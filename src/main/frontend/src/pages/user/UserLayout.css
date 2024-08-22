@@ -1,0 +1,41 @@
+.menu{
+  border: 1px solid ;
+}
+
+.menu > .menu-ul{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.menu > .menu-ul > li{
+  list-style: none;
+  border: 1px solid;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.img{
+  border: 1px solid red;
+  height: 30vh;
+}
+
+.content{
+  display: flex;
+  width: 90%;
+  margin: auto;
+}
+.content > div:first-child{
+  border: 1px dotted ;
+  width: 50%;
+}
+.content >div:last-child{
+  border: 1px dotted ;
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.content > div div{
+  border: 1px dotted;
+}

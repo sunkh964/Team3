@@ -1,0 +1,38 @@
+.adminLayout > div:first-child{
+  height: 10vh;
+}
+.adminLayout-content{
+  display: flex;
+}
+
+.adminLayout-content > .side-menu{
+  border: 1px dotted;
+  width: 20%;
+  display: flex;
+}
+
+.adminLayout-content > .side-menu li{
+  list-style: none;
+  display: flex;
+}
+
+.adminLayout-content >.show{
+  display: flex;
+  width: 100%;
+  height: 80vh
+}
+
+.adminLayout-content >.show >div{
+  border: 1px dotted;
+}
+
+.adminLayout-content .show_1{
+  width: 40%;
+}
+.show_1 > div:first-child{
+  height: 60%;
+}
+
+.adminLayout-content .show_2{
+  width: 60%;
+}
