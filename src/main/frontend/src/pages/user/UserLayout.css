@@ -1,28 +1,47 @@
 .menu{
   width: 80vw;
   margin: 0 auto;
+  height: 6vh;
 }
 
 .menu > .menu-ul{
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
+  margin: 0;
+  align-items: center;
 }
 
 .menu > .menu-ul > li{
+  border-bottom: 2px solid white;
+  width: 150px;
+  height: 100%;
   list-style: none;
-  border: 1px solid;
   font-size: 1.2rem;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.img{
-  border: 1px solid red;
-  height: 40vh;
+.menu > .menu-ul > li:hover{
+  cursor: pointer;
+  color:#55679C ;
+  border-bottom: 2px solid #55679C;
 }
+
+/* ================ 이미지 ================ */
+
+.img{
+  border: 1px dotted gray;
+  height: 50vh;
+}
+
+/* ================ 내용 ================ */
 
 .content{
   display: flex;
-  width: 80vw;
+  width: 65vw;
   height: 30vh;
   margin: 30px auto;
   gap: 30px;
@@ -32,13 +51,64 @@
   width: 50%;
 }
 .content >div:last-child{
-  border: 1px dotted ;
-  width: 50%;
+  width: 60%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
-.content > div div{
-  border: 1px dotted;
+.content .content-list > div{
+  box-shadow: 3px 3px 7px #cccccc;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-list > div > div{
+  display: flex;
+  justify-content: center;
+}
+
+.content-list > div > div:first-child{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.content-list > div > div:nth-child(2) >div{
+  width: 120px;
+  border: 1px solid white;
+  padding: 5px 5px;
+}
+
+.content-list > div > div:nth-child(2) >div:last-child{
+  border-left: none;
+}
+.content-list > div > div:nth-child(2) >div:hover{
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.content-list1{
+  background-color: #2dbc8c;
+}
+.content-list2{
+  background-color: #15989f;
+}
+.content-list3{
+  background-color: #0797c1;
+}
+.content-list4{
+  background-color: #1360b6;
+}
+
+/* ================ 밑 ================ */
+.foot{
+  background-color: #96a8ce;
+}
+.foot ul{
+  display: flex;
+  list-style: none;
 }
