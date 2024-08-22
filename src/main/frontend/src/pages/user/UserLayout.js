@@ -24,6 +24,18 @@ const UserLayout = () => {
           <div>문의하기</div>
         </div>
       </div>
+
+      <div className='foot'>
+        <div>
+          <ur>
+            <li>이용약관</li>
+            <li>개인정보처리방침</li>
+            <li>운영·관리방침</li>
+            <li></li>
+          </ur>
+        </div>
+        <div>울산광역시 어쩌구</div>
+      </div>
     </div>
   )
 }

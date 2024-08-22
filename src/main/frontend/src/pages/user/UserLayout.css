@@ -1,5 +1,6 @@
 .menu{
-
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .menu > .menu-ul{
@@ -21,9 +22,10 @@
 
 .content{
   display: flex;
-  width: 90%;
-  height: 50vh;
+  width: 80vw;
+  height: 30vh;
   margin: 30px auto;
+  gap: 30px;
 }
 .content > div:first-child{
   border: 1px dotted ;
@@ -34,7 +36,7 @@
   width: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 20px;
 }
 
 .content > div div{

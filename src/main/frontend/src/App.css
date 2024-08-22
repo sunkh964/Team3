@@ -32,8 +32,10 @@
   gap: 20px;
 }
 .head-login > ul > li:first-child{
+  
   border-right: 1px solid lightgray;
   padding-right: 20px;
+  
 }
 
 /* ================ 레이아웃 ================ */
