@@ -1,38 +1,44 @@
-.App {
+.App{
+  width: 100vw;
+}
+/* ================ 헤더 ================*/
+.head-line{
+  width: 100%;
+  height: 18vh;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+.head{
+  width: 80%;
+  margin: auto;
+}
+.head-name{
+  border: 1px dotted;
+  width: 100%;
+  color: #1E2A5E ;
   text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ----- 로그인, 회원가입 ----- */
+.head-login{
+  border: 1px dotted;
+  width: 100%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.head-login > ul{
+  justify-content: end;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  list-style: none;
+  gap: 20px;
+}
+.head-login > ul > li:first-child{
+  
+  border-right: 1px solid lightgray;
+  padding-right: 20px;
+  
 }
 
-.App-link {
-  color: #61dafb;
-}
+/* ================ 레이아웃 ================ */
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.layout{
 }
