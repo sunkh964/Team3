@@ -3,6 +3,13 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="boardMapper">
+    <resultMap id="board" type="com.green.Team3.board.vo.BoardVO">
+        <id column="BOARD_NUM" property="boardNum"/>
+        <result column="BOARD_TITLE" property="boardTitle"/>
+        <result column="BOARD_CONTENT" property="boardContent"/>
+        <result column="STAFF_NUM" property="staffNum"/>
+        <result column="BOARD_DATE" property="boardDate"/>
+    </resultMap>
 	
 </mapper>
 

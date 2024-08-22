@@ -3,6 +3,21 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="qnaMapper">
+    <resultMap id="q" type="com.green.Team3.q.vo.QVO">
+        <id column="Q_NUM" property="qNum"/>
+        <result column="MEM_NUM" property="memNum"/>
+        <result column="Q_TITLE" property="qTitle"/>
+        <result column="Q_CONTENT" property="qContent"/>
+        <result column="Q_DATE" property="qDate"/>
+    </resultMap>
+
+    <resultMap id="a" type="com.green.Team3.a.vo.AVO">
+        <id column="A_NUM" property="aNum"/>
+        <result column="STAFF_NUM" property="staffNum"/>
+        <result column="A_CONTENT" property="aContent"/>
+        <result column="A_DATE" property="aDate"/>
+        <result column="Q_NUM" property="qNum"/>
+    </resultMap>
 	
 </mapper>
 
