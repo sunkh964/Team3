@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="qnaMapper">
+    <resultMap id="q" type="com.green.Team3.q.vo.QVO">
+        <id column="Q_NUM" property="qNum"/>
+        <result column="Q_TITLE" property="qTitle"/>
+        <result column="Q_CONTENT" property="qContent"/>
+        <result column="Q_DATE" property="qDate"/>
+        <collection property="a" resultMap="a"/>
+        <collection property="member" resultMap="memberMapper.member"/>
+
+    </resultMap>
+
+    <resultMap id="a" type="com.green.Team3.a.vo.AVO">
+        <id column="A_NUM" property="aNum"/>
+        <result column="A_CONTENT" property="aContent"/>
+        <result column="A_DATE" property="aDate"/>
+        <result column="Q_NUM" property="qNum"/>
+        <collection property="q" resultMap="q"/>
+        <collection property="staff" resultMap="staffMapper.staff"/>
+    </resultMap>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

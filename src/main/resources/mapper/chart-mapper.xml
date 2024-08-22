@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="chartMapper">
+	<resultMap id="chart" type="com.green.Team3.chart.vo.ChartVO">
+        <result column="IS_NOW" property="isNow" />
+        <collection property="memberList" resultMap="memberMapper.member" />
+    </resultMap>
+
+    <resultMap id="history" type="com.green.Team3.history.vo.HistoryVO">
+        <id column="HIS_NUM" property="hisNum" />
+        <result column="ILL_NAME" property="illName" />
+        <result column="ILL_DETAIL" property="illDetail" />
+        <collection property="memberList" resultMap="memberMapper.member" />
+        <collection property="staffList" resultMap="staffMapper.staff" />
+    </resultMap>
+</mapper>

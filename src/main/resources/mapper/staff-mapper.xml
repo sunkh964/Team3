@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="staffMapper">
+    <resultMap id="staff" type="com.green.Team3.staff.vo.StaffVO">
+        <id column="STAFF_NUM" property="staffNum"/>
+        <result column="STAFF_NAME" property="staffName"/>
+        <result column="STAFF_ROLE" property="staffRole"/>
+        <result column="STAFF_BIRTH" property="staffBirth"/>
+        <result column="STAFF_TEL" property="staffTel"/>
+        <result column="STAFF_ADDR" property="staffAddr"/>
+        <result column="STAFF_ID" property="staffId"/>
+        <result column="STAFF_PW" property="staffPw"/>
+        <result column="STAFF_GEN" property="staffGen"/>
+        <collection property="partNum" resultMap="part"/>
+    </resultMap>
+
+    <resultMap id="part" type="com.green.Team3.part.vo.PartVO">
+        <id column="PART_NUM" property="partNum"/>
+        <result property="PART_NAME" column="partName"/>
+    </resultMap>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
