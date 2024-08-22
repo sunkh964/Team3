@@ -7,13 +7,17 @@ import AdminLayout from './pages/admin/AdminLayout';
 function App() {
   return (
     <div className="App">
-        <div className='head'>
-          <div className='head-name'>그린카페병원</div>
-          <div className='head-login'>
-            <ul>
-              <li>로그인</li>
-              <li>회원가입</li>
-            </ul>
+        <div className='head-line'>
+          <div className='head'>
+            <div className='head-name'>
+              그린카페병원
+            </div>
+            <div className='head-login'>
+              <ul>
+                <li>로그인</li>
+                <li>회원가입</li>
+              </ul>
+            </div>
           </div>
         </div>
   

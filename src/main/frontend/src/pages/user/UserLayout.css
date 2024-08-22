@@ -1,5 +1,5 @@
 .menu{
-  border: 1px solid ;
+
 }
 
 .menu > .menu-ul{
@@ -16,13 +16,14 @@
 
 .img{
   border: 1px solid red;
-  height: 30vh;
+  height: 40vh;
 }
 
 .content{
   display: flex;
   width: 90%;
-  margin: auto;
+  height: 50vh;
+  margin: 30px auto;
 }
 .content > div:first-child{
   border: 1px dotted ;
