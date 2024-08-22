@@ -10,9 +10,9 @@
 
     <resultMap id="history" type="com.green.Team3.history.vo.HistoryVO">
         <id column="HIS_NUM" property="hisNum" />
-        <result column="MEM_NUM" property="memNum" />
         <result column="ILL_NAME" property="illName" />
         <result column="ILL_DETAIL" property="illDetail" />
+        <collection property="memberList" resultMap="memberMapper.member" />
         <collection property="staffList" resultMap="staffMapper.staff" />
     </resultMap>
 </mapper>
