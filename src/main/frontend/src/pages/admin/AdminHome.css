@@ -1,0 +1,44 @@
+/* ================ 레이아웃 잡기 ================ */
+.home-div {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+}
+
+.other-div {
+   display: flex;
+   width: 100%;
+   height: 100%;
+}
+
+.other1-div {
+   width: 40%;
+   display: flex;
+   flex-direction: column;
+}
+
+/* ================ 환자 추가 ================ */
+.add-div {
+   height: 30px;
+   background-color: #bee7e0;
+}
+
+/* ================ 월별 시간표 ================ */
+.schedule-div {
+   height: 60%;
+   background-color: #c9d0dd;
+}
+
+/* ================ 단체메신저 ================ */
+.messenger-div {
+   height: 40%;
+   background-color: #c5c2cf;
+}
+
+/* ================ 일별 시간표 ================ */
+.other2-div {
+   background-color: #e3f5f8;
+   width: 60%;
+   display: flex;
+   flex-direction: column;
+}

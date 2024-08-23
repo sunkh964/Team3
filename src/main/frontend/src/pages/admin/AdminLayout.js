@@ -1,10 +1,10 @@
 import React from 'react'
 import './AdminLayout.css'
+import { Outlet } from 'react-router-dom'
 
 const AdminLayout = () => {
   return (
     <div className='adminLayout'>
-      <div>환자추가</div>
       <div className='adminLayout-content'>
         <div className='side-menu'>
           <ul>
@@ -13,13 +13,10 @@ const AdminLayout = () => {
             <li>직원</li>
           </ul>
         </div>
-        <div className='show'>
-          <div className='show_1'>
-            <div>월별시간표/당일예약자</div>
-            <div>단체메신저</div>
-          </div>
-          <div className='show_2'>일별시간표/와있는사람</div>
+        <div className='main-menu'>
+          <Outlet />
         </div>
+
       </div>
     </div>
   )
