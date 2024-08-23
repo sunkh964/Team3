@@ -33,7 +33,7 @@ const DoctorManage = () => {
                   {
                     partList.map((part, i) =>{
                       return(
-                        <option key={i}>{part.partNum}</option>
+                        <option key={i}>{part.partName}</option>
                       );
                     })
                   }
