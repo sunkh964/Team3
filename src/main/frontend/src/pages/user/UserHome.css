@@ -54,7 +54,7 @@
 }
 
 .content-list > div > div:nth-child(2) >div{
-   width: 120px;
+   width: 40%;
    border: 1px solid white;
    padding: 5px 5px;
 }
