@@ -6,7 +6,11 @@ import AdminLayout from './pages/admin/AdminLayout';
 import StaffManage from './pages/admin/StaffManage';
 import AdminHome from './pages/admin/AdminHome';
 import UserHome from './pages/user/UserHome';
+<<<<<<< HEAD
 import Chart from './pages/admin/Chart';
+=======
+import DoctorManage from './pages/admin/DoctorManage';
+>>>>>>> hsk
 
 function App() {
 
@@ -42,8 +46,13 @@ function App() {
               <Route path='' element={<AdminHome />} />
               {/* 관리자용 - 직원 관리 */}
               <Route path='staffManage' element={<StaffManage />} />
+
               {/* 관리자용 - 진료 관리(차트) */}
               <Route path='chart' element={<Chart />} />
+
+              {/* 관리자용 - 병원장 */}
+              <Route path='doctorManage' element={<DoctorManage />} />
+
             </Route>
           </Routes>
         </div>

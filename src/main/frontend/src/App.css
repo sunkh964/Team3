@@ -5,37 +5,40 @@
 .head-line{
   width: 100%;
   height: 10vh;
-  border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
 }
 .head{
   width: 80%;
   margin: auto;
   display: flex;
+  align-items: center;
 }
 .head-name{
-  border: 1px dotted;
   width: 100%;
   color: #1E2A5E ;
   text-align: center;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  position: relative;
+  line-height: 10vh;
 }
 /* ----- 로그인, 회원가입 ----- */
 .head-login{
-  border: 1px dotted;
-  width: 100%;
+  width: 80%;
+  position: absolute;
+  top: 40px;
+  color: gray;
 }
 .head-login > ul{
   justify-content: end;
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 15px;
 }
 .head-login > ul > li:first-child{
   
-  border-right: 1px solid lightgray;
-  padding-right: 20px;
+  border-right: 2px solid lightgray;
+  padding-right: 15px;
   
 }
 
