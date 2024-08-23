@@ -4,7 +4,7 @@ import './UserHome.css'
 const UserHome = () => {
    return (
    <div className='home-div'>
-      <div className='img'>이미지</div>
+      <div className='img'> <img src={'http://localhost:8080/images/hos_banner.png'} /> </div>
 
       <div className='content'>
          <div>

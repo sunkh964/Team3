@@ -9,8 +9,13 @@
 
 .img{
    border: 1px dotted gray;
-   height: 50vh;
    overflow: hidden;
+}
+.img img{
+   height: 400px;
+   width: 100%;
+   object-fit: cover;
+   object-position: center;
 }
 
 /* ================ 내용 ================ */
