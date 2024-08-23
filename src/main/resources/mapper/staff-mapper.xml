@@ -20,6 +20,8 @@
         <id column="PART_NUM" property="partNum"/>
         <result property="PART_NAME" column="partName"/>
     </resultMap>
+
+
 	
 </mapper>
 
