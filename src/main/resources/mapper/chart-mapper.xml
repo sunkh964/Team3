@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="chartMapper">
-	<resultMap id="chart" type="com.green.Team3.chart.vo.ChartVO">
-        <result column="IS_NOW" property="isNow" />
-        <collection property="memberList" resultMap="memberMapper.member" />
+    <resultMap id="chart" type="com.green.Team3.chart.vo.ChartVO">
+        <id column="CHART_NUM" property="chartNum"/>
+        <result column="IS_NOW" property="isNow"/>
+        <collection property="resMemList" resultMap="resMapper.res"/>
     </resultMap>
 
     <resultMap id="history" type="com.green.Team3.history.vo.HistoryVO">
-        <id column="HIS_NUM" property="hisNum" />
-        <result column="ILL_NAME" property="illName" />
-        <result column="ILL_DETAIL" property="illDetail" />
-        <collection property="memberList" resultMap="memberMapper.member" />
-        <collection property="staffList" resultMap="staffMapper.staff" />
+        <id column="HIS_NUM" property="hisNum"/>
+        <result column="ILL_NAME" property="illName"/>
+        <result column="ILL_DETAIL" property="illDetail"/>
+        <collection property="memberList" resultMap="memberMapper.member"/>
+        <collection property="staffList" resultMap="staffMapper.staff"/>
     </resultMap>
+
+    <select id="selectMemChart" resultMap="chart">
+        SELECT CHART_NUM, IS_NOW, C.MEM_NUM, MEM_NAME, MEM_BIRTH, MEM_TEL, MEM_GEN, RES_TIME
+        FROM HOS_CHART C, HOS_RES R, HOS_MEMBER M
+        WHERE IS_NOW = 'N'
+        AND C.MEM_NUM = R.MEM_NUM
+        AND C.MEM_NUM = M.MEM_NUM;
+    </select>
+
+    <select id="getIsNowMemChart" resultMap="chart">
+        SELECT CHART_NUM, IS_NOW, C.MEM_NUM, MEM_NAME, MEM_BIRTH, MEM_TEL, MEM_GEN, RES_TIME, RES_NUM, P.PART_NUM, PART_NAME, STAFF_NAME, S.STAFF_NUM
+        FROM HOS_CHART C, HOS_RES R, HOS_MEMBER M, HOS_STAFF S, HOS_PART P
+        WHERE IS_NOW = 'Y'
+        AND C.MEM_NUM = R.MEM_NUM
+        AND C.MEM_NUM = M.MEM_NUM
+        AND P.PART_NUM = S.PART_NUM
+        AND P.PART_NUM = S.PART_NUM
+        AND S.STAFF_NUM = R.STAFF_NUM;
+    </select>
 </mapper>

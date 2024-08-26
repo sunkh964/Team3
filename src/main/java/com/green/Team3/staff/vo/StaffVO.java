@@ -17,5 +17,5 @@ public class StaffVO {
     private String staffPw;
     private String staffGen;
     private int partNum;
-    private List<PartVO> partVO;
+    private PartVO part;
 }
