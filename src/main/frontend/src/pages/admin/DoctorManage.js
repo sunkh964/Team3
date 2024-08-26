@@ -14,6 +14,33 @@ const DoctorManage = () => {
     .catch((error) => {console.log(error)})
   },[])
 
+  // 직원 등록시 가져갈 데이터
+  const [insertStaff, setInsertStaff] = useState({
+    staffName : '',
+    partNum : 1,
+    staffBirth : '',
+    staffTel : '',
+    staffAddr : '',
+    staffGen : '남'
+  });
+
+  // 등록전 입력값 저장
+  function changeInsertStaffData(e){
+    setInsertStaff({
+      ...insertStaff,
+      [e.target.name] : e.target.value
+    });
+  }
+
+  // 직원 등록
+  function regStaff(){
+    axios.post('/staff/regStaff',insertStaff)
+    .then((res)=>{
+      alert('직원등록')
+    })
+    .catch((error) => {console.log(error)})
+  }
+
 
   return (
     <div>
@@ -25,15 +52,16 @@ const DoctorManage = () => {
             <tr>
               <td>이름</td>
               <td>
-                <input type='text'/>
+                <input type='text' name='staffName'
+                  onChange={(e) => {changeInsertStaffData(e)}}/>
               </td>
               <td>부서번호</td>
               <td>
-                <select>
+                <select name='partNum' onChange={(e) => {changeInsertStaffData(e)}}>
                   {
                     partList.map((part, i) =>{
                       return(
-                        <option key={i}>{part.partName}</option>
+                        <option key={i} value={part.partNum}>{part.partName}</option>
                       );
                     })
                   }
@@ -43,26 +71,32 @@ const DoctorManage = () => {
             <tr>
               <td>주민번호</td>
               <td>
-                <input type='text'/>
+                <input type='text' name='staffBirth'
+                  onChange={(e) => {changeInsertStaffData(e)}}/>
               </td>
               <td>연락처</td>
               <td>
-                <input type='text'/>
+                <input type='text' name='staffTel'
+                  onChange={(e) => {changeInsertStaffData(e)}}/>
               </td>
             </tr>
             <tr>
               <td>주소</td>
               <td>
-                <input type='text'/>
+                <input type='text' name='staffAddr'
+                  onChange={(e) => {changeInsertStaffData(e)}}/>
               </td>
               <td>성별</td>
               <td>
-                <input type='radio'/>남
-                <input type='radio'/>여
+                <input type='radio' name='staffGen' value="남"
+                   checked onChange={(e) => {changeInsertStaffData(e)}}/>남
+                <input type='radio' name='staffGen' value="여"
+                  onChange={(e) => {changeInsertStaffData(e)}}/>여
               </td>
             </tr>
           </table>
         </div>
+        <button type='button' onClick={()=>{regStaff()}}>직원등록</button>
       </div>
 
       <div className='getStaff'>

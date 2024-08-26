@@ -6,11 +6,9 @@ import AdminLayout from './pages/admin/AdminLayout';
 import StaffManage from './pages/admin/StaffManage';
 import AdminHome from './pages/admin/AdminHome';
 import UserHome from './pages/user/UserHome';
-<<<<<<< HEAD
 import Chart from './pages/admin/Chart';
-=======
 import DoctorManage from './pages/admin/DoctorManage';
->>>>>>> hsk
+
 
 function App() {
 
