@@ -1,7 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Chart.css';
+import axios from 'axios';
 
 const Chart = () => {
+  // 환자리스트 넣을 빈 배열
+  const [resMemList, setResMemList]=useState([]);
+
+  // 예약된 환자리스트 가져오기
+  useEffect(()=>{
+    axios.get('/chart/chartList')
+    .then((res)=>{
+      console.log(res.data) 
+      setResMemList(res.data)
+    })
+    .catch((error)=>{console.log(error)})
+  },[])
 
   return (
     <div className='chart'>
