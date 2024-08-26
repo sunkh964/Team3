@@ -5,6 +5,7 @@ import axios from 'axios';
 const Chart = () => {
   // 환자리스트 넣을 빈 배열
   const [resMemList, setResMemList]=useState([]);
+  const [nowResMem, setNowResMem]=useState([]);
 
   // 예약된 환자리스트 가져오기
   useEffect(()=>{
@@ -12,6 +13,15 @@ const Chart = () => {
     .then((res)=>{
       console.log(res.data) 
       setResMemList(res.data)
+    })
+    .catch((error)=>{console.log(error)})
+  },[])
+
+  useEffect(()=>{
+    axios.get('/chart/getIsNowMemChart')
+    .then((res)=>{
+      console.log(res.data) 
+      setNowResMem(res.data)
     })
     .catch((error)=>{console.log(error)})
   },[])
@@ -28,21 +38,31 @@ const Chart = () => {
               <div>당일 예약 환자</div>
               <button>추가</button>
             </div>
-            <div className='todayRegContent' >
-              <div className='divF'>
-                <div>이름 : 김자바</div>
-                <div>생년월일 : 2003.06.05</div>
-                <div>성별: 여</div>
-              </div>
-              <div className='divFSec'>
-                <div>연락처 : 010-1111-1111</div>
-                <div>
-                  <span>수정</span>
-                  <span>삭제</span>
-                  <button>진료환자 등록</button>
-                </div>
-              </div>
-            </div>
+
+            {
+              resMemList.map((resMem, i) => {
+                const member = resMem.resMemList[0]?.memberList[0];
+                return (
+                  <div className='todayRegContent' key={i}>
+                    <div className='divF'>
+                      <div>이름 : {member ? member.memName : null}</div>
+                      <div>생년월일 : {member ? member.memBirth : null}</div>
+                      <div>성별: {member ? member.memGen : null}</div>
+                    </div>
+                    <div className='divFSec'>
+                      <div>연락처 : {member ? member.memTel : null}</div>
+                      <div>
+                        <span>수정</span>
+                        <span>삭제</span>
+                        <button>진료환자 등록</button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+            
+
           </div>
           
           <div className='adminChat'>
@@ -65,21 +85,29 @@ const Chart = () => {
           <p>진료 환자</p>
           <div className='trContent'>
 
-            <div className='treatContent'>
-              <div className='divTrF'>
-                <div>예약번호 : 1</div>
-              </div>
-              <div className='divTrF'>
-                <div>이름 : 김자바</div>
-                <div>생년월일 : 2003.06.05</div>
-                <div>성별: 여</div>
-              </div>
-              <div className='divTrT'>
-                <div>진료 부서 : </div>
-                <div>담당의 : </div>
-                <button>환자 삭제</button>
-              </div>
-            </div>
+            {
+              nowResMem.map((resMem, i)=>{
+                const member = resMem.resMemList[0]?.memberList[0];
+                return(
+                  <div className='treatContent' key={i}>
+                    <div className='divTrF'>
+                      <div>예약번호 : {resMem.resMemList[0]? resMem.resMemList[0].resNum: null}</div>
+                    </div>
+                    <div className='divTrF'>
+                      <div>이름 : {member? member.memName:null} </div>
+                      <div>생년월일 : {member? member.memBirth:null}</div>
+                      <div>성별: {member? member.memGen:null}</div>
+                    </div>
+                    <div className='divTrT'>
+                      <div>진료 부서 : {resMem.resMemList[0]? resMem.resMemList[0].staffList.staffName:null}</div>
+                      <div>담당의 : {resMem.resMemList[0]? resMem.resMemList[0].staffList.staffName:null} </div>
+                      <button>환자 삭제</button>
+                    </div>
+                  </div>
+                )
+              })
+            }
+            
 
           </div>
         </div>
