@@ -1,0 +1,12 @@
+.join-div{
+  text-align: center;
+  border: 1px solid black;
+}
+
+.join-table{
+  border: 1px solid red;
+  width: 60%;
+  height: 100%;
+  margin: auto;
+  margin-top: 30px;
+}
