@@ -39,6 +39,8 @@
             , STAFF_ADDR
             , STAFF_TEL
             , STAFF_GEN
+            , STAFF_ID
+            , STAFF_PW
         ) VALUES (
             #{partNum}
             , #{staffName}
@@ -46,6 +48,8 @@
             , #{staffTel}
             , #{staffAddr}
             , #{staffGen}
+            , #{staffId}
+            , #{staffPw}
         );
     </insert>
 

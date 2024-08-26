@@ -5,6 +5,21 @@ const DoctorManage = () => {
   // 부서목록 저장 state
   const [partList, setPartList] = useState([]);
 
+  // 직원 등록시 가져갈 데이터
+  const [insertStaff, setInsertStaff] = useState({
+    staffName : '',
+    partNum : 1,
+    staffId : '',
+    staffPw : '',
+    staffBirth : '',
+    staffTel : '',
+    staffAddr : '',
+    staffGen : '남'
+  });
+
+  // 직원리스트 조회 state
+  const [staffList, setStaffList] = useState([]);
+
   // 부서목록 조회
   useEffect(() => {
     axios.get('/staff/getPart')
@@ -12,17 +27,20 @@ const DoctorManage = () => {
       setPartList(res.data);
     })
     .catch((error) => {console.log(error)})
-  },[])
+  },[]);
 
-  // 직원 등록시 가져갈 데이터
-  const [insertStaff, setInsertStaff] = useState({
-    staffName : '',
-    partNum : 1,
-    staffBirth : '',
-    staffTel : '',
-    staffAddr : '',
-    staffGen : '남'
-  });
+  // ----------- 직원 조회---------------
+
+  // 직원 조회
+  useEffect(() => {
+    axios.get('/staff/getStaff')
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((error) => {console.log(error)})
+  },[]);
+
+  // ----------- 직원 등록---------------
 
   // 등록전 입력값 저장
   function changeInsertStaffData(e){
@@ -66,6 +84,18 @@ const DoctorManage = () => {
                     })
                   }
                 </select>
+              </td>
+            </tr>
+            <tr>
+              <td>아이디</td>
+              <td>
+                <input type='text' name='staffId'
+                  onChange={(e) => {changeInsertStaffData(e)}}/>
+              </td>
+              <td>비밀번호</td>
+              <td>
+                <input type='text' name='staffPw'
+                  onChange={(e) => {changeInsertStaffData(e)}}/>
               </td>
             </tr>
             <tr>
@@ -113,6 +143,21 @@ const DoctorManage = () => {
                 <td>연락처</td>
               </tr>
             </thead>
+            <tbody>
+              {
+                staffList.map((staff, i) => {
+                  return(
+                    <tr key={i}>
+                      <td>{staffList.length - i}</td>
+                      <td></td>
+                      <td>{staff.staffName}</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
           </table>
         </div>
       </div>

@@ -28,7 +28,7 @@ public class StaffController {
 
     // 직원 조회
     @GetMapping("/getStaff")
-    public void getStaffList(){
-
+    public void getStaffList(StaffVO staffVO){
+        staffService.getStaffList(staffVO);
     }
 }
