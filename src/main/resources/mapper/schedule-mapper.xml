@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="scheduleMapper">
+    <resultMap id="schedule" type="com.green.Team3.schedule.vo.ScheduleVO">
+        <id column="SCH_NUM" property="schNum"/>
+        <result column="START" property="start"/>
+        <result column="END" property="end"/>
+        <result column="TITLE" property="title"/>
+        <result column="SCH_CONTENT" property="schContent"/>
+        <result column="SCH_ISALL" property="schIsAll"/>
+        <collection property="staffList" resultMap="staffMapper.staff" />
+    </resultMap>
+
+<!--    <resultMap id="event" type="com.green.Team3.schedule.vo.EventVO">-->
+<!--        <id column="SCH_NUM" property="schNum"/>-->
+<!--        <result column="TITLE" property="title"/>-->
+<!--        <result column="DATE" property="date"/>-->
+<!--    </resultMap>-->
+
+     <!-- 직원 전체의 일정 목록 조회 -->
+    <select id="getAllList" resultMap="schedule">
+        SELECT
+            SCH_NUM
+            , SCH_TITLE TITLE
+            , SCH_CONTENT
+            , SCH.STAFF_NUM
+            , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
+            , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
+        FROM HOS_SCHEDULE SCH, HOS_STAFF S
+        WHERE SCH.STAFF_NUM = S.STAFF_NUM
+    </select>
+
+    <!-- 직원 한 명의 일정 목록 조회 -->
+    <select id="getOneList" resultMap="schedule">
+        SELECT
+        SCH_NUM
+        , SCH_TITLE TITLE
+        , SCH_CONTENT
+        , SCH.STAFF_NUM
+        , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
+        , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
+        FROM HOS_SCHEDULE SCH, HOS_STAFF S
+        WHERE SCH.STAFF_NUM = S.STAFF_NUM
+            AND SCH.STAFF_NUM = #{staffNum}
+    </select>
+
+</mapper>
