@@ -6,6 +6,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import StaffManage from './pages/admin/StaffManage';
 import AdminHome from './pages/admin/AdminHome';
 import UserHome from './pages/user/UserHome';
+import Join from './pages/user/Join';
 import Chart from './pages/admin/Chart';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
             <div className='head-login'>
               <ul>
                 <li>로그인</li>
-                <li>회원가입</li>
+                <li onClick={()=>{navigate('/join')}}>회원가입</li>
               </ul>
             </div>
           </div>
@@ -34,6 +35,8 @@ function App() {
             <Route path='/' element={<UserLayout />}>
               {/* 회원용 - 첫 화면 */}
               <Route path='' element={<UserHome />} />
+              {/* 회원 가입 화면 */}
+              <Route path='/join' element={<Join/>}/>
             </Route>
   
             {/* 관리자용 */}
