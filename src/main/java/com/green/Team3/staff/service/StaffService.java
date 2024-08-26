@@ -12,4 +12,7 @@ public interface StaffService {
 
     // 직원 등록
     void regStaff(StaffVO staffVO);
+
+    // 직원 조회
+    List<StaffVO> getStaffList(StaffVO staffVO);
 }

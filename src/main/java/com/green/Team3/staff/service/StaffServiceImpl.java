@@ -23,4 +23,9 @@ public class StaffServiceImpl implements StaffService {
     public void regStaff(StaffVO staffVO) {
         sqlSession.insert("staffMapper.regStaff", staffVO);
     }
+
+    @Override
+    public List<StaffVO> getStaffList(StaffVO staffVO) {
+        return sqlSession.selectList("staffMapper.getStaffList", staffVO);
+    }
 }

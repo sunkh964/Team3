@@ -4,10 +4,7 @@ import com.green.Team3.part.vo.PartVO;
 import com.green.Team3.staff.service.StaffService;
 import com.green.Team3.staff.vo.StaffVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,13 @@ public class StaffController {
 
     // 직원 등록
     @PostMapping("/regStaff")
-    public void regStaff(StaffVO staffVO){
+    public void regStaff(@RequestBody StaffVO staffVO){
         staffService.regStaff(staffVO);
+    }
+
+    // 직원 조회
+    @GetMapping("/getStaff")
+    public void getStaffList(){
+
     }
 }

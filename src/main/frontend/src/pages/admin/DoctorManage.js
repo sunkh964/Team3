@@ -89,14 +89,15 @@ const DoctorManage = () => {
               <td>성별</td>
               <td>
                 <input type='radio' name='staffGen' value="남"
-                   checked onChange={(e) => {changeInsertStaffData(e)}}/>남
+                    onChange={(e) => {changeInsertStaffData(e)}} checked={insertStaff.staffGen == '남'}/>남
                 <input type='radio' name='staffGen' value="여"
-                  onChange={(e) => {changeInsertStaffData(e)}}/>여
+                  onChange={(e) => {changeInsertStaffData(e)}}
+                  checked={insertStaff.staffGen == '여'}/>여
               </td>
             </tr>
           </table>
         </div>
-        <button type='button' onClick={()=>{regStaff()}}>직원등록</button>
+        <button type='button' onClick={(e)=>{regStaff()}}>직원등록</button>
       </div>
 
       <div className='getStaff'>

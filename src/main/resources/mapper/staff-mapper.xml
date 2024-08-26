@@ -41,13 +41,27 @@
             , STAFF_GEN
         ) VALUES (
             #{partNum}
-            , #{staffNum}
             , #{staffName}
             , #{staffBirth}
             , #{staffTel}
             , #{staffAddr}
+            , #{staffGen}
         );
     </insert>
+
+    <select id="getStaffList" resultMap="staff">
+        SELECT STAFF_NUM
+            , PART_NAME
+            , STAFF_BIRTH
+            , STAFF_TEL
+            , STAFF_ADDR
+            , STAFF_GEN
+        FROM HOS_STAFF STAFF, HOS_PART PART
+        WHERE STAFF.PART_NUM = PART.PART_NUM
+        ORDER BY STAFF_NUM DESC
+    </select>
+
+
 
 
 	
