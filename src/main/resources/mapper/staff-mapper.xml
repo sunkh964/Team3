@@ -13,7 +13,7 @@
         <result column="STAFF_ID" property="staffId"/>
         <result column="STAFF_PW" property="staffPw"/>
         <result column="STAFF_GEN" property="staffGen"/>
-        <collection property="partNum" resultMap="part"/>
+        <collection property="part" resultMap="part"/>
     </resultMap>
 
     <resultMap id="part" type="com.green.Team3.part.vo.PartVO">

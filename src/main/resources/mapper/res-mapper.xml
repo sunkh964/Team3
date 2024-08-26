@@ -6,8 +6,8 @@
 	<resultMap id="res" type="com.green.Team3.res.vo.ResVO">
         <id column="RES_NUM" property="resNum" />
         <result column="RES_TIME" property="resTime" />
-        <collection property="memId" resultMap="memberMapper.member" />
-        <collection property="staffNum" resultMap="staffMapper.staff" />
-        <collection property="partNum" resultMap="partMapper.part" />
+        <collection property="memberList" resultMap="memberMapper.member" />
+        <collection property="staffList" resultMap="staffMapper.staff" />
+        <collection property="partList" resultMap="staffMapper.part" />
     </resultMap>
 </mapper>

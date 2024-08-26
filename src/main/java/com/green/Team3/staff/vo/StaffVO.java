@@ -1,5 +1,6 @@
 package com.green.Team3.staff.vo;
 
+import com.green.Team3.part.vo.PartVO;
 import lombok.Data;
 
 @Data
@@ -13,5 +14,5 @@ public class StaffVO {
     private String staffId;
     private String staffPw;
     private String staffGen;
-    private int partNum;
+    private PartVO part;
 }
