@@ -7,6 +7,7 @@ import StaffManage from './pages/admin/StaffManage';
 import AdminHome from './pages/admin/AdminHome';
 import UserHome from './pages/user/UserHome';
 import Join from './pages/user/Join';
+import Chart from './pages/admin/Chart';
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
               <Route path='' element={<AdminHome />} />
               {/* 관리자용 - 직원 관리 */}
               <Route path='staffManage' element={<StaffManage />} />
+              {/* 관리자용 - 진료 관리(차트) */}
+              <Route path='chart' element={<Chart />} />
             </Route>
           </Routes>
         </div>

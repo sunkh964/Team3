@@ -1,8 +1,8 @@
 import React from 'react'
 import './AdminHome.css';
 const AdminHome = () => {
-  return (
-    <div className='home-div'>
+   return (
+   <div className='home-div'>
       <div className='add-div'>
          <div>환자 추가</div>
       </div>
@@ -15,7 +15,7 @@ const AdminHome = () => {
 
       </div>
    </div>
-  )
+   )
 }
 
 export default AdminHome

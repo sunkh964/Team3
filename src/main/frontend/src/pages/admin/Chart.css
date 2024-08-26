@@ -1,0 +1,191 @@
+/* 페이지 기본 틀 */
+.chart .title {
+  border: 1px solid;
+  background-color: #0797c1;
+  color: white;
+  padding: 5px;
+  font-size: 20px;
+}
+
+.chart .mainChart {
+  display: flex;
+  height: calc(100vh - 40px); /* 타이틀을 제외한 높이 설정 */
+}
+
+.chart .chartLeft {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart .todayReg {
+  height: 50vh; /* 높이 설정 */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart .adminChat {
+  border-top: 1px solid #7e969e;
+  height: 35vh; /* 높이 설정 */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart .medTreat {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #7e969e;
+  height: 628px;
+  height: 85vh;
+}
+
+/* 버튼 디자인 */
+button {
+  background-color: #0797c1;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 1px 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #067da1;
+  color: #eeeeee;
+}
+
+/* 당일 예약 환자 */
+.chartLeft .todayReg p {
+  border-bottom: 1px solid #7e969e;
+  width: 100%;
+  background-color: #bedce6;
+  padding: 5px;
+}
+
+.chartLeft .todayRegContent {
+  overflow-y: auto; /* 세로 스크롤 허용 */
+  padding: 13px 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #7e969e;
+  background-color: #e8f0f3;
+  max-height: calc(50vh - 40px); /* 최대 높이 설정 (헤더와 여백을 고려하여 조정) */
+}
+
+.todayRegContent span {
+  color: #7e969e;
+  cursor: pointer;
+  padding-right: 3px;
+}
+
+.chartLeft .todayReg .divF {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.todayReg .divFSec {
+  display: flex;
+  justify-content: space-between;
+}
+
+.divFSec button {
+  font-size: 13px;
+}
+
+/* 단체 채팅 */
+.chart .adminChat {
+  background-color: #e8f0f3;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.todayTop {
+  background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageContent {
+  overflow-y: auto; /* 세로 스크롤 허용 */
+  padding: 10px;
+  background-color: #e8f0f3;
+  max-height: calc(35vh - 60px); /* 최대 높이 설정 (헤더와 입력 영역을 고려하여 조정) */
+}
+
+.adminChat .message {
+  border-radius: 10px;
+  padding: 5px 15px;
+  margin: 5px 0; /* 마진 조정 */
+  background-color: #067da1;
+  color: white;
+  font-size: 14px;
+  max-width: 100%; /* 메시지 내용이 컨테이너를 넘어가지 않도록 설정 */
+  word-wrap: break-word; /* 단어가 넘치지 않도록 설정 */
+}
+
+.adminChat .message span {
+  font-size: 10px;
+  color: #eeeeee;
+}
+
+/* 채팅 입력 영역 */
+.chart .sent {
+  border-top: 1px solid #7e969e;
+  background-color: #bedce6;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.sent input {
+  font-size: 15px;
+  border-radius: 5px;
+  width: 70%;
+  padding: 5px;
+  border: 1px solid #7e969e; /* 입력 필드 테두리 */
+}
+
+.sent button {
+  margin-left: 10px;
+}
+
+/* 진료 환자 */
+.medTreat{
+  height: 100%;
+}
+.medTreat p {
+  border-bottom: 1px solid #7e969e;
+  width: 100%;
+  background-color: #bedce6;
+  padding: 5px;
+}
+.trContent{
+  max-height: calc(50vh - 40px); /* 최대 높이 설정 (헤더와 여백을 고려하여 조정) */
+  overflow-y: auto; /* 세로 스크롤 허용 */
+}
+
+.treatContent {
+  padding: 13px 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #7e969e;
+  background-color: #e8f0f3;
+  
+}
+
+.treatContent div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.treatContent .divTrF {
+  padding-bottom: 10px;
+}
