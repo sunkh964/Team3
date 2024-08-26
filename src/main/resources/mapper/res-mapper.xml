@@ -8,6 +8,6 @@
         <result column="RES_TIME" property="resTime" />
         <collection property="memId" resultMap="memberMapper.member" />
         <collection property="staffNum" resultMap="staffMapper.staff" />
-        <collection property="partNum" resultMap="partMapper.part" />
+        <collection property="partNum" resultMap="staffMapper.part" />
     </resultMap>
 </mapper>

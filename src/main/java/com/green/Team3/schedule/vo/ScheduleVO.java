@@ -8,10 +8,9 @@ import java.util.List;
 @Data
 public class ScheduleVO {
     private int schNum;
-    private String schSDate;
-    private String schEDate;
-    private String schTitle;
+    private String title;
+    private String start;
+    private String end;
     private String schContent;
-    private String schIsAll;
     private List<StaffVO> staffList;
 }
