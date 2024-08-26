@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import './DoctorManage.css'
 
 const DoctorManage = () => {
   // 부서목록 저장 state
@@ -35,7 +36,8 @@ const DoctorManage = () => {
   useEffect(() => {
     axios.get('/staff/getStaff')
     .then((res) => {
-      console.log(res.data)
+      console.log(res.data);
+      setStaffList(res.data);
     })
     .catch((error) => {console.log(error)})
   },[]);
@@ -61,7 +63,7 @@ const DoctorManage = () => {
 
 
   return (
-    <div>
+    <div className='doctorManage'>
       <div>조직원관리, 조직원추가, 수정, 삭제 하기</div>
       <div className='regStaff'>
         <div>직원 등록</div>
@@ -147,12 +149,12 @@ const DoctorManage = () => {
               {
                 staffList.map((staff, i) => {
                   return(
-                    <tr key={i}>
+                    <tr>
                       <td>{staffList.length - i}</td>
-                      <td></td>
+                      <td>{staff.partVO[0].partName}</td>
                       <td>{staff.staffName}</td>
-                      <td></td>
-                      <td></td>
+                      <td>{staff.staffBirth}</td>
+                      <td>{staff.staffTel}</td>
                     </tr>
                   );
                 })

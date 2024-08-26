@@ -56,6 +56,7 @@
     <select id="getStaffList" resultMap="staff">
         SELECT STAFF_NUM
             , PART_NAME
+            , STAFF_NAME
             , STAFF_BIRTH
             , STAFF_TEL
             , STAFF_ADDR
