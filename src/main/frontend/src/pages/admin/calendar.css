@@ -49,8 +49,8 @@
    }
    
       /* 주말 색상 변경 */
-      .fc-day-sun a { color: #ff5757; }
-      .fc-day-sat a { color: #5757ff; }
+      .fc-day-sun a { color: #e97e7e; }
+      .fc-day-sat a { color: #7e7edb; }
 
    /*  오늘 날짜 배경색 */
    .fc .fc-daygrid-day.fc-day-today {
