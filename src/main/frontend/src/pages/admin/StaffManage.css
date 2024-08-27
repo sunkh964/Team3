@@ -12,3 +12,30 @@
 .calendar {
    height: 100%;
 }
+
+/* ============== 모달 창 ============= */
+.event-form-div {
+   display: flex;
+   justify-content: center;
+   width: 100%;
+   padding: 10px 0px;
+   /* background-color: aquamarine; */
+}
+
+.input-form input, .input-form textarea {
+   width: 100%;
+   padding: 5px;
+}
+
+.isAll {
+   display: inline-block;
+   width: 10px !important;
+   background-color: antiquewhite;
+   margin-left: 10px;
+}
+
+.input-form td {
+   padding: 5px;
+   vertical-align: middle;
+   text-align: right;
+}

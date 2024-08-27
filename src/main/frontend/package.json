@@ -7,12 +7,17 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
+    "@mui/styled-engine": "^5.16.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.4",
+    "bootstrap-icons": "^1.11.3",
+    "date-fns": "^3.6.0",
+    "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-calendar": "^5.0.0",
+    "react-datepicker": "^7.3.0",
     "react-daum-postcode": "^3.1.3",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
@@ -44,5 +49,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "@types/react-datepicker": "^7.0.0"
+  }
 }

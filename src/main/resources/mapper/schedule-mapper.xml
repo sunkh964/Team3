@@ -8,9 +8,9 @@
         <result column="START" property="start"/>
         <result column="END" property="end"/>
         <result column="TITLE" property="title"/>
-        <result column="SCH_CONTENT" property="schContent"/>
+        <result column="DESCRIPTION" property="schContent"/>
         <result column="SCH_ISALL" property="schIsAll"/>
-        <collection property="staffList" resultMap="staffMapper.staff" />
+        <association property="staffVO" resultMap="staffMapper.staff" />
     </resultMap>
 
 <!--    <resultMap id="event" type="com.green.Team3.schedule.vo.EventVO">-->
@@ -45,5 +45,21 @@
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
             AND SCH.STAFF_NUM = #{staffNum}
     </select>
+
+    <insert id="addEvent">
+        INSERT INTO HOS_SCHEDULE (
+            SCH_TITLE TITLE
+            , SCH_CONTENT DESCRIPTION
+            , STAFF_NUM
+            , SCH_SDATE START
+            , SCH_EDATE END
+        ) VALUES (
+            #{title}
+            , #{description}
+            , #{staffNum}
+            , #{start}
+            , #{end}
+        );
+    </insert>
 
 </mapper>

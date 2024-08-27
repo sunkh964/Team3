@@ -17,4 +17,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<ScheduleVO> getAllList() {
         return sqlSession.selectList("scheduleMapper.getAllList");
     }
+
+    @Override
+    public void addEvent(ScheduleVO scheduleVO) {
+        sqlSession.insert("scheduleMapper.addEvent", scheduleVO);
+    }
 }

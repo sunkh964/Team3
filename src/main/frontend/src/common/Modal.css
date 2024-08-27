@@ -1,0 +1,88 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+/* 모달창 디자인 */
+.modal-container{
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   background-color: #00000042;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 99;
+   animation: fadeOut 0.15s ease-in forwards;
+}
+
+.modal-container.show{
+   animation-name: fadeIn;
+}
+
+.modal-container > .modal{
+   width: 600px;
+   background-color: white;
+   padding: 10px;
+   border-radius: 5px;
+   animation: slideUp 0.15s ease-out forwards;
+}
+
+.modal-container.show > .modal{
+   animation-name: slideDown;
+}
+
+.modal-header {
+   text-align: right;
+   margin-bottom: 10px;
+}
+
+.modal-header > span{
+   cursor: pointer;
+}
+
+.modal-header i {
+   font-size: 1.2rem;
+   color: #067da1;
+}
+
+.modal-footer{
+   margin-top: 20px;
+   text-align: right;
+}
+
+/* 모달 애니메니션 정의 */
+@keyframes fadeIn{
+   from{
+      opacity: 0;
+   }
+   to{
+      opacity: 1;
+   }
+}
+
+@keyframes fadeOut{
+   from{
+      opacity: 1;
+   }
+   to{
+      opacity: 0;
+   }
+}
+
+@keyframes slideDown{
+   from{
+      transform: translateY(10px);
+   }
+   to{
+      transform: translateY(0px);
+   }
+}
+
+@keyframes slideUp{
+   from{
+      transform: translateY(0px);
+   }
+   to{
+      transform: translateY(10px);
+   }
+}

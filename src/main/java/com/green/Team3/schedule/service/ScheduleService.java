@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ScheduleService {
     List<ScheduleVO> getAllList();
-//    List<EventVO> getAllList();
+    void addEvent(ScheduleVO scheduleVO);
 }

@@ -11,6 +11,6 @@ public class ScheduleVO {
     private String title;
     private String start;
     private String end;
-    private String schContent;
-    private List<StaffVO> staffList;
+    private String description;
+    private StaffVO staffVO;
 }
