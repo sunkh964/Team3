@@ -68,7 +68,7 @@
     </select>
 
     <!-- 직원 상세보기-->
-    <select id="">
+    <select id="getStaffDetail" resultMap="staff">
         SELECT STAFF_NUM
             , STAFF_NAME
             , STAFF_BIRTH
@@ -77,8 +77,10 @@
             , STAFF_ID
             , STAFF_PW
             , STAFF_GEN
-            , PART_NUM
-        FROM HOS_STAFF
+            , PART_NAME
+        FROM HOS_STAFF STAFF, HOS_PART PART
+        WHERE STAFF.PART_NUM = PART.PART_NUM
+        AND STAFF_NUM = #{staffNum}
     </select>
 
 	
