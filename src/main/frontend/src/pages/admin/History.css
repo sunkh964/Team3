@@ -13,7 +13,7 @@
   background-color: #bedce6;
   margin-bottom: 5px;
 }
-.conTop, .conBot{
+.conTop, .conMid ,.conBot{
   cursor: pointer;
   width: 80%;
   padding: 5px 10px;

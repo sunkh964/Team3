@@ -197,3 +197,12 @@ button:hover {
 .clickDetail:hover{
   color: #067da1;
 }
+.botBut{
+  margin-top: 10px;
+  width: 100%;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+.botBut button{
+  margin-left: 10px;
+}

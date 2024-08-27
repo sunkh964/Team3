@@ -12,8 +12,16 @@
         <id column="HIS_NUM" property="hisNum"/>
         <result column="ILL_NAME" property="illName"/>
         <result column="ILL_DETAIL" property="illDetail"/>
+        <result column="MEM_NUM" property="memNum"/>
+        <result column="STAFF_NUM" property="staffNum"/>
+        <result column="RES_NUM" property="resNum"/>
+        <result column="PART_NUM" property="partNum"/>
+        <result column="CHART_NUM" property="chartNum"/>
         <collection property="memberList" resultMap="memberMapper.member"/>
         <collection property="staffList" resultMap="staffMapper.staff"/>
+        <collection property="resList" resultMap="resMapper.res"/>
+        <collection property="partList" resultMap="staffMapper.part"/>
+        <collection property="chartList" resultMap="chartMapper.chart"/>
     </resultMap>
 
     <!--당일 예약 환자 리스트 조회-->
@@ -33,7 +41,7 @@
         AND C.MEM_NUM = R.MEM_NUM
         AND C.MEM_NUM = M.MEM_NUM
         AND P.PART_NUM = S.PART_NUM
-        AND P.PART_NUM = S.PART_NUM
+        AND P.PART_NUM = R.PART_NUM
         AND S.STAFF_NUM = R.STAFF_NUM;
     </select>
 
@@ -55,11 +63,14 @@
 
     <!--환자 이름 누르면 디테일 들어가기-->
     <select id="selectHis" resultMap="history">
-        SELECT HIS_NUM, CHART_NUM, RES_TIME, ILL_NAME, ILL_DETAIL, R.MEM_NUM
-        FROM HOS_HISTORY H, HOS_CHART C, HOS_RES R
-        WHERE  R.MEM_NUM=#{memNum}
-        AND R.MEM_NUM = H.MEM_NUM
-        AND R.MEM_NUM = C.MEM_NUM;
+        SELECT HIS_NUM, C.CHART_NUM, RES_TIME, ILL_NAME, ILL_DETAIL, R.MEM_NUM, P.PART_NUM, PART_NAME, STAFF_NAME, S.STAFF_NUM, MEM_NAME
+        FROM HOS_HISTORY H, HOS_CHART C, HOS_RES R, HOS_STAFF S, HOS_PART P, hos_member M
+        WHERE R.RES_NUM = H.RES_NUM
+        AND C.MEM_NUM = R.MEM_NUM
+        AND S.STAFF_NUM = R.STAFF_NUM
+        AND P.PART_NUM = R.PART_NUM
+        AND M.MEM_NUM = R.MEM_NUM
+        AND R.MEM_NUM = #{memNum};
     </select>
 
 

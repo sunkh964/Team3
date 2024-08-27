@@ -13,4 +13,6 @@ public interface ChartService {
     void changeIsNow(ChartVO chartVO);
     /*진료 환자 집보내기*/
     void delIsNow(ChartVO chartVO);
+
+
 }

@@ -131,15 +131,19 @@ const Chart = () => {
                       <div>예약번호 : {resMember? resMember.resNum: null}</div>
                     </div>
                     <div className='divTrF'>
-                      <div className='clickDetail' onClick={()=>{navigate(`/admin/history/${member.memNum}}`)}}>이름 : {member? member.memName:null} </div>
+                      <div className='clickDetail' onClick={()=>{navigate(`/admin/history/${member.memNum}`)}}>이름 : {member? member.memName:null} </div>
                       <div>생년월일 : {member? member.memBirth:null}</div>
                       <div>성별: {member? member.memGen:null}</div>
                     </div>
                     <div className='divTrT'>
                       <div>진료 부서 : {resMember? resMember.partList[0].partName:null}</div>
                       <div>담당의 : {resMember? resMember.staffList[0].staffName:null} </div>
-                      <button onClick={()=>{delIsNow(chartNum)}}>환자 삭제</button>
                     </div>
+                    
+                    <div className='botBut'>
+                        <button>수정</button>
+                        <button onClick={()=>{delIsNow(chartNum)}}>환자 삭제</button>
+                      </div>
                   </div>
                 )
               })
