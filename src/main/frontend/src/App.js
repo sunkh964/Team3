@@ -9,10 +9,24 @@ import UserHome from './pages/user/UserHome';
 import Join from './pages/user/Join';
 import Chart from './pages/admin/Chart';
 import DoctorManage from './pages/admin/DoctorManage';
+import Login from './pages/user/Login';
+import { useEffect, useState } from 'react';
 
 function App() {
 
   const navigate = useNavigate();
+  const [loginInfo, setLoginInfo] = useState({});
+
+  useEffect(()=>{
+    
+    const sessionLoginInfo=window.sessionStorage.getItem('loginInfo');
+
+    if(sessionLoginInfo!=null){
+      const obj_loginInfo = JSON.parse(sessionLoginInfo);
+      //2. 로그인 정보를 loginInfo에 저장
+      setLoginInfo(obj_loginInfo);
+    }
+  },[]);
 
   return (
     <div className="App">
@@ -22,10 +36,30 @@ function App() {
               그린카페병원
             </div>
             <div className='head-login'>
-              <ul>
-                <li>로그인</li>
-                <li onClick={()=>{navigate('/join')}}>회원가입</li>
-              </ul>
+              {
+            Object.keys(loginInfo).length == 0
+            ?
+            <ul className='header-menu'>
+              <li>
+                <span onClick={(e)=> {navigate('/login')}}>로그인</span>
+              </li>
+              <li>
+                <span onClick={() => {navigate('/join')}}>회원가입</span>
+              </li>
+            </ul>
+            :
+            <div className='login-info'>
+              {loginInfo.memName}님 반갑습니다.
+              <span onClick={() => {
+                //세션에 저장된 로그인 정보 삭제
+                window.sessionStorage.removeItem('loginInfo');
+                
+                //loginInfo state 변수의 값을 비워줌
+                setLoginInfo({});
+                navigate('/');
+              }}>Logout</span>
+            </div>
+          }
             </div>
           </div>
         </div>
@@ -38,6 +72,9 @@ function App() {
               <Route path='' element={<UserHome />} />
               {/* 회원 가입 화면 */}
               <Route path='/join' element={<Join/>}/>
+              {/* 로그인 화면 */}
+              <Route path='/login' element={<Login 
+              setLoginInfo={setLoginInfo} />}/>
             </Route>
   
             {/* 관리자용 */}
