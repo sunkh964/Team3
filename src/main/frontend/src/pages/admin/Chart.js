@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './Chart.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Chart = () => {
-  // 환자리스트 넣을 빈 배열
+  const navigate = useNavigate();
+
+  // 당일예약 환자 넣을 빈 배열
   const [resMemList, setResMemList]=useState([]);
+  // 진료 환자 넣을 빈 배열
   const [nowResMem, setNowResMem]=useState([]);
 
-  // 예약된 환자리스트 가져오기
+  // 당일예약 환자 리스트
   useEffect(()=>{
     axios.get('/chart/chartList')
     .then((res)=>{
@@ -17,6 +21,7 @@ const Chart = () => {
     .catch((error)=>{console.log(error)})
   },[])
 
+  // 진료 환자 리스트
   useEffect(()=>{
     axios.get('/chart/getIsNowMemChart')
     .then((res)=>{
@@ -25,6 +30,35 @@ const Chart = () => {
     })
     .catch((error)=>{console.log(error)})
   },[])
+
+  // 당일 예약 환자 -> 진료 환자로 변경
+  function goIsNow(chartNum){
+    if(window.confirm('진료환자로 변경하시겠습니까?')){
+      alert('진료환자로 변경되었습니다.')
+      console.log(chartNum)
+      axios.put('/chart/changeIsNow', {chartNum})
+      .then((res)=>{
+        window.location.reload()
+      })
+      .catch((error)=>{})
+    }else{
+      alert('변경이 취소되었습니다.')
+    }
+  }
+
+  // 진료환자 환자 삭제
+  function delIsNow(chartNum){
+    if(window.confirm('진료환자를 지우겠습니까?')){
+      alert('정상 처리되었습니다.')
+      axios.put('/chart/delIsNow', {chartNum})
+      .then((res)=>{
+        window.location.reload()
+      })
+      .catch((error)=>{console.log(error)})
+    }else{
+      alert('취소되었습니다.')
+    }
+  }
 
   return (
     <div className='chart'>
@@ -35,17 +69,18 @@ const Chart = () => {
 
           <div className='todayReg'>
             <div className='todayTop'>
-              <div>당일 예약 환자</div>
+              <p>당일 예약 환자</p>
               <button>추가</button>
             </div>
 
             {
               resMemList.map((resMem, i) => {
                 const member = resMem.resMemList[0]?.memberList[0];
+                const chartNum = resMem.chartNum;
                 return (
                   <div className='todayRegContent' key={i}>
                     <div className='divF'>
-                      <div>이름 : {member ? member.memName : null}</div>
+                      <div className='clickDetail' onClick={()=>navigate(`/admin/history/${member.memNum}`)}>이름 : {member ? member.memName : null}</div>
                       <div>생년월일 : {member ? member.memBirth : null}</div>
                       <div>성별: {member ? member.memGen : null}</div>
                     </div>
@@ -54,7 +89,7 @@ const Chart = () => {
                       <div>
                         <span>수정</span>
                         <span>삭제</span>
-                        <button>진료환자 등록</button>
+                        <button onClick={()=>{goIsNow(chartNum)}}>진료환자 등록</button>
                       </div>
                     </div>
                   </div>
@@ -82,26 +117,28 @@ const Chart = () => {
         </div>
 
         <div className='medTreat'>
-          <p>진료 환자</p>
+          <div className='medTop'><p>진료 환자</p></div>
           <div className='trContent'>
 
             {
               nowResMem.map((resMem, i)=>{
                 const member = resMem.resMemList[0]?.memberList[0];
+                const resMember = resMem.resMemList[0]
+                const chartNum = resMem.chartNum
                 return(
                   <div className='treatContent' key={i}>
                     <div className='divTrF'>
-                      <div>예약번호 : {resMem.resMemList[0]? resMem.resMemList[0].resNum: null}</div>
+                      <div>예약번호 : {resMember? resMember.resNum: null}</div>
                     </div>
                     <div className='divTrF'>
-                      <div>이름 : {member? member.memName:null} </div>
+                      <div className='clickDetail' onClick={()=>{navigate(`/admin/history/${member.memNum}}`)}}>이름 : {member? member.memName:null} </div>
                       <div>생년월일 : {member? member.memBirth:null}</div>
                       <div>성별: {member? member.memGen:null}</div>
                     </div>
                     <div className='divTrT'>
-                      <div>진료 부서 : {resMem.resMemList[0]? resMem.resMemList[0].staffList.staffName:null}</div>
-                      <div>담당의 : {resMem.resMemList[0]? resMem.resMemList[0].staffList.staffName:null} </div>
-                      <button>환자 삭제</button>
+                      <div>진료 부서 : {resMember? resMember.partList[0].partName:null}</div>
+                      <div>담당의 : {resMember? resMember.staffList[0].staffName:null} </div>
+                      <button onClick={()=>{delIsNow(chartNum)}}>환자 삭제</button>
                     </div>
                   </div>
                 )

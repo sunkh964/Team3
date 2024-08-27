@@ -9,7 +9,7 @@
 
 .chart .mainChart {
   display: flex;
-  height: calc(100vh - 40px); /* 타이틀을 제외한 높이 설정 */
+  /* height: calc(100vh - 40px);  */
 }
 
 .chart .chartLeft {
@@ -19,14 +19,15 @@
 }
 
 .chart .todayReg {
-  height: 50vh; /* 높이 설정 */
+  height: 50vh; 
   display: flex;
   flex-direction: column;
 }
 
 .chart .adminChat {
   border-top: 1px solid #7e969e;
-  height: 35vh; /* 높이 설정 */
+  border-bottom: 1px solid #7e969e;
+  height: 35vh; 
   display: flex;
   flex-direction: column;
 }
@@ -35,7 +36,7 @@
   width: 60%;
   display: flex;
   flex-direction: column;
-  border: 1px solid #7e969e;
+  border-left: 1px solid #7e969e;
   height: 628px;
   height: 85vh;
 }
@@ -55,13 +56,6 @@ button:hover {
   color: #eeeeee;
 }
 
-/* 당일 예약 환자 */
-.chartLeft .todayReg p {
-  border-bottom: 1px solid #7e969e;
-  width: 100%;
-  background-color: #bedce6;
-  padding: 5px;
-}
 
 .chartLeft .todayRegContent {
   overflow-y: auto; /* 세로 스크롤 허용 */
@@ -69,15 +63,18 @@ button:hover {
   font-size: 15px;
   border-bottom: 1px solid #7e969e;
   background-color: #e8f0f3;
-  max-height: calc(50vh - 40px); /* 최대 높이 설정 (헤더와 여백을 고려하여 조정) */
+  /* max-height: calc(50vh - 40px); 최대 높이 설정 (헤더와 여백을 고려하여 조정) */
 }
 
 .todayRegContent span {
   color: #7e969e;
   cursor: pointer;
-  padding-right: 3px;
+  padding-right: 5px;
+  cursor: pointer;
 }
-
+.divFSec span:hover{
+  color: #067da1;
+}
 .chartLeft .todayReg .divF {
   display: flex;
   justify-content: space-between;
@@ -88,6 +85,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
+
 
 .divFSec button {
   font-size: 13px;
@@ -114,8 +112,8 @@ button:hover {
   overflow-y: auto; /* 세로 스크롤 허용 */
   padding: 10px;
   background-color: #e8f0f3;
-  max-height: calc(35vh - 60px); /* 최대 높이 설정 (헤더와 입력 영역을 고려하여 조정) */
-}
+  /* max-height: calc(35vh - 60px); /* 최대 높이 설정 (헤더와 입력 영역을 고려하여 조정) */
+} 
 
 .adminChat .message {
   border-radius: 10px;
@@ -160,15 +158,19 @@ button:hover {
 /* 진료 환자 */
 .medTreat{
   height: 100%;
-}
-.medTreat p {
   border-bottom: 1px solid #7e969e;
+}
+.medTop{
+  height: 35px;
   width: 100%;
   background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+}
+.medTop p {
   padding: 5px;
+  
 }
 .trContent{
-  max-height: calc(50vh - 40px); /* 최대 높이 설정 (헤더와 여백을 고려하여 조정) */
   overflow-y: auto; /* 세로 스크롤 허용 */
 }
 
@@ -188,4 +190,10 @@ button:hover {
 
 .treatContent .divTrF {
   padding-bottom: 10px;
+}
+.clickDetail{
+  cursor: pointer;
+}
+.clickDetail:hover{
+  color: #067da1;
 }

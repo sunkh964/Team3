@@ -9,6 +9,7 @@ import UserHome from './pages/user/UserHome';
 import Join from './pages/user/Join';
 import Chart from './pages/admin/Chart';
 import DoctorManage from './pages/admin/DoctorManage';
+import History from './pages/admin/History';
 
 function App() {
 
@@ -49,6 +50,8 @@ function App() {
 
               {/* 관리자용 - 진료 관리(차트) */}
               <Route path='chart' element={<Chart />} />
+              {/* 관리자용 - 환자 진료 이력 */}
+              <Route path='history/:memNum' element={<History/>}/>
 
               {/* 관리자용 - 병원장 */}
               <Route path='doctorManage' element={<DoctorManage />} />
