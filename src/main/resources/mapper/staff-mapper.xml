@@ -35,24 +35,25 @@
         INSERT INTO HOS_STAFF (
             PART_NUM
             , STAFF_NAME
+            , STAFF_ID
+            , STAFF_PW
             , STAFF_BIRTH
             , STAFF_ADDR
             , STAFF_TEL
             , STAFF_GEN
-            , STAFF_ID
-            , STAFF_PW
         ) VALUES (
             #{partNum}
             , #{staffName}
+            , #{staffId}
+            , #{staffPw}
             , #{staffBirth}
             , #{staffAddr}
             , #{staffTel}
             , #{staffGen}
-            , #{staffId}
-            , #{staffPw}
         );
     </insert>
 
+    <!-- 직원 목록 조회-->
     <select id="getStaffList" resultMap="staff">
         SELECT STAFF_NUM
             , PART_NAME
@@ -64,6 +65,20 @@
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
         ORDER BY STAFF_NUM DESC
+    </select>
+
+    <!-- 직원 상세보기-->
+    <select id="">
+        SELECT STAFF_NUM
+            , STAFF_NAME
+            , STAFF_BIRTH
+            , STAFF_TEL
+            , STAFF_ADDR
+            , STAFF_ID
+            , STAFF_PW
+            , STAFF_GEN
+            , PART_NUM
+        FROM HOS_STAFF
     </select>
 
 	

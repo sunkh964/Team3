@@ -151,7 +151,7 @@ const DoctorManage = () => {
                   return(
                     <tr>
                       <td>{staffList.length - i}</td>
-                      <td>{staff.partVO[0].partName}</td>
+                      <td>{staff.part.partName}</td>
                       <td>{staff.staffName}</td>
                       <td>{staff.staffBirth}</td>
                       <td>{staff.staffTel}</td>
