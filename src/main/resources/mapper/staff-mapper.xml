@@ -45,8 +45,8 @@
             #{partNum}
             , #{staffName}
             , #{staffBirth}
-            , #{staffTel}
             , #{staffAddr}
+            , #{staffTel}
             , #{staffGen}
             , #{staffId}
             , #{staffPw}
@@ -65,9 +65,6 @@
         WHERE STAFF.PART_NUM = PART.PART_NUM
         ORDER BY STAFF_NUM DESC
     </select>
-
-
-
 
 	
 </mapper>
