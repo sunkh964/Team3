@@ -44,7 +44,7 @@
 
 <!--    로그인 -->
         <select id="login" resultMap="member">
-        SELECT MEM_ID, MEM_NAME, MEM_ROLE
+        SELECT MEM_ID, MEM_NAME
                 FROM HOS_MEMBER
                 WHERE MEM_ID=#{memId}
                 AND MEM_PW=#{memPw}
