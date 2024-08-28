@@ -90,7 +90,7 @@ function App() {
                 {/* 마이페이지-1:1문의 */}
                 <Route path='qna' element={<Qna/>}/>
                 {/* 마이페이지- 진료이력보기*/}
-                <Route path='history' element={<Histoy/>}/>
+                <Route path='history' element={<History/>}/>
               </Route>
             </Route>
   
