@@ -12,6 +12,7 @@ import DoctorManage from './pages/admin/DoctorManage';
 import Login from './pages/user/Login';
 import { useEffect, useState } from 'react';
 import History from './pages/admin/History';
+import AddChart from './pages/admin/AddChart';
 
 
 function App() {
@@ -90,6 +91,8 @@ function App() {
               <Route path='chart' element={<Chart />} />
               {/* 관리자용 - 환자 진료 이력 */}
               <Route path='history/:memNum' element={<History/>}/>
+              {/* 관리자용 - 당일 예약 환자 추가 */}
+              <Route path='addChart' element={<AddChart/>}/>
 
               {/* 관리자용 - 병원장 */}
               <Route path='doctorManage' element={<DoctorManage />} />

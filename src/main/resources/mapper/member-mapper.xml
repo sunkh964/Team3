@@ -49,6 +49,12 @@
                 WHERE MEM_ID=#{memId}
                 AND MEM_PW=#{memPw}
         </select>
+
+    <!--당일 예약 환자 기본 정보-->
+    <insert id="insertChartMem">
+        INSERT INTO HOS_MEMBER(MEM_NAME, MEM_BIRTH, MEM_TEL, MEM_GEN, MEM_ADDR)
+        VALUES (#{memName}, #{memBirth}, #{memTel}, #{memGen}, #{memAddr});
+    </insert>
 </mapper>
 
 

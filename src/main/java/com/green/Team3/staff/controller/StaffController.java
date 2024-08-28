@@ -49,4 +49,10 @@ public class StaffController {
     public List<ScheduleVO> getOneList(@PathVariable(name = "staffNum") int staffNum) {
         return staffService.getOneList(staffNum);
     }
+
+    /*담당의 조회*/
+    @GetMapping("selectStaffName/{selectedPart}")
+    public List<StaffVO> selectStaffName(@PathVariable("selectedPart") int partNum){
+        return staffService.selectStaffName(partNum);
+    }
 }

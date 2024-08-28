@@ -2,6 +2,7 @@ package com.green.Team3.chart.controller;
 
 import com.green.Team3.chart.service.ChartService;
 import com.green.Team3.chart.vo.ChartVO;
+import com.green.Team3.part.vo.PartVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 

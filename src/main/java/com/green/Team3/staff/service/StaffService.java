@@ -20,4 +20,7 @@ public interface StaffService {
     List<ScheduleVO> getAllList();
 //    직원 한 명의 일정 목록 조회
     List<ScheduleVO> getOneList(int staffNum);
+
+    /*담당의 조회*/
+    List<StaffVO> selectStaffName(int partNum);
 }

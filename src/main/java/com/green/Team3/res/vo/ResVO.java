@@ -11,6 +11,9 @@ import java.util.List;
 public class ResVO {
     private int resNum;
     private String resTime;
+    private int memNum;
+    private int staffNum;
+    private int partNum;
     private List<MemberVO> memberList;
     private List<StaffVO> staffList;
     private List<PartVO> partList;
