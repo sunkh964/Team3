@@ -1,0 +1,14 @@
+.login-div{
+  text-align: center;
+  border: 1px solid rgb(172, 172, 187);
+  border-radius: 50px;
+  box-shadow: 1px 1px 3px rgb(103, 103, 148);
+  width: 50%;
+  margin: 30px auto;
+  height: 200px;
+  font-size: 1.3rem;
+}
+
+.login-div>div{
+margin: 20px auto;
+}

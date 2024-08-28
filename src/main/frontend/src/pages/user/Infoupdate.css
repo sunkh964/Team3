@@ -1,0 +1,25 @@
+.info-head{
+  border: 1px solid rgb(172, 172, 187);
+  border-radius: 50px;
+  box-shadow: 1px 1px 3px rgb(103, 103, 148);
+  font-size: 1.3rem;
+  width: 40%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+
+
+.info-thead{
+  margin: 30px auto;
+  width: 100%;
+}
+
+.infoT td{
+  padding: 7px;
+}
+
+.info-button{
+  margin-bottom: 25px;
+  background-color: rgb(127, 127, 214);
+}

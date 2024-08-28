@@ -1,0 +1,18 @@
+.mypage-div{
+  display: flex;
+  align-items: start;
+  gap: 12px;
+}
+
+.mypage-div > div:nth-child(1){
+  width: 10%;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.mypage-div > div:nth-child(2){
+  width: 90%;
+
+}
+
+
