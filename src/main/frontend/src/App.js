@@ -89,11 +89,9 @@ function App() {
               <Route path='chart' element={<Chart />} />
 
               {/* 관리자용 - 병원장(직원등록) */}
-              <Route path='doctorManage' element={<DoctorManage />} />
-
+              <Route path='doctorManage' element={<DoctorManage />}/>
               {/* 관리자용 - 병원장(직원상세보기) */}
-              <Route path='staffDetail' element={<StaffDetail />}/>
-
+              <Route path='staffDetail/:staffNum' element={<StaffDetail />}/>
             </Route>
           </Routes>
         </div>

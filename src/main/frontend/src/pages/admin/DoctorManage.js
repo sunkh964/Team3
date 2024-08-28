@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './DoctorManage.css'
+import { useNavigate } from 'react-router-dom';
 
 const DoctorManage = () => {
+  const navigate = useNavigate();
+
   // 부서목록 저장 state
   const [partList, setPartList] = useState([]);
 
@@ -67,7 +70,7 @@ const DoctorManage = () => {
       <div className='doctor-sideList'>
         <ul>
           <li>직원등록 및 현황</li>
-          <li>직원정보 수정 및 삭제</li>
+          <li onClick={()=>{navigate('/admin/staffDetail/:staffNum')}}>직원정보 수정 및 삭제</li>
         </ul>
       </div>
 
@@ -165,7 +168,7 @@ const DoctorManage = () => {
                 {
                   staffList.map((staff, i) => {
                     return(
-                      <tr>
+                      <tr onClick={() =>{navigate(`/staffDetail/${staff.staffNum}`)}}>
                         <td>{staffList.length - i}</td>
                         <td>{staff.part.partName}</td>
                         <td>{staff.staffName}</td>
