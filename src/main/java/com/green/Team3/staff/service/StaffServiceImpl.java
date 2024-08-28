@@ -42,4 +42,10 @@ public class StaffServiceImpl implements StaffService {
             return sqlSession.selectList("scheduleMapper.getOneList", staffNum);
         }
 
+    // 직원 상세보기
+    @Override
+    public StaffVO getStaffDetail(int staffNum) {
+        return sqlSession.selectOne("staffMapper.getStaffDetail", staffNum);
     }
+
+}

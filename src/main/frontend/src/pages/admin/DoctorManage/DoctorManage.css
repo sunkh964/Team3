@@ -1,0 +1,112 @@
+/*  #067da1
+    헤드 #0797c1;
+         #bedce6
+    배경 #e8f0f3
+    선  #7e969e
+*/
+
+/* ----------- li ------------ */
+.doctor-sideList{
+  display: flex;
+}
+.doctor-sideList >ul{
+  display: flex;
+}
+.doctor-sideList >ul >li{
+  background-color: #0797c1 ;
+  border: 1px solid #43a6c4;
+  color: white;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 15px 0px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 20px;
+}
+.doctor-sideList >ul >li:hover{
+  background-color: #067da1;
+  border: 1px solid #0797c1;
+}
+
+/*  */
+.doctorManage{
+  margin: 20px auto;
+  width: 90%;
+  height: 90%;
+}
+
+.doctor-content{
+  border: 1px solid gray;
+  width: 100%;
+  background-color:#eeeeee;
+  border-radius: 15px;
+  border-top-left-radius: 0;
+}
+
+/* ---------- 직원등록 ---------- */
+.regStaff{
+  width: 90%;
+  margin: auto;
+  background-color: #e8f0f3;
+  border: 1px solid #7e969e;
+  margin-top: 30px;
+}
+
+.doctor-title{
+  background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.regStaff > div:nth-child(2){
+  padding: 20px 10px;
+}
+
+.regStaff .regStaff-table tr,td {
+  padding: 10px;
+}
+
+.regStaff .btn{
+  width: 90%;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+/* ---------- 직원목록 ---------- */
+.getStaff{
+  width: 90%;
+  height: 350px;
+  margin: auto;
+  background-color: #e8f0f3;
+  border: 1px solid #7e969e;
+  margin-bottom: 30px;
+}
+
+.getStaff-table{
+  width: 100%;
+  table-layout: fixed;
+}
+.getStaff-table > thead{
+  background-color: #067da1;
+  color: white;
+  font-weight: bold;
+}
+
+.getStaff-table td{
+  border: 1px solid #dddddd ;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  text-align: center;
+}
+
+.getStaff-table tbody tr:nth-child(odd){
+  background-color: white;
+}
+
+
+.getStaff-table thead {
+}
+.getStaff-table tbody {
+  overflow: auto;
+}
