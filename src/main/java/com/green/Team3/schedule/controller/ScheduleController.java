@@ -2,9 +2,14 @@ package com.green.Team3.schedule.controller;
 
 import com.green.Team3.schedule.service.ScheduleService;
 import com.green.Team3.schedule.vo.ScheduleVO;
+import com.green.Team3.util.DateTimeUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -23,6 +28,19 @@ public class ScheduleController {
     @PostMapping("/addEvent")
     public void addEvent(@RequestBody ScheduleVO scheduleVO) {
         System.out.println(scheduleVO);
-//        scheduleService.addEvent(scheduleVO);
+
+        String startDate = DateTimeUtil.getFormattedStringDate(scheduleVO.getStart(), "yyyy-MM-dd HH:mm:ss");
+        String endDate = DateTimeUtil.getFormattedStringDate(scheduleVO.getEnd(), "yyyy-MM-dd HH:mm:ss");
+
+        scheduleVO.setStart(startDate);
+        scheduleVO.setEnd(endDate);
+
+        scheduleService.addEvent(scheduleVO);
+    }
+
+//    일정 상세 조회
+    @GetMapping("/getDetail/{schNum}")
+    public ScheduleVO getDetail(@PathVariable(name = "schNum") int schNum) {
+        return scheduleService.getDetail(schNum);
     }
 }
