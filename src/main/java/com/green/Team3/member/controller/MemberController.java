@@ -36,7 +36,8 @@ public class MemberController {
 
 //    당일 예약 환자 기본 정보
     @PostMapping("/insertChartMem")
-    public void insertChartMem(MemberVO memberVO){
+    public MemberVO insertChartMem(@RequestBody MemberVO memberVO){
         memberService.insertChartMem(memberVO);
+        return memberVO;
     }
 }
