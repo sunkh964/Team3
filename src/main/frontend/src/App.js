@@ -8,15 +8,17 @@ import AdminHome from './pages/admin/AdminHome';
 import UserHome from './pages/user/UserHome';
 import Join from './pages/user/Join';
 import Chart from './pages/admin/Chart';
-import DoctorManage from './pages/admin/DoctorManage';
+import DoctorManage from './pages/admin/DoctorManage/DoctorManage';
 import Login from './pages/user/Login';
 import { useEffect, useState } from 'react';
 import History from './pages/admin/History';
 import Mypage from './pages/user/Mypage';
 import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
+import StaffDetail from './pages/admin/StaffDetail';
 import Histoy from './pages/user/Histoy';
 import Qupldate from './pages/user/Qupldate';
+
 
 function App() {
 
@@ -107,9 +109,10 @@ function App() {
               {/* 관리자용 - 환자 진료 이력 */}
               <Route path='history/:memNum' element={<History/>}/>
 
-              {/* 관리자용 - 병원장 */}
-              <Route path='doctorManage' element={<DoctorManage />} />
-
+              {/* 관리자용 - 병원장(직원등록) */}
+              <Route path='doctorManage' element={<DoctorManage />}/>
+              {/* 관리자용 - 병원장(직원상세보기) */}
+              <Route path='staffDetail/:staffNum' element={<StaffDetail />}/>
             </Route>
           </Routes>
         </div>

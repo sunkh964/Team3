@@ -16,8 +16,14 @@ public interface StaffService {
 
     // 직원 조회
     List<StaffVO> getStaffList(StaffVO staffVO);
-//    직원 전체의 일정 목록 조회
+    //    직원 전체의 일정 목록 조회
     List<ScheduleVO> getAllList();
 //    직원 한 명의 일정 목록 조회
     List<ScheduleVO> getOneList(int staffNum);
+
+    // 직원 상세조회
+    StaffVO getStaffDetail(int staffNum);
+
 }
+
+
