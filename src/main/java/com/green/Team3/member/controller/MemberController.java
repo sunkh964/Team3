@@ -33,4 +33,16 @@ public class MemberController {
     public MemberVO login(@RequestBody MemberVO memberVO){
         return memberService.login(memberVO);
     }
+
+    //    마이페이지 개인정보 수정화면 띄우는
+    @GetMapping("/infoupdate/{memId}")
+    public MemberVO getInfo(@PathVariable("memId") String memId){
+        return memberService.getInfo(memId);
+    }
+
+    //    개인정보 수정하기
+    @PutMapping("/update")
+    public void update(@RequestBody MemberVO memberVO){
+        memberService.update(memberVO);
+    }
 }

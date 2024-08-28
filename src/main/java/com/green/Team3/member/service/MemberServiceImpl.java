@@ -31,4 +31,17 @@ public class MemberServiceImpl implements MemberService {
     public MemberVO login(MemberVO memberVO) {
         return sqlSession.selectOne("memberMapper.login", memberVO);
     }
+
+//    마이페이지 개인정보 수정 페이지 불러오기
+    @Override
+    public MemberVO getInfo(String memId) {
+        MemberVO memberVO=sqlSession.selectOne("memberMapper.getInfo", memId);
+        return memberVO;
+    }
+
+    //    개인정보 수정하기
+    @Override
+    public void update(MemberVO memberVO) {
+        sqlSession.update("memberMapper.update", memberVO);
+    }
 }

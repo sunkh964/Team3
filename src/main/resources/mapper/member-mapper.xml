@@ -44,11 +44,31 @@
 
 <!--    로그인 -->
         <select id="login" resultMap="member">
-        SELECT MEM_ID, MEM_NAME
+        SELECT MEM_ID, MEM_NAME, MEM_NUM
                 FROM HOS_MEMBER
                 WHERE MEM_ID=#{memId}
                 AND MEM_PW=#{memPw}
         </select>
+
+<!--    마이페이지- 개인정보 수정화면 띄우는 쿼리-->
+    <select id="getInfo" resultMap="member">
+        SELECT MEM_NUM
+        , MEM_NAME
+        , MEM_TEL
+        , MEM_ADDR
+        FROM HOS_MEMBER
+        WHERE MEM_ID = #{memId}
+    </select>
+
+<!--    개인정보 수정하기-->
+    <update id="update">
+        UPDATE HOS_MEMBER
+        SET
+        MEM_TEL=#{memTel},
+        MEM_ADDR=#{memAddr}
+        WHERE MEM-NUM=#{memNum}
+    </update>
+
 </mapper>
 
 

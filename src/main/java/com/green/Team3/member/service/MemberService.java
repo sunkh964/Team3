@@ -11,4 +11,10 @@ public interface MemberService {
 
 //    로그인
     MemberVO login(MemberVO memberVO);
+
+//    마이페이지 개인정보 수정화면 띄우는
+    MemberVO getInfo(String memId);
+
+//    개인정보 수정하기
+    void update(MemberVO memberVO);
 }

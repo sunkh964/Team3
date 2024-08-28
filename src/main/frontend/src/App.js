@@ -1,6 +1,6 @@
 import './App.css';
 import './reset.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Router, Routes, useNavigate } from 'react-router-dom';
 import UserLayout from './pages/user/UserLayout';
 import AdminLayout from './pages/admin/AdminLayout';
 import StaffManage from './pages/admin/StaffManage';
@@ -11,8 +11,15 @@ import Chart from './pages/admin/Chart';
 import DoctorManage from './pages/admin/DoctorManage';
 import Login from './pages/user/Login';
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import History from './pages/admin/History';
 
+=======
+import Mypage from './pages/user/Mypage';
+import Infoupdate from './pages/user/Infoupdate';
+import Qna from './pages/user/Qna';
+import Histoy from './pages/user/Histoy';
+>>>>>>> nohk
 
 function App() {
 
@@ -52,6 +59,7 @@ function App() {
             :
             <div className='login-info'>
               {loginInfo.memName}님 반갑습니다.
+              <span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>마이페이지</span>
               <span onClick={() => {
                 //세션에 저장된 로그인 정보 삭제
                 window.sessionStorage.removeItem('loginInfo');
@@ -77,6 +85,16 @@ function App() {
               {/* 로그인 화면 */}
               <Route path='/login' element={<Login 
               setLoginInfo={setLoginInfo} />}/>
+
+              {/* 마이페이지 */}
+              <Route path='/mypage' element={<Mypage  loginInfo={loginInfo}/>}>
+                {/* 마이페이지-개인정보수정 */}
+                <Route path='infoupdate/:memId' element={<Infoupdate />} />
+                {/* 마이페이지-1:1문의 */}
+                <Route path='qna' element={<Qna/>}/>
+                {/* 마이페이지- 진료이력보기*/}
+                <Route path='history' element={<Histoy/>}/>
+              </Route>
             </Route>
   
             {/* 관리자용 */}
