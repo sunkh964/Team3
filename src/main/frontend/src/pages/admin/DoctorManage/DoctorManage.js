@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './DoctorManage.css'
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import DoctorHome from './DoctorHome';
 
 const DoctorManage = () => {
   const navigate = useNavigate();

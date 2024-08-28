@@ -8,7 +8,7 @@ import AdminHome from './pages/admin/AdminHome';
 import UserHome from './pages/user/UserHome';
 import Join from './pages/user/Join';
 import Chart from './pages/admin/Chart';
-import DoctorManage from './pages/admin/DoctorManage';
+import DoctorManage from './pages/admin/DoctorManage/DoctorManage';
 import Login from './pages/user/Login';
 import { useEffect, useState } from 'react';
 import StaffDetail from './pages/admin/StaffDetail';
