@@ -20,11 +20,13 @@ public class StaffServiceImpl implements StaffService {
         return sqlSession.selectList("staffMapper.getPartList");
     }
 
+    // 직원 등록
     @Override
     public void regStaff(StaffVO staffVO) {
         sqlSession.insert("staffMapper.regStaff", staffVO);
     }
 
+    // 직원 현황 (직원 대표정보 조회)
     @Override
     public List<StaffVO> getStaffList(StaffVO staffVO) {
         return sqlSession.selectList("staffMapper.getStaffList", staffVO);
@@ -41,6 +43,12 @@ public class StaffServiceImpl implements StaffService {
         public List<ScheduleVO> getOneList ( int staffNum){
             return sqlSession.selectList("scheduleMapper.getOneList", staffNum);
         }
+
+    // 직원 상세정보 목록 조회
+    @Override
+    public List<StaffVO> getStaffInfoList(StaffVO staffVO) {
+        return sqlSession.selectList("staffMapper.getStaffInfoList", staffVO);
+    }
 
     // 직원 상세보기
     @Override

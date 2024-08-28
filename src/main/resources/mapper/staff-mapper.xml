@@ -13,6 +13,7 @@
         <result column="STAFF_ID" property="staffId"/>
         <result column="STAFF_PW" property="staffPw"/>
         <result column="STAFF_GEN" property="staffGen"/>
+        <result column="HIRE_DATE" property="hireDate"/>
         <result column="PART_NUM" property="partNum"/>
         <association property="part" resultMap="part"/>
     </resultMap>
@@ -53,7 +54,7 @@
         );
     </insert>
 
-    <!-- 직원 목록 조회-->
+    <!-- 직원 현황 (직원 대표정보 조회) -->
     <select id="getStaffList" resultMap="staff">
         SELECT STAFF_NUM
             , PART_NAME
@@ -61,10 +62,24 @@
             , STAFF_BIRTH
             , STAFF_TEL
             , STAFF_ADDR
-            , STAFF_GEN
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
-        ORDER BY STAFF_NUM DESC
+        ORDER BY STAFF_NAME ASC
+    </select>
+
+    <!-- 직원 상세정보 목록 조회 -->
+    <select id="getStaffInfoList" resultMap="staff">
+        SELECT STAFF_NUM
+        , PART_NAME
+        , STAFF_NAME
+        , STAFF_BIRTH
+        , STAFF_TEL
+        , STAFF_ADDR
+        , STAFF_GEN
+        , DATE_FORMAT(HIRE_DATE, '%Y-%m-%d') AS HIRE_DATE
+        FROM HOS_STAFF STAFF, HOS_PART PART
+        WHERE STAFF.PART_NUM = PART.PART_NUM
+        ORDER BY PART_NAME ASC, HIRE_DATE ASC, STAFF_NAME ASC
     </select>
 
     <!-- 직원 상세보기-->
@@ -77,10 +92,14 @@
             , STAFF_ID
             , STAFF_PW
             , STAFF_GEN
+            , HIRE_DATE
             , PART_NAME
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
         AND STAFF_NUM = #{staffNum}
+    </select>
+
+
     <!--담당의 조회-->
     <select id="selectStaffName" resultMap="staff">
         SELECT P.PART_NUM, STAFF_NAME

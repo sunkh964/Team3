@@ -1,0 +1,69 @@
+
+/* ---------- 직원등록 ---------- */
+.regStaff{
+  width: 95%;
+  margin: auto;
+  background-color: #e8f0f3;
+  border: 1px solid #7e969e;
+}
+
+.doctor-title{
+  background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.regStaff > div:nth-child(2){
+  padding: 20px 0px;
+}
+.regStaff .regStaff-table{
+  margin: auto;
+}
+.regStaff .regStaff-table tr,td {
+  padding: 10px;
+}
+
+.regStaff .btn{
+  width: 90%;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+/* ---------- 직원목록 ---------- */
+.getStaff{
+  width: 95%;
+  height: 350px;
+  margin: auto;
+  background-color: #e8f0f3;
+  border: 1px solid #7e969e;
+  margin-bottom: 30px;
+}
+
+.getStaff-table{
+  width: 100%;
+  table-layout: fixed;
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.getStaff-table > thead{
+  background-color: #067da1;
+  color: white;
+  font-weight: bold;
+  border-bottom: 4px double #7e969e ;
+  position: sticky;
+  top: 0;
+}
+
+.getStaff-table td{
+  border: 1px solid #dddddd ;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  text-align: center;
+}
+
+.getStaff-table tbody tr:nth-child(odd){
+  background-color: white;
+}

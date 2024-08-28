@@ -1,0 +1,30 @@
+.staffChange{
+  margin-top: 30px;
+  width: 95%;
+  margin: auto;
+  background-color: #e8f0f3;
+  border: 1px solid #7e969e;
+}
+
+.staffChange-table{
+  width: 100%;
+  table-layout: fixed;
+}
+.staffChange-table > thead{
+  background-color: #067da1;
+  color: white;
+  font-weight: bold;
+  border-bottom: 4px double #7e969e ;
+}
+
+.staffChange-table td{
+  border: 1px solid #dddddd ;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  text-align: center;
+}
+
+.staffChange-table tbody tr:nth-child(odd){
+  background-color: white;
+}

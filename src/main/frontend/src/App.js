@@ -17,6 +17,8 @@ import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
 import StaffDetail from './pages/admin/StaffDetail';
 import AddChart from './pages/admin/AddChart';
+import DoctorHome from './pages/admin/DoctorManage/DoctorHome';
+import StaffChange from './pages/admin/DoctorManage/StaffChange';
 
 function App() {
 
@@ -90,7 +92,7 @@ function App() {
                 {/* 마이페이지-1:1문의 */}
                 <Route path='qna' element={<Qna/>}/>
                 {/* 마이페이지- 진료이력보기*/}
-                <Route path='history' element={<Histoy/>}/>
+                <Route path='history' element={<History/>}/>
               </Route>
             </Route>
   
@@ -108,10 +110,15 @@ function App() {
               {/* 관리자용 - 당일 예약 환자 추가 */}
               <Route path='addChart' element={<AddChart/>}/>
 
-              {/* 관리자용 - 병원장(직원등록) */}
-              <Route path='doctorManage' element={<DoctorManage />}/>
-              {/* 관리자용 - 병원장(직원상세보기) */}
-              <Route path='staffDetail/:staffNum' element={<StaffDetail />}/>
+              {/* 관리자용 - 병원장 */}
+              <Route path='doctorManage' element={<DoctorManage />}>
+                {/* 병원장 - 첫화면(직원등록) */}
+                <Route path='' element={<DoctorHome />}/>
+                {/* 병원장 - 직원정보 수정 및 삭제 */}
+                <Route path='staffChange' element={<StaffChange />}/>
+                {/* 병원장 - 직원정보(상세보기) */}
+                <Route path='staffDetail/:staffNum' element={<StaffDetail />}/>
+              </Route>
             </Route>
           </Routes>
         </div>
