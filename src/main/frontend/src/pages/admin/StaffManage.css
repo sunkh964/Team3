@@ -14,14 +14,16 @@
 }
 
 /* ============== 모달 창 ============= */
-.event-form-div {
+/* 모달 통합 */
+.event-modal-div {
    display: flex;
    justify-content: center;
    width: 100%;
-   padding: 10px 0px;
+   padding: 10px 50px;
    /* background-color: aquamarine; */
 }
 
+/* 등록 폼 */
 .input-form input, .input-form textarea {
    width: 100%;
    padding: 5px;
@@ -34,8 +36,16 @@
    margin-left: 10px;
 }
 
-.input-form td {
+.input-form td, .detail-table td {
    padding: 5px;
    vertical-align: middle;
+}
+
+.input-form td {
    text-align: right;
+}
+
+/* 조회 테이블 */
+.detail-table td:not(:nth-child(1)) {
+   text-align: left;
 }

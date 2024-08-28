@@ -8,7 +8,7 @@
         <result column="START" property="start"/>
         <result column="END" property="end"/>
         <result column="TITLE" property="title"/>
-        <result column="DESCRIPTION" property="schContent"/>
+        <result column="DESCRIPTION" property="description"/>
         <result column="SCH_ISALL" property="schIsAll"/>
         <association property="staffVO" resultMap="staffMapper.staff" />
     </resultMap>
@@ -24,7 +24,7 @@
         SELECT
             SCH_NUM
             , SCH_TITLE TITLE
-            , SCH_CONTENT
+            , SCH_CONTENT DESCRIPTION
             , SCH.STAFF_NUM
             , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
             , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
@@ -37,7 +37,7 @@
         SELECT
         SCH_NUM
         , SCH_TITLE TITLE
-        , SCH_CONTENT
+        , SCH_CONTENT DESCRIPTION
         , SCH.STAFF_NUM
         , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
         , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
@@ -46,13 +46,27 @@
             AND SCH.STAFF_NUM = #{staffNum}
     </select>
 
+    <!-- 직원 한 명의 일정 상세 조회 -->
+    <select id="getDetail" resultMap="schedule">
+        SELECT
+        SCH_NUM
+        , SCH_TITLE TITLE
+        , SCH_CONTENT DESCRIPTION
+        , SCH.STAFF_NUM
+        , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
+        , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
+        FROM HOS_SCHEDULE SCH, HOS_STAFF S
+        WHERE SCH.STAFF_NUM = S.STAFF_NUM
+            AND SCH_NUM = #{schNum}
+    </select>
+
     <insert id="addEvent">
         INSERT INTO HOS_SCHEDULE (
-            SCH_TITLE TITLE
-            , SCH_CONTENT DESCRIPTION
+            SCH_TITLE
+            , SCH_CONTENT
             , STAFF_NUM
-            , SCH_SDATE START
-            , SCH_EDATE END
+            , SCH_SDATE
+            , SCH_EDATE
         ) VALUES (
             #{title}
             , #{description}
