@@ -32,7 +32,7 @@ public class StaffController {
         staffService.regStaff(staffVO);
     }
 
-    // 직원 조회
+    // 직원 현황 (직원 대표정보 조회)
     @GetMapping("/getStaff")
     public List<StaffVO> getStaffList(StaffVO staffVO){
         return staffService.getStaffList(staffVO);
@@ -48,6 +48,12 @@ public class StaffController {
     @GetMapping("/getOneList/{staffNum}")
     public List<ScheduleVO> getOneList(@PathVariable(name = "staffNum") int staffNum) {
         return staffService.getOneList(staffNum);
+    }
+
+    // 직원 상세정보 목록 조회
+    @GetMapping("/getStaffInfo")
+    public List<StaffVO> getStaffInfoList(StaffVO staffVO){
+        return staffService.getStaffInfoList(staffVO);
     }
 
     // 직원 상세보기
