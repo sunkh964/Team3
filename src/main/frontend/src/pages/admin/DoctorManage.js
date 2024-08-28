@@ -64,103 +64,120 @@ const DoctorManage = () => {
 
   return (
     <div className='doctorManage'>
-      <div>조직원관리, 조직원추가, 수정, 삭제 하기</div>
-      <div className='regStaff'>
-        <div>직원 등록</div>
-        <div>
-          <table>
-            <tr>
-              <td>이름</td>
-              <td>
-                <input type='text' name='staffName'
-                  onChange={(e) => {changeInsertStaffData(e)}}/>
-              </td>
-              <td>부서번호</td>
-              <td>
-                <select name='partNum' onChange={(e) => {changeInsertStaffData(e)}}>
-                  {
-                    partList.map((part, i) =>{
-                      return(
-                        <option key={i} value={part.partNum}>{part.partName}</option>
-                      );
-                    })
-                  }
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>아이디</td>
-              <td>
-                <input type='text' name='staffId'
-                  onChange={(e) => {changeInsertStaffData(e)}}/>
-              </td>
-              <td>비밀번호</td>
-              <td>
-                <input type='text' name='staffPw'
-                  onChange={(e) => {changeInsertStaffData(e)}}/>
-              </td>
-            </tr>
-            <tr>
-              <td>주민번호</td>
-              <td>
-                <input type='text' name='staffBirth'
-                  onChange={(e) => {changeInsertStaffData(e)}}/>
-              </td>
-              <td>연락처</td>
-              <td>
-                <input type='text' name='staffTel'
-                  onChange={(e) => {changeInsertStaffData(e)}}/>
-              </td>
-            </tr>
-            <tr>
-              <td>주소</td>
-              <td>
-                <input type='text' name='staffAddr'
-                  onChange={(e) => {changeInsertStaffData(e)}}/>
-              </td>
-              <td>성별</td>
-              <td>
-                <input type='radio' name='staffGen' value="남"
-                    onChange={(e) => {changeInsertStaffData(e)}} checked={insertStaff.staffGen == '남'}/>남
-                <input type='radio' name='staffGen' value="여"
-                  onChange={(e) => {changeInsertStaffData(e)}}
-                  checked={insertStaff.staffGen == '여'}/>여
-              </td>
-            </tr>
-          </table>
-        </div>
-        <button type='button' onClick={(e)=>{regStaff()}}>직원등록</button>
+      <div className='doctor-sideList'>
+        <ul>
+          <li>직원등록 및 현황</li>
+          <li>직원정보 수정 및 삭제</li>
+        </ul>
       </div>
 
-      <div className='getStaff'>
-        <div>직원목록</div>
-        <div>
-          <table>
-            <thead>
+      <div className='doctor-content'>
+        <div className='regStaff'>
+          <div className='doctor-title'>직원 등록</div>
+          <div>
+            <table className='regStaff-table'>
               <tr>
-                <td>No.</td>
-                <td>부서</td>
                 <td>이름</td>
-                <td>생년월일</td>
-                <td>연락처</td>
+                <td>
+                  <input type='text' name='staffName'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
+                <td>부서번호</td>
+                <td>
+                  <select name='partNum' onChange={(e) => {changeInsertStaffData(e)}}>
+                    {
+                      partList.map((part, i) =>{
+                        return(
+                          <option key={i} value={part.partNum}>{part.partName}</option>
+                        );
+                      })
+                    }
+                  </select>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {
-                staffList.map((staff, i) => {
-                  return(
-                    <tr>
-                      <td>{staffList.length - i}</td>
-                      <td>{staff.part.partName}</td>
-                      <td>{staff.staffName}</td>
-                      <td>{staff.staffBirth}</td>
-                      <td>{staff.staffTel}</td>
-                    </tr>
-                  );
-                })
-              }
-            </tbody>
-          </table>
+              <tr>
+                <td>아이디</td>
+                <td>
+                  <input type='text' name='staffId'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
+                <td>비밀번호</td>
+                <td>
+                  <input type='text' name='staffPw'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
+              </tr>
+              <tr>
+                <td>주민번호</td>
+                <td>
+                  <input type='text' name='staffBirth'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
+                <td>연락처</td>
+                <td>
+                  <input type='text' name='staffTel'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
+              </tr>
+              <tr>
+                <td>주소</td>
+                <td>
+                  <input type='text' name='staffAddr'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
+                <td>성별</td>
+                <td>
+                  <input type='radio' name='staffGen' value="남"
+                      onChange={(e) => {changeInsertStaffData(e)}} checked={insertStaff.staffGen == '남'}/>남
+                  <input type='radio' name='staffGen' value="여"
+                    onChange={(e) => {changeInsertStaffData(e)}}
+                    checked={insertStaff.staffGen == '여'}/>여
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div className='btn'>
+            <button type='button' onClick={(e)=>{regStaff()}}>직원등록</button>
+          </div>
+        </div>
+  
+        <div className='getStaff'>
+          <div className='doctor-title'>직원목록</div>
+          <div>
+            <table className='getStaff-table'>
+              <colgroup>
+              <col width='10%' />
+              <col width='20%' />
+              <col width='20%' />
+              <col width='20%' />
+              <col width='20%' />
+              </colgroup>
+              <thead>
+                <tr>
+                  <td>No.</td>
+                  <td>부서</td>
+                  <td>이름</td>
+                  <td>생년월일</td>
+                  <td>연락처</td>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  staffList.map((staff, i) => {
+                    return(
+                      <tr>
+                        <td>{staffList.length - i}</td>
+                        <td>{staff.part.partName}</td>
+                        <td>{staff.staffName}</td>
+                        <td>{staff.staffBirth}</td>
+                        <td>{staff.staffTel}</td>
+                      </tr>
+                    );
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

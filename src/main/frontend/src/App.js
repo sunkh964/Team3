@@ -11,6 +11,7 @@ import Chart from './pages/admin/Chart';
 import DoctorManage from './pages/admin/DoctorManage';
 import Login from './pages/user/Login';
 import { useEffect, useState } from 'react';
+import StaffDetail from './pages/admin/StaffDetail';
 
 function App() {
 
@@ -87,8 +88,11 @@ function App() {
               {/* 관리자용 - 진료 관리(차트) */}
               <Route path='chart' element={<Chart />} />
 
-              {/* 관리자용 - 병원장 */}
+              {/* 관리자용 - 병원장(직원등록) */}
               <Route path='doctorManage' element={<DoctorManage />} />
+
+              {/* 관리자용 - 병원장(직원상세보기) */}
+              <Route path='staffDetail' element={<StaffDetail />}/>
 
             </Route>
           </Routes>
