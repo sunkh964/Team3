@@ -70,7 +70,7 @@ const Chart = () => {
           <div className='todayReg'>
             <div className='todayTop'>
               <p>당일 예약 환자</p>
-              <button>추가</button>
+              <button onClick={()=>{navigate('/admin/addChart')}}>추가</button>
             </div>
 
             {

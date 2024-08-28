@@ -70,9 +70,9 @@
         AND S.STAFF_NUM = R.STAFF_NUM
         AND P.PART_NUM = R.PART_NUM
         AND M.MEM_NUM = R.MEM_NUM
-        AND R.MEM_NUM = #{memNum};
+        AND R.MEM_NUM = #{memNum}
+        ORDER BY HIS_NUM DESC;
     </select>
-
 
 
 

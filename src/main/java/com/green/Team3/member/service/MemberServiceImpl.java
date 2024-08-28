@@ -44,4 +44,11 @@ public class MemberServiceImpl implements MemberService {
     public void update(MemberVO memberVO) {
         sqlSession.update("memberMapper.update", memberVO);
     }
+    /*환자 기본 정보 등록*/
+    @Override
+    public MemberVO insertChartMem(MemberVO memberVO) {
+        sqlSession.insert("memberMapper.insertChartMem", memberVO);
+        return memberVO;
+    }
+
 }

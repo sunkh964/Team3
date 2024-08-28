@@ -24,6 +24,8 @@ public interface StaffService {
     // 직원 상세조회
     StaffVO getStaffDetail(int staffNum);
 
+    /*담당의 조회*/
+    List<StaffVO> selectStaffName(int partNum);
 }
 
 

@@ -1,6 +1,7 @@
 package com.green.Team3.chart.service;
 
 import com.green.Team3.chart.vo.ChartVO;
+import com.green.Team3.part.vo.PartVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,5 @@ public class ChartServiceImpl implements ChartService {
     public void delIsNow(ChartVO chartVO) {
         sqlSession.update("chartMapper.delIsNow", chartVO);
     }
+
 }

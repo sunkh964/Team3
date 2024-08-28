@@ -48,4 +48,10 @@ public class StaffServiceImpl implements StaffService {
         return sqlSession.selectOne("staffMapper.getStaffDetail", staffNum);
     }
 
+        /*담당의 조회*/
+
+    @Override
+    public List<StaffVO> selectStaffName(int partNum) {
+        return sqlSession.selectList("staffMapper.selectStaffName", partNum);
+    }
 }

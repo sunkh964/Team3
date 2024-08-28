@@ -52,7 +52,12 @@ public class StaffController {
 
     // 직원 상세보기
     @GetMapping("/getStaffDetail/{staffNum}")
-    public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum){
+    public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum) {
         return staffService.getStaffDetail(staffNum);
+    }
+    /*담당의 조회*/
+    @GetMapping("selectStaffName/{selectedPart}")
+    public List<StaffVO> selectStaffName(@PathVariable("selectedPart") int partNum){
+        return staffService.selectStaffName(partNum);
     }
 }

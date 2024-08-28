@@ -34,16 +34,18 @@ const History = () => {
         hisList.map((his,i)=>{
           const member = his.memberList[0];
           const staff = his.staffList[0];
+          const res = his.resList[0];
+          const part = his.partList[0];
           return(
             <div className='hisContent' key={i}>
               <div className='conTop'> 
                 <div>진료 이력 번호 : {his.hisNum} </div>
-                <div>차트 번호 : </div> 
-                <div>진료 날짜 : </div>
+                <div>차트 번호 : {his.chartNum} </div> 
+                <div>진료 날짜 : {res?res.resTime:null} </div>
               </div>
 
               <div className='conMid'> 
-                <div>진료 부서 : </div> 
+                <div>진료 부서 : {part?part.partName:null} </div> 
                 <div>담당의 : {staff?staff.staffName:null}</div> 
               </div>
 

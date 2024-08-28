@@ -17,4 +17,6 @@ public interface MemberService {
 
 //    개인정보 수정하기
     void update(MemberVO memberVO);
+//    당일 예약 환자 기본 정보
+    MemberVO insertChartMem(MemberVO memberVO);
 }

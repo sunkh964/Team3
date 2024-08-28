@@ -42,7 +42,13 @@ public class MemberController {
 
     //    개인정보 수정하기
     @PutMapping("/update")
-    public void update(@RequestBody MemberVO memberVO){
+    public void update(@RequestBody MemberVO memberVO) {
         memberService.update(memberVO);
+    }
+//    당일 예약 환자 기본 정보
+    @PostMapping("/insertChartMem")
+    public MemberVO insertChartMem(@RequestBody MemberVO memberVO){
+        memberService.insertChartMem(memberVO);
+        return memberVO;
     }
 }
