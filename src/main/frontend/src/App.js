@@ -15,7 +15,12 @@ import History from './pages/admin/History';
 import Mypage from './pages/user/Mypage';
 import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
+<<<<<<< HEAD
 import StaffDetail from './pages/admin/StaffDetail';
+=======
+import Histoy from './pages/user/Histoy';
+import Qupldate from './pages/user/Qupldate';
+>>>>>>> nohk
 
 function App() {
 
@@ -88,6 +93,7 @@ function App() {
                 <Route path='infoupdate/:memId' element={<Infoupdate />} />
                 {/* 마이페이지-1:1문의 */}
                 <Route path='qna' element={<Qna/>}/>
+                <Route path='qupdate' element={<Qupldate loginInfo={loginInfo}/>}/>
                 {/* 마이페이지- 진료이력보기*/}
                 <Route path='history' element={<Histoy/>}/>
               </Route>
