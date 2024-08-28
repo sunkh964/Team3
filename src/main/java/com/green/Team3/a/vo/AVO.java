@@ -13,6 +13,5 @@ public class AVO {
     private String aContent;
     private String aDate;
     private int qNum;
-    private List<QVO> q;
-    private List<StaffVO> staff;
+    private StaffVO staff;
 }

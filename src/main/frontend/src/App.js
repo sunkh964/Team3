@@ -11,15 +11,12 @@ import Chart from './pages/admin/Chart';
 import DoctorManage from './pages/admin/DoctorManage';
 import Login from './pages/user/Login';
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
 import History from './pages/admin/History';
-
-=======
 import Mypage from './pages/user/Mypage';
 import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
 import Histoy from './pages/user/Histoy';
->>>>>>> nohk
+import Qupldate from './pages/user/Qupldate';
 
 function App() {
 
@@ -92,6 +89,7 @@ function App() {
                 <Route path='infoupdate/:memId' element={<Infoupdate />} />
                 {/* 마이페이지-1:1문의 */}
                 <Route path='qna' element={<Qna/>}/>
+                <Route path='qupdate' element={<Qupldate loginInfo={loginInfo}/>}/>
                 {/* 마이페이지- 진료이력보기*/}
                 <Route path='history' element={<Histoy/>}/>
               </Route>
