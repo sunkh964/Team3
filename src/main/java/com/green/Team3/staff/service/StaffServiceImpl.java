@@ -56,7 +56,13 @@ public class StaffServiceImpl implements StaffService {
         return sqlSession.selectOne("staffMapper.getStaffDetail", staffNum);
     }
 
-        /*담당의 조회*/
+    // 직원정보 수정
+    @Override
+    public void updateStaffInfo(StaffVO staffVO) {
+        sqlSession.update("staffMapper.updateStaffInfo", staffVO);
+    }
+
+    /*담당의 조회*/
 
     @Override
     public List<StaffVO> selectStaffName(int partNum) {

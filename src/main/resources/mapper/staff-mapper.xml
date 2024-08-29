@@ -99,6 +99,17 @@
         AND STAFF_NUM = #{staffNum}
     </select>
 
+    <!-- 직원정보 수정 -->
+    <update id="updateStaffInfo">
+        UPDATE HOS_STAFF
+        SET
+            STAFF_TELL
+            , STAFF_ADDR = #{staffAddr}
+            , STAFF_PW = #{staffPw}
+            , HIRE_DATE = #{hireDate}
+        WHERE STAFF_NUM = #{staffNum}
+    </update>
+
 
     <!--담당의 조회-->
     <select id="selectStaffName" resultMap="staff">

@@ -61,6 +61,12 @@ public class StaffController {
     public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum) {
         return staffService.getStaffDetail(staffNum);
     }
+
+    @PutMapping("/updateStaff")
+    public void updateStaffInfo(@RequestBody StaffVO staffVO){
+        staffService.updateStaffInfo(staffVO);
+    }
+
     /*담당의 조회*/
     @GetMapping("selectStaffName/{selectedPart}")
     public List<StaffVO> selectStaffName(@PathVariable("selectedPart") int partNum){
