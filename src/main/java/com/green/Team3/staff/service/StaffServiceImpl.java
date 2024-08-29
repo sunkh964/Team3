@@ -62,6 +62,13 @@ public class StaffServiceImpl implements StaffService {
         sqlSession.update("staffMapper.updateStaffInfo", staffVO);
     }
 
+
+    //직원 삭제
+    @Override
+    public void deleteStaff(int staffNum) {
+        sqlSession.delete("staffMapper.deleteStaff", staffNum);
+    }
+
     /*담당의 조회*/
 
     @Override

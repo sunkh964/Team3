@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './StaffChange.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const StaffChange = () => {
   const navigate = useNavigate();
+
+  const {staffNum} = useParams();
 
   // 직원 상세정보 목록 state
   const [staffInfoList, setStaffInfoList] = useState([]);
@@ -18,6 +20,22 @@ const StaffChange = () => {
     .catch((error) => {console.log(error)})
   },[]);
 
+  // 직원 삭제
+  function deleteStaff(staffNum, staffName, e){
+    e.stopPropagation();
+
+    const isConfirm = window.confirm(` '${staffName}' 을 삭제하시겠습니까`);
+
+    if (isConfirm){
+      axios.delete(`/staff/deleteStaff/${staffNum}`)
+    .then((res) => {
+      alert(` '${staffName}' 삭제 완료`);
+      navigate(0)
+    })
+    .catch((error) =>{console.log(error)})
+    }
+    else{}
+  }
 
   return (
     <div className='staffChange'>
@@ -25,14 +43,15 @@ const StaffChange = () => {
       <div className='staffChange-content'>
         <table className='staffChange-table'>
           <colgroup>
-            <col width='7%'/>
+            <col width='5%'/>
             <col width='10%'/>
-            <col width='12%'/>
+            <col width='10%'/>
             <col width='15%'/>
             <col width='16%'/>
             <col width='17%'/>
-            <col width='7%'/>
-            <col width='16%'/>
+            <col width='6%'/>
+            <col width='14%'/>
+            <col width='8%'/>
           </colgroup>
           <thead>
             <tr>
@@ -44,6 +63,7 @@ const StaffChange = () => {
               <td>주소</td>
               <td>성별</td>
               <td>고용일자</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +79,9 @@ const StaffChange = () => {
                     <td>{info.staffAddr}</td>
                     <td>{info.staffGen}</td>
                     <td>{info.hireDate}</td>
+                    <td>
+                      <button type='button' onClick={(e) =>{deleteStaff(info.staffNum, info.staffName, e)}}>삭제</button>
+                    </td>
                   </tr>
                 );
               })

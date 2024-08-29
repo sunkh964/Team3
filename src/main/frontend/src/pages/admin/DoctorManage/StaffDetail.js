@@ -16,6 +16,7 @@ const StaffDetail = () => {
     staffNum : staffNum,
     staffTel : '',
     staffAddr : '',
+    staffId : '',
     staffPw : '',
     hireDate : ''
   });
@@ -32,12 +33,12 @@ const StaffDetail = () => {
     axios.get(`/staff/getStaffDetail/${staffNum}`)
     .then((res) =>{
       setStaffDetail(res.data);
-
       //수정
       setUpdateInfo({
         ...updateInfo,
         staffTel : res.data.staffTel,
         staffAddr : res.data.staffAddr,
+        staffId : res.data.staffId,
         staffPw : res.data.staffPw,
         hireDate : res.data.hireDate
       });
@@ -45,14 +46,30 @@ const StaffDetail = () => {
     .catch((error) =>{console.log(error)})
   },[]);
 
-  // 게시글 수정 등록
+  // 직원정보 수정 등록
   function updateStaff(){
-    axios.put('/staff/')
+    axios.put('/staff/updateStaff',updateInfo)
     .then((res)=>{
       alert('수정 완료')
       navigate(`/admin/doctorManage/staffDetail/${staffNum}`)
     })
     .catch((error) => {console.log(error)})
+  }
+
+  // 직원 삭제
+  function deleteStaff(){
+    const isConfirm = window.confirm(` '${staffDetail.staffName}' 을 삭제하시겠습니까`);
+
+    if (isConfirm){
+      axios.delete(`/staff/deleteStaff/${staffNum}`)
+    .then((res) => {
+      alert(` '${staffDetail.staffName}' 삭제 완료`);
+      navigate('/admin/doctorManage/staffChange')
+    })
+    .catch((error) =>{console.log(error)})
+    }
+    else{ navigate(-1) }
+    
   }
 
   return (
@@ -77,30 +94,33 @@ const StaffDetail = () => {
             <td>{staffDetail.staffGen}</td>
           </tr>
           <tr>
-            <td>주민번호</td>
+            <td>생년월일</td>
             <td>{staffDetail.staffBirth}</td>
             <td>연락처</td>
             <td>
-              <input className='form' type='text' value={staffDetail.staffTel} 
+              <input className='form' type='text' value={updateInfo.staffTel} 
                 name='staffTel' onChange={(e) =>{changeUpdateInfo(e)}}/>
               </td>
             <td>주소</td>
             <td>
-              <input className='form' type='text' value={staffDetail.staffAddr}
+              <input className='form' type='text' value={updateInfo.staffAddr}
                 name='staffAddr' onChange={(e) =>{changeUpdateInfo(e)}} />
             </td>
           </tr>
           <tr>
             <td>아이디</td>
-            <td>{staffDetail.staffId}</td>
+            <td>
+              <input className='form' type='text' value={updateInfo.staffId}
+                  name='staffId' onChange={(e) =>{changeUpdateInfo(e)}}/>
+            </td>
             <td>비번</td>
             <td>
-              <input className='form' type='text' value={staffDetail.staffPw}
+              <input className='form' type='text' value={updateInfo.staffPw}
                 name='staffPw' onChange={(e) =>{changeUpdateInfo(e)}}/>
             </td>
             <td>고용날짜</td>
             <td>
-              <input className='form' type='date' value={staffDetail.hireDate} 
+              <input className='form' type='date' value={updateInfo.hireDate} 
                 name='hireDate' onChange={(e) =>{changeUpdateInfo(e)}}/>
             </td>
           </tr>
@@ -108,7 +128,7 @@ const StaffDetail = () => {
       </div>
       <div className='staffDetail-btn'>
         <button type='button' onClick={() =>{updateStaff()}}>수정</button>
-        <button type='button'>삭제</button>
+        <button type='button' onClick={()=>{deleteStaff()}}>삭제</button>
       </div>
     </div>
   )
