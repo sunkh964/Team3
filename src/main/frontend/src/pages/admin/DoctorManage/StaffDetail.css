@@ -1,0 +1,41 @@
+.detailContainer{
+  width: 95%;
+  margin: auto;
+}
+.staffDetail{
+  margin: auto;
+  width: 100%;
+  border: 1px solid #7e969e;
+  box-shadow: 3px 3px 5px lightgrey;
+}
+.staffDetail-table{
+  width: 100%;
+  margin: auto;
+}
+
+.staffDetail-table td{
+  border: 1px solid #dddddd ;
+  padding: 30px 10px;
+  text-align: center;
+}
+
+.staffDetail-table td:nth-child(odd){
+  background-color: #e8f0f3;
+  /* background-color: #067da1; */
+  font-weight: bold;
+}
+.staffDetail-table td:nth-child(even){
+  background-color: rgba(250, 250, 250, 0.8);
+}
+
+.staffDetail .form{
+  width: 80%;
+  text-align: center;
+}
+
+.staffDetail-btn{
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

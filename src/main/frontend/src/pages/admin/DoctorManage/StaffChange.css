@@ -5,7 +5,10 @@
   background-color: #e8f0f3;
   border: 1px solid #7e969e;
 }
-
+.staffChange-content{
+  overflow-y: scroll;
+  height: 650px;
+}
 .staffChange-table{
   width: 100%;
   table-layout: fixed;
@@ -15,14 +18,19 @@
   color: white;
   font-weight: bold;
   border-bottom: 4px double #7e969e ;
+  position: sticky;
+  top: 0;
 }
-
+.staffChange-table thead td{
+  padding: 15px 0px;
+}
 .staffChange-table td{
   border: 1px solid #dddddd ;
   border-top: none;
   border-bottom: none;
   border-left: none;
   text-align: center;
+  padding: 12px 0px;
 }
 
 .staffChange-table tbody tr:nth-child(odd){

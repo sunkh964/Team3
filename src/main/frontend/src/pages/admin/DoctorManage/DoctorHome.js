@@ -71,12 +71,7 @@ const DoctorHome = () => {
           <div>
             <table className='regStaff-table'>
               <tr>
-                <td>이름</td>
-                <td>
-                  <input type='text' name='staffName'
-                    onChange={(e) => {changeInsertStaffData(e)}}/>
-                </td>
-                <td>부서번호</td>
+              <td>부서번호</td>
                 <td>
                   <select name='partNum' onChange={(e) => {changeInsertStaffData(e)}}>
                     {
@@ -88,8 +83,11 @@ const DoctorHome = () => {
                     }
                   </select>
                 </td>
-              </tr>
-              <tr>
+                <td>이름</td>
+                <td>
+                  <input type='text' name='staffName'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
                 <td>아이디</td>
                 <td>
                   <input type='text' name='staffId'
@@ -102,6 +100,8 @@ const DoctorHome = () => {
                 </td>
               </tr>
               <tr>
+              </tr>
+              <tr>
                 <td>주민번호</td>
                 <td>
                   <input type='text' name='staffBirth'
@@ -112,15 +112,13 @@ const DoctorHome = () => {
                   <input type='text' name='staffTel'
                     onChange={(e) => {changeInsertStaffData(e)}}/>
                 </td>
-              </tr>
-              <tr>
                 <td>주소</td>
                 <td>
                   <input type='text' name='staffAddr'
                     onChange={(e) => {changeInsertStaffData(e)}}/>
                 </td>
                 <td>성별</td>
-                <td>
+                <td className='radio'>
                   <input type='radio' name='staffGen' value="남"
                       onChange={(e) => {changeInsertStaffData(e)}} checked={insertStaff.staffGen == '남'}/>남
                   <input type='radio' name='staffGen' value="여"
@@ -137,7 +135,7 @@ const DoctorHome = () => {
   
         <div className='getStaff'>
           <div className='doctor-title'>직원 현황 ( <span>{staffList.length}</span> )</div>
-          <div>
+          <div className='getStaff-content'>
             <table className='getStaff-table'>
               <colgroup>
               <col width='10%' />

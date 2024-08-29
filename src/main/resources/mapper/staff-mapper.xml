@@ -92,7 +92,7 @@
             , STAFF_ID
             , STAFF_PW
             , STAFF_GEN
-            , HIRE_DATE
+            , DATE_FORMAT(HIRE_DATE, '%Y-%m-%d') AS HIRE_DATE
             , PART_NAME
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
