@@ -45,6 +45,45 @@
    text-align: right;
 }
 
+/* 컬러 주기 */
+.color-selector {
+   width: 70%;
+   /* border: 1px solid black; */
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   height: 30px;
+   overflow: visible;
+}
+
+.color {
+   appearance: none;
+   width: 20px;
+   height: 25px;
+   border-radius: 3px;
+   background-color: #000000;
+   cursor: pointer;
+}
+.color:hover {
+   opacity: 0.8;
+}
+
+.c1 { background-color: #ff6363; }
+.c1:checked { outline: 2px solid rgb(197, 43, 43) }
+.c2 { background-color: #fac35c; }
+.c2:checked { outline: 2px solid #e9a423 }
+.c3 { background-color: #95c570; }
+.c3:checked { outline: 2px solid #5fa52a }
+.c4 { background-color: #8dd4f5; }
+.c4:checked { outline: 2px solid #60afd4 }
+.c5 { background-color: #a89de4; }
+.c5:checked { outline: 2px solid #8178b3 }
+.c6 { background-color: #f88dbf; }
+.c6:checked { outline: 2px solid #da6ea0 }
+.c7 { background-color: #858585; }
+.c7:checked { outline: 2px solid #575757 }
+
+
 /* 조회 테이블 */
 .detail-table td:not(:nth-child(1)) {
    text-align: left;

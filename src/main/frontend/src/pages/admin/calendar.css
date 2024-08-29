@@ -78,6 +78,10 @@
       font-weight: 400;
       font-size: 12px;
    }
+   .fc-event-title-container {
+      color: #ffffff;
+      
+   }
 
    .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
       padding: 0px 2px;

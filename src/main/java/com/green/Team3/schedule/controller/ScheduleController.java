@@ -5,11 +5,6 @@ import com.green.Team3.schedule.vo.ScheduleVO;
 import com.green.Team3.util.DateTimeUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -42,5 +37,11 @@ public class ScheduleController {
     @GetMapping("/getDetail/{schNum}")
     public ScheduleVO getDetail(@PathVariable(name = "schNum") int schNum) {
         return scheduleService.getDetail(schNum);
+    }
+
+//    일정 상세 삭제
+    @DeleteMapping("/deleteEvent/{schNum}")
+    public void deleteEvent(@PathVariable(name = "schNum") int schNum) {
+        scheduleService.deleteEvent(schNum);
     }
 }

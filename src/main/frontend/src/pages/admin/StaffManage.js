@@ -27,23 +27,28 @@ justify-content: center;
 const StaffManage = () => {
   // 내비게이션 함수 선언
   const navigate = useNavigate();
+
   // ============================불러오기용============================
   // 일정 리스트 저장할 곳 선언
   const [allList, setAllList] = useState([]);
-  // ============================등록하기용============================
 
+  // ============================등록하기용============================
+  // 이벤트 컬러칩 저장
+  const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf', '#858585']
   // 새 이벤트 저장할 곳 선언
   const [newEvent, setNewEvent] = useState({
     title: '',
     start: '',
     end: '',
     description: '',
-    staffNum:1
+    staffNum:1, 
+    allDay : 'Y',
+    color : colorBoxes[0]
   });
   // 이벤트 추가 모달창 표시 여부
   const [addEventAddModal, setEventAddModal] = useState(false);
   // 하루종일 체크 여부 저장
-  const [isAllChecked, setIsAllChecked] = useState(true);
+  //const [isAllChecked, setIsAllChecked] = useState(true);
   // ============================조회하기용============================
   // 일정 번호 불러오기
   const [schNum, setSchNum] = useState(0);
@@ -62,23 +67,22 @@ const StaffManage = () => {
     })
     .catch((error) => {alert(error);});
   }, []);
+  console.log(allList);
 
   // ============================등록하기용============================
   // 날짜 클릭 시 연결된 함수(이벤트 추가)
   const handleDateClick = (e) => {
-    console.log(e)
     setNewEvent({
       ...newEvent,
       start : new Date(e.dateStr + 'T09:00:00'),
       end : new Date(e.dateStr + 'T23:59:59')
-      //start : e.date.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }),
-      //end : e.date.toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+      // start : moment(e.dateStr).format('yyyy-MM-dd'),
+      // end : moment(e.dateStr).format('yyyy-MM-dd')
     });
+    console.log(newEvent.start);
+    console.log(newEvent.end);
     setEventAddModal(true);
   }
-
-
-console.log(newEvent)
 
   // 일정 내용 변경 함수 onChange
   function changeEvent(e) {
@@ -88,28 +92,28 @@ console.log(newEvent)
     })
   }
 
-  // 새 일정 추가하는 모달 안의 내용
+  // 일정 추가 모달 content 내용
   function drawModalContent1() {
     return (
       <div className='event-modal-div'>
         <table className='input-form'>
           <tbody>
             <tr>
-              <td colSpan={4}><input type='checkBox' name='isAll' className='isAll' checked={isAllChecked} onChange={() => {checkChange()}} />하루 종일</td>
+              <td colSpan={4}><input type='checkBox' name='isAll' className='isAll' checked={newEvent.allDay == 'Y'} onChange={() => {checkChange()}} />하루 종일</td>
             </tr>
             <tr>
               <td>날짜</td>
               <td>
                 <DateSelect name='start' 
                   setNewEvent={setNewEvent} newEvent={newEvent} targetName={'start'}
-                  clickDate={newEvent.start} checked={isAllChecked}
+                  clickDate={newEvent.start}
                 />
               </td>
               <td>→</td>
               <td>
                 <DateSelect name='end'
                   setNewEvent={setNewEvent} newEvent={newEvent} targetName={'end'}
-                  clickDate={newEvent.end} checked={isAllChecked}
+                  clickDate={newEvent.end} 
                 />
               </td>
             </tr>
@@ -121,23 +125,46 @@ console.log(newEvent)
               <td>내용</td>
               <td colSpan={3}><textarea name='description' rows={3} onChange={(e) => {changeEvent(e)}} /></td>
             </tr>
+            <tr>
+              <td>색상</td>
+              <td colSpan={3}>
+                <div className='color-selector'>
+                  {
+                    colorBoxes.map((colorName, i) => {
+                      return (
+                        <input
+                          type='radio' name='color' className={`color c${i+1}`} value={colorName}
+                          onClick={(e) => {changeEvent(e)}}
+                          defaultChecked={ (i == 0) ? true : false}
+                        />
+                      )
+                    })
+                  }
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     )
   }
-  
-  // 새 일정 추가하는 모달 확인 버튼 함수
+
+  function drawFooterContent1() {}
+
+  // 일정 추가 모달 확인 버튼 함수
   function handleBtn1() {
     axios.post('/schedule/addEvent', newEvent)
     .then((res) => {console.log("등록 완료")})
     .catch((error) => {alert(error)});
-    console.log(newEvent);
   }
 
     // '하루종일' 체크여부 변경
     function checkChange() {
-      setIsAllChecked(!isAllChecked);
+      //setIsAllChecked(!isAllChecked);
+      setNewEvent({
+        ...newEvent,
+        allDay: newEvent.allDay == 'Y' ? 'N' : 'Y'
+      })
     }
 
   // ============================조회하기용============================
@@ -147,11 +174,10 @@ console.log(newEvent)
     setEventDetailModal(true);
   }
 
-  // 일정 상세 모달 안의 내용
+  // 일정 상세 모달 content 내용
   function drawModalContent2() {
     axios.get(`/schedule/getDetail/${schNum}`)
     .then((res) => {
-      console.log(res.data);
       setEventDetail(res.data);
     })
     .catch((error) => {alert(error)});
@@ -181,9 +207,37 @@ console.log(newEvent)
     );
   }
 
+  // 일정 추가 모달 footerContent 내용
+  function drawFooterContent2() {
+    return (
+      <>
+        <button type='button' className='modifyBtn' onClick={() => {eventModifyBtn()}} >수정</button>
+        <button type='button' className='deletnBtn' onClick={() => {eventDeleteBtn()}} >삭제</button>
+      </>
+    )
+  }
+
   // 일정 상세 모달 확인 버튼 함수
   function handleBtn2() {}
 
+  // 일정 상세 수정 버튼 함수
+  function eventModifyBtn() {
+
+  }
+
+  // 일정 상세 삭제 버튼 함수
+  function eventDeleteBtn() {
+    if (window.confirm("일정을 삭제하시겠습니까?")) {
+      axios.delete(`/schedule/deleteEvent/${schNum}`)
+      .then((res) => {
+        alert("삭제 완료");
+        navigate(0);
+      })
+      .catch((error) => {alert(error)})
+    } else {
+      return ;
+    }
+  }
 
   return (
     <div className='calendar-div'>
@@ -197,25 +251,28 @@ console.log(newEvent)
             center: 'title',
             right: 'dayGridMonth,dayGridWeek,dayGridDay'}} 
           events={allList}
-          // eventDataTransform={function(event) {
-          //   if(!true) {
-          //       event.end = moment(event.end).add(2, 'days')
-          //   }
-          //   return event;  
-          // }}
+          eventDataTransform={function(event) {
+            if(true) {
+              //console.log('if!!')
+              //console.log(event)
+              event.end = moment(event.end).add(1, 'days').format("YYYY-MM-DD")
+              //console.log(moment(event.end).add(5, 'days').format("YYYY-MM-DD"))
+            }
+            return event;
+          }}
         />
       </FullCalendarContainer>
 
       {/* 일정 추가 모달창 */}
       {
-        addEventAddModal ? <Modal content={drawModalContent1} setIsShow={setEventAddModal} clickCloseBtn={handleBtn1} />
+        addEventAddModal ? <Modal content={drawModalContent1} footerContent={drawFooterContent1} setIsShow={setEventAddModal} clickCloseBtn={handleBtn1} />
         :
         null
       }
 
       {/* 일정 상세 모달창 */}
       {
-        addEventDetailModal ? <Modal content={drawModalContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} />
+        addEventDetailModal ? <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} />
         :
         null
       }
