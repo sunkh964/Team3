@@ -15,7 +15,7 @@ import History from './pages/admin/History';
 import Mypage from './pages/user/Mypage';
 import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
-import StaffDetail from './pages/admin/StaffDetail';
+import StaffDetail from './pages/admin/DoctorManage/StaffDetail';
 import AddChart from './pages/admin/AddChart';
 import DoctorHome from './pages/admin/DoctorManage/DoctorHome';
 import StaffChange from './pages/admin/DoctorManage/StaffChange';
@@ -120,7 +120,7 @@ function App() {
                 {/* 병원장 - 직원정보 수정 및 삭제 */}
                 <Route path='staffChange' element={<StaffChange />}/>
                 {/* 병원장 - 직원정보(상세보기) */}
-                <Route path='staffDetail/:staffNum' element={<StaffDetail />}/>
+                <Route path='staffDetail/:staffNum' element={<StaffDetail/>}/>
               </Route>
             </Route>
           </Routes>

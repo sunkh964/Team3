@@ -3,49 +3,78 @@
 .regStaff{
   width: 95%;
   margin: auto;
+  height: 300px;
   background-color: #e8f0f3;
-  border: 1px solid #7e969e;
 }
 
 .doctor-title{
   background-color: #bedce6;
-  border-bottom: 1px solid #7e969e;
+  border-bottom: 3px double #7e969e;
   padding: 10px 20px;
   font-weight: bold;
 }
 
 .regStaff > div:nth-child(2){
-  padding: 20px 0px;
+  padding: 30px 20px;
+  
 }
-.regStaff .regStaff-table{
+.regStaff-table{
   margin: auto;
+  height: 130px;
 }
-.regStaff .regStaff-table tr,td {
-  padding: 10px;
+.regStaff-table td{
+  vertical-align: middle;
+  padding:10px;
+}
+.regStaff-table td:nth-child(odd) {
+  text-align: right;
+}
+
+.regStaff input{
+  font-size: 14px;
+  vertical-align: middle;
+  border: 2px solid #7e969e;
+  border-radius: 5px;
+  width: 100%;
+  padding: 3px 5px;
+}
+
+.regStaff .radio{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.regStaff select{
+  font-size: 14px;
+  vertical-align: middle;
+  border: 2px solid #7e969e;
+  border-radius: 5px;
+  margin-left: auto;
+  padding: 3px 5px;
 }
 
 .regStaff .btn{
-  width: 90%;
-  text-align: right;
+  text-align: center;
   margin-bottom: 20px;
 }
 
 /* ---------- 직원목록 ---------- */
 .getStaff{
   width: 95%;
-  height: 350px;
+  height: 380px;
   margin: auto;
   background-color: #e8f0f3;
-  border: 1px solid #7e969e;
-  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.getStaff-content{
+  overflow-y: scroll;
+  height: 335px;
 }
 
 .getStaff-table{
   width: 100%;
-  table-layout: fixed;
-  display: block;
-  max-height: 300px;
-  overflow-y: scroll;
 }
 .getStaff-table > thead{
   background-color: #067da1;
@@ -55,6 +84,9 @@
   position: sticky;
   top: 0;
 }
+.getStaff-table > thead td{
+  padding: 13px 0px;
+}
 
 .getStaff-table td{
   border: 1px solid #dddddd ;
@@ -62,6 +94,7 @@
   border-bottom: none;
   border-left: none;
   text-align: center;
+  padding: 10px 20px;
 }
 
 .getStaff-table tbody tr:nth-child(odd){

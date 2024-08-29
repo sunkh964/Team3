@@ -79,7 +79,7 @@
         , DATE_FORMAT(HIRE_DATE, '%Y-%m-%d') AS HIRE_DATE
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
-        ORDER BY PART_NAME ASC, HIRE_DATE ASC, STAFF_NAME ASC
+        ORDER BY PART_NAME ASC, HIRE_DATE DESC, STAFF_NAME ASC
     </select>
 
     <!-- 직원 상세보기-->
@@ -92,12 +92,30 @@
             , STAFF_ID
             , STAFF_PW
             , STAFF_GEN
-            , HIRE_DATE
+            , DATE_FORMAT(HIRE_DATE, '%Y-%m-%d') AS HIRE_DATE
             , PART_NAME
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
         AND STAFF_NUM = #{staffNum}
     </select>
+
+    <!-- 직원정보 수정 -->
+    <update id="updateStaffInfo">
+        UPDATE HOS_STAFF
+        SET
+            STAFF_TEL = #{staffTel}
+            , STAFF_ADDR = #{staffAddr}
+            , STAFF_ID = #{staffId}
+            , STAFF_PW = #{staffPw}
+            , HIRE_DATE = #{hireDate}
+        WHERE STAFF_NUM = #{staffNum}
+    </update>
+
+    <!-- 직원 삭제 -->
+    <delete id="deleteStaff">
+        DELETE FROM HOS_STAFF
+        WHERE STAFF_NUM =#{staffNum}
+    </delete>
 
 
     <!--담당의 조회-->

@@ -2,9 +2,30 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import './DoctorHome.css'
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 const DoctorHome = () => {
   const navigate = useNavigate();
+
+  //daum 주소 api 팝업창을 띄우기 위한 함수 선언
+  const open = useDaumPostcodePopup(); 
+
+  //주소 검색 팝업창이 닫힐 때 실행되는 함수
+  function handleComplete(data){
+    //도로명주소
+    console.log(data.roadAddress);
+
+    //input 태그에 검색한 내용 넣기
+    setInsertStaff({
+      ...insertStaff,
+      staffAddr : data.roadAddress
+    });
+  }
+
+  // 주소창 클릭 시 실행되는 함수
+  function addrClick(){
+    open({onComplete : handleComplete});
+  }
 
   // 부서목록 저장 state
   const [partList, setPartList] = useState([]);
@@ -71,12 +92,7 @@ const DoctorHome = () => {
           <div>
             <table className='regStaff-table'>
               <tr>
-                <td>이름</td>
-                <td>
-                  <input type='text' name='staffName'
-                    onChange={(e) => {changeInsertStaffData(e)}}/>
-                </td>
-                <td>부서번호</td>
+              <td>진료부서</td>
                 <td>
                   <select name='partNum' onChange={(e) => {changeInsertStaffData(e)}}>
                     {
@@ -88,8 +104,11 @@ const DoctorHome = () => {
                     }
                   </select>
                 </td>
-              </tr>
-              <tr>
+                <td>이름</td>
+                <td>
+                  <input type='text' name='staffName'
+                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                </td>
                 <td>아이디</td>
                 <td>
                   <input type='text' name='staffId'
@@ -102,9 +121,9 @@ const DoctorHome = () => {
                 </td>
               </tr>
               <tr>
-                <td>주민번호</td>
+                <td>생년월일</td>
                 <td>
-                  <input type='text' name='staffBirth'
+                  <input type='date' name='staffBirth'
                     onChange={(e) => {changeInsertStaffData(e)}}/>
                 </td>
                 <td>연락처</td>
@@ -112,15 +131,14 @@ const DoctorHome = () => {
                   <input type='text' name='staffTel'
                     onChange={(e) => {changeInsertStaffData(e)}}/>
                 </td>
-              </tr>
-              <tr>
                 <td>주소</td>
                 <td>
                   <input type='text' name='staffAddr'
-                    onChange={(e) => {changeInsertStaffData(e)}}/>
+                    onChange={(e) => {changeInsertStaffData(e)}}
+                    value={insertStaff.staffAddr} readOnly={true} onClick={addrClick}/>
                 </td>
                 <td>성별</td>
-                <td>
+                <td className='radio'>
                   <input type='radio' name='staffGen' value="남"
                       onChange={(e) => {changeInsertStaffData(e)}} checked={insertStaff.staffGen == '남'}/>남
                   <input type='radio' name='staffGen' value="여"
@@ -137,7 +155,7 @@ const DoctorHome = () => {
   
         <div className='getStaff'>
           <div className='doctor-title'>직원 현황 ( <span>{staffList.length}</span> )</div>
-          <div>
+          <div className='getStaff-content'>
             <table className='getStaff-table'>
               <colgroup>
               <col width='10%' />

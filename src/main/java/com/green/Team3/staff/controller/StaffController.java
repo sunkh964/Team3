@@ -61,6 +61,19 @@ public class StaffController {
     public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum) {
         return staffService.getStaffDetail(staffNum);
     }
+
+    // 직원 정보 수정
+    @PutMapping("/updateStaff")
+    public void updateStaffInfo(@RequestBody StaffVO staffVO){
+        staffService.updateStaffInfo(staffVO);
+    }
+
+    // 직원 삭제
+    @DeleteMapping("/deleteStaff/{staffNum}")
+    public void deleteStaff(@PathVariable("staffNum") int staffNum){
+        staffService.deleteStaff(staffNum);
+    }
+
     /*담당의 조회*/
     @GetMapping("selectStaffName/{selectedPart}")
     public List<StaffVO> selectStaffName(@PathVariable("selectedPart") int partNum){

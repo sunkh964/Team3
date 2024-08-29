@@ -28,6 +28,12 @@ public interface StaffService {
     // 직원 상세보기
     StaffVO getStaffDetail(int staffNum);
 
+    // 직원 정보 수정
+    void updateStaffInfo(StaffVO staffVO);
+
+    // 직원 삭제
+    void deleteStaff(int staffNum);
+
     /*담당의 조회*/
     List<StaffVO> selectStaffName(int partNum);
 }
