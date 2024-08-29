@@ -27,4 +27,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     public ScheduleVO getDetail(int schNum) {
         return sqlSession.selectOne("scheduleMapper.getDetail", schNum);
     }
+
+    @Override
+    public void deleteEvent(int schNum) {
+        sqlSession.delete("scheduleMapper.deleteEvent", schNum);
+    }
 }

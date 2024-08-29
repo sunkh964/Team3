@@ -4,14 +4,15 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DateSelect = ({clickDate, checked, newEvent, setNewEvent, targetName}) => {
+const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
    
    // 클릭 날짜 저장할 곳 선언
    //const [changeDate, setChangeDate] = useState(clickDate);
+
    function getFormattedDate(date, targetName){
       let result = '';
-      if (checked) {
-         result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${targetName == 'start' ? '00:00:00' : '23:59:59'}`;
+      if (newEvent.allDay == 'Y') {
+         result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${targetName == 'start' ? '00:00:00' : '00:00:00'}`;
       } else {
          result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:00`;  
       }
@@ -22,13 +23,14 @@ const DateSelect = ({clickDate, checked, newEvent, setNewEvent, targetName}) => 
    return (
       <>
          {
-            checked ?
+            newEvent.allDay  == 'Y'?
             <DatePicker
                showIcon
                selected={clickDate}
                onChange={(date) => {
                   setNewEvent({
                      ...newEvent,
+                     allDay : 'Y',
                      [targetName]:getFormattedDate(date, targetName)
                   })
                }}
@@ -44,6 +46,7 @@ const DateSelect = ({clickDate, checked, newEvent, setNewEvent, targetName}) => 
                   console.log('!!!' + date)
                   setNewEvent({
                      ...newEvent,
+                     allDay : 'N',
                      [targetName]:getFormattedDate(date, targetName)
                   })
                }}

@@ -42,7 +42,7 @@
 }
 
 /* 버튼 디자인 */
-button {
+.chart button {
   background-color: #0797c1;
   color: white;
   font-size: 15px;
@@ -51,7 +51,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.chart button:hover {
   background-color: #067da1;
   color: #eeeeee;
 }

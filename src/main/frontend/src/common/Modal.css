@@ -42,12 +42,26 @@
 
 .modal-header i {
    font-size: 1.2rem;
-   color: #067da1;
+   color: #bdbdbd;
 }
 
 .modal-footer{
    margin-top: 20px;
-   text-align: right;
+   text-align: center;
+}
+
+.modal-footer button {
+   padding: 5px 20px;
+   margin: 0px 5px;
+   border: none;
+   border-radius: 3px;
+   background-color: #0797c1;
+   color: white;
+   cursor: pointer;
+}
+
+.modal-footer button:hover {
+   background-color: #0c7592;
 }
 
 /* 모달 애니메니션 정의 */

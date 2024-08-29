@@ -13,5 +13,7 @@ public class ScheduleVO {
     private String start;
     private String end;
     private String description;
+    private String color;
     private StaffVO staffVO;
+    private String allDay;
 }
