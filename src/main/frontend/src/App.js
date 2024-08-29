@@ -19,6 +19,7 @@ import StaffDetail from './pages/admin/StaffDetail';
 import AddChart from './pages/admin/AddChart';
 import DoctorHome from './pages/admin/DoctorManage/DoctorHome';
 import StaffChange from './pages/admin/DoctorManage/StaffChange';
+import ReviseChart from './pages/admin/ReviseChart';
 
 function App() {
 
@@ -109,6 +110,8 @@ function App() {
               <Route path='history/:memNum' element={<History/>}/>
               {/* 관리자용 - 당일 예약 환자 추가 */}
               <Route path='addChart' element={<AddChart/>}/>
+              {/* 관리자용 - 차트 수정 */}
+              <Route path='reviseChart/:memNum/:chartNum' element={<ReviseChart/>}/>
 
               {/* 관리자용 - 병원장 */}
               <Route path='doctorManage' element={<DoctorManage />}>

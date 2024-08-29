@@ -5,14 +5,16 @@ import axios from 'axios';
 const AddChart = () => {
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
-  const [selectedPart, setSelectedPart] = useState('');
-  const [selectedStaff, setSelectedStaff] = useState('');
+  
   const [insertChartMem, setInsertChartMem] = useState({
+    memNum: 0,
     memName: '',
     memBirth: '',
     memTel: '',
     memGen: '',
-    memAddr: ''
+    memAddr: '',
+    staffNum: '',
+    partNum: ''
   });
 
   // 진료부서 조회
@@ -28,26 +30,18 @@ const AddChart = () => {
 
   // 담당의 조회
   useEffect(() => {
-    if (selectedPart) {
-      axios.get(`/staff/selectStaffName/${selectedPart}`)
+    if (insertChartMem.partNum) {
+      axios.get(`/staff/selectStaffName/${insertChartMem.partNum}`)
         .then((res) => {
           setStaffs(res.data);
         })
         .catch((error) => {
           console.error('Error fetching staffs:', error);
         });
+    } else {
+      setStaffs([]); // `partNum`이 없는 경우 직원 목록 초기화
     }
-  }, [selectedPart]);
-
-  // 진료부서 변경 핸들러
-  const handlePartChange = (event) => {
-    setSelectedPart(event.target.value);
-  };
-
-  // 담당의 변경 핸들러
-  const handleStaffChange = (event) => {
-    setSelectedStaff(event.target.value);
-  };
+  }, [insertChartMem.partNum]);
 
   // 입력 값 변경 핸들러
   const changeMemValue = (e) => {
@@ -59,53 +53,42 @@ const AddChart = () => {
 
   // 환자 및 진료 정보 등록
   const insertChartRes = () => {
-    if (Object.values(insertChartMem).some(x => x === '') || !selectedPart || !selectedStaff) {
-        alert('모든 필드를 채워야 합니다.');
-        return;
+    if (!insertChartMem.partNum || !insertChartMem.staffNum) {
+      alert('진료부서와 담당의를 선택해야 합니다.');
+      return;
     }
-
-    // STAFF_NUM과 PART_NUM 유효성 검증
-    if (isNaN(selectedStaff) || selectedStaff <= 0 || isNaN(selectedPart) || selectedPart <= 0) {
-        alert('올바른 담당의와 진료부서를 선택해주세요.');
-        return;
+    if (Object.values(insertChartMem).some(x => x === '')) {
+      alert('모든 필드를 채워야 합니다.');
+      return;
     }
-
-    console.log('Patient Data:', insertChartMem);
-    console.log('Selected Part:', selectedPart);
-    console.log('Selected Staff:', selectedStaff);
 
     axios.post('/member/insertChartMem', insertChartMem)
-        .then((response) => {
-            const member = response.data;
-            console.log('Member response:', member);
-            
-            if (member && member.memNum) {
-                const chartData = {
-                    memNum: member.memNum,
-                    staffNum: parseInt(selectedStaff, 10), // 숫자로 변환
-                    partNum: parseInt(selectedPart, 10)   // 숫자로 변환
-                };
+      .then((response) => {
+        const member = response.data;
+        console.log(insertChartMem)
+        console.log('Member response:', member);
 
-                console.log('Reservation Data:', chartData);
+        if (member && member.memNum) {
+          const updatedChartMem = {
+            ...insertChartMem,
+            memNum: member.memNum
+          };
 
-                axios.post('/res/insertChartRes', chartData)
-                    .then(() => {
-                        alert('환자와 진료 정보가 성공적으로 등록되었습니다.');
-                    })
-                    .catch((error) => {
-                        console.error('Error inserting chart res:', error.response ? error.response.data : error.message);
-                        alert('진료 정보 등록에 실패하였습니다.');
-                    });
-            } else {
-                throw new Error('memNum이 반환되지 않았습니다.');
-            }
-        })
-        .catch((error) => {
-            console.error('Error inserting chart mem:', error.response ? error.response.data : error.message);
-            alert('환자 정보 등록에 실패하였습니다.');
-        });
-};
-
+          axios.post('/res/insertChartRes', updatedChartMem)
+            .then(() => {
+              alert('환자와 진료 정보가 성공적으로 등록되었습니다.');
+            })
+            .catch((error) => {
+              console.error('Error inserting chart res:', error.response ? error.response.data : error.message);
+              alert('진료 정보 등록에 실패하였습니다.');
+            });
+        }
+      })
+      .catch((error) => {
+        console.error('Error inserting chart mem:', error.response ? error.response.data : error.message);
+        alert('환자 정보 등록에 실패하였습니다.');
+      });
+  };
 
   return (
     <div className='addChartBack'>
@@ -142,7 +125,7 @@ const AddChart = () => {
         <div className='addContent'>
           <div>
             <span>진료부서 :</span>
-            <select name='partName' value={selectedPart} onChange={handlePartChange}>
+            <select name='partNum' value={insertChartMem.partNum} onChange={changeMemValue}>
               <option value="">진료부서 선택</option>
               {parts.map((part, i) => (
                 <option key={i} value={part.partNum}>
@@ -153,7 +136,7 @@ const AddChart = () => {
           </div>
           <div className='cM'>
             <span>담당의 :</span>
-            <select name='staffName' value={selectedStaff} onChange={handleStaffChange}>
+            <select name='staffNum' value={insertChartMem.staffNum} onChange={changeMemValue}>
               <option value="">담당의 선택</option>
               {staffs.map((staff, i) => (
                 <option key={i} value={staff.staffNum}>

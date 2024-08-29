@@ -12,5 +12,4 @@ public interface ResService {
     /*당일 예약 환자 등록*/
     void insertChartRes(ResVO resVO);
 
-
 }

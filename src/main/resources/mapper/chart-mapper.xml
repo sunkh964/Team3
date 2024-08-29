@@ -74,6 +74,9 @@
         ORDER BY HIS_NUM DESC;
     </select>
 
+    <!--차트 수정시 환자 정보-->
+    <select id="selectRevise" resultMap=""
+
 
 
 

@@ -87,8 +87,8 @@ const Chart = () => {
                     <div className='divFSec'>
                       <div>연락처 : {member ? member.memTel : null}</div>
                       <div>
-                        <span>수정</span>
-                        <span>삭제</span>
+                        <span onClick={()=>{navigate(`/admin/reviseChart/${member.memNum}/${chartNum}`)}}>수정</span>
+                        <span onClick={()=>{delIsNow(chartNum)}}>삭제</span>
                         <button onClick={()=>{goIsNow(chartNum)}}>진료환자 등록</button>
                       </div>
                     </div>
@@ -141,7 +141,7 @@ const Chart = () => {
                     </div>
                     
                     <div className='botBut'>
-                        <button>수정</button>
+                        <button onClick={()=>{navigate(`/admin/reviseChart/${member.memNum}/${chartNum}`)}}>수정</button>
                         <button onClick={()=>{delIsNow(chartNum)}}>환자 삭제</button>
                       </div>
                   </div>
