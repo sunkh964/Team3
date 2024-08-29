@@ -102,7 +102,7 @@
 
     <!--담당의 조회-->
     <select id="selectStaffName" resultMap="staff">
-        SELECT P.PART_NUM, STAFF_NAME
+        SELECT P.PART_NUM, STAFF_NAME, STAFF_NUM
         FROM HOS_PART P, HOS_STAFF S
         WHERE P.PART_NUM = S.PART_NUM
         AND P.PART_NUM = #{partNum};

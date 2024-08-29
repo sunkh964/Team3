@@ -25,3 +25,12 @@
 .reviseChart table input{
   margin-left: 30px;
 }
+.reviseChart select{
+  font-size: 20px;
+  padding: 5px;
+  margin-left: 35px;
+  border: 1px solid
+  #7e969e;
+  border-radius: 5px;
+  cursor: pointer;
+}

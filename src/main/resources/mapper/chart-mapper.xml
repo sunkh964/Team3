@@ -75,7 +75,36 @@
     </select>
 
     <!--차트 수정시 환자 정보-->
-    <select id="selectRevise" resultMap=""
+    <select id="reviseInfo" resultMap="chart">
+        SELECT CHART_NUM, M.MEM_NUM, MEM_NAME, MEM_BIRTH
+        FROM HOS_CHART C, HOS_MEMBER M
+        WHERE C.MEM_NUM = M.MEM_NUM
+        AND M.MEM_NUM = #{memNum};
+    </select>
+
+    <!-- 차트 정보 업데이트 -->
+    <update id="updateChart">
+        UPDATE HOS_CHART
+        SET
+        IS_NOW = #{isNow}
+        WHERE
+        CHART_NUM = #{chartNum}
+    </update>
+
+
+    <!-- 차트 정보 업데이트 -->
+    <update id="updateHistory">
+        UPDATE HOS_HISTORY
+        SET
+        ILL_NAME = #{illName},
+        ILL_DETAIL = #{illDetail},
+        PART_NUM = #{partNum},
+        STAFF_NUM = #{staffNum}
+        WHERE
+        CHART_NUM = #{chartNum}
+    </update>
+
+
 
 
 

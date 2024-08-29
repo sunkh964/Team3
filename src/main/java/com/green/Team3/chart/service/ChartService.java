@@ -2,6 +2,7 @@ package com.green.Team3.chart.service;
 
 import com.green.Team3.chart.vo.ChartVO;
 import com.green.Team3.part.vo.PartVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,6 +15,17 @@ public interface ChartService {
     void changeIsNow(ChartVO chartVO);
     /*진료 환자 집보내기*/
     void delIsNow(ChartVO chartVO);
+    /*차트 수정에 기본 정보*/
+    ChartVO reviseInfo(int memNum);
+    // 차트 업데이트
+    void updateChart(@Param("chartNum") int chartNum,
+                     @Param("isNow") String isNow);
 
+    // 병력 업데이트
+    void updateHistory(@Param("chartNum") int chartNum,
+                       @Param("illName") String illName,
+                       @Param("illDetail") String illDetail,
+                       @Param("partNum") int partNum,
+                       @Param("staffNum") int staffNum);
 
 }
