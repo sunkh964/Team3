@@ -27,17 +27,16 @@
             , SCH_TITLE TITLE
             , SCH_CONTENT DESCRIPTION
             , SCH.STAFF_NUM
-<!--            , CASE-->
-<!--                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')-->
-<!--                ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')-->
-<!--                END AS START-->
-<!--            , CASE-->
-<!--                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')-->
-<!--                ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')-->
-<!--                END AS END-->
-<!--            , COLOR-->
-        , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i') START
-        , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i') END
+            , CASE
+                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
+                ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i:%s')
+                END AS START
+            , CASE
+                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
+                ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i:%s')
+                END AS END
+            , COLOR
+            , IF(ALL_DAY = 'Y', 1, 0) AS ALL_DAY
         FROM HOS_SCHEDULE SCH, HOS_STAFF S
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
     </select>
@@ -45,40 +44,41 @@
     <!-- 직원 한 명의 일정 목록 조회 -->
     <select id="getOneList" resultMap="schedule">
         SELECT
-        SCH_NUM
-        , SCH_TITLE TITLE
-        , SCH_CONTENT DESCRIPTION
-        , SCH.STAFF_NUM
-        , CASE
-            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
-            ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')
-            END AS START
-        , CASE
-            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
-            ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')
-            END AS END
-        , COLOR
-        FROM HOS_SCHEDULE SCH, HOS_STAFF S
-        WHERE SCH.STAFF_NUM = S.STAFF_NUM
+            SCH_NUM
+            , SCH_TITLE TITLE
+            , SCH_CONTENT DESCRIPTION
+            , SCH.STAFF_NUM
+            , CASE
+                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
+                ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i:%s')
+                END AS START
+            , CASE
+                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
+                ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i:%s')
+                END AS END
+            , COLOR
+            , IF(ALL_DAY = 'Y', 1, 0) AS ALL_DAY
+            FROM HOS_SCHEDULE SCH, HOS_STAFF S
+            WHERE SCH.STAFF_NUM = S.STAFF_NUM
             AND SCH.STAFF_NUM = #{staffNum}
     </select>
 
     <!-- 직원 한 명의 일정 상세 조회 -->
     <select id="getDetail" resultMap="schedule">
         SELECT
-        SCH_NUM
-        , SCH_TITLE TITLE
-        , SCH_CONTENT DESCRIPTION
-        , SCH.STAFF_NUM
-        , CASE
-            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
-            ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')
-            END AS START
-        , CASE
-            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
-            ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')
-            END AS END
-
+            SCH_NUM
+            , SCH_TITLE TITLE
+            , SCH_CONTENT DESCRIPTION
+            , SCH.STAFF_NUM
+            , CASE
+                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
+                ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')
+                END AS START
+            , CASE
+                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
+                ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')
+                END AS END
+            , COLOR
         FROM HOS_SCHEDULE SCH, HOS_STAFF S
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
             AND SCH_NUM = #{schNum}
@@ -90,18 +90,25 @@
             SCH_TITLE
             , SCH_CONTENT
             , STAFF_NUM
+            , COLOR
             , SCH_SDATE
             , SCH_EDATE
-            , COLOR
             , ALL_DAY
         ) VALUES (
             #{title}
             , #{description}
             , #{staffNum}
-            , #{start}
-            , #{end}
             , #{color}
-            , #{allDay}
+            <if test='allDay = true'>
+                , DATE_FORMAT(#{start}, '%Y-%m-%d')
+                , DATE_FORMAT(#{end}, '%Y-%m-%d')
+                , 'Y'
+            </if>
+            <if test='allDay = false'>
+                , #{start}
+                , #{end}
+                ,'N'
+            </if>
         );
     </insert>
 
@@ -110,5 +117,16 @@
         DELETE FROM HOS_SCHEDULE
         WHERE SCH_NUM = #{schNum}
     </delete>
+
+    <!-- 일정 수정 -->
+    <update id="modifyEvent">
+        UPDATE hos_schedule SET
+        SCH_SDATE = #{start}
+        , SCH_EDATE = #{end}
+        , SCH_TITLE = #{title}
+        , SCH_CONTENT = #{description}
+        , COLOR = #{color}
+        WHERE SCH_NUM = #{schNum};
+    </update>
 
 </mapper>

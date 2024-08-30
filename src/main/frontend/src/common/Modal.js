@@ -1,14 +1,11 @@
-
 import React, { useRef } from 'react'
 import "./Modal.css"
-
 
 // content : 모달에서 보여지는 내용
 // setIsShow : 모달을 닫는 코드
 // clickCloseBtn : 모달의 확인버튼 클릭 시 실행할 코드
-const Modal = ({content, footerContent, setIsShow, clickCloseBtn}) => {
+const Modal = ({content, footerContent, setIsShow, clickCloseBtn, setModifyActive}) => {
    const modalContainer = useRef();
-
    return (
       <div className='modal-container show' ref={modalContainer}>
          <div className='modal'>
@@ -17,6 +14,7 @@ const Modal = ({content, footerContent, setIsShow, clickCloseBtn}) => {
                modalContainer.current.className = 'modal-container';
                setTimeout(() => {
                   setIsShow(false)
+                  setModifyActive(false)
                }, 200);
             }}>
                <i className="bi bi-x-lg" />
