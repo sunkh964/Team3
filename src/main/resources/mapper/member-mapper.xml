@@ -69,6 +69,31 @@
         WHERE MEM_ID=#{memId}
     </update>
 
+    <!--당일 예약 환자 기본 정보 차트 추가-->
+    <insert id="insertChartMem" useGeneratedKeys="true" keyProperty="memNum">
+        INSERT INTO HOS_MEMBER (
+        MEM_NAME,
+        MEM_BIRTH,
+        MEM_TEL,
+        MEM_GEN,
+        MEM_ADDR
+        ) VALUES (
+        #{memName},
+        #{memBirth},
+        #{memTel},
+        #{memGen},
+        #{memAddr}
+        )
+    </insert>
+
+    <!--환자 검색-->
+    <select id="searchMem" resultMap="member">
+        SELECT * FROM HOS_MEMBER
+        <if test='searchValue != null and !searchValue.equals("")'>
+            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+    </select>
+
 </mapper>
 
 

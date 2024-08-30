@@ -32,7 +32,7 @@ public class StaffController {
         staffService.regStaff(staffVO);
     }
 
-    // 직원 조회
+    // 직원 현황 (직원 대표정보 조회)
     @GetMapping("/getStaff")
     public List<StaffVO> getStaffList(StaffVO staffVO){
         return staffService.getStaffList(staffVO);
@@ -50,9 +50,33 @@ public class StaffController {
         return staffService.getOneList(staffNum);
     }
 
+    // 직원 상세정보 목록 조회
+    @GetMapping("/getStaffInfo")
+    public List<StaffVO> getStaffInfoList(StaffVO staffVO){
+        return staffService.getStaffInfoList(staffVO);
+    }
+
     // 직원 상세보기
     @GetMapping("/getStaffDetail/{staffNum}")
-    public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum){
+    public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum) {
         return staffService.getStaffDetail(staffNum);
+    }
+
+    // 직원 정보 수정
+    @PutMapping("/updateStaff")
+    public void updateStaffInfo(@RequestBody StaffVO staffVO){
+        staffService.updateStaffInfo(staffVO);
+    }
+
+    // 직원 삭제
+    @DeleteMapping("/deleteStaff/{staffNum}")
+    public void deleteStaff(@PathVariable("staffNum") int staffNum){
+        staffService.deleteStaff(staffNum);
+    }
+
+    /*담당의 조회*/
+    @GetMapping("selectStaffName/{selectedPart}")
+    public List<StaffVO> selectStaffName(@PathVariable("selectedPart") int partNum){
+        return staffService.selectStaffName(partNum);
     }
 }

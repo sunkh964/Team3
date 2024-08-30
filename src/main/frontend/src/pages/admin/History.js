@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './History.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { hi } from 'date-fns/locale';
 
 const History = () => {
+  const navigate= useNavigate();
   const {memNum} = useParams();
 
   // 진료 이력 리스트 담을 빈 배열
@@ -34,24 +36,27 @@ const History = () => {
         hisList.map((his,i)=>{
           const member = his.memberList[0];
           const staff = his.staffList[0];
+          const res = his.resList[0];
+          const part = his.partList[0];
           return(
-            <div className='hisContent' key={i}>
-              <div className='conTop'> 
-                <div>진료 이력 번호 : {his.hisNum} </div>
-                <div>차트 번호 : </div> 
-                <div>진료 날짜 : </div>
+            <div className='hisContent' key={i} onClick={()=>{navigate(`/admin/reviseChart/${member?member.memName:null}/${his.chartNum}`)}}>
+              <div className='con conTop'> 
+                <div><span>진료 이력 번호 :</span> {his.hisNum} </div>
+              </div>
+              <div className='con'> 
+                <div><span>차트 번호 :</span> {his.chartNum} </div> 
+                <div><span>예약 시간 :</span> {res?res.resTime:null} </div>
               </div>
 
-              <div className='conMid'> 
-                <div>진료 부서 : </div> 
-                <div>담당의 : {staff?staff.staffName:null}</div> 
+              <div className='con'> 
+                <div><span>진료 부서 :</span> {part?part.partName:null} </div> 
+                <div><span>담당의 :</span> {staff?staff.staffName:null}</div> 
               </div>
 
-              <div className='conBot'> 
-                <div>병명 : {his.illName}</div> 
-                <div>세부사항 : {his.illDetail} </div> 
+              <div className='con'> 
+                <div><span>병명 :</span> {his.illName}</div> 
+                <div><span>세부사항 :</span> {his.illDetail} </div> 
               </div>
-              <button>수정</button>
             </div>
           )
         })

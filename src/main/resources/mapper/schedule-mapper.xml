@@ -8,8 +8,9 @@
         <result column="START" property="start"/>
         <result column="END" property="end"/>
         <result column="TITLE" property="title"/>
-        <result column="DESCRIPTION" property="schContent"/>
-        <result column="SCH_ISALL" property="schIsAll"/>
+        <result column="COLOR" property="color"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="ALL_DAY" property="allDay"/>
         <association property="staffVO" resultMap="staffMapper.staff" />
     </resultMap>
 
@@ -24,10 +25,19 @@
         SELECT
             SCH_NUM
             , SCH_TITLE TITLE
-            , SCH_CONTENT
+            , SCH_CONTENT DESCRIPTION
             , SCH.STAFF_NUM
-            , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
-            , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
+<!--            , CASE-->
+<!--                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')-->
+<!--                ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')-->
+<!--                END AS START-->
+<!--            , CASE-->
+<!--                WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')-->
+<!--                ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')-->
+<!--                END AS END-->
+<!--            , COLOR-->
+        , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i') START
+        , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i') END
         FROM HOS_SCHEDULE SCH, HOS_STAFF S
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
     </select>
@@ -37,29 +47,68 @@
         SELECT
         SCH_NUM
         , SCH_TITLE TITLE
-        , SCH_CONTENT
+        , SCH_CONTENT DESCRIPTION
         , SCH.STAFF_NUM
-        , DATE_FORMAT(SCH_SDATE, '%Y-%m-%d') START
-        , DATE_FORMAT(SCH_EDATE, '%Y-%m-%d') END
+        , CASE
+            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
+            ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')
+            END AS START
+        , CASE
+            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
+            ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')
+            END AS END
+        , COLOR
         FROM HOS_SCHEDULE SCH, HOS_STAFF S
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
             AND SCH.STAFF_NUM = #{staffNum}
     </select>
 
+    <!-- 직원 한 명의 일정 상세 조회 -->
+    <select id="getDetail" resultMap="schedule">
+        SELECT
+        SCH_NUM
+        , SCH_TITLE TITLE
+        , SCH_CONTENT DESCRIPTION
+        , SCH.STAFF_NUM
+        , CASE
+            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_SDATE, '%Y-%m-%d')
+            ELSE DATE_FORMAT(SCH_SDATE, '%Y-%m-%d %H:%i')
+            END AS START
+        , CASE
+            WHEN ALL_DAY = 'Y' THEN DATE_FORMAT(SCH_EDATE, '%Y-%m-%d')
+            ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')
+            END AS END
+
+        FROM HOS_SCHEDULE SCH, HOS_STAFF S
+        WHERE SCH.STAFF_NUM = S.STAFF_NUM
+            AND SCH_NUM = #{schNum}
+    </select>
+
+    <!-- 일정 추가 -->
     <insert id="addEvent">
         INSERT INTO HOS_SCHEDULE (
-            SCH_TITLE TITLE
-            , SCH_CONTENT DESCRIPTION
+            SCH_TITLE
+            , SCH_CONTENT
             , STAFF_NUM
-            , SCH_SDATE START
-            , SCH_EDATE END
+            , SCH_SDATE
+            , SCH_EDATE
+            , COLOR
+            , ALL_DAY
         ) VALUES (
             #{title}
             , #{description}
             , #{staffNum}
             , #{start}
             , #{end}
+            , #{color}
+            , #{allDay}
         );
     </insert>
+
+    <!-- 일정 삭제 -->
+    <delete id="deleteEvent">
+        DELETE FROM HOS_SCHEDULE
+        WHERE SCH_NUM = #{schNum}
+    </delete>
 
 </mapper>

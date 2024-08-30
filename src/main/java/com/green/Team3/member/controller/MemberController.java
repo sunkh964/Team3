@@ -3,10 +3,13 @@ package com.green.Team3.member.controller;
 import com.green.Team3.member.service.MemberService;
 import com.green.Team3.member.service.MemberServiceImpl;
 import com.green.Team3.member.vo.MemberVO;
+import com.green.Team3.member.vo.SearchVO;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/member")
@@ -42,7 +45,19 @@ public class MemberController {
 
     //    개인정보 수정하기
     @PutMapping("/update")
-    public void update(@RequestBody MemberVO memberVO){
+    public void update(@RequestBody MemberVO memberVO) {
         memberService.update(memberVO);
+    }
+//    당일 예약 환자 기본 정보 차트 추가
+    @PostMapping("/insertChartMem")
+    public MemberVO insertChartMem(@RequestBody MemberVO memberVO){
+        memberService.insertChartMem(memberVO);
+        return memberVO;
+    }
+
+    /* 환자 검색 기능*/
+    @PostMapping("/searchMem")
+    public List<MemberVO> searchMem(@RequestBody(required = false)SearchVO searchVO){
+        return memberService.searchMem(searchVO);
     }
 }

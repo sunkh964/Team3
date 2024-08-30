@@ -1,0 +1,70 @@
+.addChartBack{
+  background-color: #ebf4f8;
+  width: 100%;
+  height: 100%;
+  border: 1px solid ;
+}
+.addChart{
+  width: 1000px;
+  border: 1px solid #7e969e;
+  background-color: #cbe2f0;
+  margin: 50px auto;
+}
+.addChart>.addContent{
+  margin: 20px auto;
+  display: flex;
+  font-size: 25px;
+  width: 80%;
+}
+.addChart input{
+  font-size: 20px;
+  vertical-align: middle;
+  border: 2px solid #7e969e;
+  border-radius: 5px;
+  width: 200px;
+  margin-left: auto;
+  padding: 5px;
+}
+.cM>input{
+  width: 150px !important;
+}
+.addChart>.addContent>div:first-child{
+  width: 50%;
+}
+.addContent span{
+  width: 150px;
+  display: inline-block;
+}
+.addContent div:first-child>span{
+  width: 110px;
+  display: inline-block;
+}
+.addTitle{
+  font-size: 30px;
+  text-align: center;
+  background-color: #1aa6d1;
+  color: white;
+  padding: 5px;
+  margin-bottom: 40px;
+}
+.address{
+  width: 100% !important;
+}
+.address>input{
+  width: 400px;
+}
+.title2{
+  margin-top: 40px;
+}
+.addChartBtn{
+  width: 150px;
+  font-size: 20px;
+  margin: 40px 43%;
+  padding: 5px;
+}
+.addContent select{
+  font-size: 25px;
+  border: 1px solid #7e969e;
+  width: 200px;
+  cursor: pointer;
+}

@@ -8,4 +8,6 @@ import java.util.List;
 public interface ScheduleService {
     List<ScheduleVO> getAllList();
     void addEvent(ScheduleVO scheduleVO);
+    ScheduleVO getDetail(int schNum);
+    void deleteEvent(int schNum);
 }

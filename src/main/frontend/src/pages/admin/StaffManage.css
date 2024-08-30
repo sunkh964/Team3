@@ -14,14 +14,16 @@
 }
 
 /* ============== 모달 창 ============= */
-.event-form-div {
+/* 모달 통합 */
+.event-modal-div {
    display: flex;
    justify-content: center;
    width: 100%;
-   padding: 10px 0px;
+   padding: 10px 50px;
    /* background-color: aquamarine; */
 }
 
+/* 등록 폼 */
 .input-form input, .input-form textarea {
    width: 100%;
    padding: 5px;
@@ -34,8 +36,55 @@
    margin-left: 10px;
 }
 
-.input-form td {
+.input-form td, .detail-table td {
    padding: 5px;
    vertical-align: middle;
+}
+
+.input-form td {
    text-align: right;
+}
+
+/* 컬러 주기 */
+.color-selector {
+   width: 70%;
+   /* border: 1px solid black; */
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   height: 30px;
+   overflow: visible;
+}
+
+.color {
+   appearance: none;
+   width: 20px;
+   height: 25px;
+   border-radius: 3px;
+   background-color: #000000;
+   cursor: pointer;
+}
+.color:hover {
+   opacity: 0.8;
+}
+
+.c1 { background-color: #ff6363; }
+.c1:checked { outline: 2px solid rgb(197, 43, 43) }
+.c2 { background-color: #fac35c; }
+.c2:checked { outline: 2px solid #e9a423 }
+.c3 { background-color: #95c570; }
+.c3:checked { outline: 2px solid #5fa52a }
+.c4 { background-color: #8dd4f5; }
+.c4:checked { outline: 2px solid #60afd4 }
+.c5 { background-color: #a89de4; }
+.c5:checked { outline: 2px solid #8178b3 }
+.c6 { background-color: #f88dbf; }
+.c6:checked { outline: 2px solid #da6ea0 }
+.c7 { background-color: #858585; }
+.c7:checked { outline: 2px solid #575757 }
+
+
+/* 조회 테이블 */
+.detail-table td:not(:nth-child(1)) {
+   text-align: left;
 }

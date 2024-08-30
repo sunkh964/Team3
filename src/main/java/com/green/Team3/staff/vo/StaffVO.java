@@ -16,6 +16,7 @@ public class StaffVO {
     private String staffId;
     private String staffPw;
     private String staffGen;
+    private String hireDate;
     private int partNum;
     private PartVO part;
 }
