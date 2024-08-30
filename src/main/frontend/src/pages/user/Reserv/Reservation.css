@@ -1,0 +1,117 @@
+.reserv-container{
+  margin: auto;
+  padding: 30px 0px;
+  border: 1px dotted red;
+  width: 1100px;
+  display: flex;
+}
+
+#sidebar{
+  width: 200px ;
+  
+}
+#sidebar > div{
+  height: 110px;
+  background-color: #55679C;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 110px;
+}
+
+#sidebar > ul{
+  border: 1px solid lightgray;
+  border-bottom: none;
+}
+#sidebar > ul >li{
+  border-bottom: 1px solid lightgray;
+  padding: 10px 15px;
+}
+
+.reserv-content{
+  background-color: #eeeeee;
+  width: 100%;
+  margin: auto;
+  padding: 30px;
+}
+
+.explain{
+  width: 100%;
+  height: 20vh;
+  background-color: #dddddd;
+}
+
+.act{
+  display: grid;
+  grid-template-columns: 20% 40% 40%;
+}
+.act > div{
+  border: 1px dotted blue;
+}
+.reserv-title{
+  width: 90%;
+  margin: auto;
+  font-size: 1.1rem;
+  border-bottom: 1px solid gray;
+  padding: 10px 0px;
+}
+.act .reserv-part{
+  padding: 20px;
+}
+
+.act .part{
+  text-align: center;
+  width: 100px;
+  background-color: white;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  border: 1px solid #a7b6da;
+  color: #5e6474;
+  border-radius: 5px;
+}
+
+.act .part.selected{
+  border: 2px solid #6c7791;
+  color:#5b6681 ;
+  font-weight: bold;
+}
+
+.reserv-doctor{
+  padding: 20px;
+}
+
+.reserv-doctor >div{
+  width: 80%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.reserv-doctor .img{
+  width: 40%;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+}
+
+.reserv-doctor .doctor{
+  margin-bottom: 10px;
+}
+
+.reserv-doctor .doctor.selected{
+  border: 1px solid #5c84e2;
+  color:#5b6681 ;
+  font-weight: bold;
+}
+
+.reserv-doctor .doctorInfo{
+  padding: 15px;
+  font-size: 0.9rem;
+}
+
+.reserv-doctor .doctorInfo >div:first-child{
+  font-weight: 600;
+  color: rgb(124, 124, 124);
+  margin-bottom: 5px;
+}

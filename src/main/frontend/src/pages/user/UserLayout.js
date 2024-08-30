@@ -1,15 +1,17 @@
 import React from 'react'
 import './UserLayout.css'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const UserLayout = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='userLayout'>
       <div className='menu'>
         <ul className='menu-ul'>
           <li>진료안내</li>
           <li>이용안내</li>
-          <li>진료예약</li>
+          <li onClick={() => {navigate('/reserv')}}>진료예약</li>
           <li>고객서비스</li>
         </ul>
       </div>

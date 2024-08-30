@@ -20,6 +20,7 @@ import AddChart from './pages/admin/AddChart';
 import DoctorHome from './pages/admin/DoctorManage/DoctorHome';
 import StaffChange from './pages/admin/DoctorManage/StaffChange';
 import ReviseChart from './pages/admin/ReviseChart';
+import Reservation from './pages/user/Reserv/Reservation';
 
 function App() {
 
@@ -95,6 +96,10 @@ function App() {
                 {/* 마이페이지- 진료이력보기*/}
                 <Route path='history' element={<History/>}/>
               </Route>
+
+              {/* 진료예약 */}
+              <Route path='reserv' element={<Reservation />} />
+              
             </Route>
   
             {/* 관리자용 */}
