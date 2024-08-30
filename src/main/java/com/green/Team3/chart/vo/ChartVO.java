@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class ChartVO {
     private int chartNum;
+    private int memNum;
     private String isNow;
     private List<ResVO> resMemList;
 }

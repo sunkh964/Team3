@@ -16,4 +16,10 @@ public class HistoryServiceImpl implements HistoryService {
     public List<HistoryVO> selectHis(int memNum) {
         return sqlSession.selectList("chartMapper.selectHis", memNum);
     }
+
+    /*차트에 병명 등록하기*/
+    @Override
+    public void insertHis(HistoryVO historyVO) {
+        sqlSession.insert("chartMapper.insertHis", historyVO);
+    }
 }

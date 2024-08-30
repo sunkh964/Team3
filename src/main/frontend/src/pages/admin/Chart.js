@@ -86,27 +86,29 @@ const Chart = () => {
               <button onClick={() => navigate('/admin/addChart')}>추가</button>
             </div>
 
-            {resMemList.map((resMem, i) => {
-              const member = resMem.resMemList[0]?.memberList[0];
-              const chartNum = resMem.chartNum;
-              return (
-                <div className='todayRegContent' key={i}>
-                  <div className='divF'>
-                    <div className='clickDetail' onClick={() => navigate(`/admin/history/${member.memNum}`)}>이름 : {member ? member.memName : null}</div>
-                    <div>생년월일 : {member ? member.memBirth : null}</div>
-                    <div>성별: {member ? member.memGen : null}</div>
-                  </div>
-                  <div className='divFSec'>
-                    <div>연락처 : {member ? member.memTel : null}</div>
-                    <div>
-                      <span onClick={() => navigate(`/admin/reviseChart/${member.memNum}/${chartNum}`)}>수정</span>
-                      <span onClick={() => delIsNow(chartNum)}>삭제</span>
-                      <button onClick={() => goIsNow(chartNum)}>진료환자 등록</button>
+            <div className='topContent'>
+              {resMemList.map((resMem, i) => {
+                const member = resMem.resMemList[0]?.memberList[0];
+                const chartNum = resMem.chartNum;
+                return (
+                  <div className='todayRegContent' key={i}>
+                    <div className='divF'>
+                      <div className='clickDetail' onClick={() => navigate(`/admin/history/${member.memNum}`)}>이름 : {member ? member.memName : null}</div>
+                      <div>생년월일 : {member ? member.memBirth : null}</div>
+                      <div>성별: {member ? member.memGen : null}</div>
+                    </div>
+                    <div className='divFSec'>
+                      <div>연락처 : {member ? member.memTel : null}</div>
+                      <div>
+                        <span onClick={() => navigate(`/admin/reviseChart/${member.memNum}/${chartNum}`)}>수정</span>
+                        <span onClick={() => delIsNow(chartNum)}>삭제</span>
+                        <button onClick={() => goIsNow(chartNum)}>진료환자 등록</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           <div className='searchMem'>

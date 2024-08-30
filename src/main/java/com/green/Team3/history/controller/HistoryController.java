@@ -3,10 +3,7 @@ package com.green.Team3.history.controller;
 import com.green.Team3.history.service.HistoryService;
 import com.green.Team3.history.vo.HistoryVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +16,11 @@ public class HistoryController {
     @GetMapping("/selectHis/{memNum}")
     public List<HistoryVO> selectHis(@PathVariable("memNum") int memNum){
         return historyService.selectHis(memNum);
+    }
+
+    /*차트에 병명등록하기*/
+    @PostMapping("/insertHis")
+    public void insertHis(@RequestBody HistoryVO historyVO){
+        historyService.insertHis(historyVO);
     }
 }

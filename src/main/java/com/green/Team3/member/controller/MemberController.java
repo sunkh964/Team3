@@ -48,7 +48,7 @@ public class MemberController {
     public void update(@RequestBody MemberVO memberVO) {
         memberService.update(memberVO);
     }
-//    당일 예약 환자 기본 정보
+//    당일 예약 환자 기본 정보 차트 추가
     @PostMapping("/insertChartMem")
     public MemberVO insertChartMem(@RequestBody MemberVO memberVO){
         memberService.insertChartMem(memberVO);

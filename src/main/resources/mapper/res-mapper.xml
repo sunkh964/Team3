@@ -13,10 +13,11 @@
                 <collection property="partList" resultMap="staffMapper.part" />
         </resultMap>
 
-        <insert id="insertChartRes">
+        <insert id="insertChartRes" useGeneratedKeys="true" keyProperty="resNum" keyColumn="RES_NUM">
                 INSERT INTO HOS_RES (MEM_NUM, RES_TIME, STAFF_NUM, PART_NUM)
                 VALUES (#{memNum}, NOW(), #{staffNum}, #{partNum});
         </insert>
+
 
 
 

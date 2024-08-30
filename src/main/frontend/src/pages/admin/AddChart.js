@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './AddChart.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddChart = () => {
+  const navigate = useNavigate();
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
   
-  const [insertChartMem, setInsertChartMem] = useState({
+  const [insertChart, setinsertChart] = useState({
     memNum: 0,
     memName: '',
     memBirth: '',
     memTel: '',
     memGen: '',
     memAddr: '',
-    staffNum: '',
-    partNum: ''
+    staffNum: 0,
+    resNum: 0,
+    partNum: 0,
+    isNow:'',
+    illName:'',
+    illDetail:''
   });
 
   // 진료부서 조회
@@ -30,8 +36,8 @@ const AddChart = () => {
 
   // 담당의 조회
   useEffect(() => {
-    if (insertChartMem.partNum) {
-      axios.get(`/staff/selectStaffName/${insertChartMem.partNum}`)
+    if (insertChart.partNum) {
+      axios.get(`/staff/selectStaffName/${insertChart.partNum}`)
         .then((res) => {
           setStaffs(res.data);
         })
@@ -41,54 +47,63 @@ const AddChart = () => {
     } else {
       setStaffs([]); // `partNum`이 없는 경우 직원 목록 초기화
     }
-  }, [insertChartMem.partNum]);
+  }, [insertChart.partNum]);
 
   // 입력 값 변경 핸들러
-  const changeMemValue = (e) => {
-    setInsertChartMem({
-      ...insertChartMem,
+  const changeValue = (e) => {
+    setinsertChart({
+      ...insertChart,
       [e.target.name]: e.target.value
     });
   };
 
   // 환자 및 진료 정보 등록
-  const insertChartRes = () => {
-    if (!insertChartMem.partNum || !insertChartMem.staffNum) {
-      alert('진료부서와 담당의를 선택해야 합니다.');
-      return;
-    }
-    if (Object.values(insertChartMem).some(x => x === '')) {
-      alert('모든 필드를 채워야 합니다.');
-      return;
-    }
-
-    axios.post('/member/insertChartMem', insertChartMem)
-      .then((response) => {
-        const member = response.data;
-        console.log(insertChartMem)
-        console.log('Member response:', member);
-
-        if (member && member.memNum) {
-          const updatedChartMem = {
-            ...insertChartMem,
-            memNum: member.memNum
-          };
-
-          axios.post('/res/insertChartRes', updatedChartMem)
-            .then(() => {
-              alert('환자와 진료 정보가 성공적으로 등록되었습니다.');
-            })
-            .catch((error) => {
-              console.error('Error inserting chart res:', error.response ? error.response.data : error.message);
-              alert('진료 정보 등록에 실패하였습니다.');
-            });
-        }
-      })
-      .catch((error) => {
-        console.error('Error inserting chart mem:', error.response ? error.response.data : error.message);
-        alert('환자 정보 등록에 실패하였습니다.');
+  const insertChartRes = async () => {
+    try {
+      // 1. 멤버 추가
+      const memberResponse = await axios.post('/member/insertChartMem', insertChart);
+      const member = memberResponse.data;
+      if (!member || !member.memNum) {
+        throw new Error('Member creation failed');
+      }
+  
+      // 2. 진료 기록 추가
+      const resResponse = await axios.post('/res/insertChartRes', {
+        ...insertChart,
+        memNum: member.memNum
       });
+      const res = resResponse.data;
+      if (!res || !res.resNum) {
+        throw new Error('Chart record creation failed');
+      }
+  
+      // 3. 차트 추가
+      const chartResponse = await axios.post('/chart/insertChart', {
+        ...insertChart,
+        resNum: res.resNum
+      });
+      const chart = chartResponse.data;
+      if (!chart || !chart.chartNum) {
+        throw new Error('Chart creation failed');
+      }
+  
+      // 4. 병병 추가
+      const historyResponse = await axios.post('/history/insertHis', {
+        ...insertChart,
+        resNum: res.resNum,
+        chartNum: chart.chartNum
+      });
+      console.log('History insert response:', historyResponse.data);
+  
+      alert('등록되었습니다.');
+      navigate('/admin/chart');
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
+    }
   };
+  
+  
+  
 
   return (
     <div className='addChartBack'>
@@ -97,27 +112,27 @@ const AddChart = () => {
         <div className='addContent'>
           <div className='cM'>
             <span>이름 : </span>
-            <input type='text' name='memName' value={insertChartMem.memName} onChange={changeMemValue} />
+            <input type='text' name='memName' value={insertChart.memName} onChange={changeValue} />
           </div>
           <div>
             <span>주민등록번호 :</span>
-            <input type='text' name='memBirth' value={insertChartMem.memBirth} onChange={changeMemValue} />
+            <input type='text' name='memBirth' value={insertChart.memBirth} onChange={changeValue} />
           </div>
         </div>
         <div className='addContent'>
           <div>
             <span>연락처 :</span>
-            <input type='text' name='memTel' value={insertChartMem.memTel} onChange={changeMemValue} />
+            <input type='text' name='memTel' value={insertChart.memTel} onChange={changeValue} />
           </div>
           <div className='cM'>
             <span>성별 :</span>
-            <input type='text' name='memGen' value={insertChartMem.memGen} onChange={changeMemValue} />
+            <input type='text' name='memGen' value={insertChart.memGen} onChange={changeValue} />
           </div>
         </div>
         <div className='addContent'>
           <div className='address'>
             <span>주소 :</span>
-            <input type='text' name='memAddr' value={insertChartMem.memAddr} onChange={changeMemValue} />
+            <input type='text' name='memAddr' value={insertChart.memAddr} onChange={changeValue} />
           </div>
         </div>
 
@@ -125,7 +140,7 @@ const AddChart = () => {
         <div className='addContent'>
           <div>
             <span>진료부서 :</span>
-            <select name='partNum' value={insertChartMem.partNum} onChange={changeMemValue}>
+            <select name='partNum' value={insertChart.partNum} onChange={changeValue}>
               <option value="">진료부서 선택</option>
               {parts.map((part, i) => (
                 <option key={i} value={part.partNum}>
@@ -136,7 +151,7 @@ const AddChart = () => {
           </div>
           <div className='cM'>
             <span>담당의 :</span>
-            <select name='staffNum' value={insertChartMem.staffNum} onChange={changeMemValue}>
+            <select name='staffNum' value={insertChart.staffNum} onChange={changeValue}>
               <option value="">담당의 선택</option>
               {staffs.map((staff, i) => (
                 <option key={i} value={staff.staffNum}>
@@ -146,6 +161,25 @@ const AddChart = () => {
             </select>
           </div>
         </div>
+
+        <div className='addTitle'>환자 차트</div>
+        <div className='addContent'>
+          <div className='cM'>
+            <span>당일 진료 : </span>
+            <input type='text' name='isNow' value={insertChart.isNow} onChange={changeValue} />
+          </div>
+          <div>
+            <span>병명 :</span>
+            <input type='text' name='illName' value={insertChart.illName} onChange={changeValue} />
+          </div>
+        </div>
+        <div className='addContent'>
+          <div className='address'>
+            <span> 세부사항 :</span>
+            <input type='text' name='illDetail' value={insertChart.illDetail} onChange={changeValue} />
+          </div>
+        </div>
+
         <button className='addChartBtn' onClick={insertChartRes}>환자 등록</button>
       </div>
     </div>

@@ -57,4 +57,11 @@ public class ChartController {
     public void updateHistory(@RequestBody HistoryVO historyVO) {
         chartService.updateHistory(historyVO);
     }
+
+    /*차트 등록하기*/
+    @PostMapping("/insertChart")
+    public void insertChart(@RequestBody ChartVO chartVO){
+        chartService.insertChart(chartVO);
+    }
+
 }
