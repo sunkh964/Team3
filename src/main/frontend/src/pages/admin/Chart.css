@@ -91,12 +91,9 @@ button:hover {
   font-size: 13px;
 }
 
-/* 단체 채팅 */
-.chart .adminChat {
-  background-color: #e8f0f3;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+/* 환자 검색 */
+.chart .searchMem {
+  height: 42%;
 }
 
 .todayTop {
@@ -108,52 +105,56 @@ button:hover {
   justify-content: space-between;
 }
 
-.messageContent {
+.searchResultContent {
   overflow-y: auto; /* 세로 스크롤 허용 */
-  padding: 10px;
-  background-color: #e8f0f3;
-  /* max-height: calc(35vh - 60px); /* 최대 높이 설정 (헤더와 입력 영역을 고려하여 조정) */
 } 
 
-.adminChat .message {
-  border-radius: 10px;
-  padding: 5px 15px;
-  margin: 5px 0; /* 마진 조정 */
-  background-color: #067da1;
-  color: white;
-  font-size: 14px;
+.searchMem .searchResult {
+  background-color: #e8f0f3;
+  font-size: 15px;
   max-width: 100%; /* 메시지 내용이 컨테이너를 넘어가지 않도록 설정 */
   word-wrap: break-word; /* 단어가 넘치지 않도록 설정 */
 }
 
-.adminChat .message span {
-  font-size: 10px;
-  color: #eeeeee;
-}
-
-/* 채팅 입력 영역 */
-.chart .sent {
-  border-top: 1px solid #7e969e;
+.searchMem .searchTitle {
   background-color: #bedce6;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
+  padding: 10px 5px;
+  border-top: 1px solid #7e969e;
+  border-bottom: 1px solid #7e969e;
 }
 
-.sent input {
-  font-size: 15px;
-  border-radius: 5px;
-  width: 70%;
-  padding: 5px;
-  border: 1px solid #7e969e; /* 입력 필드 테두리 */
+/* 환자 검색 영역 */
+.searchTitle span{
+  font-size: 18px;
+  margin: 5px;
 }
-
-.sent button {
+.search{
+  margin: 5px;
+}
+.search input{
+  font-size: 13px;
+  width: 250px;
+}
+.search button{
+  margin-left: 10px;
+  padding: 5px 10px;
+}
+.searchResult{
+  padding: 10px 5px;
+}
+.searchResult div span:first-child{
+  width: 50%;
+  display: inline-block;
+}
+.searchResult span{
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.searchResult button{
   margin-left: 10px;
 }
+
+
 
 /* 진료 환자 */
 .medTreat{

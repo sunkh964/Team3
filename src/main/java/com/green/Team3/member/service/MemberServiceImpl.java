@@ -1,11 +1,13 @@
 package com.green.Team3.member.service;
 
 import com.green.Team3.member.vo.MemberVO;
+import com.green.Team3.member.vo.SearchVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Struct;
+import java.util.List;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
@@ -51,4 +53,9 @@ public class MemberServiceImpl implements MemberService {
         return memberVO;
     }
 
+    /*환자 검색 기능*/
+    @Override
+    public List<MemberVO> searchMem(SearchVO searchVO) {
+        return sqlSession.selectList("memberMapper.searchMem", searchVO);
+    }
 }

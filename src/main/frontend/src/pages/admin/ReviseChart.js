@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './ReviseChart.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ReviseChart = () => {
+  const navigate = useNavigate();
   const { memNum } = useParams();
   const [reviseInfo, setReviseInfo] = useState({});
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
   const [updateChart, setUpdateChart] = useState({
-    resTime: '',
     isNow: '',
     partNum: 0,
     staffNum: 0,
@@ -37,9 +37,7 @@ const ReviseChart = () => {
           const member = res.data.resMemList[0].memberList[0];
           setUpdateChart(prevState => ({
             ...prevState,
-            resTime: res.data.resTime || '',
             isNow: res.data.isNow || '',
-            // 초기값 설정 (예시)
             partNum: res.data.partNum || 0,
             staffNum: res.data.staffNum || 0,
             illName: res.data.illName || '',
@@ -80,7 +78,6 @@ const ReviseChart = () => {
     // 차트 업데이트 API 호출
     axios.put('/chart/updateChart', {
       chartNum: reviseInfo.chartNum,
-      // resTime: updateChart.resTime,
       isNow: updateChart.isNow
     })
     .then(response => {
@@ -96,6 +93,8 @@ const ReviseChart = () => {
       })
       .then(response => {
         console.log('병력 업데이트 성공');
+        alert('수정되었습니다.')
+        navigate(`admin/histry/${memNum}`)
       })
       .catch(error => {
         console.log('병력 업데이트 실패:', error);
@@ -112,16 +111,15 @@ const ReviseChart = () => {
       <table>
         <thead>
           <tr>
-            <td colSpan={2}>차트 번호 : {reviseInfo.chartNum} </td>
+            <td colSpan={2}>차트 번호 {reviseInfo.chartNum} 번 </td>
           </tr>
           <tr>
-            <td><span>이름</span> : {memList.memNum} </td>
+            <td><span>이름</span> : {memList.memName} </td>
             <td><span>생년월일</span> : {memList.memBirth}</td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><span>예약 시간</span> : <input type='text' name='resTime' value={updateChart.resTime} onChange={changeValue} /></td>
             <td><span>당일 진료</span> : <input type='text' name='isNow' value={updateChart.isNow} onChange={changeValue} /></td>
           </tr>
           <tr>
