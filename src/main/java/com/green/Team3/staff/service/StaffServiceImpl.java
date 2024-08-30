@@ -48,4 +48,9 @@ public class StaffServiceImpl implements StaffService {
         return sqlSession.selectOne("staffMapper.getStaffDetail", staffNum);
     }
 
+    @Override
+    public StaffVO login(StaffVO staffVO) {
+        return sqlSession.selectOne("staffMapper.loginStaff", staffVO);
+    }
+
 }

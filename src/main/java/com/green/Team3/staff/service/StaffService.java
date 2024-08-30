@@ -24,6 +24,9 @@ public interface StaffService {
     // 직원 상세조회
     StaffVO getStaffDetail(int staffNum);
 
+//    직원 로그인
+    StaffVO login(StaffVO staffVO);
+
 }
 
 

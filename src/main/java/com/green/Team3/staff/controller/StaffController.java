@@ -55,4 +55,10 @@ public class StaffController {
     public StaffVO getStaffDetail(@PathVariable("staffNum") int staffNum){
         return staffService.getStaffDetail(staffNum);
     }
+
+//    직원 로그인
+    @PostMapping("/loginStaff")
+    public StaffVO login(@RequestBody StaffVO staffVO){
+        return staffService.login(staffVO);
+    }
 }

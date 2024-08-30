@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Qna = () => {
   const navigate=useNavigate();
+// 문의 번호 불러오기
+  const {qNum}=useParams();
 
   //조회된 게시글 목록을 저장할 변수
   const [qnaList, setQnaList]=useState([]);
@@ -46,7 +48,7 @@ const Qna = () => {
             return(
               <tr key={i}>
                 <td>{i+1}</td>
-                <td>{q.qtitle}</td>
+                <td onClick={(e)=>{navigate(`/mypage/qdetail/${q.qnum}`)}}>{q.qtitle}</td>
                 <td>{q.qdate}</td>
               </tr>
             );
@@ -54,7 +56,7 @@ const Qna = () => {
         }
         </tbody>
       </table>
-      <button type='button' onClick={(e)=>{navigate('/mypage/qupdate')}}>문의작성</button>
+      <button type='button' onClick={(e)=>{navigate(`/mypage/qupdate/${qnaList.memNum}`)}}>문의작성</button>
       </div>
   )
 }

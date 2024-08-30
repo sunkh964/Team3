@@ -22,6 +22,14 @@
         <result column="PART_NAME" property="partName"/>
     </resultMap>
 
+    <!--    로그인 -->
+    <select id="loginStaff" resultMap="staff">
+        SELECT STAFF_ID, STAFF_PW, STAFF_ROLE, STAFF_NAME
+        FROM HOS_STAFF
+        WHERE STAFF_ID=#{staffId}
+        AND STAFF_PW=#{staffPw}
+    </select>
+
     <!-- 부서 목록 조회 -->
     <select id="getPartList" resultMap="part">
         SELECT PART_NUM

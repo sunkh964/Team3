@@ -17,4 +17,21 @@ public class QServiceImpl implements QService{
     public List<QVO> qnaList(int memNum) {
         return sqlSession.selectList("qnaMapper.qnaList", memNum);
     }
+
+//    문의하기 등록
+    @Override
+    public void insertQ(QVO qvo) {
+        sqlSession.insert("qnaMapper.insertQ", qvo);
+    }
+
+//    질문 상세보기
+    @Override
+    public QVO qdetail(int qNum) {
+        return sqlSession.selectOne("qnaMapper.qdetail", qNum);
+    }
+
+    @Override
+    public QVO reply(int qNum) {
+        return sqlSession.selectOne("qnaMapper.reply", qNum);
+    }
 }

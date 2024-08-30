@@ -20,6 +20,7 @@
         <result column="A_DATE" property="aDate"/>
         <result column="Q_NUM" property="qNum"/>
 
+<!--        <association property="q" resultMap="a"/>-->
         <association property="staff" resultMap="staffMapper.staff"/>
     </resultMap>
 
@@ -33,6 +34,40 @@
         ORDER BY Q_NUM DESC
     </select>
 
+<!--    문의글 등록 쿼리-->
+    <insert id="insertQ">
+        INSERT INTO HOS_Q (
+            Q_TITLE
+            , Q_CONTENT
+            , MEM_NUM
+        ) VALUES (
+            #{qTitle}
+            , #{qContent}
+            , #{memNum}
+        );
+    </insert>
+
+<!--    문의하기 상세조회-->
+    <select id="qdetail" resultMap="q">
+        SELECT Q_NUM
+        , MEM_NUM
+        , Q_TITLE
+        , Q_CONTENT
+        , Q_DATE
+        FROM HOS_Q
+        WHERE Q_NUM=#{qNum}
+    </select>
+
+<!--    답변 조회-->
+    <select id="reply" resultMap="a">
+        SELECT A_NUM
+        , A_CONTENT
+        , A_DATE
+        , Q.Q_NUM
+        FROM HOS_A A, HOS_Q Q
+        WHERE Q.Q_NUM=#{qNum}
+        AND Q.Q_NUM = A.Q_NUM;
+    </select>
 </mapper>
 
 
