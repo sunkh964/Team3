@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 const Reservation = () => {
   const {partNum: initialPartNum} = useParams();
+  const {staffNum: initialDoctorNum} = useParams();
 
   // 부서목록 저장
   const [partList, setPartList] = useState([]);
@@ -16,7 +17,7 @@ const Reservation = () => {
   const [partNum, setPartNum] = useState(initialPartNum || '');
 
   // 선택된 의료진 번호
-  const [doctorNum, setDoctorNum] = useState(null);
+  const [doctorNum, setDoctorNum] = useState(initialDoctorNum || '');
 
 
   // 부서목록 조회
@@ -44,6 +45,11 @@ const Reservation = () => {
       axios.get(`/staff/selectStaffName/${partNum}`)
         .then((res) => {
           setDoctor(res.data);
+
+        // 자동선택
+        if(res.data.length > 0 && !initialDoctorNum){
+          setDoctorNum(res.data[0].staffNum);
+      }
         })
         .catch((error) => { console.log(error) });
     } else {
@@ -103,7 +109,14 @@ const Reservation = () => {
           </div>
           <div>
             <div className='reserv-title'>예약날짜/시간 선택</div>
-            <div></div>
+            <div>
+              <div>
+                <input type='date'/>
+              </div>
+              <div>
+                <input type='time'/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
