@@ -122,16 +122,12 @@ const Chart = () => {
                 {searchMems.map((mem, i) => (
                   <div className='searchResult' key={i}>
                     <div>
-                      <span>이름 : {mem.memName}</span>
+                      <span className='clickDetail' onClick={() => navigate(`/admin/history/${mem.memNum}`)}>이름 : {mem.memName}</span>
                       <span>생년월일 : {mem.memBirth}</span>
                     </div>
                     <div>
                       <span>연락처 : {mem.memTel}</span>
                       <span>성별 : {mem.memGen}</span>
-                    </div>
-                    <div className='botBut'>
-                      <button>수정</button>
-                      <button>예약환자 등록</button>
                     </div>
                   </div>
                 ))}
