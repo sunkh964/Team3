@@ -13,10 +13,16 @@ public class ScheduleController {
     @Resource(name = "scheduleService")
     private ScheduleService scheduleService;
 
-//    전체 목록 조회
+//    직원 전체의 일정 목록 조회
     @GetMapping("/getAllList")
     public List<ScheduleVO> getAllList() {
         return scheduleService.getAllList();
+    }
+
+//    로그인한 직원의 일정 목록 조회
+    @GetMapping("/getOneList/{memNum}")
+    public List<ScheduleVO> getOneList(@PathVariable(name = "memNum")int memNum) {
+        return scheduleService.getOneList(memNum);
     }
 
 //    새 이벤트 등록하기
@@ -43,5 +49,12 @@ public class ScheduleController {
     @DeleteMapping("/deleteEvent/{schNum}")
     public void deleteEvent(@PathVariable(name = "schNum") int schNum) {
         scheduleService.deleteEvent(schNum);
+    }
+
+//    일정 수정
+    @PostMapping("/modifyEvent")
+    public void modifyEvent(@RequestBody ScheduleVO scheduleVO) {
+        System.out.println(scheduleVO);
+        scheduleService.modifyEvent(scheduleVO);
     }
 }

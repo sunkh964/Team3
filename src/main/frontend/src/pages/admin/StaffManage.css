@@ -24,7 +24,7 @@
 }
 
 /* 등록 폼 */
-.input-form input, .input-form textarea {
+.input-form input, .input-form textarea, .modify-form {
    width: 100%;
    padding: 5px;
 }
@@ -82,6 +82,10 @@
 .c6:checked { outline: 2px solid #da6ea0 }
 .c7 { background-color: #858585; }
 .c7:checked { outline: 2px solid #575757 }
+
+.modify-form {
+   display: none;
+}
 
 
 /* 조회 테이블 */

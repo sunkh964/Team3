@@ -87,7 +87,7 @@ function App() {
               setLoginInfo={setLoginInfo} />}/>
 
               {/* 마이페이지 */}
-              <Route path='/mypage' element={<Mypage  loginInfo={loginInfo}/>}>
+              <Route path='/mypage' element={<Mypage loginInfo={loginInfo}/>}>
                 {/* 마이페이지-개인정보수정 */}
                 <Route path='infoupdate/:memId' element={<Infoupdate />} />
                 {/* 마이페이지-1:1문의 */}
@@ -102,7 +102,7 @@ function App() {
               {/* 관리자용 - 첫 화면 */}
               <Route path='' element={<AdminHome />} />
               {/* 관리자용 - 직원 관리 */}
-              <Route path='staffManage' element={<StaffManage />} />
+              <Route path='staffManage' element={<StaffManage loginInfo={loginInfo}/>} />
 
               {/* 관리자용 - 진료 관리(차트) */}
               <Route path='chart' element={<Chart />} />

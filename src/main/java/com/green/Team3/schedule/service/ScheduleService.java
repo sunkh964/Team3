@@ -6,8 +6,16 @@ import com.green.Team3.schedule.vo.ScheduleVO;
 import java.util.List;
 
 public interface ScheduleService {
+//    직원 전체의 일정 목록 조회
     List<ScheduleVO> getAllList();
+//    로그인한 직원의 일정 목록 조회
+    List<ScheduleVO> getOneList(int memNum);
+//    새 이벤트 등록하기
     void addEvent(ScheduleVO scheduleVO);
+//    일정 상세 조회
     ScheduleVO getDetail(int schNum);
+//    일정 상세 삭제
     void deleteEvent(int schNum);
+//    일정 수정
+    void modifyEvent(ScheduleVO scheduleVO);
 }

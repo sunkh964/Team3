@@ -9,10 +9,11 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
    // 클릭 날짜 저장할 곳 선언
    //const [changeDate, setChangeDate] = useState(clickDate);
 
-   function getFormattedDate(date, targetName){
+   function getFormattedDate(date){
       let result = '';
       if (newEvent.allDay == 'Y') {
-         result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${targetName == 'start' ? '00:00:00' : '00:00:00'}`;
+         result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} 00:00:00`;
+         // ${targetName == 'start' ? '00:00:00' : '00:00:00'}
       } else {
          result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:00`;  
       }
@@ -31,7 +32,7 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
                   setNewEvent({
                      ...newEvent,
                      allDay : 'Y',
-                     [targetName]:getFormattedDate(date, targetName)
+                     [targetName]:getFormattedDate(date)
                   })
                }}
                popperPlacement="top-end"
@@ -47,13 +48,13 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
                   setNewEvent({
                      ...newEvent,
                      allDay : 'N',
-                     [targetName]:getFormattedDate(date, targetName)
+                     [targetName]:getFormattedDate(date)
                   })
                }}
                popperPlacement="top-end"
                showTimeSelect={true}
                timeFormat="HH:mm"
-               timeIntervals={10}
+               timeIntervals={15}
                dateFormat="yyyy-MM-dd HH:mm"
                timeCaption="time"
             />

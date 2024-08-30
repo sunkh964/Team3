@@ -24,7 +24,7 @@ justify-content: center;
 }
 `;
 
-const StaffManage = () => {
+const StaffManage = ({loginInfo}) => {
   // 내비게이션 함수 선언
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const StaffManage = () => {
     start: '',
     end: '',
     description: '',
-    staffNum:1, 
+    staffNum: 1, 
     allDay : 'Y',
     color : colorBoxes[0]
   });
@@ -55,12 +55,15 @@ const StaffManage = () => {
   // 일정 상세 저장할 곳 선언
   const [eventDetail, setEventDetail] = useState({});
   // 이벤트 상세 모달창 표시 여부
-  const [addEventDetailModal, setEventDetailModal] = useState(false);
+  const [eventDetailModal, setEventDetailModal] = useState(false);
+  const [modifyActive, setModifyActive] = useState(false);
   
+
   // ============================불러오기용============================
   // 리스트 불러오기
   useEffect(() => {
     axios.get('/schedule/getAllList')
+    // axios.get('/schedule/getOneList/1')
     .then((res) => {
       console.log(res.data);
       setAllList(res.data);
@@ -75,7 +78,7 @@ const StaffManage = () => {
     setNewEvent({
       ...newEvent,
       start : new Date(e.dateStr + 'T09:00:00'),
-      end : new Date(e.dateStr + 'T23:59:59')
+      end : new Date(e.dateStr + 'T10:00:00')
       // start : moment(e.dateStr).format('yyyy-MM-dd'),
       // end : moment(e.dateStr).format('yyyy-MM-dd')
     });
@@ -149,13 +152,19 @@ const StaffManage = () => {
     )
   }
 
+  // 일정 추가 모달 footerContent 내용
   function drawFooterContent1() {}
 
   // 일정 추가 모달 확인 버튼 함수
   function handleBtn1() {
+    newEvent.allDay = newEvent.allDay == 'Y' ? true : false;
     axios.post('/schedule/addEvent', newEvent)
-    .then((res) => {console.log("등록 완료")})
-    .catch((error) => {alert(error)});
+    .then((res) => {
+      console.log(newEvent)
+      console.log("등록 완료")})
+      .catch((error) => {
+      console.log(newEvent)
+      alert(error)});
   }
 
     // '하루종일' 체크여부 변경
@@ -174,32 +183,87 @@ const StaffManage = () => {
     setEventDetailModal(true);
   }
 
+  //DetailModal이 활성화되면 상세 정보를 조회
+  useEffect(() => {
+    if(eventDetailModal){
+      axios.get(`/schedule/getDetail/${schNum}`)
+      .then((res) => {
+        setEventDetail(res.data);
+      })
+    .catch((error) => {alert(error)});
+    }
+  }, [eventDetailModal])
+
   // 일정 상세 모달 content 내용
   function drawModalContent2() {
-    axios.get(`/schedule/getDetail/${schNum}`)
-    .then((res) => {
-      setEventDetail(res.data);
-    })
-    .catch((error) => {alert(error)});
+    function getColor() {
+      let colorNum = 0;
+      colorBoxes.map((color, i) => {
+        if (eventDetail.color == color) {
+          colorNum = i+1
+        }
+      })
+      return colorNum
+    }
+
     return (
       <div className='event-modal-div'>
         <table className='detail-table'>
           <tbody>
             <tr>
+              <td>색상</td>
+              <td colSpan={3}>
+                <input type='radio' className={`color c${getColor()} view`} value={eventDetail.color} ></input>
+                {
+                  colorBoxes.map((colorName, i) => {
+                    return (
+                      <input
+                        type='radio' name='color' className={`color c${i+1} modify-form`} value={colorName}
+                        onClick={(e) => {changeEvent(e)}}
+                        defaultChecked={ (i == 0) ? true : false}
+                      />
+                    )
+                  })
+                }
+              </td>
+            </tr>
+            <tr>
               <td>날짜</td>
               <td>
-                {eventDetail.start}
+                <span className='view'>{eventDetail.start}</span>
+                {/* <input className='modify-form' name='start' defaultValue={eventDetail.start} onChange={() => {}} /> */}
+                {
+                  modifyActive ? <DateSelect name='start' className='modify-form'
+                  setNewEvent={setNewEvent} newEvent={newEvent} targetName={'start'}
+                  clickDate={eventDetail.start} /> 
+                : false
+                }
               </td>
               <td>→</td>
-              <td>{eventDetail.end}</td>
+              <td>
+                <span className='view'>{eventDetail.end}</span>
+                {
+                  modifyActive ?
+                  <DateSelect name='end' className='modify-form'
+                  setNewEvent={setNewEvent} newEvent={newEvent} targetName={'end'}
+                  clickDate={eventDetail.end} /> 
+                  : false
+                }
+              </td>
             </tr>
             <tr>
               <td>제목</td>
-              <td colSpan={3}>{eventDetail.title}</td>
+              <td colSpan={3}>
+                <span className='view'>{eventDetail.title}</span>
+                <input className='modify-form' name='title' defaultValue={eventDetail.title} onChange={() =>{}} />
+              </td>
             </tr>
             <tr>
               <td>내용</td>
-              <td colSpan={3}>{eventDetail.description}</td>
+              <td colSpan={3}>
+                <span className='view'>{eventDetail.description}</span>
+                <input className='modify-form' name='description' defaultValue={eventDetail.description} onChange={() => {}} />
+              </td>
             </tr>
           </tbody>
         </table>
@@ -207,22 +271,42 @@ const StaffManage = () => {
     );
   }
 
-  // 일정 추가 모달 footerContent 내용
+  // 일정 상세 모달 footerContent 내용
   function drawFooterContent2() {
-    return (
-      <>
-        <button type='button' className='modifyBtn' onClick={() => {eventModifyBtn()}} >수정</button>
-        <button type='button' className='deletnBtn' onClick={() => {eventDeleteBtn()}} >삭제</button>
-      </>
-    )
+    if (!modifyActive) {
+      return (
+        <>
+          <button type='button' className='modifyBtn' onClick={() => {eventModifyBtn()}} >수정</button>
+          <button type='button' className='deletnBtn' onClick={() => {eventDeleteBtn()}} >삭제</button>
+        </>
+      )
+    }
+    else { return ; }
   }
 
   // 일정 상세 모달 확인 버튼 함수
-  function handleBtn2() {}
+  function handleBtn2() {
+    if (modifyActive) {
+      axios.post('/schedule/modifyEvent', newEvent)
+      .then(() => {alert("수정 완료")})
+      .catch((error) => {alert(error)});
+    } else { return ; }
+  }
 
-  // 일정 상세 수정 버튼 함수
+  // 일정 상세 수정 버튼 활성화 시 css 변경 함수
   function eventModifyBtn() {
+    setModifyActive(modifyActive ? false : true);
 
+    var modify = document.querySelectorAll('.modify-form');
+    var view = document.querySelectorAll('.view');
+
+    if (!modifyActive) {
+      modify.forEach(element => { element.style.display = 'inline-block' });
+      view.forEach(element => { element.style.display = 'none' });
+    } else {
+      modify.forEach(element => { element.style.display = 'none' });
+      view.forEach(element => { element.style.display = 'inline-block' });
+    }
   }
 
   // 일정 상세 삭제 버튼 함수
@@ -256,7 +340,6 @@ const StaffManage = () => {
               //console.log('if!!')
               //console.log(event)
               event.end = moment(event.end).add(1, 'days').format("YYYY-MM-DD")
-              //console.log(moment(event.end).add(5, 'days').format("YYYY-MM-DD"))
             }
             return event;
           }}
@@ -265,14 +348,14 @@ const StaffManage = () => {
 
       {/* 일정 추가 모달창 */}
       {
-        addEventAddModal ? <Modal content={drawModalContent1} footerContent={drawFooterContent1} setIsShow={setEventAddModal} clickCloseBtn={handleBtn1} />
+        addEventAddModal ? <Modal content={drawModalContent1} footerContent={drawFooterContent1} setIsShow={setEventAddModal} clickCloseBtn={handleBtn1} setModifyActive={setModifyActive} />
         :
         null
       }
 
       {/* 일정 상세 모달창 */}
       {
-        addEventDetailModal ? <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} />
+        eventDetailModal ? <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} setModifyActive={setModifyActive} />
         :
         null
       }
