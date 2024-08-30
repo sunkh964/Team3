@@ -1,6 +1,7 @@
 package com.green.Team3.chart.service;
 
 import com.green.Team3.chart.vo.ChartVO;
+import com.green.Team3.history.vo.HistoryVO;
 import com.green.Team3.part.vo.PartVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,51 +45,16 @@ public class ChartServiceImpl implements ChartService {
         return sqlSession.selectOne("chartMapper.reviseInfo", memNum);
     }
 
+    /*차트 업데이트*/
     @Override
-    public void updateChart(int chartNum, String isNow) {
-        sqlSession.update("chartMapper.updateChart", Map.of(
-                "chartNum", chartNum,
-                "isNow", isNow
-        ));
+    public void updateChart(ChartVO chartVO) {
+        sqlSession.update("chartMapper.updateChart", chartVO);
     }
 
-
+    /*병력 업데이트*/
     @Override
-    public void updateHistory(int chartNum, String illName, String illDetail, int partNum, int staffNum) {
-        // 병력 업데이트
-        sqlSession.update("chartMapper.updateHistory", new HistoryUpdateParam(chartNum, illName, illDetail, partNum, staffNum));
+    public void updateHistory(HistoryVO historyVO) {
+        sqlSession.update("chartMapper.updateHistory", historyVO);
     }
 
-    // 파라미터 클래스를 내부에 정의하거나 별도의 파일로 분리해 사용할 수 있습니다.
-    private static class ChartUpdateParam {
-        private int chartNum;
-        private String resTime;
-        private String isNow;
-
-        public ChartUpdateParam(int chartNum, String resTime, String isNow) {
-            this.chartNum = chartNum;
-            this.resTime = resTime;
-            this.isNow = isNow;
-        }
-
-        // getters and setters
-    }
-
-    private static class HistoryUpdateParam {
-        private int chartNum;
-        private String illName;
-        private String illDetail;
-        private int partNum;
-        private int staffNum;
-
-        public HistoryUpdateParam(int chartNum, String illName, String illDetail, int partNum, int staffNum) {
-            this.chartNum = chartNum;
-            this.illName = illName;
-            this.illDetail = illDetail;
-            this.partNum = partNum;
-            this.staffNum = staffNum;
-        }
-
-        // getters and setters
-    }
 }

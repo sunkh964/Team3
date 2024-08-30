@@ -2,6 +2,7 @@ package com.green.Team3.chart.controller;
 
 import com.green.Team3.chart.service.ChartService;
 import com.green.Team3.chart.vo.ChartVO;
+import com.green.Team3.history.vo.HistoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,27 +48,13 @@ public class ChartController {
 
     /*차트 업데이트*/
     @PutMapping("/updateChart")
-    public void updateChart(@RequestBody Map<String, Object> requestBody) {
-        // 요청 본문에서 값 추출
-        int chartNum = Integer.parseInt(requestBody.get("chartNum").toString());
-        String isNow = (String) requestBody.get("isNow");
-
-        // 서비스 호출
-        chartService.updateChart(chartNum, isNow);
+    public void updateChart(@RequestBody ChartVO chartVO) {
+        chartService.updateChart(chartVO);
     }
-
 
     /*병력 업데이트*/
     @PutMapping("/updateHistory")
-    public void updateHistory(@RequestBody Map<String, Object> requestBody) {
-        // 요청 본문에서 값 추출
-        int chartNum = Integer.parseInt(requestBody.get("chartNum").toString());
-        String illName = (String) requestBody.get("illName");
-        String illDetail = (String) requestBody.get("illDetail");
-        int partNum = Integer.parseInt(requestBody.get("partNum").toString());
-        int staffNum = Integer.parseInt(requestBody.get("staffNum").toString());
-
-        // 서비스 호출
-        chartService.updateHistory(chartNum, illName, illDetail, partNum, staffNum);
+    public void updateHistory(@RequestBody HistoryVO historyVO) {
+        chartService.updateHistory(historyVO);
     }
 }

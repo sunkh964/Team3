@@ -1,6 +1,9 @@
 package com.green.Team3.member.service;
 
 import com.green.Team3.member.vo.MemberVO;
+import com.green.Team3.member.vo.SearchVO;
+
+import java.util.List;
 
 public interface MemberService {
 //    회원가입
@@ -19,4 +22,6 @@ public interface MemberService {
     void update(MemberVO memberVO);
 //    당일 예약 환자 기본 정보
     MemberVO insertChartMem(MemberVO memberVO);
+//    환자 검색기능
+    List<MemberVO> searchMem(SearchVO searchVO);
 }

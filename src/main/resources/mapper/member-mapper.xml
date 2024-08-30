@@ -86,6 +86,13 @@
         )
     </insert>
 
+    <!--환자 검색-->
+    <select id="searchMem" resultMap="member">
+        SELECT * FROM HOS_MEMBER
+        <if test='searchValue != null and !searchValue.equals("")'>
+            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+    </select>
 
 </mapper>
 

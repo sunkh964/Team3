@@ -13,15 +13,23 @@
   background-color: #bedce6;
   margin-bottom: 5px;
 }
-.conTop, .conMid ,.conBot{
+.con{
   cursor: pointer;
-  width: 80%;
   padding: 5px 10px;
   display: flex;
-  justify-content: space-between;
 }
-.hisContent button{
-  margin: 10px;
-  position: relative;
-  right: -90%;
+.con>div:first-child{
+  width: 50%;
+}
+
+.hisContent:hover{
+  background-color: #b5d1da;
+}
+.con span{
+  display: inline-block;
+  width: 80px;
+}
+.conTop span{
+  display: inline-block;
+  width: 110px;
 }

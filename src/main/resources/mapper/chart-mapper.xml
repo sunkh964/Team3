@@ -91,7 +91,6 @@
         CHART_NUM = #{chartNum}
     </update>
 
-
     <!-- 차트 정보 업데이트 -->
     <update id="updateHistory">
         UPDATE HOS_HISTORY

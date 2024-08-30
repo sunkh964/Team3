@@ -34,3 +34,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.reviseChart button{
+  margin: 40px auto;
+  display: block;
+  padding: 5px 20px;
+  font-size: 18px;
+}
