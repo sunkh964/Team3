@@ -69,7 +69,7 @@
         WHERE MEM-NUM=#{memNum}
     </update>
 
-    <!--당일 예약 환자 기본 정보-->
+    <!--당일 예약 환자 기본 정보 차트 추가-->
     <insert id="insertChartMem" useGeneratedKeys="true" keyProperty="memNum">
         INSERT INTO HOS_MEMBER (
         MEM_NAME,

@@ -103,6 +103,20 @@
         CHART_NUM = #{chartNum}
     </update>
 
+    <!-- 차트 등록 -->
+    <insert id="insertChart" useGeneratedKeys="true" keyProperty="chartNum">
+        INSERT INTO HOS_CHART(MEM_NUM, IS_NOW)
+        VALUES(#{memNum}, #{isNow});
+    </insert>
+
+    <!-- 병명 차트에 등록 -->
+    <insert id="insertHis">
+        INSERT INTO HOS_HISTORY(MEM_NUM, ILL_NAME, ILL_DETAIL, STAFF_NUM, RES_NUM, PART_NUM, CHART_NUM)
+        VALUES(#{memNum}, #{illName}, #{illDetail}, #{staffNum}, #{resNum}, #{partNum}, #{chartNum});
+    </insert>
+
+
+
 
 
 

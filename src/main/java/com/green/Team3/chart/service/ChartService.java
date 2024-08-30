@@ -22,5 +22,7 @@ public interface ChartService {
     void updateChart(ChartVO chartVO);
     // 병력 업데이트
     void updateHistory(HistoryVO historyVO);
+    /*차트 등록하기*/
+    void insertChart(ChartVO chartVO);
 
 }

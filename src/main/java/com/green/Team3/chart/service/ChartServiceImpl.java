@@ -57,4 +57,10 @@ public class ChartServiceImpl implements ChartService {
         sqlSession.update("chartMapper.updateHistory", historyVO);
     }
 
+    /*차트 등록하기*/
+    @Override
+    public void insertChart(ChartVO chartVO) {
+        sqlSession.insert("chartMapper.insertChart", chartVO);
+    }
+
 }
