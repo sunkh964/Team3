@@ -56,6 +56,7 @@ public class StaffServiceImpl implements StaffService {
         return sqlSession.selectOne("staffMapper.getStaffDetail", staffNum);
     }
 
+
     // 직원정보 수정
     @Override
     public void updateStaffInfo(StaffVO staffVO) {
@@ -75,4 +76,10 @@ public class StaffServiceImpl implements StaffService {
     public List<StaffVO> selectStaffName(int partNum) {
         return sqlSession.selectList("staffMapper.selectStaffName", partNum);
     }
+
+    @Override
+    public StaffVO login(StaffVO staffVO) {
+        return sqlSession.selectOne("staffMapper.loginStaff", staffVO);
+    }
+
 }

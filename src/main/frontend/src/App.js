@@ -15,21 +15,17 @@ import History from './pages/admin/History';
 import Mypage from './pages/user/Mypage';
 import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import StaffDetail from './pages/admin/StaffDetail';
-=======
 import Histoy from './pages/user/Histoy';
 import Qupldate from './pages/user/Qupldate';
->>>>>>> nohk
-=======
+
 import StaffDetail from './pages/admin/DoctorManage/StaffDetail';
 import AddChart from './pages/admin/AddChart';
 import DoctorHome from './pages/admin/DoctorManage/DoctorHome';
 import StaffChange from './pages/admin/DoctorManage/StaffChange';
 import ReviseChart from './pages/admin/ReviseChart';
 import Reservation from './pages/user/Reserv/Reservation';
->>>>>>> acc2c59c34d2b09cf17e9053ab2cf9d1a36a2928
+import Qdetail from './pages/user/Qdetail';
+
 
 function App() {
 
@@ -68,8 +64,10 @@ function App() {
             </ul>
             :
             <div className='login-info'>
-              {loginInfo.memName}님 반갑습니다.
-              <span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>마이페이지</span>
+              {loginInfo.memName}{loginInfo.staffName}님 반갑습니다.
+              <span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>
+                마이페이지
+                </span>
               <span onClick={() => {
                 //세션에 저장된 로그인 정보 삭제
                 window.sessionStorage.removeItem('loginInfo');
@@ -94,15 +92,18 @@ function App() {
               <Route path='/join' element={<Join/>}/>
               {/* 로그인 화면 */}
               <Route path='/login' element={<Login 
-              setLoginInfo={setLoginInfo} />}/>
+              setLoginInfo={setLoginInfo} loginInfo={loginInfo}/>}/>
 
               {/* 마이페이지 */}
               <Route path='/mypage' element={<Mypage  loginInfo={loginInfo}/>}>
                 {/* 마이페이지-개인정보수정 */}
                 <Route path='infoupdate/:memId' element={<Infoupdate />} />
                 {/* 마이페이지-1:1문의 */}
-                <Route path='qna' element={<Qna/>}/>
-                <Route path='qupdate' element={<Qupldate loginInfo={loginInfo}/>}/>
+                <Route path='qna/:memNum' element={<Qna/>}/>
+                {/* 마이페이지-문의하기상세보기 */}
+                <Route path='qdetail/:qNum' element={<Qdetail loginInfo={loginInfo}/>}/>
+                {/* 문의하기 등록, 작성 */}
+                <Route path='qupdate/:memNum' element={<Qupldate loginInfo={loginInfo}/>}/>
                 {/* 마이페이지- 진료이력보기*/}
                 <Route path='history' element={<History/>}/>
               </Route>

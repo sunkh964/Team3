@@ -18,4 +18,22 @@ public class QController {
     public List<QVO> qnaList(@PathVariable("memNum") int memNum){
         return qService.qnaList(memNum);
     }
+
+//    문의하기 글 등록
+    @PostMapping("/qupdate")
+    public void insertQ(@RequestBody QVO qvo){
+        qService.insertQ(qvo);
+    }
+
+//    질문 상세보기
+    @GetMapping("/qdetail/{qNum}")
+    public QVO qdetail(@PathVariable("qNum")int qNum){
+        return qService.qdetail(qNum);
+    }
+
+//    답변 목록 보기
+    @GetMapping("/reply/{qNum}")
+    public QVO reply(@PathVariable("qNum")int qNum){
+        return qService.reply(qNum);
+    }
 }

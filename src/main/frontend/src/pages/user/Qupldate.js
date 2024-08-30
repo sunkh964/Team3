@@ -5,19 +5,18 @@ import { useNavigate } from 'react-router-dom'
 const Qupldate = () => {
   const navigate=useNavigate();
 
-    //세션에 있는 로그인 정보를 받아 옴
-    const sessionLoginInfo =  window.sessionStorage.getItem('loginInfo');
-    const loginInfo = JSON.parse(sessionLoginInfo);
+  //세션에 있는 로그인 정보를 받아 옴
+  const sessionLoginInfo =  window.sessionStorage.getItem('loginInfo');
+  const loginInfo = JSON.parse(sessionLoginInfo);
 
-const [qInfo, setQInfo]=useState({
-  memId:loginInfo.memId,
-  qNum:'',
-  qTitle:'',
-  qContent:''
-});
+  const [qInfo, setQInfo]=useState({
+    memNum:loginInfo.memNum,
+    qTitle:'',
+    qContent:''
+  });
 
 function update(){
-  axios.post('/mypage/qupdate', qInfo)
+  axios.post('/q/qupdate', qInfo)
   .then((res)=>{
     alert('문의가 성공적으로 되었습니다.');
     setQInfo(res.data);

@@ -1,43 +1,104 @@
-.join-div{
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  height: 960px;
+  margin: 20px auto;
+  background: #ffffff;
+  border: 1px solid #aacdff;
+  box-shadow: 7px 7px 8px rgba(0, 104, 255, 0.25);
+  border-radius: 20px;
+}
+
+.member-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 470px;
+  height: 818px;
+  margin-top: 72px;
+  margin-bottom: 70px;
+}
+
+.header {
+  width: 466px;
+  height: 94px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 47px;
+  color: #2d68c2;
+}
+
+.user-info {
+  margin-top: 39px;
+}
+
+.user-info div {
+  margin-top: 21px;
+}
+
+.user-info input {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #797979;
+  border: none;
+  border-bottom: 1px solid #cfcfcf;
+  width: 466px;
+  margin-top: 21px;
+}
+
+.user-info-email input {
+  border-bottom: 1px solid #0068ff;
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 140px;
+  height: 23.94px;
+  margin-top: 50px;
+}
+
+.gender input {
+  width: 20px;
+  height: 19.95px;
+  background: #ebebeb;
+  border: 1px solid #d2d2d2;
+}
+
+.gender label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.agree-check {
+  width: 454px;
+  height: 21.06px;
+  margin-top: 52.05px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+}
+
+.member-container>.btn-join {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 60px;
+  border-top: 1px solid #e6e6e6;
+  margin-top: 5px;
+  width: 300px;
+  height: 60px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 10px;
   text-align: center;
-  border: 1px solid black;
-}
-
-.join-di{
-  text-align: center;
-  margin: 40px auto;
-  width: 80%;
-  border: 1px solid rgb(172, 172, 187);
-  border-radius: 50px;
-  box-shadow: 1px 1px 3px rgb(103, 103, 148);
-  font-size: 1.3rem;
-}
-
-.join-table{
-  width: 60%;
-  height: 100%;
-  margin: 30px auto;
-}
-
-.join-table td{
-  padding: 8px;
-}
-
-.button-td{
-
-}
-
-.join-input>input{
-  padding: 10px;
-  margin-left: 20px;
-}
-
-.button-bb{
-background-color: rgb(127, 127, 214);
-margin-left: -50%;
-}
-.button-div{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: rgb(127, 127, 214);
+  border-radius: 10px;
 }

@@ -77,6 +77,12 @@ public class StaffController {
     /*담당의 조회*/
     @GetMapping("selectStaffName/{selectedPart}")
     public List<StaffVO> selectStaffName(@PathVariable("selectedPart") int partNum){
-        return staffService.selectStaffName(partNum);
+        return staffService.selectStaffName(partNum);}
+
+//    직원 로그인
+    @PostMapping("/loginStaff")
+    public StaffVO login(@RequestBody StaffVO staffvo){
+        return staffService.login(staffvo);
+
     }
 }

@@ -74,51 +74,51 @@ function checkId(){
 
 
   return (
-    <div className='join-div'>
-      <div className='join-di'>
-        <table className='join-table'>
-          <thead className='join-thead'>
-            <tr>
-              <td>이름</td>
-              <td><input type='text' name='memName' onChange={(e)=>{changeJoinData(e)}}></input></td>
-            </tr>
-            <tr>
-              <td>생년월일</td>
-              <td><input type='text' name='memBirth' onChange={(e)=>{changeJoinData(e)}}/></td>
-            </tr>
-            <tr>
-              <td>아이디</td>
-              <td><input type='text' name='memId' className='button-td' onChange={(e)=>{changeJoinData(e)}}></input>
-              </td>
-              <td><button type='button'  className='button-bb' onClick={(e)=>{checkId()}}>중복 확인</button></td>
-            </tr>
-            <tr>
-              <td>비밀번호</td>
-              <td><input type='password' name='memPw' onChange={(e)=>{changeJoinData(e)}}></input>
-              </td>
-            </tr>
-            <tr>
-              <td>비밀번호 확인</td>
-              <td><input type='password'></input></td>
-            </tr>
-            <tr>
-              <td>전화번호</td>
-              <td><input type='text' name='memTel' onChange={(e)=>{changeJoinData(e)}}/></td>
-            </tr>
-            <tr>
-              <td>주소</td>
-              <td><input type='text' name='memAddr' onChange={(e)=>{changeJoinData(e)}}/></td>
-            </tr>
-            <tr>
-              <td>성별</td>
-              <td className='join-input'><input type='radio' name='memGen' checked={joinData.memGen=='male'} value="male" onChange={(e)=>{changeJoinData(e)}}/>남
-              <input type='radio' name='memGen' checked={joinData.memGen=='female'} value="female" onChange={(e)=>{changeJoinData(e)}}/>여</td>
-            </tr>
-          </thead>
-        </table>
+    <div class="container">
+    <div class="member-container">
+      <div class="header">
+        <div>회원 가입을 위해</div>
+        <div>정보를 입력해주세요</div>
       </div>
-      <button type='button' className='button-div' disabled={isDisabled} onClick={(e)=>{join()}}>회원가입</button>
+      <div class="user-info">
+        <div class="user-info-email">
+          <div>* 이름</div>
+          <input type='text' name='memName' onChange={(e)=>{changeJoinData(e)}} />
+        </div>
+        <div class="user-info-email">
+          <div>* 생년월일</div>
+          <input type='text' name='memBirth' onChange={(e)=>{changeJoinData(e)}} />
+        </div>
+        <div class="user-info-email">
+          <div>* 아이디</div>
+          <input type='text' name='memId' className='button-td' onChange={(e)=>{changeJoinData(e)}} />
+        </div>
+        <div class="user-info-email">
+          <div>* 비밀번호</div>
+          <input type='password' name='memPw' onChange={(e)=>{changeJoinData(e)}}/>
+        </div>
+        <div class="user-info-email">
+          <div>* 비밀번호 확인</div>
+          <input type="password" />
+        </div>
+        <div class="user-info-email">
+          <div>* 전화번호</div>
+          <input type='text' name='memTel' onChange={(e)=>{changeJoinData(e)}}/>
+        </div>
+        <div class="user-info-email">
+          <div>* 주소</div>
+          <input name='memAddr' onChange={(e)=>{changeJoinData(e)}} />
+        </div>
+      </div>
+      <div class="gender">
+        <input type='radio' name='memGen' checked={joinData.memGen=='male'} value="male" onChange={(e)=>{changeJoinData(e)}}/>남
+        <input type='radio' name='memGen' checked={joinData.memGen=='female'} value="female" onChange={(e)=>{changeJoinData(e)}}/>여
+      </div>
+      <div class="btn-join">
+        <button type='button' class="btn-join" disabled={isDisabled} onClick={(e)=>{join()}}>가입하기</button>
+      </div>
     </div>
+  </div>
   )
 }
 
