@@ -13,6 +13,6 @@ public class QVO {
     private String qTitle;
     private String qContent;
     private String qDate;
-    private AVO a;
+//    private AVO a;
     private MemberVO member;
 }

@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Qnaupdate.css';
 
 const Qupldate = () => {
   const navigate=useNavigate();
+
 
   //세션에 있는 로그인 정보를 받아 옴
   const sessionLoginInfo =  window.sessionStorage.getItem('loginInfo');
@@ -36,23 +37,7 @@ function chengeQ(e){
   });
 }
 
-  return (
-    // <div className='sample5'>
-    //   <table>
-    //     <thead className='blockquote'>
-    //       <tr>
-    //         <td>제목</td>
-    //         <td><input type='text' name='qtitle' onChange={(e)=>{chengeQ(e)}}/></td>
-    //       </tr>
-    //       <tr>
-    //         <td>문의 내용</td>
-    //         <td><textarea type='textarea' name='qcontent' onChange={(e)=>{chengeQ(e)}}/></td>
-    //       </tr>
-    //     </thead>
-    //   </table>
-    //     <button className='cite' onClick={(e)=>{update()}}>글 등록</button>
-    // </div>
-  
+  return (  
   <div class="container2">
     <div class="member-container">
       <div class="header1">

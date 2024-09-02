@@ -1,5 +1,6 @@
 package com.green.Team3.q.controller;
 
+import com.green.Team3.a.vo.AVO;
 import com.green.Team3.q.service.QService;
 import com.green.Team3.q.vo.QVO;
 import jakarta.annotation.Resource;
@@ -33,7 +34,7 @@ public class QController {
 
 //    답변 목록 보기
     @GetMapping("/reply/{qNum}")
-    public QVO reply(@PathVariable("qNum")int qNum){
+    public AVO reply(@PathVariable("qNum")int qNum){
         return qService.reply(qNum);
     }
 }

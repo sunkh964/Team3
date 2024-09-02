@@ -1,5 +1,6 @@
 package com.green.Team3.q.service;
 
+import com.green.Team3.a.vo.AVO;
 import com.green.Team3.q.vo.QVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class QServiceImpl implements QService{
     }
 
     @Override
-    public QVO reply(int qNum) {
+    public AVO reply(int qNum) {
         return sqlSession.selectOne("qnaMapper.reply", qNum);
     }
 }
