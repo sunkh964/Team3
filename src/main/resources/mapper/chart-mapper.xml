@@ -5,6 +5,7 @@
     <resultMap id="chart" type="com.green.Team3.chart.vo.ChartVO">
         <id column="CHART_NUM" property="chartNum"/>
         <result column="IS_NOW" property="isNow"/>
+        <result column="MEM_NUM" property="memNum"/>
         <collection property="resMemList" resultMap="resMapper.res"/>
     </resultMap>
 
@@ -114,6 +115,12 @@
         INSERT INTO HOS_HISTORY(MEM_NUM, ILL_NAME, ILL_DETAIL, STAFF_NUM, RES_NUM, PART_NUM, CHART_NUM)
         VALUES(#{memNum}, #{illName}, #{illDetail}, #{staffNum}, #{resNum}, #{partNum}, #{chartNum});
     </insert>
+
+    <!--차트 번호 가져오기-->
+    <select id="selectChartNum" resultMap="chart">
+        SELECT CHART_NUM FROM HOS_CHART
+        WHERE MEM_NUM=#{memNum};
+    </select>
 
 
 
