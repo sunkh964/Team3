@@ -104,7 +104,7 @@
     </update>
 
     <!-- 차트 등록 -->
-    <insert id="insertChart" useGeneratedKeys="true" keyProperty="chartNum">
+    <insert id="insertChart">
         INSERT INTO HOS_CHART(MEM_NUM, IS_NOW)
         VALUES(#{memNum}, #{isNow});
     </insert>
