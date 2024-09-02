@@ -14,4 +14,9 @@ public class ResServiceImpl implements ResService {
     public void insertChartRes(ResVO resVO) {
         sqlSession.insert("resMapper.insertChartRes", resVO);
     }
+
+    @Override
+    public ResVO selectResNum(int memNum) {
+        return sqlSession.selectOne("resMapper.selectResNum", memNum);
+    }
 }

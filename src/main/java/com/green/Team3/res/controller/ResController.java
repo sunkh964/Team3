@@ -6,10 +6,7 @@ import com.green.Team3.res.service.ResService;
 import com.green.Team3.res.vo.ResVO;
 import com.green.Team3.staff.vo.StaffVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class ResController {
     @PostMapping("/insertChartRes")
     public void insertChartRes(@RequestBody ResVO resVO){
         resService.insertChartRes(resVO);
+    }
+
+    @GetMapping("/selectResNum/{memNum}")
+    public ResVO selectResNum(@PathVariable("memNum") int memNum){
+        return resService.selectResNum(memNum);
     }
 
 
