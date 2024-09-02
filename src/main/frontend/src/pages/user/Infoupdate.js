@@ -108,7 +108,7 @@ const Infoupdate = () => {
         </div>
       </div>
       <div>
-        <button type='button' class="btn-info" onClick={(e)=>{updateInfo()}}>변경하기</button>
+        <button type='button' class="custom-btn btn-6" onClick={(e)=>{updateInfo()}}><span>변경하기</span></button>
       </div>
     </div>
   </div>

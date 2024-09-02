@@ -12,7 +12,7 @@ const Login = ({setLoginInfo, loginInfo}) => {
   // 입력한 id, pw를 저장하는 변수
   const [loginData, setLoginData]=useState({
     memId: '',
-    memPw:''
+    memPw:'',
   });
 
     // 스태프가  입력한 id, pw를 저장하는 변수
@@ -96,7 +96,8 @@ function login2(){
         staffId:res.data.staffId,
         staffPw:res.data.staffPw,
         staffRole:res.data.staffRole,
-        staffName:res.data.staffName
+        staffName:res.data.staffName,
+        staffNum:res.data.staffNum
       };
       alert('로그인 성공')
       //로그인 정보를 가진 객체를 문자열 형태로 변환
@@ -106,14 +107,7 @@ function login2(){
       window.sessionStorage.setItem('loginInfo', json_loginInfo);
       //로그인 정보를 저장
       setLoginInfo(loginInfo);
-      if(isLogin){ //로그인 성공 시 확인 버튼 내용
-        if(loginInfo.staffRole == 'STAFF'){
-          navigate('/admin')
-        }
-        else if(loginInfo.staffRole == 'ADMIN'){
-          navigate('/admin')
-        }
-      }
+      navigate('/admin')
     }
   })
   .catch((error)=>{

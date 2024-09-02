@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './Qnaupdate.css';
 
 const Qupldate = () => {
   const navigate=useNavigate();
@@ -36,21 +37,45 @@ function chengeQ(e){
 }
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <td>제목</td>
-            <td><input type='text' name='qtitle' onChange={(e)=>{chengeQ(e)}}/></td>
-          </tr>
-          <tr>
-            <td>문의 내용</td>
-            <td><textarea type='textarea' name='qcontent' onChange={(e)=>{chengeQ(e)}}/></td>
-          </tr>
-        </thead>
-      </table>
-        <button onClick={(e)=>{update()}}>글 등록</button>
+    // <div className='sample5'>
+    //   <table>
+    //     <thead className='blockquote'>
+    //       <tr>
+    //         <td>제목</td>
+    //         <td><input type='text' name='qtitle' onChange={(e)=>{chengeQ(e)}}/></td>
+    //       </tr>
+    //       <tr>
+    //         <td>문의 내용</td>
+    //         <td><textarea type='textarea' name='qcontent' onChange={(e)=>{chengeQ(e)}}/></td>
+    //       </tr>
+    //     </thead>
+    //   </table>
+    //     <button className='cite' onClick={(e)=>{update()}}>글 등록</button>
+    // </div>
+  
+  <div class="container2">
+    <div class="member-container">
+      <div class="header1">
+        <div>제목</div>
+      </div>
+      <div class="user-info">
+        <div class="user-info-email">
+          <div><input type='text' name='qtitle' onChange={(e)=>{chengeQ(e)}}/></div>
+        </div>
+        <div>
+          <div className='qna-div'>문의 내용</div>
+        </div>
+        <div class="user-info-name">
+          <div><textarea type='textarea' name='qcontent' onChange={(e)=>{chengeQ(e)}}/></div>
+          
+        </div>
+      </div>
+      <div>
+        <button type='button' class="custom-btn btn-6" onClick={(e)=>{update()}}><span>글 등록</span></button>
+      </div>
     </div>
+  </div>
+
   )
 }
 

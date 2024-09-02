@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import './Qna.css';
 
 const Qna = () => {
   const navigate=useNavigate();
@@ -32,32 +33,35 @@ const Qna = () => {
   }, []);
 
   return (
-    <div>
-      <div>1:1 문의하기</div>
-      <table>
-        <thead>
-          <tr>
-            <td>No</td>
-            <td>제목</td>
-            <td>작성 날짜</td>
-          </tr>
-        </thead>
-        <tbody>
-        {
-          qnaList.map((q, i)=>{
-            return(
-              <tr key={i}>
-                <td>{i+1}</td>
-                <td onClick={(e)=>{navigate(`/mypage/qdetail/${q.qnum}`)}}>{q.qtitle}</td>
-                <td>{q.qdate}</td>
-              </tr>
-            );
-          })
-        }
-        </tbody>
-      </table>
-      <button type='button' onClick={(e)=>{navigate(`/mypage/qupdate/${qnaList.memNum}`)}}>문의작성</button>
+    <div className='Qdiv'>
+      <div className='q-text'>1:1 문의하기</div>
+      <div className='Q1'>
+        <table>
+          <thead >
+            <tr className='Q2'>
+              <td>No</td>
+              <td>제목</td>
+              <td>작성 날짜</td>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            qnaList.map((q, i)=>{
+              return(
+                <tr key={i} className='Q' onClick={(e)=>{navigate(`/mypage/qdetail/${q.qnum}`)}}>
+                  <td>{i+1}</td>
+                  <td>{q.qtitle}</td>
+                  <td>{q.qdate}</td>
+                </tr>
+              );
+            })
+          }
+          </tbody>
+        </table>
       </div>
+      <div><button type='button' className='btn-6' onClick={(e)=>{navigate(`/mypage/qupdate/${qnaList.memNum}`)}}><span>문의작성</span></button></div>
+      </div>
+
   )
 }
 

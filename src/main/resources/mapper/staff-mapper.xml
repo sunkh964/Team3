@@ -25,7 +25,7 @@
 
     <!--    로그인 -->
     <select id="loginStaff" resultMap="staff">
-        SELECT STAFF_ID, STAFF_PW, STAFF_ROLE, STAFF_NAME
+        SELECT STAFF_ID, STAFF_PW, STAFF_ROLE, STAFF_NAME, STAFF_NUM
         FROM HOS_STAFF
         WHERE STAFF_ID=#{staffId}
         AND STAFF_PW=#{staffPw}
