@@ -3,6 +3,8 @@ import './StaffManage.css'
 import './calendar.css'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import listPlugin from '@fullcalendar/list'
 import interactionPlugin from "@fullcalendar/interaction"
 import styled from 'styled-components'
 import axios from 'axios'
@@ -46,7 +48,7 @@ const StaffManage = () => {
     start: '',
     end: '',
     description: '',
-    staffNum: 1, 
+    staffNum: loginInfo.staffNum, 
     allDay : 'Y',
     color : colorBoxes[0]
   });
@@ -66,8 +68,8 @@ const StaffManage = () => {
   // ============================불러오기용============================
   // 리스트 불러오기
   useEffect(() => {
-    // axios.get(`/schedule/getOneList/${loginInfo.staffNum}`)
-    axios.get('/schedule/getAllList')
+    // axios.get('/schedule/getAllList')
+    axios.get(`/schedule/getOneList/${loginInfo.staffNum}`)
     .then((res) => {
       console.log(res.data);
       setAllList(res.data);
@@ -83,8 +85,6 @@ const StaffManage = () => {
       ...newEvent,
       start : new Date(e.dateStr + 'T09:00:00'),
       end : new Date(e.dateStr + 'T10:00:00')
-      // start : moment(e.dateStr).format('yyyy-MM-dd'),
-      // end : moment(e.dateStr).format('yyyy-MM-dd')
     });
     console.log(newEvent.start);
     console.log(newEvent.end);
@@ -333,14 +333,21 @@ const StaffManage = () => {
     <div className='calendar-div'>
       <FullCalendarContainer>
         <FullCalendar className='calendar'
-          plugins={[dayGridPlugin, interactionPlugin]}
+          plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
           dateClick={handleDateClick}
           eventClick={eventClick}
           headerToolbar = {{
             left: 'today,prev,next',
             center: 'title',
-            right: 'dayGridMonth,dayGridWeek,dayGridDay'}} 
+            right: 'dayGridMonth,timeGridWeek,listWeek'}} 
           events={allList}
+          locale={"ko"}
+          dayCellContent={function (info) {
+            var number = document.createElement("a");
+            number.classList.add("fc-daygrid-day-number");
+            number.innerHTML = info.dayNumberText.replace("일", '').replace("日","");
+            if (info.view.type === "dayGridMonth") {return {html: number.outerHTML};}
+            return {domNodes: []};}}
           eventDataTransform={function(event) {
             if(true) {
               event.end = moment(event.end).add(1, 'days').format("YYYY-MM-DD")
