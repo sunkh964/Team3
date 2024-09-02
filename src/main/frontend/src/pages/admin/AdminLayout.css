@@ -6,15 +6,60 @@
 }
 
 .side-menu{
-  border: 1px dotted;
+  border: 1px dotted blue;
+  margin-top: 20px;
+  padding-right: 20px;
   width: 20%;
   display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: end;
 }
 
-.side-menu li{
-  list-style: none;
+.menu-title{
+  width: 180px;
+  color: #0b5f79;
   display: flex;
+  flex-direction: column;
 }
+
+.menu-title > div{
+  width: 100%;
+  padding: 7px 10px;
+  color: #0b5f79;
+  border: 2px solid #0b5f79;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.menu-title > span{
+  color: black;
+  font-size: 1.4rem;
+}
+
+.menu-title .dropdown-menu{
+  background-color: white;
+  border: none;
+  color: gray;
+}
+
+.menu-title .dropdown-menu ul{
+  border: 1px solid #dddddd;
+}
+
+.menu-title .dropdown-menu li{
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 10px 10px 0px 10px;
+  cursor: pointer;
+  
+}
+
 
 .main-menu {
   width: 80%;
