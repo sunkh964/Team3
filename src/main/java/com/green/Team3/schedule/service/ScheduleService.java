@@ -9,7 +9,7 @@ public interface ScheduleService {
 //    직원 전체의 일정 목록 조회
     List<ScheduleVO> getAllList();
 //    로그인한 직원의 일정 목록 조회
-    List<ScheduleVO> getOneList(int memNum);
+    List<ScheduleVO> getOneList(int staffNum);
 //    새 이벤트 등록하기
     void addEvent(ScheduleVO scheduleVO);
 //    일정 상세 조회

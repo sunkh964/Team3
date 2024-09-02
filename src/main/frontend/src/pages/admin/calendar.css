@@ -62,6 +62,10 @@
    .fc .fc-daygrid-day-frame {
       padding: 10px;
    }
+   .fc .fc-daygrid-day-frame:hover {
+
+      background-color: #f0f0f0;
+   }
 
    /*  날짜  ex) 2일 */
    .fc .fc-daygrid-day-top {

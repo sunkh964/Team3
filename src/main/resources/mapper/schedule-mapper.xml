@@ -121,11 +121,17 @@
     <!-- 일정 수정 -->
     <update id="modifyEvent">
         UPDATE hos_schedule SET
-        SCH_SDATE = #{start}
-        , SCH_EDATE = #{end}
-        , SCH_TITLE = #{title}
-        , SCH_CONTENT = #{description}
-        , COLOR = #{color}
+            SCH_TITLE = #{title}
+            , SCH_CONTENT = #{description}
+            , COLOR = #{color}
+            , SCH_SDATE = #{start}
+            , SCH_EDATE = #{end}
+            <if test='allDay = true'>
+                , ALL_DAY = 'Y'
+            </if>
+            <if test='allDay = false'>
+                , ALL_DAY = 'N'
+            </if>
         WHERE SCH_NUM = #{schNum};
     </update>
 
