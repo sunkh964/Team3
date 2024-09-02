@@ -21,8 +21,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 //    로그인한 직원의 일정 목록 조회
     @Override
-    public List<ScheduleVO> getOneList(int memNum) {
-        return sqlSession.selectList("scheduleMapper.getOneList", memNum);
+    public List<ScheduleVO> getOneList(int staffNum) {
+        return sqlSession.selectList("scheduleMapper.getOneList", staffNum);
     }
 
 //    새 이벤트 등록하기

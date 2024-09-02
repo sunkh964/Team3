@@ -24,7 +24,7 @@ justify-content: center;
 }
 `;
 
-const StaffManage = ({loginInfo}) => {
+const StaffManage = () => {
   // 내비게이션 함수 선언
   const navigate = useNavigate();
 
@@ -32,9 +32,14 @@ const StaffManage = ({loginInfo}) => {
   // 일정 리스트 저장할 곳 선언
   const [allList, setAllList] = useState([]);
 
+  //세션에 있는 로그인 정보를 받아 옴
+  const sessionLoginInfo =  window.sessionStorage.getItem('loginInfo');
+  const loginInfo = JSON.parse(sessionLoginInfo);
+
   // ============================등록하기용============================
   // 이벤트 컬러칩 저장
   const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf', '#858585']
+
   // 새 이벤트 저장할 곳 선언
   const [newEvent, setNewEvent] = useState({
     title: '',
@@ -57,13 +62,12 @@ const StaffManage = ({loginInfo}) => {
   // 이벤트 상세 모달창 표시 여부
   const [eventDetailModal, setEventDetailModal] = useState(false);
   const [modifyActive, setModifyActive] = useState(false);
-  
 
   // ============================불러오기용============================
   // 리스트 불러오기
   useEffect(() => {
+    // axios.get(`/schedule/getOneList/${loginInfo.staffNum}`)
     axios.get('/schedule/getAllList')
-    // axios.get('/schedule/getOneList/1')
     .then((res) => {
       console.log(res.data);
       setAllList(res.data);
@@ -203,6 +207,7 @@ const StaffManage = ({loginInfo}) => {
           colorNum = i+1
         }
       })
+      console.log(colorNum)
       return colorNum
     }
 
@@ -220,7 +225,7 @@ const StaffManage = ({loginInfo}) => {
                       <input
                         type='radio' name='color' className={`color c${i+1} modify-form`} value={colorName}
                         onClick={(e) => {changeEvent(e)}}
-                        defaultChecked={ (i == 0) ? true : false}
+                        defaultChecked={ i+1 == getColor() ? true : false}
                       />
                     )
                   })
@@ -231,9 +236,9 @@ const StaffManage = ({loginInfo}) => {
               <td>날짜</td>
               <td>
                 <span className='view'>{eventDetail.start}</span>
-                {/* <input className='modify-form' name='start' defaultValue={eventDetail.start} onChange={() => {}} /> */}
                 {
-                  modifyActive ? <DateSelect name='start' className='modify-form'
+                  modifyActive ?
+                  <DateSelect className='modify-form'
                   setNewEvent={setNewEvent} newEvent={newEvent} targetName={'start'}
                   clickDate={eventDetail.start} /> 
                 : false
@@ -244,9 +249,10 @@ const StaffManage = ({loginInfo}) => {
                 <span className='view'>{eventDetail.end}</span>
                 {
                   modifyActive ?
-                  <DateSelect name='end' className='modify-form'
+                  <DateSelect className='modify-form'
                   setNewEvent={setNewEvent} newEvent={newEvent} targetName={'end'}
-                  clickDate={eventDetail.end} /> 
+                  clickDate={eventDetail.end}
+                  /> 
                   : false
                 }
               </td>
@@ -255,14 +261,14 @@ const StaffManage = ({loginInfo}) => {
               <td>제목</td>
               <td colSpan={3}>
                 <span className='view'>{eventDetail.title}</span>
-                <input className='modify-form' name='title' defaultValue={eventDetail.title} onChange={() =>{}} />
+                <input className='modify-form' name='title' defaultValue={eventDetail.title} onChange={(e) =>{changeEvent(e)}} />
               </td>
             </tr>
             <tr>
               <td>내용</td>
               <td colSpan={3}>
                 <span className='view'>{eventDetail.description}</span>
-                <input className='modify-form' name='description' defaultValue={eventDetail.description} onChange={() => {}} />
+                <input className='modify-form' name='description' defaultValue={eventDetail.description} onChange={(e) => {changeEvent(e)}} />
               </td>
             </tr>
           </tbody>
@@ -337,8 +343,6 @@ const StaffManage = ({loginInfo}) => {
           events={allList}
           eventDataTransform={function(event) {
             if(true) {
-              //console.log('if!!')
-              //console.log(event)
               event.end = moment(event.end).add(1, 'days').format("YYYY-MM-DD")
             }
             return event;

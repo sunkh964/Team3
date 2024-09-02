@@ -1,19 +1,11 @@
-import { tr } from 'date-fns/locale';
-import moment from 'moment';
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
-   
-   // 클릭 날짜 저장할 곳 선언
-   //const [changeDate, setChangeDate] = useState(clickDate);
-
    function getFormattedDate(date){
       let result = '';
       if (newEvent.allDay == 'Y') {
          result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} 00:00:00`;
-         // ${targetName == 'start' ? '00:00:00' : '00:00:00'}
       } else {
          result = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:00`;  
       }
@@ -38,13 +30,14 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
                popperPlacement="top-end"
                showTimeSelect={false}
                dateFormat="yyyy-MM-dd"
+               minDate={targetName == 'end' ? newEvent.start : null}
+               
             />
             :
             <DatePicker
                showIcon
                selected={clickDate}
                onChange={(date) => {
-                  console.log('!!!' + date)
                   setNewEvent({
                      ...newEvent,
                      allDay : 'N',
@@ -57,6 +50,7 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
                timeIntervals={15}
                dateFormat="yyyy-MM-dd HH:mm"
                timeCaption="time"
+               minDate={targetName == 'end' ? newEvent.start : null}
             />
          }
       </>

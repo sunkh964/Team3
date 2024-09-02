@@ -20,9 +20,9 @@ public class ScheduleController {
     }
 
 //    로그인한 직원의 일정 목록 조회
-    @GetMapping("/getOneList/{memNum}")
-    public List<ScheduleVO> getOneList(@PathVariable(name = "memNum")int memNum) {
-        return scheduleService.getOneList(memNum);
+    @GetMapping("/getOneList/{staffNum}")
+    public List<ScheduleVO> getOneList(@PathVariable(name = "staffNum")int staffNum) {
+        return scheduleService.getOneList(staffNum);
     }
 
 //    새 이벤트 등록하기

@@ -118,7 +118,7 @@ function App() {
               {/* 관리자용 - 첫 화면 */}
               <Route path='' element={<AdminHome />} />
               {/* 관리자용 - 직원 관리 */}
-              <Route path='staffManage' element={<StaffManage loginInfo={loginInfo}/>} />
+              <Route path='staffManage' element={<StaffManage />} />
 
               {/* 관리자용 - 진료 관리(차트) */}
               <Route path='chart' element={<Chart />} />
