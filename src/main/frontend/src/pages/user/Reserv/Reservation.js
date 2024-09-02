@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Reservation.css'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import DateSelect from '../../../common/DateSelect';
 
 const Reservation = () => {
   const {partNum: initialPartNum} = useParams();
@@ -112,6 +113,7 @@ const Reservation = () => {
             <div>
               <div>
                 <input type='date'/>
+                
               </div>
               <div>
                 <input type='time'/>
