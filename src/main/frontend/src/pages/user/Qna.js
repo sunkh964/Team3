@@ -44,7 +44,7 @@ const Qna = () => {
               <td>작성 날짜</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="tbl-content">
           {
             qnaList.map((q, i)=>{
               return(

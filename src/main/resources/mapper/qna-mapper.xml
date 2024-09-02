@@ -9,7 +9,7 @@
         <result column="MEM_NUM" property="memNum"/>
         <result column="Q_CONTENT" property="qContent"/>
         <result column="Q_DATE" property="qDate"/>
-        <association property="a" resultMap="a"/>
+<!--        <association property="a" resultMap="a"/>-->
         <association property="member" resultMap="memberMapper.member"/>
 
     </resultMap>
@@ -19,8 +19,7 @@
         <result column="A_CONTENT" property="aContent"/>
         <result column="A_DATE" property="aDate"/>
         <result column="Q_NUM" property="qNum"/>
-
-<!--        <association property="q" resultMap="a"/>-->
+        <association property="q" resultMap="q"/>
         <association property="staff" resultMap="staffMapper.staff"/>
     </resultMap>
 
@@ -65,7 +64,7 @@
         , A_DATE
         , Q.Q_NUM
         FROM HOS_A A, HOS_Q Q
-        WHERE Q.Q_NUM=#{qNum}
+        WHERE A.Q_NUM=#{qNum}
         AND Q.Q_NUM = A.Q_NUM;
     </select>
 </mapper>

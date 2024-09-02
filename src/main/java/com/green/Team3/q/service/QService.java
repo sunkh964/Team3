@@ -1,5 +1,6 @@
 package com.green.Team3.q.service;
 
+import com.green.Team3.a.vo.AVO;
 import com.green.Team3.q.vo.QVO;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface QService {
     QVO qdetail(int qNum);
 
 //    답변 조회
-    QVO reply(int qNum);
+    AVO reply(int qNum);
 }

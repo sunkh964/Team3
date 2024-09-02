@@ -13,6 +13,6 @@ public class AVO {
     private String aContent;
     private String aDate;
     private int qNum;
-    //private QVO q; // `QVO` 타입의 `q` 속성 추가
+    private QVO q; // `QVO` 타입의 `q` 속성 추가
     private StaffVO staff;
 }

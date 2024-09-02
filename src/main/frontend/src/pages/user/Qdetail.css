@@ -1,0 +1,21 @@
+.container-qDetail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  height: 500px;
+  margin: 40px auto;
+  background: #ffffff;
+  border: 1px solid #aacdff;
+  box-shadow: 7px 7px 8px rgba(0, 104, 255, 0.25);
+  border-radius: 20px;
+}
+
+.Qdetail-div{
+  border: 1px solid black;
+  margin-top: 40px;
+  padding: 20px;
+  width: 500px;
+  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(99, 137, 184, 0.507) 100%);
+}
+
