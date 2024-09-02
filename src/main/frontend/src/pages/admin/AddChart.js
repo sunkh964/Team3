@@ -63,42 +63,48 @@ const AddChart = () => {
       // 1. 멤버 추가
       const memberResponse = await axios.post('/member/insertChartMem', insertChart);
       const member = memberResponse.data;
-      if (!member || !member.memNum) {
-        throw new Error('Member creation failed');
-      }
+      console.log(member);
   
       // 2. 진료 기록 추가
+      console.log('멤버 번호로 진료 기록 추가:', member.memNum);
       const resResponse = await axios.post('/res/insertChartRes', {
         ...insertChart,
         memNum: member.memNum
       });
       const res = resResponse.data;
+      console.log('진료 기록 응답:', res);
       if (!res || !res.resNum) {
-        throw new Error('Chart record creation failed');
+        throw new Error('진료 기록 생성 실패');
       }
   
       // 3. 차트 추가
+      console.log('진료 번호로 차트 추가:', res.resNum);
       const chartResponse = await axios.post('/chart/insertChart', {
         ...insertChart,
         resNum: res.resNum
       });
       const chart = chartResponse.data;
+      console.log('차트 응답:', chart);
       if (!chart || !chart.chartNum) {
-        throw new Error('Chart creation failed');
+        throw new Error('차트 생성 실패');
       }
+
   
-      // 4. 병병 추가
+      // 4. 병명 추가
+      console.log('차트 번호로 병명 추가:', chart.chartNum);
       const historyResponse = await axios.post('/history/insertHis', {
         ...insertChart,
         resNum: res.resNum,
         chartNum: chart.chartNum
       });
-      console.log('History insert response:', historyResponse.data);
+      console.log('병명 추가 응답:', historyResponse.data);
+
   
       alert('등록되었습니다.');
       navigate('/admin/chart');
     } catch (error) {
-      console.error('Error:', error.response ? error.response.data : error.message);
+      console.error('오류 발생:', error.response ? error.response.data : error.message);
+      alert('오류가 발생했습니다: ' + (error.response ? error.response.data : error.message));
     }
   };
   
