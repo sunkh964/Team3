@@ -25,6 +25,7 @@ import StaffChange from './pages/admin/DoctorManage/StaffChange';
 import ReviseChart from './pages/admin/ReviseChart';
 import Reservation from './pages/user/Reserv/Reservation';
 import Qdetail from './pages/user/Qdetail';
+import Reserv_staff from './pages/admin/UserManage/Reserv_staff';
 
 
 function App() {
@@ -130,6 +131,11 @@ function App() {
               <Route path='addChart' element={<AddChart/>}/>
               {/* 관리자용 - 차트 수정 */}
               <Route path='reviseChart/:memNum/:chartNum' element={<ReviseChart/>}/>
+
+              {/* 관리자용- 환자관리 */}
+              <Route path='userManage' element={<Reserv_staff/>}>
+
+              </Route>
 
               {/* 관리자용 - 병원장 */}
               <Route path='doctorManage' element={<DoctorManage />}>

@@ -21,7 +21,7 @@
   top: 0;
 }
 .staffChange-table thead td{
-  padding: 15px 0px;
+  padding: 10px 0px;
 }
 .staffChange-table td{
   border: 1px solid #dddddd ;
@@ -34,4 +34,8 @@
 
 .staffChange-table tbody tr:nth-child(odd){
   background-color: white;
+}
+
+.staffChange-table tbody td{
+  padding: 5px 0px;
 }

@@ -1,0 +1,63 @@
+.reserv-staff{
+  border: 1px dotted;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+}
+
+.reserv-staff > .title{
+  background-color: #0797c1;
+  color: white;
+  padding: 5px;
+  font-size: 20px;
+}
+
+.reservStaff-content{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content-up{
+  background-color: #eeeeee;
+  height: 50%;
+  display: flex;
+  border-bottom: 1px solid #7e969e;
+}
+
+/* ================== 예악하기 ================== */
+.content-up .regReserv{
+  background-color: #f5f5f5; /* 배경색 설정 */
+  border-right: 1px solid #7e969e; /* 오른 테두리 설정 */
+  width: 50%;
+}
+
+.content-up .regReserv > div:first-child{
+  background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+  padding: 5px;
+}
+
+/* ================== 예악정보 수정 ================== */
+
+.content-up .updateReserv{
+  background-color: #f5f5f5; /* 배경색 설정 */
+  width: 50%;
+}
+
+.content-up .updateReserv> div:first-child{
+  background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+  padding: 5px;
+}
+
+/* ================== 예약리스트 ================== */
+.content-down{
+  background-color: antiquewhite;
+  height: 50%;
+}
+.content-down > div:first-child{
+  background-color: #bedce6;
+  border-bottom: 1px solid #7e969e;
+  padding: 5px;
+}

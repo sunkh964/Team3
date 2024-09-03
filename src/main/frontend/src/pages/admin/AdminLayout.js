@@ -15,7 +15,7 @@ const AdminLayout = () => {
     },
     {
       title: '환자 관리',
-      path: ['/admin'],
+      path: ['/admin/userManage'],
       subMenu: ['예약', '문의하기', '환자 목록']
     },
     {
@@ -46,7 +46,7 @@ const AdminLayout = () => {
             <div key={index} className="menu-title">
               <div
                 className={`menu-title ${isShow === index ? 'active' : ''}`}
-                onClick={() => clickMenu(index, menu.path)}
+                onClick={() => clickMenu(index, menu.path[0])}
               >
                 {menu.title}
                 <span><i className="bi bi-caret-down-fill"></i></span>
@@ -56,7 +56,7 @@ const AdminLayout = () => {
                   <ul>
                     {menu.subMenu.map((sub, subi) => (
                       <li
-                        key={subi}>
+                        key={subi} onClick={() => clickMenu(index, menu.path[subi])}>
                         {sub}
                       </li>
                     ))}

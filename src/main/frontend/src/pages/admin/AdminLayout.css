@@ -1,5 +1,5 @@
 .adminLayout > div:first-child{
-  height: 90vh;
+  height: 85vh;
 }
 .adminLayout-content{
   display: flex;
@@ -44,7 +44,6 @@
 .menu-title .dropdown-menu{
   background-color: white;
   border: none;
-  color: gray;
 }
 
 .menu-title .dropdown-menu ul{
@@ -56,8 +55,11 @@
   font-size: 1.1rem;
   font-weight: 500;
   padding: 10px 10px 0px 10px;
+  color: gray;
   cursor: pointer;
-  
+}
+.menu-title .dropdown-menu li:hover{
+  color: #0b5f79;
 }
 
 
