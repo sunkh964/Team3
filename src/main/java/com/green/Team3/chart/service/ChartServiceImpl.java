@@ -63,4 +63,10 @@ public class ChartServiceImpl implements ChartService {
         sqlSession.insert("chartMapper.insertChart", chartVO);
     }
 
+    /*차트 번호가져오기*/
+
+    @Override
+    public ChartVO selectChartNum(int memNum) {
+        return  sqlSession.selectOne("chartMapper.selectChartNum", memNum);
+    }
 }
