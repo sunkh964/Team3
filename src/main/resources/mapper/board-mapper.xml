@@ -10,7 +10,14 @@
         <result column="STAFF_NUM" property="staffNum"/>
         <result column="BOARD_DATE" property="boardDate"/>
     </resultMap>
-	
+
+<!--    게시글 목록 조회-->
+    <select id="boardList" resultMap="board">
+        SELECT BOARD_NUM
+        , BOARD_TITLE
+        , BOARD_DATE
+        FROM HOS_BOARD
+    </select>
 </mapper>
 
 

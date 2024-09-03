@@ -40,9 +40,10 @@
    margin: 30px auto;
    gap: 30px;
 }
-.content > div:first-child{
-   border: 1px dotted ;
+.content .home3{
+   padding: 15px;
    width: 50%;
+   box-shadow: 3px 3px 7px #cccccc;
 }
 .content >div:last-child{
    width: 60%;
@@ -96,4 +97,43 @@
 }
 .content-list4{
    background-color: #1360b6;
+}
+
+/* 게시글 작성 */
+.home1{
+   text-align: center;
+   margin-top: 10px;
+   font-size: large;
+   width: 90%;
+}
+
+.home4{
+   display: flex;
+   justify-content: center;
+   border: 1px solid gold;
+
+}
+
+.icon{
+   font-size: 1.6rem;
+   padding: 5px;
+}
+
+.icon:hover{
+   color: #1360b6;
+   cursor: pointer;
+}
+
+.home2{
+   margin: 15px auto;
+   text-align: center;
+   width: 90%;
+}
+
+.home2>table{
+   width: 100%;
+}
+
+.home2 td{
+   text-align: center;
 }

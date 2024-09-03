@@ -1,17 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './UserHome.css'
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom'
 
 const UserHome = () => {
    const navigate= useNavigate();
+=======
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const UserHome = () => {
+   const navigate=useNavigate();
+  //조회된 게시글 목록을 저장할 변수
+   const [boardList, setBoardList] = useState([]);
+
+   //게시글 목록 조회
+   useEffect(() => {
+   axios.get('/board/list')
+   .then((res) => {
+   console.log(res.data)
+   setBoardList(res.data);
+   })
+   .catch((error) => {
+   alert('게시글 목록 조회 오류!');
+   console.log(error);
+   });
+}, []);
+
+
+>>>>>>> nohk
    return (
    <div className='home-div'>
       <div className='img'> <img src={'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png'} /> </div>
 
       <div className='content'>
-         <div>
-            <div>게시판/공지</div>
-            <div>내용</div>
+         <div className='home3'>
+            <div className='home4'>
+               <div className='home1' onClick={(e)=>{navigate('/notice')}} >공지사항</div>
+               <div className='icon' onClick={(e)=>{navigate('/notice')}}><i class="bi bi-chat-left-dots"></i></div>
+            </div>
+            <div className='home2'>
+               <table>
+                  {
+                     boardList.map((board, i)=>{
+                        return(
+                           <tr key={i}>
+                              <td>{i+1}</td>
+                              <td>{board.boardTitle}</td>
+                              <td>{board.boardDate}</td>
+                           </tr>
+                        );
+                     })
+                  }
+               </table>
+            </div>
          </div>
          <div className='content-list'>
             <div className='content-list1'>
