@@ -15,5 +15,5 @@ public class ScheduleVO {
     private String description;
     private String color;
     private StaffVO staffVO;
-    private boolean allDay;
+    private String allDay;
 }

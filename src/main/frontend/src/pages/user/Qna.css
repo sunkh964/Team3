@@ -18,10 +18,10 @@
   background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(99, 137, 184, 0.507) 100%);
 }
 
-.Q1 tr, td{
+/* .Q1 tr, td{
 line-height: 40px;
 letter-spacing: 2px;
-}
+} */
 
 .Q2{
   font-size: 1.15rem;

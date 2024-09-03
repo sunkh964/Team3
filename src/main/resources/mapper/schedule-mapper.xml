@@ -36,7 +36,7 @@
                 ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i:%s')
                 END AS END
             , COLOR
-            , IF(ALL_DAY = 'Y', 1, 0) AS ALL_DAY
+            , ALL_DAY
         FROM HOS_SCHEDULE SCH, HOS_STAFF S
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
     </select>
@@ -57,7 +57,7 @@
                 ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i:%s')
                 END AS END
             , COLOR
-            , IF(ALL_DAY = 'Y', 1, 0) AS ALL_DAY
+            , ALL_DAY
             FROM HOS_SCHEDULE SCH, HOS_STAFF S
             WHERE SCH.STAFF_NUM = S.STAFF_NUM
             AND SCH.STAFF_NUM = #{staffNum}
@@ -79,6 +79,7 @@
                 ELSE DATE_FORMAT(SCH_EDATE, '%Y-%m-%d %H:%i')
                 END AS END
             , COLOR
+            , ALL_DAY
         FROM HOS_SCHEDULE SCH, HOS_STAFF S
         WHERE SCH.STAFF_NUM = S.STAFF_NUM
             AND SCH_NUM = #{schNum}
@@ -126,12 +127,7 @@
             , COLOR = #{color}
             , SCH_SDATE = #{start}
             , SCH_EDATE = #{end}
-            <if test='allDay = true'>
-                , ALL_DAY = 'Y'
-            </if>
-            <if test='allDay = false'>
-                , ALL_DAY = 'N'
-            </if>
+            , ALL_DAY
         WHERE SCH_NUM = #{schNum};
     </update>
 
