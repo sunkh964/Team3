@@ -37,7 +37,7 @@
 }
 
 .input-form td, .detail-table td {
-   padding: 5px;
+   padding: 5px 10px;
    vertical-align: middle;
 }
 
