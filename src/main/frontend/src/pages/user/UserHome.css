@@ -12,7 +12,8 @@
 }
 .img img{
    height: 400px;
-   width: 100%;
+   width: 90%;
+   margin: auto;
    object-fit: cover;
    object-position: center;
 }

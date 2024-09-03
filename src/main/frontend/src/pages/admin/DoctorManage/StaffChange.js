@@ -43,7 +43,7 @@ const StaffChange = () => {
       <div className='staffChange-content'>
         <table className='staffChange-table'>
           <colgroup>
-            <col width='5%'/>
+            <col width='6%'/>
             <col width='10%'/>
             <col width='10%'/>
             <col width='15%'/>
@@ -51,7 +51,7 @@ const StaffChange = () => {
             <col width='17%'/>
             <col width='6%'/>
             <col width='14%'/>
-            <col width='8%'/>
+            <col width='6%'/>
           </colgroup>
           <thead>
             <tr>

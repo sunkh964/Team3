@@ -158,11 +158,11 @@ const DoctorHome = () => {
           <div className='getStaff-content'>
             <table className='getStaff-table'>
               <colgroup>
-              <col width='10%' />
+              <col width='8%' />
+              <col width='15%' />
               <col width='20%' />
-              <col width='20%' />
-              <col width='20%' />
-              <col width='20%' />
+              <col width='25%' />
+              <col width='25%' />
               </colgroup>
               <thead>
                 <tr>

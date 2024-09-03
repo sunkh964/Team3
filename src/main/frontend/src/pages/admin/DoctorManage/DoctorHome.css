@@ -85,7 +85,7 @@
   top: 0;
 }
 .getStaff-table > thead td{
-  padding: 13px 0px;
+  padding: 10px 0px;
 }
 
 .getStaff-table td{
@@ -99,4 +99,8 @@
 
 .getStaff-table tbody tr:nth-child(odd){
   background-color: white;
+}
+
+.getStaff-table tbody td{
+  padding: 5px 0px;
 }

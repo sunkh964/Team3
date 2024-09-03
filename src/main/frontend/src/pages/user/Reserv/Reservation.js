@@ -3,6 +3,7 @@ import './Reservation.css'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import DateSelect from '../../../common/DateSelect';
+import DatePicker from 'react-datepicker';
 
 const Reservation = () => {
   const {partNum: initialPartNum} = useParams();
@@ -112,11 +113,11 @@ const Reservation = () => {
             <div className='reserv-title'>예약날짜/시간 선택</div>
             <div>
               <div>
-                <input type='date'/>
+                <DatePicker inline />
                 
               </div>
               <div>
-                <input type='time'/>
+                <DatePicker showTimeSelect={true} showTimeSelectOnly inline/>
               </div>
             </div>
           </div>

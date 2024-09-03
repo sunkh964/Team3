@@ -15,8 +15,8 @@ const UserHome = () => {
             <div className='content-list1'>
                <div>진료안내</div>
                <div>
-               <div>과/의료진 안내</div>
-               <div>예약 안내</div>
+                  <div>과/의료진 안내</div>
+                  <div>예약 안내</div>
                </div>
             </div>
             <div className='content-list2'>
