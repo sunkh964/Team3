@@ -50,10 +50,9 @@ const UserLayout = () => {
             <li>이용약관</li>
             <li>개인정보처리방침</li>
             <li>운영·관리방침</li>
-            <li>어쩌구..</li>
           </ul>
         </div>
-        <div>울산광역시 어쩌구</div>
+        <div className='footAddr'>울산광역시 남구 삼산중로 100번길 26</div>
       </div>
     </div>
   )

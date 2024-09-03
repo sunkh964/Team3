@@ -14,5 +14,15 @@
   width: 90%;
 
 }
-
+.mypage-div li{
+  cursor: pointer;
+  margin: 10px 0px;
+}
+.mypage-div li:hover{
+  color: rgb(88, 88, 88);
+}
+.mypage-div h2{
+  margin-bottom: 20px;
+  cursor: default;
+}
 

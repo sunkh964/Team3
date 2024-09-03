@@ -1,6 +1,9 @@
-.userLayout{
-  
+.userLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 전체 화면 높이를 기준으로 레이아웃 설정 */
 }
+
 .menu{
   width: 80vw;
   margin: 0 auto;
@@ -34,10 +37,28 @@
 }
 
 /* ================ 밑 ================ */
-.foot{
+.foot {
+  position: fixed; 
+  bottom: 0;
   background-color: #96a8ce;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  text-align: end;
 }
-.foot ul{
+
+.foot ul {
   display: flex;
-  list-style: none;
+  justify-content: space-around;
+  margin: 10px;
+}
+.foot li{
+  cursor: pointer;
+}
+.foot li:hover{
+  color: #eeeeee;
+}
+.footAddr{
+  letter-spacing: 4px;
+  font-size: 15px;
 }

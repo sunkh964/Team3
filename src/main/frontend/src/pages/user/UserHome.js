@@ -1,10 +1,12 @@
 import React from 'react'
 import './UserHome.css'
+import { useNavigate } from 'react-router-dom'
 
 const UserHome = () => {
+   const navigate= useNavigate();
    return (
    <div className='home-div'>
-      <div className='img'> <img src={'http://localhost:8080/images/hos_banner.png'} /> </div>
+      <div className='img'> <img src={'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png'} /> </div>
 
       <div className='content'>
          <div>
@@ -29,7 +31,7 @@ const UserHome = () => {
             <div className='content-list3'>
                <div>진료예약</div>
                <div>
-               <div>예약 하기</div>
+               <div onClick={()=>{navigate('/reserv')}}>예약 하기</div>
                <div>예약 변경</div>
                </div>
             </div>

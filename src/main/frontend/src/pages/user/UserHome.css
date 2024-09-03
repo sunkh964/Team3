@@ -7,15 +7,22 @@
 
 /* ================ 이미지 ================ */
 
-.img{
+.img {
    overflow: hidden;
-}
-.img img{
-   height: 400px;
+   height: 400px; /* 높이를 조정하여 이미지 크기 조절 */
    width: 100%;
-   object-fit: cover;
-   object-position: center;
+   position: relative;
 }
+
+.img img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover; /* 이미지를 컨테이너에 맞게 조정 */
+   object-position: center 40%; /* 중앙으로 위치 설정 */
+}
+
+
+
 
 /* ================ 내용 ================ */
 
