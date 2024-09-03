@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './UserLayout.css'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const UserLayout = () => {
   const navigate = useNavigate();
+
+  const [dropDown, setDropDown] = useState();
+  
+
+  function DropDown(){
+    return(
+      <div>
+        <div>
+          <li>진료안내</li>
+          <li>진료안내</li>
+        </div>
+        <div>
+          <li>이용안내</li>
+          <li>이용안내</li>
+        </div>
+        <div>
+          <li>진료예약</li>
+          <li>진료예약</li>
+        </div>
+        <div>
+          <li>고객서비스</li>
+          <li>고객서비스</li>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='userLayout'>
