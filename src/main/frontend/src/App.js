@@ -15,7 +15,6 @@ import History from './pages/admin/History';
 import Mypage from './pages/user/Mypage';
 import Infoupdate from './pages/user/Infoupdate';
 import Qna from './pages/user/Qna';
-import Histoy from './pages/user/Histoy';
 import Qupldate from './pages/user/Qupldate';
 
 import StaffDetail from './pages/admin/DoctorManage/StaffDetail';
@@ -25,6 +24,8 @@ import StaffChange from './pages/admin/DoctorManage/StaffChange';
 import ReviseChart from './pages/admin/ReviseChart';
 import Reservation from './pages/user/Reserv/Reservation';
 import Qdetail from './pages/user/Qdetail';
+import UserHistory from './pages/user/UserHistory';
+import Notice from './pages/user/Notice';
 
 
 function App() {
@@ -96,6 +97,8 @@ function App() {
               <Route path='/login' element={<Login 
               setLoginInfo={setLoginInfo} loginInfo={loginInfo}/>}/>
 
+                {/* 공지사항 큰화면 */}
+                <Route path='/notice' element={<Notice/>}/>
               {/* 마이페이지 */}
               <Route path='/mypage' element={<Mypage loginInfo={loginInfo}/>}>
                 {/* 마이페이지-개인정보수정 */}
@@ -107,7 +110,7 @@ function App() {
                 {/* 문의하기 등록, 작성 */}
                 <Route path='qupdate/:memNum' element={<Qupldate loginInfo={loginInfo}/>}/>
                 {/* 마이페이지- 진료이력보기*/}
-                <Route path='history' element={<History/>}/>
+                <Route path='userHistory/:memNum' element={<UserHistory/>}/>
               </Route>
 
               {/* 진료예약 */}

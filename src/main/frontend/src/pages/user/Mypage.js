@@ -17,7 +17,7 @@ const Mypage = () => {
         <ul style={{ listStyle: 'none', padding: 0 }}>
           <li onClick={(e)=>{navigate(`/mypage/infoupdate/${loginData.memId}`)}}>개인정보 수정</li>
           <li onClick={(e)=>{navigate(`/mypage/qna/${loginData.memNum}`)}}>1:1 문의</li>
-          <li>진료이력보기</li>
+          <li onClick={(e)=>navigate(`/mypage/userHistory/${loginData.memNum}`)}>진료이력보기</li>
         </ul>
       </div>
       <div className='mypage-content-div'>
