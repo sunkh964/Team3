@@ -48,6 +48,7 @@ const Qdetail = () => {
   useEffect(()=>{
     axios.get(`/q/reply/${qNum}`)
     .then((res)=>{
+      console.log(1)
       console.log(res.data);
       setReply(res.data);
     })
@@ -98,11 +99,11 @@ const Qdetail = () => {
           <tbody>
             <tr>
               <td>답변 내용</td>
-              <td>{reply.aContent}</td>
+              <td>{reply.acontent}</td>
             </tr>
             <tr>
               <td>답변 날짜</td>
-              <td>{reply.aDate}</td>
+              <td>{reply.adate}</td>
             </tr>
           </tbody>
         </table>
