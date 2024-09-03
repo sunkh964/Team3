@@ -10,22 +10,22 @@ const AdminLayout = () => {
   const [adminMenu, setAdminMenu] = useState([
     {
       title: '진료 관리',
-      path: '/admin/chart',
+      path: ['/admin/chart'],
       subMenu: ['진료 목록', '환자 차트', '예약 목록']
     },
     {
       title: '환자 관리',
-      path: '/admin',
+      path: ['/admin'],
       subMenu: ['예약', '문의하기', '환자 목록']
     },
     {
       title: '직원 일정 관리',
-      path: '/admin/staffManage',
+      path: ['/admin/staffManage'],
       subMenu: ['직원 스케쥴 목록']
     },
     {
       title: '병원장',
-      path: '/admin/doctorManage',
+      path: ['/admin/doctorManage'],
       subMenu: ['직원 관리', '매출 관리']
     }
   ]);
