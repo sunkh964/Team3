@@ -12,10 +12,10 @@
 }
 
 .Q1{
-  border: 1px solid rgb(45, 58, 92);
   width: 60%;
   padding: 20px;
-  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(99, 137, 184, 0.507) 100%);
+border-bottom:1px solid #25364b;
+border-top:1px solid #25364b;
 }
 
 .Q1 tr, td{
@@ -29,8 +29,11 @@ letter-spacing: 2px;
 
 
 .q-text{
-  font-size: 2rem;
+  font-weight: 700;
   margin: 20px auto;
+  font-size: 32px;
+  line-height: 47px;
+  color: #2d68c2;
 }
 
 

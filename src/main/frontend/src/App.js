@@ -63,12 +63,13 @@ function App() {
               </li>
             </ul>
             :
-            <div className='login-info'>
-              {loginInfo.memName}{loginInfo.staffName}님 반갑습니다.
-              <span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>
-                마이페이지
-                </span>
-              <span onClick={() => {
+            <ul className='header-menu'>
+            <li>
+            {loginInfo.memName}{loginInfo.staffName}님 반갑습니다.
+            </li>
+            <li><span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>마이페이지</span></li>
+            <li>
+            <span onClick={() => {
                 //세션에 저장된 로그인 정보 삭제
                 window.sessionStorage.removeItem('loginInfo');
                 
@@ -76,7 +77,8 @@ function App() {
                 setLoginInfo({});
                 navigate('/');
               }}>Logout</span>
-            </div>
+            </li>
+          </ul>
           }
             </div>
           </div>
