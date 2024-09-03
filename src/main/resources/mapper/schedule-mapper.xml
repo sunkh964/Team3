@@ -100,12 +100,12 @@
             , #{description}
             , #{staffNum}
             , #{color}
-            <if test='allDay = true'>
+            <if test='allDay == true'>
                 , DATE_FORMAT(#{start}, '%Y-%m-%d')
                 , DATE_FORMAT(#{end}, '%Y-%m-%d')
                 , 'Y'
             </if>
-            <if test='allDay = false'>
+            <if test='allDay == false'>
                 , #{start}
                 , #{end}
                 ,'N'
