@@ -87,7 +87,8 @@
 }
 
 .content-list1{
-   background-color: #2dbc8c;
+   background: #2dbc8c url('http://localhost:8080/images/ico_set_renewmain202209_1.png') no-repeat;
+    background-position: 10px 10px;
 }
 .content-list2{
    background-color: #15989f;

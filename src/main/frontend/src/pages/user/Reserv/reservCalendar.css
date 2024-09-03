@@ -1,0 +1,53 @@
+.act_3 >div:nth-child(2){
+  border: 1px solid rebeccapurple;
+  width: 80%;
+  margin: auto;
+}
+.reservCalendar{
+  border: 1px dotted;
+  width: 100%;
+  margin: auto;
+}
+
+.react-datepicker__day.react-datepicker__day--weekend{
+  color: red;
+}
+
+/* ================ 시간 설정 ================ */
+.reservTime{
+  border: 1px dotted;
+  width: 100%;
+  margin: auto;
+}
+.react-datepicker__time-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.react-datepicker__time-container .react-datepicker__header--time{
+  background-color: antiquewhite;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 100%;
+  height: 50px;
+  overflow-x: hidden;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  list-style: none;
+  margin: 0;
+  height: calc(195px + 1.7rem / 2);
+  overflow-y: hidden;
+  padding-right: 0;
+  padding-left: 0;
+  width: 100%;
+  box-sizing: content-box;
+}
+
+.react-datepicker__time-list{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}

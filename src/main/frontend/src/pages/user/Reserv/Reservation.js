@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import DateSelect from '../../../common/DateSelect';
 import DatePicker from 'react-datepicker';
+import './reservCalendar.css'
+import { setHours } from 'date-fns';
 
 const Reservation = () => {
   const {partNum: initialPartNum} = useParams();
@@ -59,6 +61,26 @@ const Reservation = () => {
     }
   },[partNum]);
 
+  // ================== DATE ================== //
+
+  // 특정시간대 지정
+
+  const [startDate, setStartDate] = useState(new Date());
+
+  const filterTime = (time) => {
+    const hours = time.getHours();
+    return hours >= 9 && hours < 19; // 9 AM ~ 6 PM
+  };
+
+
+    // const minTime = new Date();
+    // minTime.setHours(8);
+    // minTime.setMinutes(30);
+
+    // const maxTime = new Date();
+    // maxTime.setHours(18);
+    // maxTime.setMinutes(30);
+  
   return (
     <div className='reserv-container'>
       <div id='sidebar'>
@@ -77,7 +99,7 @@ const Reservation = () => {
         </div>
   
         <div className='act'>
-          <div>
+          <div className='act_1'>
             <div className='reserv-title'>진료과 선택</div>
             <div className='reserv-part'>
               {
@@ -90,7 +112,7 @@ const Reservation = () => {
               }
             </div>
           </div>
-          <div>
+          <div className='act_2'>
             <div className='reserv-title'>의료진 선택</div>
             <div className='reserv-doctor'>
               {
@@ -109,15 +131,19 @@ const Reservation = () => {
               }
             </div>
           </div>
-          <div>
+          <div className='act_3'>
             <div className='reserv-title'>예약날짜/시간 선택</div>
             <div>
-              <div>
+              <div className='reservCalendar'>
                 <DatePicker inline />
-                
               </div>
-              <div>
-                <DatePicker showTimeSelect={true} showTimeSelectOnly inline/>
+              <div className='reservTime'>
+                
+                <DatePicker showTimeSelect={true} showTimeSelectOnly inline
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    timeIntervals={60}
+                    filterTime={filterTime} />
               </div>
             </div>
           </div>
