@@ -36,10 +36,15 @@
   gap: 15px;
 }
 .head-login > ul > li:first-child{
-  
   border-right: 2px solid lightgray;
   padding-right: 15px;
-  
+  cursor: default;
+}
+.head li>span{
+  cursor: pointer;
+}
+.head li>span:hover{
+  color: rgb(68, 68, 68);
 }
 
 /* ================ input ================ */
