@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './UserHome.css'
-<<<<<<< HEAD
+
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const UserHome = () => {
    const navigate= useNavigate();
-=======
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
+
+const UserHome = () => {
+
    const navigate=useNavigate();
   //조회된 게시글 목록을 저장할 변수
    const [boardList, setBoardList] = useState([]);
@@ -28,7 +32,7 @@ const UserHome = () => {
 }, []);
 
 
->>>>>>> nohk
+
    return (
    <div className='home-div'>
       <div className='img'> <img src={'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png'} /> </div>
@@ -85,5 +89,8 @@ const UserHome = () => {
    </div>
 )
 }
+}
+}
+
 
 export default UserHome
