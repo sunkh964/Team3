@@ -18,10 +18,10 @@ border-bottom:1px solid #25364b;
 border-top:1px solid #25364b;
 }
 
-.Q1 tr, td{
+/* .Q1 tr, td{
 line-height: 40px;
 letter-spacing: 2px;
-}
+} */
 
 .Q2{
   font-size: 1.15rem;

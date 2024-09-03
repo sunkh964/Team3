@@ -13,6 +13,10 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
       return resultDate
    }
 
+   if(newEvent.allDay != 'Y' && newEvent.allDay != 'N' ){
+      newEvent.allDay = newEvent.allDay ? 'Y' : 'N'
+   }
+
    return (
       <>
          {
@@ -47,7 +51,7 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
                popperPlacement="top-end"
                showTimeSelect={true}
                timeFormat="HH:mm"
-               timeIntervals={15}
+               timeIntervals={30}
                dateFormat="yyyy-MM-dd HH:mm"
                timeCaption="time"
                minDate={targetName == 'end' ? newEvent.start : null}

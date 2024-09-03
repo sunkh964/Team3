@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './StaffManage.css'
 import './calendar.css'
+import './datepicker.css'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -72,7 +73,15 @@ const StaffManage = () => {
     axios.get(`/schedule/getOneList/${loginInfo.staffNum}`)
     .then((res) => {
       console.log(res.data);
-      setAllList(res.data);
+
+      const result =  res.data.map((each) => {
+        const a = each.allDay == 'Y'  ? true : false;
+        return {...each, allDay : a}
+      })
+
+      console.log(result)
+
+      setAllList(result);
     })
     .catch((error) => {alert(error);});
   }, []);
@@ -140,7 +149,7 @@ const StaffManage = () => {
                     colorBoxes.map((colorName, i) => {
                       return (
                         <input
-                          type='radio' name='color' className={`color c${i+1}`} value={colorName}
+                          type='radio' key={i} name='color' className={`color c${i+1}`} value={colorName}
                           onClick={(e) => {changeEvent(e)}}
                           defaultChecked={ (i == 0) ? true : false}
                         />
@@ -192,25 +201,46 @@ const StaffManage = () => {
     if(eventDetailModal){
       axios.get(`/schedule/getDetail/${schNum}`)
       .then((res) => {
-        setEventDetail(res.data);
+        console.log(res.data)
+
+        setEventDetail({
+          ...res.data,
+          allDay : res.data.allDay == 'Y' ? true : false,
+          start : new Date(res.data.start),
+          end : new Date(res.data.end)
+        });
+        //setEventDetail(res.data);
       })
     .catch((error) => {alert(error)});
     }
   }, [eventDetailModal])
 
-  // 일정 상세 모달 content 내용
-  function drawModalContent2() {
-    function getColor() {
-      let colorNum = 0;
+
+  const [selectedColor, setSelectedColor] = useState(0);
+
+  //상세 정보가 조회되면 해당 정보의 컬러값 세팅
+  useEffect(() => {
+    if(Object.keys(eventDetail).length != 0 ){
       colorBoxes.map((color, i) => {
         if (eventDetail.color == color) {
-          colorNum = i+1
+          //console.log('!!!!!!' + (i+ 1))
+          setSelectedColor(i + 1);
         }
       })
-      console.log(colorNum)
-      return colorNum
+    }
+  }, [eventDetail])
+
+    // 일정 내용 변경 함수 onChange
+    function changeEventDetail(e) {
+      setEventDetail({
+        ...eventDetail,
+        schNum : schNum,
+        [e.target.name] : e.target.value
+      })
     }
 
+  // 일정 상세 모달 content 내용
+  function drawModalContent2() {
     return (
       <div className='event-modal-div'>
         <table className='detail-table'>
@@ -218,14 +248,15 @@ const StaffManage = () => {
             <tr>
               <td>색상</td>
               <td colSpan={3}>
-                <input type='radio' className={`color c${getColor()} view`} value={eventDetail.color} ></input>
+                <input type='radio' className={`color c${selectedColor} view`} value={eventDetail.color} ></input>
                 {
                   colorBoxes.map((colorName, i) => {
+                    console.log((i + 1) + '  / ' + selectedColor)
                     return (
                       <input
-                        type='radio' name='color' className={`color c${i+1} modify-form`} value={colorName}
-                        onClick={(e) => {changeEvent(e)}}
-                        defaultChecked={ i+1 == getColor() ? true : false}
+                        type='radio' key={i} name='color' className={`color c${i+1} modify-form`} value={colorName}
+                        onChange={(e) => {changeEventDetail(e)}}
+                        checked={ i+1 == selectedColor ? true : false}
                       />
                     )
                   })
@@ -235,22 +266,23 @@ const StaffManage = () => {
             <tr>
               <td>날짜</td>
               <td>
-                <span className='view'>{eventDetail.start}</span>
+                <span className='view'>{eventDetail.start && eventDetail.allDay ? moment(eventDetail.start).format("YYYY-MM-DD") : moment(eventDetail.start).format("YYYY-MM-DD HH:mm:ss")}</span>
                 {
                   modifyActive ?
                   <DateSelect className='modify-form'
-                  setNewEvent={setNewEvent} newEvent={newEvent} targetName={'start'}
+                  //setNewEvent={setNewEvent} newEvent={newEvent} targetName={'start'}
+                  setNewEvent={setEventDetail} newEvent={eventDetail} targetName={'start'}
                   clickDate={eventDetail.start} /> 
                 : false
                 }
               </td>
               <td>→</td>
               <td>
-                <span className='view'>{eventDetail.end}</span>
+                <span className='view'>{eventDetail.end && eventDetail.allDay ? moment(eventDetail.end).format("YYYY-MM-DD") : moment(eventDetail.end).format("YYYY-MM-DD HH:mm:ss")}</span>
                 {
                   modifyActive ?
                   <DateSelect className='modify-form'
-                  setNewEvent={setNewEvent} newEvent={newEvent} targetName={'end'}
+                  setNewEvent={setEventDetail} newEvent={eventDetail} targetName={'end'}
                   clickDate={eventDetail.end}
                   /> 
                   : false
@@ -261,14 +293,14 @@ const StaffManage = () => {
               <td>제목</td>
               <td colSpan={3}>
                 <span className='view'>{eventDetail.title}</span>
-                <input className='modify-form' name='title' defaultValue={eventDetail.title} onChange={(e) =>{changeEvent(e)}} />
+                <input className='modify-form' name='title' defaultValue={eventDetail.title} onChange={(e) =>{changeEventDetail(e)}} />
               </td>
             </tr>
             <tr>
               <td>내용</td>
               <td colSpan={3}>
                 <span className='view'>{eventDetail.description}</span>
-                <input className='modify-form' name='description' defaultValue={eventDetail.description} onChange={(e) => {changeEvent(e)}} />
+                <input className='modify-form' name='description' defaultValue={eventDetail.description} onChange={(e) => {changeEventDetail(e)}} />
               </td>
             </tr>
           </tbody>
@@ -293,7 +325,7 @@ const StaffManage = () => {
   // 일정 상세 모달 확인 버튼 함수
   function handleBtn2() {
     if (modifyActive) {
-      axios.post('/schedule/modifyEvent', newEvent)
+      axios.post('/schedule/modifyEvent', eventDetail)
       .then(() => {alert("수정 완료")})
       .catch((error) => {alert(error)});
     } else { return ; }
@@ -328,6 +360,7 @@ const StaffManage = () => {
       return ;
     }
   }
+
 
   return (
     <div className='calendar-div'>
