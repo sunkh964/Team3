@@ -64,4 +64,10 @@ public class ChartController {
         chartService.insertChart(chartVO);
     }
 
+    /*차트 번호 가져오기*/
+    @GetMapping("/selectChartNum/{memNum}")
+    public ChartVO selectChartNum(@PathVariable("memNum") int memNum){
+        return chartService.selectChartNum(memNum);
+    }
+
 }

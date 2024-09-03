@@ -76,17 +76,23 @@ const AddChart = () => {
             ...insertChart,
             memNum: memNum
           }).then((res) => {
-            const chartNum = res.data.chartNum
-            
-            axios.post('/history/insertHis', {
-              ...insertChart,
-              memNum: memNum,
-              resNum: resNum,
-              chartNum:chartNum
-            });
+            axios.get(`/chart/selectChartNum/${memNum}`)
+            .then((res)=>{
+              console.log(res.data)
+              const chartNum = res.data.chartNum
+              axios.post('/history/insertHis', {
+                ...insertChart,
+                memNum: memNum,
+                resNum: resNum,
+                chartNum:chartNum
+              })
+              .then((res)=>{
+                alert('등록되었습니다.')
+                navigate('/admin/chart')
+              })
+            })
           });
         })
-
         
       }).catch((error) => {
         console.error(error);
@@ -96,10 +102,6 @@ const AddChart = () => {
     });
 };
 
-
-  
-  
-  
 
   return (
     <div className='addChartBack'>

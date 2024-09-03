@@ -24,5 +24,6 @@ public interface ChartService {
     void updateHistory(HistoryVO historyVO);
     /*차트 등록하기*/
     void insertChart(ChartVO chartVO);
-
+    /*차트 번호 가져오기*/
+    ChartVO selectChartNum(int memNum);
 }
