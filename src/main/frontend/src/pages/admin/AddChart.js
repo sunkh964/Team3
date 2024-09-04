@@ -106,7 +106,7 @@ const AddChart = () => {
   return (
     <div className='addChartBack'>
       <div className='addChart'>
-        <div className='topTitle'>당일 환자 예약</div>
+        <div className='topTitle'>첫방문 환자 진료 정보 추가</div>
         <div className='addTitle'>환자 기본 정보</div>
         <div className='addContent'>
           <div className='cM'>

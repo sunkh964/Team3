@@ -14,8 +14,8 @@
   background-color: #e8f0f3;
   margin: 0 auto;
   width: 90%;
-  border-radius: 15px;
   box-shadow: 3px 3px 5px gray;
+  border-radius: 15px;
 }
 .addChart>.addContent{
   margin: 20px auto;
@@ -48,13 +48,15 @@
 }
 .topTitle{
   font-size: 30px;
-  text-align: center;
   background-color: #1aa6d1;
   color: white;
   padding: 5px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 
 }
 .addTitle{
+  
   font-size: 25px;
   padding: 5px;
   margin-bottom: 40px;

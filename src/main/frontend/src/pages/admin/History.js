@@ -45,7 +45,7 @@ const History = () => {
               </div>
               <div className='con'> 
                 <div><span>차트 번호 :</span> {his.chartNum} </div> 
-                <div><span>예약 시간 :</span> {res?res.resTime:null} </div>
+                <div><span>접수 시간 :</span> {res?res.resTime:null} </div>
               </div>
 
               <div className='con'> 

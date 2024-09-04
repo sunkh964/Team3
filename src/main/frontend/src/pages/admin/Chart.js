@@ -30,7 +30,7 @@ const Chart = () => {
 
   // 진료환자 등록 버튼
   function goIsNow(chartNum) {
-    if (window.confirm('진료환자로 변경하시겠습니까?')) {
+    if (window.confirm('진료 환자로 변경하시겠습니까?')) {
       axios.put('/chart/changeIsNow', { chartNum })
         .then(() => window.location.reload())
         .catch((error) => { console.log(error); });
@@ -41,7 +41,7 @@ const Chart = () => {
 
   // 환자 집보내기
   function delIsNow(chartNum) {
-    if (window.confirm('진료환자를 지우겠습니까?')) {
+    if (window.confirm('환자 진료가 끝났습니까?')) {
       axios.put('/chart/delIsNow', { chartNum })
         .then(() => window.location.reload())
         .catch((error) => { console.log(error); });
@@ -77,13 +77,13 @@ const Chart = () => {
 
   return (
     <div className='chart'>
-      <div className='title'>환자 차트</div>
+      <div className='title'>당일 환자 차트</div>
       <div className='mainChart'>
         <div className='chartLeft'>
           <div className='todayReg'>
             <div className='todayTop'>
-              <p>당일 예약 환자</p>
-              <button onClick={() => navigate('/admin/addChart')}>추가</button>
+              <p>대기 환자</p>
+              <button onClick={() => navigate('/admin/addChart')}>첫 방문 환자 진료 추가</button>
             </div>
 
             <div className='topContent'>
@@ -98,11 +98,11 @@ const Chart = () => {
                       <div>성별: {member ? member.memGen : null}</div>
                     </div>
                     <div className='divFSec'>
-                      <div>연락처 : {member ? member.memTel : null}</div>
+                      <div>접수시간 : {member ? member.memTel : null}</div>
                       <div>
                         <span onClick={() => navigate(`/admin/reviseChart/${member.memNum}/${chartNum}`)}>수정</span>
                         <span onClick={() => delIsNow(chartNum)}>삭제</span>
-                        <button onClick={() => goIsNow(chartNum)}>진료환자 등록</button>
+                        <button onClick={() => goIsNow(chartNum)}>진료 환자 등록</button>
                       </div>
                     </div>
                   </div>
@@ -113,7 +113,7 @@ const Chart = () => {
 
           <div className='searchMem'>
             <div className='searchTitle'>
-              <span>환자 검색</span>
+              <span>재방문 환자 검색</span>
               <div className='search'>
                 <input type='text'  name='searchValue'  onChange={changeSearchData}/>
                 <button onClick={searchMem}>검색</button>
