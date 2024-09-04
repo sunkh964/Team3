@@ -24,9 +24,8 @@
         VALUES(#{patieNum}, #{patieName}, #{patieTel}, #{patieBirth}, #{patieAddr}, #{patieGen});
     </insert>
 
-
     <!--환자 검색-->
-    <select id="searchPatie" resultMap="patie">
+    <select id="searchPaties" resultMap="patie">
         SELECT * FROM HOS_PATIE
         <if test='searchValue != null and !searchValue.equals("")'>
             WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')

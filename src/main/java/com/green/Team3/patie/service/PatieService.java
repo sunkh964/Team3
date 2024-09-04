@@ -1,8 +1,7 @@
 package com.green.Team3.patie.service;
 
-import com.green.Team3.member.vo.MemberVO;
-import com.green.Team3.member.vo.SearchVO;
 import com.green.Team3.patie.vo.PatieVO;
+import com.green.Team3.patie.vo.SearchVO;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface PatieService {
     void insertPatie(PatieVO patieVO);
 
     /*환자 검색*/
-    List<PatieVO> searchPatie(PatieVO patieVO);
+    List<PatieVO> searchPaties(SearchVO searchVO);
 
 
 }

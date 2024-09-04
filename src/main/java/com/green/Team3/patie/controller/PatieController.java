@@ -2,6 +2,7 @@ package com.green.Team3.patie.controller;
 
 import com.green.Team3.patie.service.PatieService;
 import com.green.Team3.patie.vo.PatieVO;
+import com.green.Team3.patie.vo.SearchVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,8 @@ public class PatieController {
         return patieNum;
     }
 
-    @GetMapping("/searchPatie")
-    List<PatieVO> searchPatie(PatieVO patieVO){
-        return patieService.searchPatie(patieVO);
+    @PostMapping("/searchPaties")
+    public List<PatieVO> searchPaties(@RequestBody(required = false) SearchVO searchVO){
+        return patieService.searchPaties(searchVO);
     }
 }
