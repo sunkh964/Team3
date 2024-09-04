@@ -9,19 +9,16 @@ const AddChart = () => {
   const [staffs, setStaffs] = useState([]);
   
   const [insertChart, setinsertChart] = useState({
-    memNum: 0,
-    memName: '',
-    memBirth: '',
-    memTel: '',
-    memGen: '',
-    memAddr: '',
+    patieNum: 0,
+    patieName: '',
+    patieBirth: '',
+    patieTel: '',
+    patieGen: '',
+    patieAddr: '',
     staffNum: 0,
-    resNum: 0,
     partNum: 0,
-    chartNum: 0,
-    isNow:'',
-    illName:'',
-    illDetail:''
+    recStatus:'',
+    recDetail:''
   });
 
   // 진료부서 조회
@@ -46,7 +43,7 @@ const AddChart = () => {
           console.error('Error fetching staffs:', error);
         });
     } else {
-      setStaffs([]); // `partNum`이 없는 경우 직원 목록 초기화
+      setStaffs([]); 
     }
   }, [insertChart.partNum]);
 
@@ -60,40 +57,25 @@ const AddChart = () => {
 
  // 환자 및 진료 정보 등록
   const insertChartRes = () => {
-  axios.post('/member/insertChartMem', insertChart)
+  // 필수 값이 비어 있는지 확인
+  if (!insertChart.patieName || !insertChart.patieTel || !insertChart.patieBirth ||
+      !insertChart.patieAddr || !insertChart.patieGen || !insertChart.staffNum || !insertChart.partNum) {
+    alert('모든 필드를 입력하세요.');
+    return;
+  }
+  
+  axios.post('/patie/insertPatie', insertChart)
     .then((res) => {
-      const memNum = res.data.memNum;
+      const patieNum = res.data;
+      console.log(res.data);
       
-      axios.post('/res/insertChartRes', {
+      axios.post('/rec/insertRec', {
         ...insertChart,
-        memNum: memNum
+        patieNum: patieNum
       }).then((res) => {
-        axios.get(`/res/selectResNum/${memNum}`)
-        .then((res)=>{
-          const resNum = res.data.resNum; 
-
-          axios.post('/chart/insertChart', {
-            ...insertChart,
-            memNum: memNum
-          }).then((res) => {
-            axios.get(`/chart/selectChartNum/${memNum}`)
-            .then((res)=>{
-              console.log(res.data)
-              const chartNum = res.data.chartNum
-              axios.post('/history/insertHis', {
-                ...insertChart,
-                memNum: memNum,
-                resNum: resNum,
-                chartNum:chartNum
-              })
-              .then((res)=>{
-                alert('등록되었습니다.')
-                navigate('/admin/chart')
-              })
-            })
-          });
-        })
-        
+        console.log(res.data)
+        alert('등록되었습니다.')
+        navigate('/admin/chart')
       }).catch((error) => {
         console.error(error);
       });
@@ -111,27 +93,27 @@ const AddChart = () => {
         <div className='addContent'>
           <div className='cM'>
             <span>이름 : </span>
-            <input type='text' name='memName' value={insertChart.memName} onChange={changeValue} />
+            <input type='text' name='patieName' value={insertChart.patieName} onChange={changeValue} />
           </div>
           <div>
             <span>주민등록번호 :</span>
-            <input type='text' name='memBirth' value={insertChart.memBirth} onChange={changeValue} />
+            <input type='text' name='patieBirth' value={insertChart.patieBirth} onChange={changeValue} />
           </div>
         </div>
         <div className='addContent'>
           <div>
             <span>연락처 :</span>
-            <input type='text' name='memTel' value={insertChart.memTel} onChange={changeValue} />
+            <input type='text' name='patieTel' value={insertChart.patieTel} onChange={changeValue} />
           </div>
           <div className='cM'>
             <span>성별 :</span>
-            <input type='text' name='memGen' value={insertChart.memGen} onChange={changeValue} />
+            <input type='text' name='patieGen' value={insertChart.memGen} onChange={changeValue} />
           </div>
         </div>
         <div className='addContent'>
           <div className='address'>
             <span>주소 :</span>
-            <input type='text' name='memAddr' value={insertChart.memAddr} onChange={changeValue} />
+            <input type='text' name='patieAddr' value={insertChart.patieAddr} onChange={changeValue} />
           </div>
         </div>
 
@@ -163,19 +145,11 @@ const AddChart = () => {
 
         <div className='addTitle'>환자 차트</div>
         <div className='addContent'>
-          <div className='cM'>
-            <span>당일 진료 : </span>
-            <input type='text' name='isNow' value={insertChart.isNow} onChange={changeValue} />
-          </div>
-          <div>
-            <span>병명 :</span>
-            <input type='text' name='illName' value={insertChart.illName} onChange={changeValue} />
-          </div>
         </div>
         <div className='addContent'>
           <div className='address'>
-            <span> 세부사항 :</span>
-            <input type='text' name='illDetail' value={insertChart.illDetail} onChange={changeValue} />
+            <span> 증상 :</span>
+            <input type='text' name='recDetail' onChange={changeValue} />
           </div>
         </div>
 

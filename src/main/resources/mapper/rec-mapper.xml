@@ -13,7 +13,48 @@
         <result column="STAFF_NUM" property="staffNum"/>
         <association property="staffVO" resultMap="staffMapper.staff" />
         <association property="patieVO" resultMap="patieMapper.patie" />
+        <collection property="patieList" resultMap="patieMapper.patie" />
     </resultMap>
+
+    <insert id="insertRec">
+            INSERT INTO HOS_REC(REC_DATE, IS_REC, REC_STATUS, REC_DETAIL, PATIE_NUM, STAFF_NUM)
+            VALUES(NOW(), 'N', '대기', #{recDetail}, #{patieNum}, #{staffNum})
+    </insert>
+
+    <!--대기환자 리스트-->
+    <select id="selectWaitPatie" resultMap="rec">
+        SELECT REC_NUM,  DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i'), IS_REC, REC_STATUS, REC_DETAIL, P.PATIE_NUM, STAFF_NUM, PATIE_NAME, PATIE_BIRTH, PATIE_GEN
+        FROM HOS_REC R, HOS_PATIE P
+        WHERE REC_STATUS = '대기'
+        AND R.PATIE_NUM = P.PATIE_NUM;
+    </select>
+
+    <!--진료 환자 리스트-->
+    <select id="selectIngPatie" resultMap="rec">
+        SELECT REC_NUM,  DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i'), IS_REC, REC_STATUS, REC_DETAIL, P.PATIE_NUM,
+        S.STAFF_NUM, PATIE_NAME, PATIE_BIRTH, PATIE_GEN, A.PART_NUM, PART_NAME, STAFF_NAME, S.STAFF_NUM
+        FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART A
+        WHERE REC_STATUS = '진료'
+        AND R.PATIE_NUM = P.PATIE_NUM
+        AND R.STAFF_NUM = S.STAFF_NUM
+        AND A.PART_NUM=S.PART_NUM;
+    </select>
+
+    <!--진료환자 변경 버튼-->
+    <update id="updateStatus">
+        UPDATE HOS_REC
+        SET
+        REC_STATUS = '진료'
+        WHERE REC_NUM = #{recNum};
+    </update>
+
+    <!--진료완료 버튼-->
+    <update id="endStatus">
+        UPDATE HOS_REC
+        SET
+        REC_STATUS = '끝'
+        WHERE REC_NUM = #{recNum};
+    </update>
 
 
 
