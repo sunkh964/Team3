@@ -4,16 +4,18 @@
 }
 
 .menu{
-  width: 80vw;
+  width: 65vw;
   margin: 0 auto;
   height: 60px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu > .menu-ul{
+  width: 90%;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
-  margin: 0;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -34,6 +36,14 @@
   color:#55679C ;
   border-bottom: 4px solid #55679C;
 }
+
+.menu .menu-icon{
+  line-height: 65px;
+  font-size: 2rem;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
 
 /* ================ 아울렛 ================ */
 .outlet{

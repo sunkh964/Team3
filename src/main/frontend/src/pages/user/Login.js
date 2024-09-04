@@ -115,8 +115,6 @@ function login2(){
   });
 }
 
-
-
   return (
     <div className='login'>
 <div class="box">
@@ -132,6 +130,18 @@ function login2(){
   <input type='password'  placeholder='Input your Password' name='staffPw' onChange={(e) => {changeLoginData2(e)}} />
   <button type='button' onClick={(e) => {login2()}} className='button-div'>로그인</button>
 </div>
+
+      <div className='login-foot'>
+        <div>
+          · 아이디 / 비밀번호 찾기
+          <div className='foot'>아이디 찾기</div>
+          <div>비밀번호 찾기</div>
+        </div>
+        <div>
+          · 회원가입하기
+          <div>회원가입</div>
+        </div>
+      </div>
     </div>
   );
 }

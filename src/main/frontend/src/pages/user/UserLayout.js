@@ -40,6 +40,8 @@ const UserLayout = () => {
           <li onClick={() => {navigate('/reserv')}}>진료예약</li>
           <li>고객서비스</li>
         </ul>
+        <div className='menu-icon'>
+        <i class="bi bi-list-task"></i></div>
       </div>
       
       <div className='outlet'><Outlet /></div>
