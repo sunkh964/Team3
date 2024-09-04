@@ -2,10 +2,7 @@ import React, { useEffect, useRef, useState} from 'react'
 import './UserHome.css'
 
 import axios from 'axios';
-<<<<<<< HEAD
-=======
 import { useNavigate } from 'react-router-dom';
->>>>>>> nohk
 
 const UserHome = () => {
    const navigate= useNavigate();
