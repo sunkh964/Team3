@@ -11,6 +11,12 @@
         <result column="PATIE_ADDR" property="patieAddr"/>
         <result column="PATIE_GEN" property="patieGen"/>
     </resultMap>
+
+        <insert id="insertPatie">
+                INSERT INTO HOS_PATIE(PATIE_NAME, PATIE_TEL, PATIE_BIRTH, PATIE_ADDR, PATIE_GEN)
+                VALUES(#{patieName}, #{patieTel}, #{patieBirth}, #{patieAddr}, #{patieGen});
+        </insert>
+
 </mapper>
 
 
