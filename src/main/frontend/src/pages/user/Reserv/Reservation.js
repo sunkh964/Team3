@@ -139,7 +139,7 @@ const Reservation = () => {
               </div>
               <div className='reservTime'>
                 
-                <DatePicker showTimeSelect={true} showTimeSelectOnly inline
+                <DatePicker  showTimeSelect={true} showTimeSelectOnly inline
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     timeIntervals={60}

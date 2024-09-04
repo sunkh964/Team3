@@ -52,6 +52,7 @@ function App() {
           <div className='head'>
             <div className='head-name' onClick={() => {navigate('/');}}>
               그린카페병원
+              <span><img src={'http://localhost:8080/images/logo.png'}/></span>
             </div>
             <div className='head-login'>
               {
