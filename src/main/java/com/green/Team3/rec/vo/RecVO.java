@@ -4,6 +4,8 @@ import com.green.Team3.patie.vo.PatieVO;
 import com.green.Team3.staff.vo.StaffVO;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class RecVO {
     private int recNum;
@@ -15,5 +17,6 @@ public class RecVO {
     private int staffNum;
     private StaffVO staffVO;
     private PatieVO patieVO;
+    private List<PatieVO> patieList;
 
 }
