@@ -114,8 +114,8 @@
             , #{staffNum}
             , #{color}
             <if test='allDay == true'>
-                , DATE_FORMAT(#{start}, '%Y-%m-%d')
-                , DATE_FORMAT(#{end}, '%Y-%m-%d')
+                , DATE_FORMAT(#{start}, '%Y-%m-%d %H:%i')
+                , DATE_FORMAT(#{end}, '%Y-%m-%d %H:%i')
                 , 'Y'
             </if>
             <if test='allDay == false'>
@@ -126,23 +126,29 @@
         );
     </insert>
 
+    <!-- 일정 수정 -->
+    <update id="modifyEvent">
+        UPDATE hos_schedule SET
+        SCH_TITLE = #{title}
+        , SCH_CONTENT = #{description}
+        , COLOR = #{color}
+        , ALL_DAY = #{allDay}
+        <if test='allDay.equals("Y")'>
+            , SCH_SDATE = #{start}
+            , SCH_EDATE = #{end}
+        </if>
+        <if test='allDay.equals("N")'>
+            , SCH_SDATE = DATE_FORMAT(#{start}, '%Y-%m-%d %H:%i')
+            , SCH_EDATE = DATE_FORMAT(#{end}, '%Y-%m-%d %H:%i')
+        </if>
+        WHERE SCH_NUM = #{schNum};
+    </update>
+
     <!-- 일정 삭제 -->
     <delete id="deleteEvent">
         DELETE FROM HOS_SCHEDULE
         WHERE SCH_NUM = #{schNum}
     </delete>
-
-    <!-- 일정 수정 -->
-    <update id="modifyEvent">
-        UPDATE hos_schedule SET
-            SCH_TITLE = #{title}
-            , SCH_CONTENT = #{description}
-            , COLOR = #{color}
-            , SCH_SDATE = #{start}
-            , SCH_EDATE = #{end}
-            , ALL_DAY
-        WHERE SCH_NUM = #{schNum};
-    </update>
 
     <!-- 진료 + 개인 일정 조회 -->
     <select id="getAllSchedule" resultMap="doctorSchedule">
@@ -157,7 +163,7 @@
 
     <!-- 진료 일정 상세 조회 -->
     <select id="getRecDetail" resultMap="recMapper.rec">
-        SELECT REC_NUM, REC_DATE, DATE_ADD(REC_DATE, INTERVAL 30 MINUTE) REC_EDATE, (SELECT PATIE_NAME FROM hos_patie WHERE PATIE_NUM = hos_rec.PATIE_NUM) PATIE_NAME, 'N', '#858585' COLOR, STAFF_NUM, 'N' PERSONAL_YN
+        SELECT REC_NUM, REC_DATE, DATE_ADD(REC_DATE, INTERVAL 30 MINUTE) REC_EDATE, (SELECT PATIE_NAME FROM hos_patie WHERE PATIE_NUM = hos_rec.PATIE_NUM) PATIE_NAME, 'N', '#858585' COLOR, STAFF_NUM, 'N' PERSONAL_YN, IFNULL(REC_DETAIL, '내용 없음') AS REC_DETAIL
         FROM HOS_REC
         WHERE REC_NUM = #{recNum}
     </select>

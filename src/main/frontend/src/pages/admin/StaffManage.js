@@ -41,8 +41,8 @@ const StaffManage = () => {
 
   // ============================등록하기용============================
   // 이벤트 컬러칩 저장
-  // const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf', '#858585']
-  const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf']
+  const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf', '#858585']
+  // const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf']
 
   // 새 이벤트 저장할 곳 선언
   const [newEvent, setNewEvent] = useState({
@@ -92,8 +92,6 @@ const StaffManage = () => {
       start : new Date(e.dateStr + 'T09:00:00'),
       end : new Date(e.dateStr + 'T10:00:00')
     });
-    console.log(newEvent.start);
-    console.log(newEvent.end);
     setEventAddModal(true);
   }
 
@@ -170,10 +168,9 @@ const StaffManage = () => {
     newEvent.allDay = newEvent.allDay == 'Y' ? true : false;
     axios.post('/schedule/addEvent', newEvent)
     .then((res) => {
-      console.log(newEvent)
       console.log("등록 완료")})
+      navigate(0)
       .catch((error) => {
-      console.log(newEvent)
       alert(error)});
   }
 
@@ -305,14 +302,14 @@ const StaffManage = () => {
               <td>제목</td>
               <td colSpan={3}>
                 <span className='view'>{eventDetail.title}</span>
-                <input className='modify-form' name='title' defaultValue={eventDetail.title} onChange={(e) =>{changeEventDetail(e)}} />
+                <input className='modify-form' name='title' value={eventDetail.title} onChange={(e) =>{changeEventDetail(e)}} />
               </td>
             </tr>
             <tr>
               <td>내용</td>
               <td colSpan={3}>
                 <span className='view'>{eventDetail.description}</span>
-                <input className='modify-form' name='description' defaultValue={eventDetail.description} onChange={(e) => {changeEventDetail(e)}} />
+                <input className='modify-form' name='description' value={eventDetail.description} onChange={(e) => {changeEventDetail(e)}} />
               </td>
             </tr>
           </tbody>
@@ -327,39 +324,22 @@ const StaffManage = () => {
         <table className='detail-table'>
           <tbody>
             <tr>
-              <td>색상</td>
-              <td colSpan={3}>
-                <input type='radio' className={`color c${selectedColor} view`} value={eventDetail.color} ></input>
-                {
-                  colorBoxes.map((colorName, i) => {
-                    return (
-                      <input
-                        type='radio' key={i} name='color' className={`color c${i+1} modify-form`} value={colorName}
-                        onChange={(e) => {changeEventDetail(e)}}
-                        checked={ i+1 == selectedColor ? true : false}
-                      />
-                    )
-                  })
-                }
-              </td>
-            </tr>
-            <tr>
               <td>날짜</td>
               <td>
-                <span className='view'>{moment(eventDetail.start).format("YYYY-MM-DD HH:mm")}</span>
+                <span className='view'>{moment(eventDetail.recDate).format("YYYY-MM-DD HH:mm")}</span>
               </td>
               <td>→</td>
               <td>
-                <span className='view'>{moment(eventDetail.start).format("YYYY-MM-DD HH:mm")}</span>
+                <span className='view'>{moment(eventDetail.recEDate).format("YYYY-MM-DD HH:mm")}</span>
               </td>
             </tr>
             <tr>
               <td>환자명</td>
-              <td colSpan={3}><span className='view'>{eventDetail.title}</span></td>
+              <td colSpan={3}><span className='view'>{eventDetail.patieVO && eventDetail.patieVO.patieName}</span></td>
             </tr>
             <tr>
               <td>특이사항</td>
-              <td colSpan={3}><span className='view'>{eventDetail.description}</span></td>
+              <td colSpan={3}><span className='view'>{eventDetail.recDetail}</span></td>
             </tr>
           </tbody>
         </table>
@@ -386,9 +366,10 @@ const StaffManage = () => {
 
   // 일정 상세 모달 확인 버튼 함수
   function handleBtn2() {
+    console.log(eventDetail)
     if (modifyActive) {
       axios.post('/schedule/modifyEvent', eventDetail)
-      .then(() => {alert("수정 완료")})
+      .then(() => {alert("수정 완료"); navigate(0);})
       .catch((error) => {alert(error)});
     } else { return ; }
   }
@@ -438,15 +419,19 @@ const StaffManage = () => {
     <div className='calendar-div'>
       <FullCalendarContainer>
         <FullCalendar className='calendar'
-          plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
+        //  timezone={'local'}
+          // plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
+          plugins={[dayGridPlugin, interactionPlugin]}
           dateClick={handleDateClick}
           eventClick={eventClick}
           headerToolbar = {{
             left: 'today,prev,next',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,listWeek'}} 
+            // right: 'dayGridMonth,timeGridWeek,listWeek'}} 
+            right: 'dayGridMonth'}} 
           events={allList}
           locale={"ko"}
+          timeZone='local'
           dayCellContent={function (info) {
             var number = document.createElement("a");
             number.classList.add("fc-daygrid-day-number");
@@ -473,8 +458,6 @@ const StaffManage = () => {
       {
         eventDetailModal
         ?
-
-        // <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} setModifyActive={setModifyActive} />
         drawScheduleDetailModal()
         :
         null

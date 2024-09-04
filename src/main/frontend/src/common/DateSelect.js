@@ -24,7 +24,9 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
             <DatePicker
                showIcon
                selected={clickDate}
+               value={clickDate}
                onChange={(date) => {
+                  console.log('1111' +getFormattedDate(date));
                   setNewEvent({
                      ...newEvent,
                      allDay : 'Y',
@@ -41,6 +43,7 @@ const DateSelect = ({clickDate, newEvent, setNewEvent, targetName}) => {
             <DatePicker
                showIcon
                selected={clickDate}
+               value={clickDate}
                onChange={(date) => {
                   setNewEvent({
                      ...newEvent,

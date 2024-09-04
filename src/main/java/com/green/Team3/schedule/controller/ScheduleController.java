@@ -57,6 +57,13 @@ public class ScheduleController {
     @PostMapping("/modifyEvent")
     public void modifyEvent(@RequestBody ScheduleVO scheduleVO) {
         System.out.println(scheduleVO);
+
+        String startDate = DateTimeUtil.getFormattedStringDate(scheduleVO.getStart(), "yyyy-MM-dd HH:mm:ss");
+        String endDate = DateTimeUtil.getFormattedStringDate(scheduleVO.getEnd(), "yyyy-MM-dd HH:mm:ss");
+
+        scheduleVO.setStart(startDate);
+        scheduleVO.setEnd(endDate);
+
         scheduleService.modifyEvent(scheduleVO);
     }
 
@@ -71,6 +78,8 @@ public class ScheduleController {
 //    진료 일정 상세 조회
     @GetMapping("/getRecDetail/{recNum}")
     public RecVO getRecDetail(@PathVariable(name = "recNum") int recNum) {
-        return scheduleService.getRecDetail(recNum);
+        RecVO result =  scheduleService.getRecDetail(recNum);
+        System.out.println(result);
+        return result;
     }
 }
