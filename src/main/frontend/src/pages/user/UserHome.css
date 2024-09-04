@@ -2,15 +2,14 @@
 
 .home-div {
    display: flex;
-   width: 100vw;
 }
 
 /* ================ 이미지 ================ */
 
 .img {
-   overflow: hidden;
    height: 400px;
    width: 100%;
+   position: relative;
 }
 .img img{
    margin: auto;
@@ -26,6 +25,50 @@
    height: 100%;
    object-fit: cover; /* 이미지를 컨테이너에 맞게 조정 */
    object-position: center 40%; /* 중앙으로 위치 설정 */
+}
+
+.img .img-list{
+   display: flex;
+   width: 60px;
+   position: absolute;
+   color: white;
+   bottom:20px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: flex;
+   justify-content: space-between;
+}
+.img-item{
+   width: 15px;
+   height: 15px;
+   border: 1px solid white;
+   border-radius: 5px;
+}
+
+.img-item.active{
+   background-color: whitesmoke;
+}
+
+.img .img-btn{
+   width: 80%;
+   position: absolute;
+   bottom: 230px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: flex;
+   justify-content: space-between;
+}
+
+.img-btn i{
+   color: white;
+   cursor: pointer;
+   font-size: 4rem;
+   border: none;
+   background-color: rgba(0, 0, 0, 0);
+}
+.img-btn i:hover{
+   cursor: pointer;
+   color: gray;
 }
 
 

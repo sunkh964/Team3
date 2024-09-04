@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import './UserHome.css'
 
 import { useNavigate } from 'react-router-dom'
@@ -7,11 +7,6 @@ import axios from 'axios';
 const UserHome = () => {
    const navigate= useNavigate();
 
-const UserHome = () => {
-
-const UserHome = () => {
-
-   const navigate=useNavigate();
   //조회된 게시글 목록을 저장할 변수
    const [boardList, setBoardList] = useState([]);
 
@@ -28,11 +23,49 @@ const UserHome = () => {
    });
 }, []);
 
+// ============ 이미지 ===============//
+const [showImg, setShowImage] = useState(0);
 
+const img = [
+   'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png',
+   'http://localhost:8080/images/FIL_20240719140842069Pf20.jpg',
+   'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png'
+]
+
+// 이미지 이동
+ const prev = () => {
+   setShowImage((prev) => (prev === 0 ? img.length - 1 : prev - 1));
+ };
+ const next = () => {
+   setShowImage((prev) => (prev === img.length - 1 ? 0 : prev + 1));
+ };
+
+ // li 자동변경
+ const liChange = (i) =>{
+   setShowImage(i);
+ }
 
    return (
    <div className='home-div'>
-      <div className='img'> <img src={'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png'} /> </div>
+      <div className='img'> 
+         <img src={img[showImg]} />
+         <div>
+            <ul className='img-list'>
+               {
+                  img.map((img, i) => {
+                     return(
+                        <li key={i} className={`img-item ${i == showImg ? 'active' : ''}`}
+                        onClick={()=>{liChange(i)}}></li>
+                     );
+                  })
+               }
+            </ul>
+         </div>
+         <div className='img-btn'>
+            <i onClick={()=>{prev()}} class="bi bi-chevron-double-left"></i>
+            <i onClick={()=>{next()}} class="bi bi-chevron-double-right"></i>
+         </div>
+      </div>
 
       <div className='content'>
          <div className='home3'>
@@ -85,8 +118,6 @@ const UserHome = () => {
       </div>
    </div>
 )
-}
-}
 }
 
 

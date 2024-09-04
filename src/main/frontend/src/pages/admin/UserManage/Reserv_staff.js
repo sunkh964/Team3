@@ -11,22 +11,32 @@ const Reserv_staff = () => {
       <div className='title'>예약관리</div>
       <div className='reservStaff-content'>
         <div className='content-up'>
-          <div className='regReserv'>
-            <div>예약하기</div>
-            <div>
-              <table>
+          <div className='reservList'>
+            <div>예약환자 리스트</div>
+            <div >
+              <table className='reservUserList'>
+                <colgroup>
+                  <col width='10%'/>
+                  <col width='20%'/>
+                  <col width='16%'/>
+                  <col width='16%'/>
+                  <col width='16%'/>
+                  <col width='22%'/>
+                </colgroup>
+                <thead>
                   <tr>
+                    <td>No.</td>
+                    <td>예약 시간</td>
+                    <td>진료과</td>
+                    <td>담당의료진</td>
                     <td>이름</td>
-                    <td><input /></td>
                     <td>연락처</td>
-                    <td></td>
                   </tr>
-                </table>
-              <div>이름 <input /></div>
-              <div>연락처</div>
-              <div>예약시간<input /></div>
-              <div>진료과</div>
-              <div>담당의료진</div>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
             </div>
           </div>
           <div className='updateReserv'>
@@ -35,7 +45,7 @@ const Reserv_staff = () => {
           </div>
         </div>
         <div className='content-down'>
-          <div>예약 리스트</div>
+          <div>??????????</div>
           <div></div>
         </div>
       </div>

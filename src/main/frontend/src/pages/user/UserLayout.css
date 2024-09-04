@@ -1,7 +1,6 @@
 .userLayout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 전체 화면 높이를 기준으로 레이아웃 설정 */
 }
 
 .menu{
@@ -36,10 +35,12 @@
   border-bottom: 2px solid #55679C;
 }
 
+/* ================ 아울렛 ================ */
+.outlet{
+  width: 100%;
+}
 /* ================ 밑 ================ */
 .foot {
-  position: fixed; 
-  bottom: 0;
   background-color: #96a8ce;
   width: 100%;
   padding: 10px;
@@ -50,7 +51,7 @@
 .foot ul {
   display: flex;
   justify-content: space-around;
-  margin: 10px;
+  margin: 10px 0px;
 }
 .foot li{
   cursor: pointer;

@@ -1,5 +1,5 @@
 .App{
-  width: 100vw;
+  width: 100%;
 }
 /* ================ 헤더 ================*/
 .head-line{
@@ -8,7 +8,7 @@
 }
 .head{
   width: 80%;
-  height: 100px;
+  height: 90px;
   margin: auto;
   display: flex;
   align-items: center;

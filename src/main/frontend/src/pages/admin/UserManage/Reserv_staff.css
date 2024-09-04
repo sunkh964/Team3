@@ -26,16 +26,39 @@
 }
 
 /* ================== 예악하기 ================== */
-.content-up .regReserv{
+.content-up .reservList{
   background-color: #f5f5f5; /* 배경색 설정 */
   border-right: 1px solid #7e969e; /* 오른 테두리 설정 */
   width: 50%;
 }
 
-.content-up .regReserv > div:first-child{
+.content-up .reservList > div:first-child{
   background-color: #bedce6;
   border-bottom: 1px solid #7e969e;
   padding: 5px;
+}
+.reservUserList{
+  width: 100%;
+  text-align: center;
+}
+.reservUserList > thead{
+  background-color: #067da1;
+  color: white;
+  font-weight: bold;
+  border-bottom: 4px double #7e969e ;
+  position: sticky;
+  top: 0;
+}
+.reservUserList thead td{
+  padding: 10px 0px;
+}
+.reservUserList td{
+  border: 1px solid #dddddd ;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  text-align: center;
+  padding: 12px 0px;
 }
 
 /* ================== 예악정보 수정 ================== */
