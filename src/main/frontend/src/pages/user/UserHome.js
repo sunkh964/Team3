@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './UserHome.css'
 
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const UserHome = () => {
    const navigate= useNavigate();
