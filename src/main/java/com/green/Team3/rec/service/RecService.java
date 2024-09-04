@@ -18,4 +18,13 @@ public interface RecService {
 
     /*진료 완료*/
     void endStatus(RecVO recVO);
+
+    /*진료 이력 리스트*/
+    List<RecVO> selectHis(int patieNum);
+
+    /*차트 수정*/
+    RecVO selectRevise(RecVO recVO);
+
+    /*차트 업데이트*/
+    void updateRevise(RecVO recVO);
 }

@@ -20,6 +20,5 @@ public class RecVO {
     private String personalYN;
     private StaffVO staffVO;
     private PatieVO patieVO;
-    private List<PatieVO> patieList;
 
 }

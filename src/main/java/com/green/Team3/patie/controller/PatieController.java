@@ -30,4 +30,9 @@ public class PatieController {
     public List<PatieVO> searchPaties(@RequestBody(required = false) SearchVO searchVO){
         return patieService.searchPaties(searchVO);
     }
+
+    @GetMapping("/patieInfo/{patieNum}")
+    public PatieVO patieInfo(@PathVariable("patieNum") int patieNum){
+        return patieService.patieInfo(patieNum);
+    }
 }

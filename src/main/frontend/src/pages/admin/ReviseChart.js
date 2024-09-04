@@ -5,50 +5,43 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const ReviseChart = () => {
   const navigate = useNavigate();
-  const { memNum } = useParams();
+  const { patieNum, recNum } = useParams();
   const [reviseInfo, setReviseInfo] = useState({});
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
   const [updateChart, setUpdateChart] = useState({
-    isNow: '',
     partNum: 0,
     staffNum: 0,
-    illName: '',
-    illDetail: ''
+    recDetail: '',
+    recStatus: ''
   });
 
-  // 값 변경
-  function changeValue(e) {
+  // 값 변경 함수
+  const changeValue = (e) => {
     setUpdateChart({
       ...updateChart,
       [e.target.name]: e.target.value
     });
-    console.log(updateChart);
-  }
+  };
 
   // 정보 받아오기
   useEffect(() => {
-    axios.get(`/chart/reviseInfo/${memNum}`)
+    axios.get(`/rec/selectRevise/${patieNum}/${recNum}`)
       .then((res) => {
         console.log(res.data);
         setReviseInfo(res.data);
-        // 초기 값 설정
-        if (res.data.resMemList && res.data.resMemList.length > 0) {
-          const member = res.data.resMemList[0].memberList[0];
-          setUpdateChart(prevState => ({
-            ...prevState,
-            isNow: res.data.isNow || '',
-            partNum: res.data.partNum || 0,
-            staffNum: res.data.staffNum || 0,
-            illName: res.data.illName || '',
-            illDetail: res.data.illDetail || ''
-          }));
-        }
+        setUpdateChart({
+          ...updateChart,
+          partNum: res.data.partNum || 0,
+          staffNum: res.data.staffNum || 0,
+          recDetail: res.data.recDetail || '',
+          recStatus: res.data.recStatus || ''
+        });
       })
       .catch((error) => { console.log(error) });
-  }, [memNum]);
+  }, [patieNum, recNum]);
 
-  // 진료부서 조회
+  // 진료 부서 조회
   useEffect(() => {
     axios.get('/staff/getPart')
       .then((res) => {
@@ -67,42 +60,21 @@ const ReviseChart = () => {
         })
         .catch((error) => { console.log(error) });
     } else {
-      setStaffs([]); // `partNum`이 없는 경우 직원 목록 초기화
+      setStaffs([]);
     }
   }, [updateChart.partNum]);
 
   // 기본정보 값
-  const memList = reviseInfo.resMemList && reviseInfo.resMemList.length > 0 ? reviseInfo.resMemList[0].memberList[0] : '';
+  const patie = reviseInfo.patieVO;
 
+  // 버튼 클릭 시 업데이트
   const handleSubmit = () => {
-    // 차트 업데이트 API 호출
-    axios.put('/chart/updateChart', {
-      chartNum: reviseInfo.chartNum,
-      isNow: updateChart.isNow
-    })
-    .then(response => {
-      console.log('차트 업데이트 성공');
-      
-      // 병력 업데이트 API 호출
-      axios.put('/chart/updateHistory', {
-        chartNum: reviseInfo.chartNum,
-        illName: updateChart.illName,
-        illDetail: updateChart.illDetail,
-        partNum: updateChart.partNum,
-        staffNum: updateChart.staffNum
+    axios.put(`/rec/updateRevise/${patieNum}/${recNum}`, updateChart)
+      .then((res) => {
+        console.log(res.data);
+        navigate('/admin/chart');
       })
-      .then(response => {
-        console.log('병력 업데이트 성공');
-        alert('수정되었습니다.')
-        navigate(`admin/histry/${memNum}`)
-      })
-      .catch(error => {
-        console.log('병력 업데이트 실패:', error);
-      });
-    })
-    .catch(error => {
-      console.log('차트 업데이트 실패:', error);
-    });
+      .catch((error) => { console.log(error) });
   };
 
   return (
@@ -111,16 +83,21 @@ const ReviseChart = () => {
       <table>
         <thead>
           <tr>
-            <td colSpan={2}>차트 번호 {reviseInfo.chartNum} 번 </td>
+            <td colSpan={2}>진료 번호 {reviseInfo.recNum} </td>
           </tr>
           <tr>
-            <td><span>이름</span> : {memList.memName} </td>
-            <td><span>생년월일</span> : {memList.memBirth}</td>
+            <td><span>이름</span> : {patie?patie.patieName:null} </td>
+            <td><span>생년월일</span> : {patie? patie.patieBirth:null}</td>
+          </tr>
+          <tr>
+            <td><span>성별</span> : {patie?patie.patieGen:null} </td>
+            <td><span>연락처</span> : {patie? patie.patieTel:null}</td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><span>당일 진료</span> : <input type='text' name='isNow' value={updateChart.isNow} onChange={changeValue} /></td>
+            <td><span>예약 여부</span> : {reviseInfo.isRec}</td>
+            <td><span>접수 시간</span> : {reviseInfo.recDate}</td>
           </tr>
           <tr>
             <td><span>진료 부서</span> :
@@ -143,14 +120,18 @@ const ReviseChart = () => {
             </td>
           </tr>
           <tr>
-            <td><span>병명</span> : <input type='text' name='illName' value={updateChart.illName} onChange={changeValue} /></td>
-            <td><span>세부사항</span> : <input type='text' name='illDetail' value={updateChart.illDetail} onChange={changeValue} /></td>
+            <td><span>세부사항</span> : <input type='text' name='recDetail' value={updateChart.recDetail} onChange={changeValue} /></td>
+            <td><span>진료 상태</span> : 
+              <input type='radio' name='recStatus' value='대기' checked={updateChart.recStatus === '대기'} onChange={changeValue}/> 대기 
+              <input type='radio' name='recStatus' value='진료' checked={updateChart.recStatus === '진료'} onChange={changeValue}/> 진료 
+              <input type='radio' name='recStatus' value='끝' checked={updateChart.recStatus === '끝'} onChange={changeValue}/> 종료 
+            </td>
           </tr>
         </tbody>
       </table>
-      <button onClick={handleSubmit}>등록</button>
+      <button onClick={handleSubmit}>수정</button>
     </div>
   );
-}
+};
 
 export default ReviseChart;

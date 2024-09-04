@@ -43,4 +43,21 @@ public class RecController {
         recService.endStatus(recVO);
     }
 
+    /*진료 이력 리스트*/
+    @GetMapping("/selectHis/{patieNum}")
+    List<RecVO> selectHis(@PathVariable("patieNum")int patieNum){
+        return recService.selectHis(patieNum);
+    }
+
+    /*수정 기본 정보*/
+    @GetMapping("/selectRevise/{patieNum}/{recNum}")
+    RecVO selectRevise(RecVO recVO){
+        return recService.selectRevise(recVO);
+    }
+
+    @PutMapping("/updateRevise/{patieNum}/{recNum}")
+    public void updateRevise(@RequestBody RecVO recVO){
+        recService.updateRevise(recVO);
+    }
+
 }

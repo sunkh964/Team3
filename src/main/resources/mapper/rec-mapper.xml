@@ -16,7 +16,6 @@
         <result column="PERSONAL_YN" property="personalYN"/>
         <association property="staffVO" resultMap="staffMapper.staff" />
         <association property="patieVO" resultMap="patieMapper.patie" />
-        <collection property="patieList" resultMap="patieMapper.patie" />
     </resultMap>
 
     <insert id="insertRec">
@@ -29,7 +28,8 @@
         SELECT REC_NUM, REC_DATE,  DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i'), IS_REC, REC_STATUS, REC_DETAIL, P.PATIE_NUM, STAFF_NUM, PATIE_NAME, PATIE_BIRTH, PATIE_GEN
         FROM HOS_REC R, HOS_PATIE P
         WHERE REC_STATUS = '대기'
-        AND R.PATIE_NUM = P.PATIE_NUM;
+        AND R.PATIE_NUM = P.PATIE_NUM
+        ORDER BY REC_DATE;
     </select>
 
     <!--진료 환자 리스트-->
@@ -40,7 +40,8 @@
         WHERE REC_STATUS = '진료'
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
-        AND A.PART_NUM=S.PART_NUM;
+        AND A.PART_NUM=S.PART_NUM
+        ORDER BY REC_DATE;
     </select>
 
     <!--진료환자 변경 버튼-->
@@ -57,6 +58,36 @@
         SET
         REC_STATUS = '끝'
         WHERE REC_NUM = #{recNum};
+    </update>
+
+    <select id="selectHis" resultMap="rec">
+        SELECT *
+        FROM HOS_REC R, HOS_STAFF S, HOS_PART A, HOS_PATIE P
+        WHERE P.PATIE_NUM=R.PATIE_NUM
+        AND s.STAFF_NUM = R.STAFF_NUM
+        AND A.PART_NUM = s.PART_NUM
+        AND P.PATIE_NUM= #{patieNum}
+        ORDER BY REC_DATE DESC;
+    </select>
+
+    <select id="selectRevise" resultMap="rec">
+        SELECT *
+        FROM HOS_REC R, HOS_STAFF S, HOS_PART A, HOS_PATIE P
+        WHERE P.PATIE_NUM=R.PATIE_NUM
+        AND s.STAFF_NUM = R.STAFF_NUM
+        AND A.PART_NUM = s.PART_NUM
+        AND P.PATIE_NUM= #{patieNum}
+        AND REC_NUM= #{recNum};
+    </select>
+
+    <update id="updateRevise">
+        UPDATE HOS_REC
+        SET
+        REC_DETAIL = #{recDetail},
+        STAFF_NUM = #{staffNum},
+        REC_STATUS = #{recStatus}
+        WHERE PATIE_NUM= #{patieNum}
+        AND REC_NUM= #{recNum};
     </update>
 
 

@@ -32,6 +32,12 @@
         </if>
     </select>
 
+    <!--환자 기본 정보 가져오기-->
+    <select id="patieInfo" resultMap="patie">
+        SELECT * FROM HOS_PATIE
+        WHERE PATIE_NUM= #{patieNum};
+    </select>
+
 
 
 </mapper>

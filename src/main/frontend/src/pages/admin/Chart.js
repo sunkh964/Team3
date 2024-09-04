@@ -36,9 +36,7 @@ const Chart = () => {
     if (window.confirm('진료 환자로 변경하시겠습니까?')) {
       try {
         await axios.put('/rec/updateStatus', { recNum });
-        // 상태를 갱신하여 UI를 업데이트합니다
         setRecWaitPatieList(prevList => prevList.filter(patie => patie.recNum !== recNum));
-        // 진료 환자 리스트를 갱신합니다
         const updatedRecIngPatieList = await axios.get('/rec/selectIngPatie');
         setRecIngPatieList(updatedRecIngPatieList.data);
       } catch (error) {
@@ -54,9 +52,7 @@ const Chart = () => {
     if (window.confirm('환자 진료가 끝났습니까?')) {
       try {
         await axios.put('/rec/endStatus', { recNum });
-        // 상태를 갱신하여 UI를 업데이트합니다
         setRecIngPatieList(prevList => prevList.filter(patie => patie.recNum !== recNum));
-        // 대기 환자 리스트를 갱신합니다
         const updatedRecWaitPatieList = await axios.get('/rec/selectWaitPatie');
         setRecWaitPatieList(updatedRecWaitPatieList.data);
       } catch (error) {
@@ -110,14 +106,14 @@ const Chart = () => {
                 return(
                 <div className='todayRegContent' key={i}>
                   <div className='divF'>
-                    <div className='clickDetail' onClick={() => navigate(`/admin/history/${patie?patie.patieNum:null}`)}>이름 : {patie?patie.patieName:null}</div>
+                    <div className='clickDetail' onClick={() => navigate(`/admin/history/${patie.patieNum}`)}>이름 : {patie?patie.patieName:null}</div>
                     <div>생년월일 : {patie?patie.patieBirth:null}</div>
                     <div>성별: {patie?patie.patieGen:null}</div>
                   </div>
                   <div className='divFSec'>
                     <div>접수시간 : {recPatie.recDate}</div>
                     <div>
-                      <span onClick={() => navigate(`/admin/reviseChart/${recPatie.patieNum}`)}>수정</span>
+                      <span onClick={() => navigate(`/admin/reviseChart/${recPatie.patieNum}/${recPatie.recNum}`)}>수정</span>
                       <span onClick={() => delIsNow(recPatie.recNum)}>삭제</span>
                       <button onClick={() => goIsNow(recPatie.recNum)}>진료 환자 등록</button>
                     </div>
@@ -148,6 +144,7 @@ const Chart = () => {
                       <span>연락처 : {patie.patieTel}</span>
                       <span>성별 : {patie.patieGen}</span>
                     </div>
+                    <div className='put'><button onClick={()=>{navigate(`/admin/insertRec/${patie.patieNum}`)}}>진료추가</button></div>
                   </div>
                 )})}
               </div>

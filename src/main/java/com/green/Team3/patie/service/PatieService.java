@@ -16,5 +16,8 @@ public interface PatieService {
     /*환자 검색*/
     List<PatieVO> searchPaties(SearchVO searchVO);
 
+    /*환자 기본 정보*/
+    PatieVO patieInfo(int patieNum);
+
 
 }

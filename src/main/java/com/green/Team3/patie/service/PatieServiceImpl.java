@@ -27,4 +27,9 @@ public class PatieServiceImpl implements PatieService {
     public List<PatieVO> searchPaties(SearchVO searchVO) {
         return sqlSession.selectList("patieMapper.searchPaties", searchVO);
     }
+
+    @Override
+    public PatieVO patieInfo(int patieNum) {
+        return sqlSession.selectOne("patieMapper.patieInfo", patieNum);
+    }
 }

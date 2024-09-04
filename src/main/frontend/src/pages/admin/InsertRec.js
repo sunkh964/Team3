@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import './AddChart.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddChart = () => {
+const InsertRec = () => {
   const navigate = useNavigate();
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
-  
+  const {patieNum} = useParams();
+  const [patie, setPatie]=useState({})
   const [insertChart, setinsertChart] = useState({
-    patieNum: 0,
-    patieName: '',
-    patieBirth: '',
-    patieTel: '',
-    patieGen: '',
-    patieAddr: '',
+    patieNum: patieNum,
     staffNum: 0,
     partNum: 0,
     recStatus:'',
@@ -30,7 +25,7 @@ const AddChart = () => {
       .catch((error) => {
         console.error('Error fetching parts:', error);
       });
-  }, []);
+  }, {});
 
   // 담당의 조회
   useEffect(() => {
@@ -55,66 +50,50 @@ const AddChart = () => {
     });
   };
 
+  // 환자 기본정보
+  useEffect(()=>{
+    axios.get(`/patie/patieInfo/${patieNum}`)
+    .then((res)=>{
+    setPatie(res.data)
+    console.log(res.data)
+    })
+
+  },[])
+
  // 환자 및 진료 정보 등록
   const insertChartRes = () => {
-  // 필수 값이 비어 있는지 확인
-  if (!insertChart.patieName || !insertChart.patieTel || !insertChart.patieBirth ||
-      !insertChart.patieAddr || !insertChart.patieGen || !insertChart.staffNum || !insertChart.partNum) {
-    alert('모든 필드를 입력하세요.');
-    return;
-  }
-  
-  axios.post('/patie/insertPatie', insertChart)
-    .then((res) => {
-      const patieNum = res.data;
-      console.log(res.data);
-      
-      axios.post('/rec/insertRec', {
-        ...insertChart,
-        patieNum: patieNum
-      }).then((res) => {
-        console.log(res.data)
-        alert('등록되었습니다.')
-        navigate('/admin/chart')
-      }).catch((error) => {
-        console.error(error);
-      });
-    }).catch((error) => {
-      console.error(error);
-    });
+  axios.post('/rec/insertRec', insertChart)
+  .then((res) => {
+    alert('등록되었습니다.')
+    navigate('/admin/chart')
+  }).catch((error) => {console.error(error);});
 };
 
 
   return (
     <div className='addChartBack'>
       <div className='addChart'>
-        <div className='topTitle'>첫방문 환자 진료 정보 추가</div>
+        <div className='topTitle'>{patie.patieName} 님 진료 정보 추가</div>
         <div className='addTitle'>환자 기본 정보</div>
         <div className='addContent'>
-          <div className='cM'>
-            <span>이름 : </span>
-            <input type='text' name='patieName' value={insertChart.patieName} onChange={changeValue} />
-          </div>
+          <span>이름 : </span>
+          <span> {patie.patieName} </span>
           <div>
-            <span>주민등록번호 :</span>
-            <input type='text' name='patieBirth' value={insertChart.patieBirth} onChange={changeValue} />
+            <span>주민등록번호 :  </span>
+            <span> {patie.patieBirth} </span>
           </div>
         </div>
         <div className='addContent'>
-          <div>
-            <span>연락처 :</span>
-            <input type='text' name='patieTel' value={insertChart.patieTel} onChange={changeValue} />
-          </div>
-          <div className='cM'>
-            <span>성별 :</span>
-            <input type='text' name='patieGen' value={insertChart.memGen} onChange={changeValue} />
-          </div>
+          <span>연락처 :</span>
+          <span> {patie.patieTel} </span>
+        <div className='cM'>
+          <span>성별 :</span>
+          <span> {patie.patieGen} </span>
+        </div>
         </div>
         <div className='addContent'>
-          <div className='address'>
-            <span>주소 :</span>
-            <input type='text' name='patieAddr' value={insertChart.patieAddr} onChange={changeValue} />
-          </div>
+          <span>주소 :</span>
+          <span> {patie.patieAddr} </span>
         </div>
 
         <div className='addTitle title2'>진료 정보</div>
@@ -147,16 +126,14 @@ const AddChart = () => {
         <div className='addContent'>
         </div>
         <div className='addContent'>
-          <div className='address'>
-            <span> 증상 :</span>
-            <input type='text' name='recDetail' onChange={changeValue} />
-          </div>
+          <span> 증상 :</span>
+          <input type='text' name='recDetail' onChange={changeValue} className='recDetail' />
         </div>
 
-        <button className='addChartBtn' onClick={insertChartRes}>환자 등록</button>
+        <button className='addChartBtn' onClick={insertChartRes}>진료 정보 등록</button>
       </div>
     </div>
   );
-};
+}
 
-export default AddChart;
+export default InsertRec
