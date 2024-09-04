@@ -7,14 +7,29 @@
   border-bottom: 1px solid lightgray;
 }
 .head{
-  width: 80%;
+  border: 1px solid;
+  width: 60%;
   height: 90px;
   margin: auto;
   display: flex;
   align-items: center;
 }
+.head1{
+  background-color:rgb(105, 138, 168);
+  padding: 10px 15px;
+  display: flex;
+  border-radius: 20px;
+  color: white;
+}
+.head1:hover{
+  text-decoration-line: underline;
+  text-underline-offset: 5px;
+  cursor: pointer;
+  background-color: lightslategray;
+}
+
 .head-name{
-  width: 100%;
+  width: 90%;
   color: #1E2A5E ;
   text-align: center;
   font-weight: bold;
@@ -28,7 +43,8 @@
 }
 /* ----- 로그인, 회원가입 ----- */
 .head-login{
-  width: 80%;
+  border:  1px dotted;
+  width: 60%;
   position: absolute;
   top: 40px;
   color: gray;

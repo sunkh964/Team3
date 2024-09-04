@@ -50,6 +50,7 @@ function App() {
     <div className="App">
         <div className='head-line'>
           <div className='head'>
+            <div className='head1'>상담예약 √</div>
             <div className='head-name' onClick={() => {navigate('/');}}>
               그린카페병원
               <span><img src={'http://localhost:8080/images/logo.png'}/></span>
@@ -84,6 +85,10 @@ function App() {
             </li>
           </ul>
           }
+            </div>
+            <div>
+              <div></div>
+              <div></div>
             </div>
           </div>
         </div>
