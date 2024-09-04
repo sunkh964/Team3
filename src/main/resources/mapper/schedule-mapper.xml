@@ -131,4 +131,14 @@
         WHERE SCH_NUM = #{schNum};
     </update>
 
+    <select id="getAllSchedule" resultMap="schedule">
+        SELECT SCH_NUM, SCH_SDATE, SCH_EDATE, SCH_TITLE, ALL_DAY, COLOR, STAFF_NUM, 'Y' AS PERSONAL_YN
+        FROM hos_schedule
+        WHERE STAFF_NUM = #{staffNum}
+        UNION ALL
+        SELECT REC_NUM, REC_DATE, DATE_ADD(REC_DATE, INTERVAL 30 MINUTE), (SELECT PATIE_NAME FROM hos_patie WHERE PATIE_NUM = hos_rec.PATIE_NUM), 'N', '#858585', STAFF_NUM, 'N'
+        FROM hos_rec;
+        WHERE STAFF_NUM = #{staffNum}
+    </select>
+
 </mapper>

@@ -41,7 +41,8 @@ const StaffManage = () => {
 
   // ============================등록하기용============================
   // 이벤트 컬러칩 저장
-  const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf', '#858585']
+  // const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf', '#858585']
+  const colorBoxes = ['#ff6363', '#fac35c', '#95c570', '#8dd4f5', '#a89de4', '#f88dbf']
 
   // 새 이벤트 저장할 곳 선언
   const [newEvent, setNewEvent] = useState({
