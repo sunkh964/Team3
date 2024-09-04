@@ -1,5 +1,7 @@
 package com.green.Team3.schedule.service;
 
+import com.green.Team3.rec.vo.RecVO;
+import com.green.Team3.schedule.vo.DoctorScheduleVO;
 import com.green.Team3.schedule.vo.ScheduleVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +48,17 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void modifyEvent(ScheduleVO scheduleVO) {
         sqlSession.update("scheduleMapper.modifyEvent", scheduleVO);
+    }
+
+//    진료 + 개인 일정 조회
+    @Override
+    public List<DoctorScheduleVO> getAllSchedule(int staffNum) {
+        return sqlSession.selectList("scheduleMapper.getAllSchedule", staffNum);
+    }
+
+//    진료 일정 상세 조회
+    @Override
+    public RecVO getRecDetail(int recNum) {
+        return sqlSession.selectOne("scheduleMapper.getRecDetail", recNum);
     }
 }

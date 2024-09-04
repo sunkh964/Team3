@@ -1,9 +1,7 @@
 package com.green.Team3.member.controller;
 
 import com.green.Team3.member.service.MemberService;
-import com.green.Team3.member.service.MemberServiceImpl;
 import com.green.Team3.member.vo.MemberVO;
-import com.green.Team3.member.vo.SearchVO;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,9 +53,4 @@ public class MemberController {
         return memberVO;
     }
 
-    /* 환자 검색 기능*/
-    @PostMapping("/searchMem")
-    public List<MemberVO> searchMem(@RequestBody(required = false)SearchVO searchVO){
-        return memberService.searchMem(searchVO);
-    }
 }

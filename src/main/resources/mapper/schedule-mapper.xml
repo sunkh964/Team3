@@ -11,7 +11,20 @@
         <result column="COLOR" property="color"/>
         <result column="DESCRIPTION" property="description"/>
         <result column="ALL_DAY" property="allDay"/>
+        <result column="PERSONAL_YN" property="personalYN"/>
         <association property="staffVO" resultMap="staffMapper.staff" />
+    </resultMap>
+
+    <resultMap id="doctorSchedule" type="com.green.Team3.schedule.vo.DoctorScheduleVO">
+        <id column="SCH_NUM" property="schNum"/>
+        <result column="START" property="start"/>
+        <result column="END" property="end"/>
+        <result column="TITLE" property="title"/>
+        <result column="COLOR" property="color"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="ALL_DAY" property="allDay"/>
+        <result column="PERSONAL_YN" property="personalYN"/>
+        <result column="STAFF_NUM" property="staffNum"/>
     </resultMap>
 
 <!--    <resultMap id="event" type="com.green.Team3.schedule.vo.EventVO">-->
@@ -131,14 +144,22 @@
         WHERE SCH_NUM = #{schNum};
     </update>
 
-    <select id="getAllSchedule" resultMap="schedule">
-        SELECT SCH_NUM, SCH_SDATE, SCH_EDATE, SCH_TITLE, ALL_DAY, COLOR, STAFF_NUM, 'Y' AS PERSONAL_YN
+    <!-- 진료 + 개인 일정 조회 -->
+    <select id="getAllSchedule" resultMap="doctorSchedule">
+        SELECT SCH_NUM, SCH_SDATE START, SCH_EDATE END, SCH_TITLE TITLE, ALL_DAY, COLOR, STAFF_NUM, 'Y' AS PERSONAL_YN
         FROM hos_schedule
         WHERE STAFF_NUM = #{staffNum}
         UNION ALL
         SELECT REC_NUM, REC_DATE, DATE_ADD(REC_DATE, INTERVAL 30 MINUTE), (SELECT PATIE_NAME FROM hos_patie WHERE PATIE_NUM = hos_rec.PATIE_NUM), 'N', '#858585', STAFF_NUM, 'N'
-        FROM hos_rec;
+        FROM hos_rec
         WHERE STAFF_NUM = #{staffNum}
+    </select>
+
+    <!-- 진료 일정 상세 조회 -->
+    <select id="getRecDetail" resultMap="recMapper.rec">
+        SELECT REC_NUM, REC_DATE, DATE_ADD(REC_DATE, INTERVAL 30 MINUTE) REC_EDATE, (SELECT PATIE_NAME FROM hos_patie WHERE PATIE_NUM = hos_rec.PATIE_NUM) PATIE_NAME, 'N', '#858585' COLOR, STAFF_NUM, 'N' PERSONAL_YN
+        FROM HOS_REC
+        WHERE REC_NUM = #{recNum}
     </select>
 
 </mapper>

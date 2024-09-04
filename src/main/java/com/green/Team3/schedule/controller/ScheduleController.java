@@ -1,6 +1,8 @@
 package com.green.Team3.schedule.controller;
 
+import com.green.Team3.rec.vo.RecVO;
 import com.green.Team3.schedule.service.ScheduleService;
+import com.green.Team3.schedule.vo.DoctorScheduleVO;
 import com.green.Team3.schedule.vo.ScheduleVO;
 import com.green.Team3.util.DateTimeUtil;
 import jakarta.annotation.Resource;
@@ -56,5 +58,19 @@ public class ScheduleController {
     public void modifyEvent(@RequestBody ScheduleVO scheduleVO) {
         System.out.println(scheduleVO);
         scheduleService.modifyEvent(scheduleVO);
+    }
+
+//    진료 + 개인 일정 조회
+    @GetMapping("/getAllSchedule/{staffNum}")
+    public List<DoctorScheduleVO> getAllSchedule(@PathVariable(name = "staffNum") int staffNum) {
+        List<DoctorScheduleVO> list= scheduleService.getAllSchedule(staffNum);
+        System.out.println(list);
+        return list;
+    }
+
+//    진료 일정 상세 조회
+    @GetMapping("/getRecDetail/{recNum}")
+    public RecVO getRecDetail(@PathVariable(name = "recNum") int recNum) {
+        return scheduleService.getRecDetail(recNum);
     }
 }

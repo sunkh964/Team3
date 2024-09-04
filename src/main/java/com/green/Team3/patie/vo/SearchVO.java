@@ -1,4 +1,4 @@
-package com.green.Team3.member.vo;
+package com.green.Team3.patie.vo;
 
 import lombok.Data;
 
