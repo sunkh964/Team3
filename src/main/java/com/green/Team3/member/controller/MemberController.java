@@ -2,6 +2,8 @@ package com.green.Team3.member.controller;
 
 import com.green.Team3.member.service.MemberService;
 import com.green.Team3.member.vo.MemberVO;
+import com.green.Team3.part.vo.PartVO;
+import com.green.Team3.patie.vo.PatieVO;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ public class MemberController {
 
 //    로그인
     @PostMapping("/login")
-    public MemberVO login(@RequestBody MemberVO memberVO){
+    public MemberVO  login(@RequestBody MemberVO memberVO){
         return memberService.login(memberVO);
     }
 
