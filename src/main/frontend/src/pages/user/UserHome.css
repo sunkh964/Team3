@@ -7,7 +7,7 @@
 /* ================ 이미지 ================ */
 
 .home-div> .img {
-   height: 650px;
+   height: 600px;
    width: 100%;
    position: relative;
 }
@@ -23,7 +23,7 @@
 }
 .home-div .img .img2{
    width: 100%;
-   height: 98%;
+   height: 100%;
    top: 0px;
    left: 50%;
    transform: translateX(-50%);
@@ -80,7 +80,7 @@
 
 /* ============= 퀵메뉴 ============= */
 .quick{
-   width: 65vw;
+   width: 60vw;
    height: 250px;
    margin: auto;
    background-color: rgb(138, 156, 173);
@@ -134,14 +134,13 @@
 }
 
 
-
 /* ================ 내용 ================ */
 
 .content{
    display: flex;
-   width: 65vw;
+   width: 60vw;
    height: 300px;
-   margin: 100px auto;
+   margin: 140px auto;
    gap: 30px;   
 }
 
@@ -174,7 +173,7 @@
 .content-list > div > div:first-child{
    font-size: 1.5rem;
    font-weight: 600;
-   margin-bottom: 15px;
+   margin-bottom: 20px;
 }
 
 .content-list > div > div:nth-child(2) >div{
@@ -193,16 +192,21 @@
 
 .content-list1{
    background: #2dbc8c url('http://localhost:8080/images/ico_set_renewmain202209_1.png') no-repeat;
-    background-position: 10px 10px;
+    background-position: -5px 5px;
 }
 .content-list2{
    background-color: #15989f;
+   background: #15989f url('http://localhost:8080/images/ico_set_renewmain202209_4.png') no-repeat;
+    background-position: -5px 5px;
 }
 .content-list3{
    background-color: #0797c1;
+   background: #0797c1 url('http://localhost:8080/images/ico_set_renewmain202209_5.png') no-repeat;
+    background-position: -5px 5px;
 }
 .content-list4{
-   background-color: #1360b6;
+   background: #1360b6 url('http://localhost:8080/images/ico_set_renewmain202209_2.png') no-repeat;
+    background-position: -2px 5px;
 }
 
 /* 게시글 작성 */

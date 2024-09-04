@@ -1,13 +1,17 @@
 .login{
 display: flex;
-width: 100%;
+flex-direction: row;
+align-items: center;
+width: 65%;
+height: 67.6vh;
 margin: auto;
 }
 
 .box {
   position: relative;
   margin: 50px auto;
-  width: 30%;
+  width: 450px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +40,8 @@ margin: auto;
 .box1 {
   position: relative;
   margin: 50px auto;
-  width: 30%;
+  width: 450px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
