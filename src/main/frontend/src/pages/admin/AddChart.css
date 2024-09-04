@@ -32,14 +32,22 @@
   margin-left: auto;
   padding: 5px;
 }
+.recDetail{
+  height: 100px;
+  width: 1000px !important;
+}
 .cM>input{
   width: 150px !important;
 }
 .addChart>.addContent>div:first-child{
   width: 50%;
 }
-.addContent span{
+.addContent span:first-child{
   width: 150px;
+  display: inline-block;
+}
+.addContent span:nth-child(2){
+  width: 250px;
   display: inline-block;
 }
 .addContent div:first-child>span{

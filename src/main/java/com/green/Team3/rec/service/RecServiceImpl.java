@@ -4,6 +4,7 @@ import com.green.Team3.rec.vo.RecVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class RecServiceImpl implements RecService{
     private SqlSessionTemplate sqlSession;
 
     @Override
-    public void insertRec(RecVO recVO) {
+    public void insertRec(@RequestBody RecVO recVO) {
         sqlSession.insert("recMapper.insertRec", recVO);
     }
 
@@ -35,5 +36,20 @@ public class RecServiceImpl implements RecService{
     @Override
     public void endStatus(RecVO recVO) {
         sqlSession.update("recMapper.endStatus", recVO);
+    }
+
+    @Override
+    public List<RecVO> selectHis(int patieNum) {
+        return sqlSession.selectList("recMapper.selectHis", patieNum);
+    }
+
+    @Override
+    public RecVO selectRevise(RecVO recVO) {
+        return sqlSession.selectOne("recMapper.selectRevise", recVO);
+    }
+
+    @Override
+    public void updateRevise(RecVO recVO) {
+        sqlSession.update("recMapper.updateRevise", recVO);
     }
 }

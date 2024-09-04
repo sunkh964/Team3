@@ -1,17 +1,22 @@
 .historyDiv{
   width: 100%;
   height: 100%;
+  background-color: #f1f1f1;
 }
 .hisTitle{
-  border: 1px solid;
-  background-color: #0797c1;
-  color: white;
+  background-color: #dddddd;
   padding: 5px;
   font-size: 20px;
 }
-.hisContent{
+.historyDiv .hisContent{
   background-color: #bedce6;
   margin-bottom: 5px;
+  margin: 5px;
+}
+.historyDiv .topContent{
+  color: white;
+  margin-top: 10px;
+  background-color: #0797c1;
 }
 .con{
   cursor: pointer;

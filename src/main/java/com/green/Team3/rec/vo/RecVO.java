@@ -17,6 +17,5 @@ public class RecVO {
     private int staffNum;
     private StaffVO staffVO;
     private PatieVO patieVO;
-    private List<PatieVO> patieList;
 
 }

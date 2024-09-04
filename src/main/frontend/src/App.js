@@ -27,6 +27,7 @@ import Qdetail from './pages/user/Qdetail';
 import Reserv_staff from './pages/admin/UserManage/Reserv_staff';
 import UserHistory from './pages/user/UserHistory';
 import Notice from './pages/user/Notice';
+import InsertRec from './pages/admin/InsertRec';
 
 
 
@@ -131,8 +132,10 @@ function App() {
               <Route path='chart' element={<Chart />} />
               {/* 관리자용 - 환자 진료 이력 */}
               <Route path='history/:patieNum' element={<History/>}/>
-              {/* 관리자용 - 당일 예약 환자 추가 */}
+              {/* 관리자용 - 첫방문 환자 추가 */}
               <Route path='addChart' element={<AddChart/>}/>
+              {/* 관리자용 - 재방문 환자 추가 */}
+              <Route path='insertRec/:patieNum' element={<InsertRec/>}/>
               {/* 관리자용 - 차트 수정 */}
               <Route path='reviseChart/:patieNum/:recNum' element={<ReviseChart/>}/>
 
