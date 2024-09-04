@@ -66,27 +66,23 @@ const StaffManage = () => {
   // 이벤트 상세 모달창 표시 여부
   const [eventDetailModal, setEventDetailModal] = useState(false);
   const [modifyActive, setModifyActive] = useState(false);
+  const [isPersonal, setIsPersonal] = useState(true);
 
   // ============================불러오기용============================
   // 리스트 불러오기
   useEffect(() => {
     // axios.get('/schedule/getAllList')
-    axios.get(`/schedule/getOneList/${loginInfo.staffNum}`)
+    // axios.get(`/schedule/getOneList/${loginInfo.staffNum}`)
+    axios.get(`/schedule/getAllSchedule/${loginInfo.staffNum}`)
     .then((res) => {
-      console.log(res.data);
-
       const result =  res.data.map((each) => {
         const a = each.allDay == 'Y'  ? true : false;
         return {...each, allDay : a}
       })
-
-      console.log(result)
-
       setAllList(result);
     })
     .catch((error) => {alert(error);});
   }, []);
-  console.log(allList);
 
   // ============================등록하기용============================
   // 날짜 클릭 시 연결된 함수(이벤트 추가)
@@ -193,26 +189,42 @@ const StaffManage = () => {
   // ============================조회하기용============================
   // 일정 클릭 시 연결된 함수(이벤트 조회)
   const eventClick = (e) => {
+    // console.log(e.event.extendedProps.personalYN);
     setSchNum(e.event.extendedProps.schNum);
+    if(e.event.extendedProps.personalYN == 'Y') {
+      setIsPersonal(true);
+    } else {
+      setIsPersonal(false);
+    }
     setEventDetailModal(true);
   }
 
   //DetailModal이 활성화되면 상세 정보를 조회
   useEffect(() => {
     if(eventDetailModal){
-      axios.get(`/schedule/getDetail/${schNum}`)
-      .then((res) => {
-        console.log(res.data)
+      if(isPersonal) {
+        axios.get(`/schedule/getDetail/${schNum}`)
+        .then((res) => {
+          console.log(res.data)
 
-        setEventDetail({
-          ...res.data,
-          allDay : res.data.allDay == 'Y' ? true : false,
-          start : new Date(res.data.start),
-          end : new Date(res.data.end)
-        });
-        //setEventDetail(res.data);
-      })
-    .catch((error) => {alert(error)});
+          setEventDetail({
+            ...res.data,
+            allDay : res.data.allDay == 'Y' ? true : false,
+            start : new Date(res.data.start),
+            end : new Date(res.data.end)
+          });
+        })
+        .catch((error) => {alert(error)});
+      } else {
+        console.log(schNum);
+        axios.get(`/schedule/getRecDetail/${schNum}`)
+        .then((res) => {
+          console.log(res.data);
+          setEventDetail(res.data);
+        })
+        .catch((error) => {alert(error)});
+      }
+      
     }
   }, [eventDetailModal])
 
@@ -252,7 +264,6 @@ const StaffManage = () => {
                 <input type='radio' className={`color c${selectedColor} view`} value={eventDetail.color} ></input>
                 {
                   colorBoxes.map((colorName, i) => {
-                    console.log((i + 1) + '  / ' + selectedColor)
                     return (
                       <input
                         type='radio' key={i} name='color' className={`color c${i+1} modify-form`} value={colorName}
@@ -310,6 +321,56 @@ const StaffManage = () => {
     );
   }
 
+  function drawModalContent3() {
+    return (
+      <div className='event-modal-div'>
+        <table className='detail-table'>
+          <tbody>
+            <tr>
+              <td>색상</td>
+              <td colSpan={3}>
+                <input type='radio' className={`color c${selectedColor} view`} value={eventDetail.color} ></input>
+                {
+                  colorBoxes.map((colorName, i) => {
+                    return (
+                      <input
+                        type='radio' key={i} name='color' className={`color c${i+1} modify-form`} value={colorName}
+                        onChange={(e) => {changeEventDetail(e)}}
+                        checked={ i+1 == selectedColor ? true : false}
+                      />
+                    )
+                  })
+                }
+              </td>
+            </tr>
+            <tr>
+              <td>날짜</td>
+              <td>
+                <span className='view'>{moment(eventDetail.start).format("YYYY-MM-DD HH:mm")}</span>
+              </td>
+              <td>→</td>
+              <td>
+                <span className='view'>{moment(eventDetail.start).format("YYYY-MM-DD HH:mm")}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>환자명</td>
+              <td colSpan={3}><span className='view'>{eventDetail.title}</span></td>
+            </tr>
+            <tr>
+              <td>특이사항</td>
+              <td colSpan={3}><span className='view'>{eventDetail.description}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  function drawFooterContent3() {
+    return ;
+  }
+
   // 일정 상세 모달 footerContent 내용
   function drawFooterContent2() {
     if (!modifyActive) {
@@ -363,6 +424,16 @@ const StaffManage = () => {
   }
 
 
+  function drawScheduleDetailModal(){
+    if(isPersonal){
+      return (
+        <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} setModifyActive={setModifyActive} />
+      )
+    }else{
+      return (<Modal content={drawModalContent3} footerContent={drawFooterContent3} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} setModifyActive={setModifyActive} />);
+    }
+  }
+
   return (
     <div className='calendar-div'>
       <FullCalendarContainer>
@@ -400,10 +471,15 @@ const StaffManage = () => {
 
       {/* 일정 상세 모달창 */}
       {
-        eventDetailModal ? <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} setModifyActive={setModifyActive} />
+        eventDetailModal
+        ?
+
+        // <Modal content={drawModalContent2} footerContent={drawFooterContent2} setIsShow={setEventDetailModal} clickCloseBtn={handleBtn2} setModifyActive={setModifyActive} />
+        drawScheduleDetailModal()
         :
         null
       }
+
     </div>
   )
 }

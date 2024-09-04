@@ -10,11 +10,14 @@ import java.util.List;
 public class RecVO {
     private int recNum;
     private String recDate;
+    private String recEDate;
     private String isRec;
     private String recStatus;
     private String recDetail;
     private int patieNum;
     private int staffNum;
+    private String color;
+    private String personalYN;
     private StaffVO staffVO;
     private PatieVO patieVO;
     private List<PatieVO> patieList;
