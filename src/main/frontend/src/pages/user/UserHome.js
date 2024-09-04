@@ -49,6 +49,7 @@ const img = [
    <div className='home-div'>
       <div className='img'> 
          <img src={img[showImg]} />
+         <img className='img2' src={img[showImg]} />
          <div>
             <ul className='img-list'>
                {
@@ -66,6 +67,36 @@ const img = [
             <i onClick={()=>{next()}} class="bi bi-chevron-double-right"></i>
          </div>
       </div>
+
+      <div className='quick'>
+         <div>
+            <div className='qTitle'>Quick Menu</div>
+            <div className='quickList'>
+               <div className='qMenu'>
+                  <div className='qIcon'><img src={'http://localhost:8080/images/quick1.png'}/></div>
+                  <div>제증명서류 발급</div>
+               </div>
+               <div className='qMenu'>
+                  <div className='qIcon'><img src={'http://localhost:8080/images/quick2.png'}/></div>
+                  <div>의무기록사본 발급</div>
+               </div>
+               <div className='qMenu'>
+                  <div className='qIcon'><img src={'http://localhost:8080/images/quick4.png'}/></div>
+                  <div>주요 전화번호</div>
+               </div>
+               <div className='qMenu'>
+                  <div className='qIcon'><img src={'http://localhost:8080/images/quick5.png'}/></div>
+                  <div>주차안내</div>
+               </div>
+               <div className='qMenu'>
+                  <div className='qIcon'><img src={'http://localhost:8080/images/quick3.png'}/></div>
+                  <div>채용정보시스템</div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div className='empty'></div>
 
       <div className='content'>
          <div className='home3'>
@@ -101,7 +132,7 @@ const img = [
                <div>이용안내</div>
                <div>
                <div>시설 안내</div>
-               <div>증명서발급</div>
+               <div>원내배치도</div>
                </div>
             </div>
             <div className='content-list3'>

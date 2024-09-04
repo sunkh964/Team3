@@ -15,7 +15,7 @@
     <select id="boardList" resultMap="board">
         SELECT BOARD_NUM
         , BOARD_TITLE
-        , BOARD_DATE
+        , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE
         FROM HOS_BOARD
     </select>
 </mapper>

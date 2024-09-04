@@ -6,25 +6,32 @@
 
 /* ================ 이미지 ================ */
 
-.img {
-   height: 400px;
+.home-div> .img {
+   height: 650px;
    width: 100%;
    position: relative;
 }
-.img img{
-   margin: auto;
-   object-fit: cover;
-   object-position: center;
-   height: 400px; /* 높이를 조정하여 이미지 크기 조절 */
-   width: 100%;
-   position: relative;
-}
-
-.img img {
+.home-div .img img{
    width: 100%;
    height: 100%;
-   object-fit: cover; /* 이미지를 컨테이너에 맞게 조정 */
-   object-position: center 40%; /* 중앙으로 위치 설정 */
+   margin: auto;
+   object-fit: cover;
+   object-position: center center; 
+   height: 100%; /* 높이를 조정하여 이미지 크기 조절 */
+   position: relative;
+   background-color: rgba(0, 0, 0, 0.3);
+}
+.home-div .img .img2{
+   width: 100%;
+   height: 98%;
+   top: 0px;
+   left: 50%;
+   transform: translateX(-50%);
+   margin: auto;
+   object-fit: contain;
+   object-position: center center; 
+   position: absolute;
+   opacity: 1;
 }
 
 .img .img-list{
@@ -32,7 +39,7 @@
    width: 60px;
    position: absolute;
    color: white;
-   bottom:20px;
+   bottom:150px;
    left: 50%;
    transform: translateX(-50%);
    display: flex;
@@ -52,7 +59,7 @@
 .img .img-btn{
    width: 80%;
    position: absolute;
-   bottom: 230px;
+   bottom: 300px;
    left: 50%;
    transform: translateX(-50%);
    display: flex;
@@ -71,6 +78,60 @@
    color: gray;
 }
 
+/* ============= 퀵메뉴 ============= */
+.quick{
+   width: 65vw;
+   height: 250px;
+   margin: auto;
+   background-color: rgb(138, 156, 173);
+   display: flex;
+   flex-direction: column;
+   padding: 15px;
+   position: absolute;
+   bottom: 80px;
+   left: 50%;
+   transform: translateX(-50%);
+}
+.quick > div{
+   background-color: white;
+   padding: 20px 30px;
+}
+.qTitle{
+   color: gray;
+   letter-spacing: 5px;
+   font-size: 1.1rem;
+   margin-bottom: 10px;
+}
+.quickList{
+   display: grid;
+   grid-template-columns: repeat(5,1fr);
+   height: 80%;
+   padding: 10px 0px;
+}
+.qMenu{
+   text-align: center;
+   border-right: 1px solid #dddddd;
+   padding: 15px 0px;
+}
+.qMenu:last-child{
+   border-right: none;
+}
+.qMenu:hover{
+   cursor: pointer;
+   background-color: rgba(118, 140, 190, 0.1);
+   box-shadow: 1px 3px 6px lightgray;
+}
+.qIcon{
+   margin: auto;
+   width: 100px;
+   height: 80px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.qIcon img{
+   width: 45%;
+}
 
 
 
@@ -79,16 +140,17 @@
 .content{
    display: flex;
    width: 65vw;
-   height: 30vh;
-   margin: 30px auto;
-   gap: 30px;
+   height: 300px;
+   margin: 100px auto;
+   gap: 30px;   
 }
+
 .content .home3{
    padding: 15px;
-   width: 50%;
+   width: 40%;
    box-shadow: 3px 3px 7px #cccccc;
 }
-.content >div:last-child{
+.content .content-list{
    width: 60%;
    display: grid;
    grid-template-columns: repeat(2, 1fr);
@@ -181,3 +243,4 @@
 .home2 td{
    text-align: center;
 }
+
