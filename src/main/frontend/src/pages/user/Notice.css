@@ -1,0 +1,30 @@
+.noti-body{
+  margin: auto;
+  text-align: center;
+  width: 100vw;
+  height: 75vh;
+}
+.noti-text{
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 30px auto;
+}
+
+.noti-table{
+  margin: auto;
+  width: 60vw;
+  height: 85%;
+  font-size: 1.3rem;
+  line-height: 30px;
+  border: 1px solid black;
+
+}
+
+.noti-tr>td{
+  padding-bottom: 10px;
+  border: 1px solid rgb(24, 41, 75);
+}
+
+.Noti-map{
+  border-bottom: 1px solid black;
+}

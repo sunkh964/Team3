@@ -90,7 +90,7 @@ function checkId(){
           <input type='text' name='memBirth' onChange={(e)=>{changeJoinData(e)}} />
         </div>
         <div class="user-info-email">
-          <div>* 아이디</div>
+          <div>* 아이디<button className='user-button' type='button' onClick={(e)=>{checkId(e)}}>중복 확인</button></div>
           <input type='text' name='memId' className='button-td' onChange={(e)=>{changeJoinData(e)}} />
         </div>
         <div class="user-info-email">

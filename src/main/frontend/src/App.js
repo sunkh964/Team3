@@ -24,15 +24,9 @@ import StaffChange from './pages/admin/DoctorManage/StaffChange';
 import ReviseChart from './pages/admin/ReviseChart';
 import Reservation from './pages/user/Reserv/Reservation';
 import Qdetail from './pages/user/Qdetail';
-<<<<<<< HEAD
-import UserHistory from './pages/user/UserHistory';
-import Notice from './pages/user/Notice';
-import Reserv_staff from './pages/admin/UserManage/Reserv_staff';
-=======
 import Reserv_staff from './pages/admin/UserManage/Reserv_staff';
 import UserHistory from './pages/user/UserHistory';
 import Notice from './pages/user/Notice';
->>>>>>> nohk
 
 
 

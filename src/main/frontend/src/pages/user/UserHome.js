@@ -2,10 +2,7 @@ import React, { useEffect, useRef, useState} from 'react'
 import './UserHome.css'
 
 import axios from 'axios';
-<<<<<<< HEAD
-=======
 import { useNavigate } from 'react-router-dom';
->>>>>>> nohk
 
 const UserHome = () => {
    const navigate= useNavigate();
@@ -36,17 +33,17 @@ const img = [
 ]
 
 // 이미지 이동
- const prev = () => {
+const prev = () => {
    setShowImage((prev) => (prev === 0 ? img.length - 1 : prev - 1));
- };
- const next = () => {
+};
+const next = () => {
    setShowImage((prev) => (prev === img.length - 1 ? 0 : prev + 1));
- };
+};
 
  // li 자동변경
- const liChange = (i) =>{
+const liChange = (i) =>{
    setShowImage(i);
- }
+}
 
    return (
    <div className='home-div'>

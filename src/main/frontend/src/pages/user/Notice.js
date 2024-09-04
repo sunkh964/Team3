@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import './Notice.css';
 
 const Notice = () => {
   //조회된 게시글 목록을 저장할 변수
@@ -19,11 +20,11 @@ const Notice = () => {
 }, []);
 
   return (
-    <div>
-      <div>공지사항</div>
-      <table>
-        <thead>
-          <tr>
+    <div className='noti-body'>
+      <div className='noti-text'>공지사항</div>
+      <table className='noti-table'>
+        <thead className='noti-thead'>
+          <tr className='noti-tr'>
             <td>No</td>
             <td>제목</td>
             <td>날짜</td>
@@ -33,7 +34,7 @@ const Notice = () => {
           {
             boardList.map((board, i)=>{
               return(
-                <tr key={i}>
+                <tr key={i} className='Noti-map'>
                   <td>{board.boardNum}</td>
                   <td>{board.boardTitle}</td>
                   <td>{board.boardDate}</td>
