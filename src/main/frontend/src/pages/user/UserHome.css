@@ -120,6 +120,7 @@
    cursor: pointer;
    background-color: rgba(118, 140, 190, 0.1);
    box-shadow: 1px 3px 6px lightgray;
+   font-weight: 600;
 }
 .qIcon{
    margin: auto;

@@ -7,7 +7,6 @@
   border-bottom: 1px solid lightgray;
 }
 .head{
-  border: 1px solid;
   width: 60%;
   height: 90px;
   margin: auto;
@@ -43,8 +42,7 @@
 }
 /* ----- 로그인, 회원가입 ----- */
 .head-login{
-  border:  1px dotted;
-  width: 60%;
+  width: 62%;
   position: absolute;
   top: 40px;
   color: gray;
@@ -65,6 +63,7 @@
 }
 .head li>span:hover{
   color: rgb(68, 68, 68);
+  font-weight: bold;
 }
 
 
