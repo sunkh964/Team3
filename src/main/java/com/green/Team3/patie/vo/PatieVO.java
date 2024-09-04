@@ -10,4 +10,5 @@ public class PatieVO {
     private String patieBirth;
     private String patieAddr;
     private String patieGen;
+    private String personalYN;
 }
