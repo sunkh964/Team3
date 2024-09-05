@@ -1,12 +1,17 @@
 package com.green.Team3.member.service;
 
 import com.green.Team3.member.vo.MemberVO;
+import com.green.Team3.patie.vo.PatieVO;
 
 import java.util.List;
 
 public interface MemberService {
 //    회원가입
     void join(MemberVO memberVO);
+
+//회원가입 환자 까지
+    void join1(PatieVO patieVO);
+
 
 //    아이디 중복
     boolean isDuplicateId(String memid);
