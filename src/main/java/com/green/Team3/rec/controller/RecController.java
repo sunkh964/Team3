@@ -60,4 +60,8 @@ public class RecController {
         recService.updateRevise(recVO);
     }
 
+    @DeleteMapping("/delRec/{recNum}")
+    public void delRec(@PathVariable("recNum") int recNum){
+        recService.delRec(recNum);
+    }
 }

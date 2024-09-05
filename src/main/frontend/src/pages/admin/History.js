@@ -55,6 +55,7 @@ const History = () => {
             </div>
             <div className='con'>
               <div><span>접수 시간 :</span> {his.recDate || null}</div>
+              <div><span>예약 여부 :</span> {his.isRec || null}</div>
             </div>
             <div className='con'>
               <div><span>진료 부서 :</span> {his.staffVO?.part?.partName || null}</div>

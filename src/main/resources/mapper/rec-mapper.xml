@@ -25,10 +25,13 @@
 
     <!--대기환자 리스트-->
     <select id="selectWaitPatie" resultMap="rec">
-        SELECT REC_NUM, REC_DATE,  DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i'), IS_REC, REC_STATUS, REC_DETAIL, P.PATIE_NUM, STAFF_NUM, PATIE_NAME, PATIE_BIRTH, PATIE_GEN
-        FROM HOS_REC R, HOS_PATIE P
+        SELECT REC_NUM, REC_DATE,  DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i'), IS_REC, REC_STATUS, REC_DETAIL, P.PATIE_NUM,
+        S.STAFF_NUM, PATIE_NAME, PATIE_BIRTH, PATIE_GEN, A.PART_NUM, PART_NAME, STAFF_NAME, S.STAFF_NUM
+        FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART A
         WHERE REC_STATUS = '대기'
         AND R.PATIE_NUM = P.PATIE_NUM
+        AND R.STAFF_NUM = S.STAFF_NUM
+        AND A.PART_NUM=S.PART_NUM
         ORDER BY REC_DATE;
     </select>
 
@@ -89,6 +92,12 @@
         WHERE REC_NUM= #{recNum}
         AND PATIE_NUM = #{patieNum};
     </update>
+
+    <!--대기환자 삭제-->
+    <delete id="delRec">
+        DELETE FROM HOS_REC
+        WHERE REC_NUM = #{recNum};
+    </delete>
 
 
 
