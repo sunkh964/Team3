@@ -22,7 +22,7 @@
         <result column="PATIE_ADDR" property="patieAddr"/>
         <result column="PATIE_GEN" property="patieGen"/>
         <result column="PERSONAL_YN " property="personalYN"/>
-        <association property="memberVO" resultMap="member"/>
+        <collection property="memberList" resultMap="memberMapper.member"/>
     </resultMap>
 
 <!--    환자의 회원가입과 로그인 만들기 -->
@@ -48,22 +48,45 @@
                 )
         </insert>
 
-<!--        아이디 중복 확인-->
-        <select id="isDuplicate" resultType="String">
-                SELECT MEM_ID
-                FROM HOS_MEMBER
-                WHERE MEM_ID=#{memId};
-        </select>
 
-<!--    로그인 -->
-        <select id="login" resultMap="member">
+    <insert id="join1">
+    <!-- 회원 등록& 환자 등록 -->
+    INSERT INTO PATIE (
+    PATIE_NUM,
+    PATIE_NAME,
+    PATIE_BIRTH,
+    PATIE_TEL,
+    PATIE_ADDR,
+    PATIE_GEN,
+    PERSONAL_YN
+    ) VALUES (
+    #{patieNum}, <!-- PATIE_NUM은 memNum과 동일하게 설정됨 -->
+    #{patieName},
+    #{patieBirth},
+    #{patieTel},
+    #{patieAddr},
+    #{patieGen},
+    #{personalYN}
+    )
+    </insert>
+
+
+    <!--        아이디 중복 확인-->
+    <select id="isDuplicate" resultType="String">
+        SELECT MEM_ID
+        FROM HOS_MEMBER
+        WHERE MEM_ID=#{memId};
+    </select>
+
+    <!--    로그인 -->
+    <select id="login" resultMap="member">
         SELECT MEM_ID, MEM_NAME, MEM_NUM
-                FROM HOS_MEMBER
-                WHERE MEM_ID=#{memId}
-                AND MEM_PW=#{memPw}
-        </select>
+        FROM HOS_MEMBER
+        WHERE MEM_ID=#{memId}
+        AND MEM_PW=#{memPw}
+    </select>
 
-<!--    마이페이지- 개인정보 수정화면 띄우는 쿼리-->
+    <!--    마이페이지- 개인정보 수정화면 띄우는 쿼리-->
     <select id="getInfo" resultMap="member">
         SELECT MEM_NUM
         , MEM_NAME
@@ -73,7 +96,7 @@
         WHERE MEM_ID = #{memId}
     </select>
 
-<!--    개인정보 수정하기-->
+    <!--    개인정보 수정하기-->
     <update id="update">
         UPDATE HOS_MEMBER
         SET
@@ -102,6 +125,7 @@
 
 
 </mapper>
+
 
 
 

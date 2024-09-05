@@ -16,6 +16,16 @@ const [joinData, setJoinData]=useState({
   memGen:'male',
   memBirth:''
 });
+// 회원가입 시  환자 데이터 가져가기
+const [joinData1, setJoinData1]=useState({
+  patieNum:'',
+  patieName:'',
+  patieTel:'',
+  patieBirth:'',
+  patieAddr:'male',
+  patieGen:'',
+  personalYN:''
+});
 
   // 버튼 활성화 여부 state 변수
   const [isDisabled,setisDisabled ]=useState(true);
@@ -23,10 +33,12 @@ const [joinData, setJoinData]=useState({
 
   //회원가입 버튼 클릭 시 insert 쿼리 실행하러 가기
   function join(){
-  axios.post('/member/join', joinData)
+  axios.post('/member/join', joinData, joinData1)
   .then((res)=>{
     alert('회원가입')
+    console.log(setJoinData1);
     setJoinData(res.data);
+    setJoinData1(res.data);
     navigate('/')
   })
   .catch((error)=>{
@@ -37,10 +49,14 @@ const [joinData, setJoinData]=useState({
 
 const [valid_result, setValiResult]=useState(false);
 
-
+// 환자데이터와 일반 회원 데이터
 function changeJoinData(e){
   setJoinData({
     ...joinData,
+    [e.target.name]:e.target.value
+  })
+  setJoinData1({
+    ...joinData1,
     [e.target.name]:e.target.value
   })
 }

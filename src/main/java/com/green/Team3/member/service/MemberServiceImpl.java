@@ -1,6 +1,7 @@
 package com.green.Team3.member.service;
 
 import com.green.Team3.member.vo.MemberVO;
+import com.green.Team3.patie.vo.PatieVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,13 @@ public class MemberServiceImpl implements MemberService {
         sqlSession.insert("memberMapper.join", memberVO);
     }
 
-//    아이디 중복 확인
+//    회원가입
+    @Override
+    public void join1(PatieVO patie) {
+        sqlSession.insert("patieMapper.join1", patie);
+    }
+
+    //    아이디 중복 확인
 //    중복-> true
 //    중복x ->false
     @Override

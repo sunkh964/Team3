@@ -22,7 +22,7 @@ function update(){
   .then((res)=>{
     alert('문의가 성공적으로 되었습니다.');
     setQInfo(res.data);
-    navigate('/mypage/qna');
+    navigate(`/mypage/qna/${loginInfo.memNum}`);
   })
   .catch((error)=>{
     alert('등록 오류');
