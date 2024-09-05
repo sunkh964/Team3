@@ -18,8 +18,10 @@
   margin-top: 10px;
   background-color: #0797c1;
 }
-.con{
+.hisContent .con{
   cursor: pointer;
+}
+.con{
   padding: 5px 10px;
   display: flex;
 }

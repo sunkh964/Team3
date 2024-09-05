@@ -49,7 +49,7 @@ const Chart = () => {
 
   // 환자 집보내기
   const delIsNow = async (recNum) => {
-    if (window.confirm('환자 진료가 끝났습니까?')) {
+    if (window.confirm('진료가 완료되었습니까?')) {
       try {
         await axios.put('/rec/endStatus', { recNum });
         setRecIngPatieList(prevList => prevList.filter(patie => patie.recNum !== recNum));
@@ -89,6 +89,17 @@ const Chart = () => {
     }
   };
 
+  // 대기환자 삭제
+  function delRec(recNum){
+    if (window.confirm('환자 차트를 삭제하겠습니까?')) {
+      axios.delete(`/rec/delRec/${recNum}`)
+      .then((res)=>{navigate(0)})
+    } 
+    else {
+      alert('취소되었습니다.');
+    }
+  }
+
   return (
     <div className='chart'>
       <div className='title'>당일 환자 차트</div>
@@ -103,6 +114,7 @@ const Chart = () => {
             <div className='topContent'>
               {recPatieList.map((recPatie, i) => {
                 const patie = recPatie.patieVO;
+                const part = recPatie.staffVO.part
                 return(
                 <div className='todayRegContent' key={i}>
                   <div className='divF'>
@@ -112,9 +124,10 @@ const Chart = () => {
                   </div>
                   <div className='divFSec'>
                     <div>접수시간 : {recPatie.recDate}</div>
+                    <div>진료 부서 : {part?part.partName:null}</div>
                     <div>
                       <span onClick={() => navigate(`/admin/reviseChart/${recPatie.patieNum}/${recPatie.recNum}`)}>수정</span>
-                      <span onClick={() => delIsNow(recPatie.recNum)}>삭제</span>
+                      <span onClick={() => delRec(recPatie.recNum)}>삭제</span>
                       <button onClick={() => goIsNow(recPatie.recNum)}>진료 환자 등록</button>
                     </div>
                   </div>
@@ -169,13 +182,13 @@ const Chart = () => {
                   <div>성별: {patie?patie.patieGen:null}</div>
                 </div>
                 <div className='divTrT'>
-                  <div>진료 부서 {staff?staff.part.partName:null}: </div>
+                  <div>진료 부서 : {staff?staff.part.partName:null} </div>
                   <div>담당의 : {staff.staffName} </div>
                 </div>
 
                 <div className='botBut'>
                   <button onClick={() => navigate(`/admin/reviseChart/${patie.patieNum}/${recPatie.recNum}`)}>수정</button>
-                  <button onClick={() => delIsNow(recPatie.recNum)}>환자 삭제</button>
+                  <button onClick={() => delIsNow(recPatie.recNum)}>진료 완료</button>
                 </div>
               </div>
             )})}

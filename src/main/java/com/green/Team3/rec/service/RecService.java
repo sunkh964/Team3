@@ -27,4 +27,7 @@ public interface RecService {
 
     /*차트 업데이트*/
     void updateRevise(RecVO recVO);
+
+    /*대기환자 삭제*/
+    void delRec(int recNum);
 }

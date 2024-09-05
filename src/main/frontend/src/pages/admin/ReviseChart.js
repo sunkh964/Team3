@@ -126,7 +126,7 @@ const ReviseChart = () => {
             <td><span>진료 상태</span> : 
               <input type='radio' name='recStatus' value='대기' checked={updateChart.recStatus === '대기'} onChange={changeValue}/> 대기 
               <input type='radio' name='recStatus' value='진료' checked={updateChart.recStatus === '진료'} onChange={changeValue}/> 진료 
-              <input type='radio' name='recStatus' value='끝' checked={updateChart.recStatus === '끝'} onChange={changeValue}/> 종료 
+              <input type='radio' name='recStatus' value='끝' checked={updateChart.recStatus === '끝'} onChange={changeValue}/> 진료 완료 
             </td>
           </tr>
         </tbody>

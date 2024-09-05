@@ -50,6 +50,13 @@ public class RecServiceImpl implements RecService{
 
     @Override
     public void updateRevise(RecVO recVO) {
+
         sqlSession.update("recMapper.updateRevise", recVO);
     }
+
+    @Override
+    public void delRec(int recNum) {
+        sqlSession.delete("recMapper.delRec", recNum);
+    }
 }
+
