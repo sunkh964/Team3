@@ -117,29 +117,36 @@ function login2(){
 
   return (
     <div className='login'>
-<div class="box">
-  <div className='login-div'>일반 회원</div>
-  <input input type='text' name='memId' placeholder='Input your ID' onChange={(e) => {changeLoginData(e)}}/>
-  <input type='password'  placeholder='Input your Password' name='memPw' onChange={(e) => {changeLoginData(e)}} />
-  <button type='button' onClick={(e) => {login()}} className='button-div'>로그인</button>
-</div>
-
-      <div class="box1">
-        <div className='login-div'>직원 전용</div>
-  <input type='text' name='staffId' placeholder='Input your ID' onChange={(e) => {changeLoginData2(e)}}/>
-  <input type='password'  placeholder='Input your Password' name='staffPw' onChange={(e) => {changeLoginData2(e)}} />
-  <button type='button' onClick={(e) => {login2()}} className='button-div'>로그인</button>
-</div>
+      <div>
+        <div class="box">
+          <div className='login-div'>일반 회원</div>
+          <input input type='text' name='memId' placeholder='Input your ID' onChange={(e) => {changeLoginData(e)}}/>
+          <input type='password'  placeholder='Input your Password' name='memPw' onChange={(e) => {changeLoginData(e)}} />
+          <button type='button' onClick={(e) => {login()}} className='button-div'>로그인</button>
+        </div>
+        
+              <div class="box1">
+                <div className='login-div'>직원 전용</div>
+          <input type='text' name='staffId' placeholder='Input your ID' onChange={(e) => {changeLoginData2(e)}}/>
+          <input type='password'  placeholder='Input your Password' name='staffPw' onChange={(e) => {changeLoginData2(e)}} />
+          <button type='button' onClick={(e) => {login2()}} className='button-div'>로그인</button>
+        </div>
+      </div>
 
       <div className='login-foot'>
+        <div>· 비회원 이용
+          <div className='login-f-content'><button>진료예약 바로가기</button></div>
+        </div>
         <div>
           · 아이디 / 비밀번호 찾기
-          <div className='foot'>아이디 찾기</div>
-          <div>비밀번호 찾기</div>
+          <div className='login-f-content'>
+            <button className='idSelect'>아이디 찾기</button>
+            <button>비밀번호 찾기</button>
+          </div>
         </div>
         <div>
           · 회원가입하기
-          <div>회원가입</div>
+          <div className='login-f-content'><button >회원가입</button></div>
         </div>
       </div>
     </div>
