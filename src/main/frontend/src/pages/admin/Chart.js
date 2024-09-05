@@ -174,7 +174,7 @@ const Chart = () => {
                 </div>
 
                 <div className='botBut'>
-                  <button onClick={() => navigate(`/admin/reviseChart/${patie.patieNum}`)}>수정</button>
+                  <button onClick={() => navigate(`/admin/reviseChart/${patie.patieNum}/${recPatie.recNum}`)}>수정</button>
                   <button onClick={() => delIsNow(recPatie.recNum)}>환자 삭제</button>
                 </div>
               </div>

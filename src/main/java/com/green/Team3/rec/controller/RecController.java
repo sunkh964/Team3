@@ -55,7 +55,7 @@ public class RecController {
         return recService.selectRevise(recVO);
     }
 
-    @PutMapping("/updateRevise/{patieNum}/{recNum}")
+    @PutMapping("/updateRevise")
     public void updateRevise(@RequestBody RecVO recVO){
         recService.updateRevise(recVO);
     }

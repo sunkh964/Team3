@@ -10,7 +10,8 @@ const ReviseChart = () => {
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
   const [updateChart, setUpdateChart] = useState({
-    partNum: 0,
+    partNum: patieNum,
+    recNum: recNum,
     staffNum: 0,
     recDetail: '',
     recStatus: ''
@@ -69,7 +70,7 @@ const ReviseChart = () => {
 
   // 버튼 클릭 시 업데이트
   const handleSubmit = () => {
-    axios.put(`/rec/updateRevise/${patieNum}/${recNum}`, updateChart)
+    axios.put('/rec/updateRevise', updateChart)
       .then((res) => {
         console.log(res.data);
         navigate('/admin/chart');
@@ -120,11 +121,11 @@ const ReviseChart = () => {
             </td>
           </tr>
           <tr>
-            <td><span>세부사항</span> : <input type='text' name='recDetail' value={updateChart.recDetail} onChange={changeValue} /></td>
+            <td><span>세부사항</span> : <input type='text' name='recDetail' onChange={changeValue} /></td>
             <td><span>진료 상태</span> : 
-              <input type='radio' name='recStatus' value='대기' checked={updateChart.recStatus === '대기'} onChange={changeValue}/> 대기 
-              <input type='radio' name='recStatus' value='진료' checked={updateChart.recStatus === '진료'} onChange={changeValue}/> 진료 
-              <input type='radio' name='recStatus' value='끝' checked={updateChart.recStatus === '끝'} onChange={changeValue}/> 종료 
+              <input type='radio' name='recStatus' value='대기' onChange={changeValue}/> 대기 
+              <input type='radio' name='recStatus' value='진료' onChange={changeValue}/> 진료 
+              <input type='radio' name='recStatus' value='끝'  onChange={changeValue}/> 종료 
             </td>
           </tr>
         </tbody>

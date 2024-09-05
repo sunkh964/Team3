@@ -86,8 +86,7 @@
         REC_DETAIL = #{recDetail},
         STAFF_NUM = #{staffNum},
         REC_STATUS = #{recStatus}
-        WHERE PATIE_NUM= #{patieNum}
-        AND REC_NUM= #{recNum};
+        WHERE REC_NUM= #{recNum};
     </update>
 
 
