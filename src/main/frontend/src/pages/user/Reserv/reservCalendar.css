@@ -1,4 +1,4 @@
-.act_3 >div:nth-child(2){
+/* .act_3 >div:nth-child(2){
   border: 1px solid rebeccapurple;
   width: 80%;
   margin: auto;
@@ -9,12 +9,12 @@
   margin: auto;
 }
 
-.react-datepicker__day.react-datepicker__day--weekend{
+.reservCalendar .react-datepicker__day.react-datepicker__day--weekend{
   color: red;
-}
+} */
 
 /* ================ 시간 설정 ================ */
-.reservTime{
+/* .reservTime{
   border: 1px dotted;
   width: 100%;
   margin: auto;
@@ -32,7 +32,6 @@
   width: 100%;
   height: 50px;
   overflow-x: hidden;
-  /* overflow-y: hidden; */
   margin: 0 auto;
   text-align: center;
   border-bottom-right-radius: 0.3rem;
@@ -52,4 +51,4 @@
 .react-datepicker__time-list{
   display: grid;
   grid-template-columns: repeat(3,1fr);
-}
+} */

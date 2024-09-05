@@ -113,17 +113,17 @@
             , #{description}
             , #{staffNum}
             , #{color}
-            <if test='allDay == true'>
+            <if test='allDay.equals("true")'>
                 , DATE_FORMAT(#{start}, '%Y-%m-%d %H:%i')
                 , DATE_FORMAT(#{end}, '%Y-%m-%d %H:%i')
                 , 'Y'
             </if>
-            <if test='allDay == false'>
+            <if test='allDay.equals("false")'>
                 , #{start}
                 , #{end}
-                ,'N'
+                , 'N'
             </if>
-        );
+        )
     </insert>
 
     <!-- 일정 수정 -->
@@ -141,7 +141,7 @@
             , SCH_SDATE = DATE_FORMAT(#{start}, '%Y-%m-%d %H:%i')
             , SCH_EDATE = DATE_FORMAT(#{end}, '%Y-%m-%d %H:%i')
         </if>
-        WHERE SCH_NUM = #{schNum};
+        WHERE SCH_NUM = #{schNum}
     </update>
 
     <!-- 일정 삭제 -->

@@ -168,10 +168,10 @@ const StaffManage = () => {
     newEvent.allDay = newEvent.allDay == 'Y' ? true : false;
     axios.post('/schedule/addEvent', newEvent)
     .then((res) => {
-      console.log("등록 완료")})
-      navigate(0)
-      .catch((error) => {
-      alert(error)});
+      console.log("등록 완료")
+      navigate(0);
+  })
+      .catch((error) => {alert(error)});
   }
 
     // '하루종일' 체크여부 변경
@@ -424,6 +424,7 @@ const StaffManage = () => {
           plugins={[dayGridPlugin, interactionPlugin]}
           dateClick={handleDateClick}
           eventClick={eventClick}
+          dayMaxEventRows={true}
           headerToolbar = {{
             left: 'today,prev,next',
             center: 'title',
