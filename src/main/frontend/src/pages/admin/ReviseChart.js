@@ -10,8 +10,9 @@ const ReviseChart = () => {
   const [parts, setParts] = useState([]);
   const [staffs, setStaffs] = useState([]);
   const [updateChart, setUpdateChart] = useState({
-    partNum: patieNum,
-    recNum: recNum,
+    partNum: 0,
+    recNum:recNum,
+    patieNum:patieNum,
     staffNum: 0,
     recDetail: '',
     recStatus: ''
@@ -70,7 +71,7 @@ const ReviseChart = () => {
 
   // 버튼 클릭 시 업데이트
   const handleSubmit = () => {
-    axios.put('/rec/updateRevise', updateChart)
+    axios.put(`/rec/updateRevise`, updateChart)
       .then((res) => {
         console.log(res.data);
         navigate('/admin/chart');
@@ -84,21 +85,21 @@ const ReviseChart = () => {
       <table>
         <thead>
           <tr>
-            <td colSpan={2}>진료 번호 {reviseInfo.recNum} </td>
+            <td colSpan={2}>진료 번호 {reviseInfo.recNum} 번 차트 </td>
           </tr>
           <tr>
-            <td><span>이름</span> : {patie?patie.patieName:null} </td>
-            <td><span>생년월일</span> : {patie? patie.patieBirth:null}</td>
+            <td><span>이름</span> : <p>{patie?patie.patieName:null}</p> </td>
+            <td><span>생년월일</span> : <p>{patie? patie.patieBirth:null}</p></td>
           </tr>
           <tr>
-            <td><span>성별</span> : {patie?patie.patieGen:null} </td>
-            <td><span>연락처</span> : {patie? patie.patieTel:null}</td>
+            <td><span>성별</span> : <p>{patie?patie.patieGen:null}</p> </td>
+            <td><span>연락처</span> : <p>{patie? patie.patieTel:null}</p></td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><span>예약 여부</span> : {reviseInfo.isRec}</td>
-            <td><span>접수 시간</span> : {reviseInfo.recDate}</td>
+            <td><span>예약 여부</span> : <p>{reviseInfo.isRec}</p></td>
+            <td><span>접수 시간</span> : <p>{reviseInfo.recDate}</p></td>
           </tr>
           <tr>
             <td><span>진료 부서</span> :
@@ -121,11 +122,11 @@ const ReviseChart = () => {
             </td>
           </tr>
           <tr>
-            <td><span>세부사항</span> : <input type='text' name='recDetail' onChange={changeValue} /></td>
+            <td><span>세부사항</span> : <input type='text' name='recDetail' value={updateChart.recDetail} onChange={changeValue} /></td>
             <td><span>진료 상태</span> : 
-              <input type='radio' name='recStatus' value='대기' onChange={changeValue}/> 대기 
-              <input type='radio' name='recStatus' value='진료' onChange={changeValue}/> 진료 
-              <input type='radio' name='recStatus' value='끝'  onChange={changeValue}/> 종료 
+              <input type='radio' name='recStatus' value='대기' checked={updateChart.recStatus === '대기'} onChange={changeValue}/> 대기 
+              <input type='radio' name='recStatus' value='진료' checked={updateChart.recStatus === '진료'} onChange={changeValue}/> 진료 
+              <input type='radio' name='recStatus' value='끝' checked={updateChart.recStatus === '끝'} onChange={changeValue}/> 종료 
             </td>
           </tr>
         </tbody>
