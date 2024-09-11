@@ -176,6 +176,7 @@ const Reservation = () => {
               }
             </div>
           </div>
+          {/* css reservCalendar.css 파일에 있음 */}
           <div className='act_3'>
             <div className='reserv-title'>예약날짜/시간 선택</div>
             <div>
@@ -185,6 +186,18 @@ const Reservation = () => {
               
               <div className='reservTime'>
                 <CustomTime/>
+              </div>
+
+              <div className='reservInfo'>
+                <div>예약자 <br/>
+                  <input type='text' className='form'/>
+                </div>
+                <div>생년월일 <br/>
+                  <input type='text' className='form' placeholder='ex) 900101' />
+                </div>
+                <div>증상 <br/>
+                  <textarea type='text' className='form area' />
+                </div>
               </div>
             </div>
           </div>

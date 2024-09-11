@@ -1,14 +1,14 @@
 .act_3 >div:nth-child(2){
   width: 80%;
   margin: auto;
+  padding: 20px 10px;
 }
 .reservCalendar{
-  width: 90%;
+  width: 100%;
   margin: auto;
 }
 .react-datepicker{
   width: 100%;
-  margin-top: 20px;
 }
 .react-datepicker__month-container{
   width: 100%;
@@ -28,7 +28,7 @@
 
 /* ================ 시간 설정 ================ */
 .reservTime{
-  width: 95%;
+  width: 100%;
   margin: auto;
 }
 .reservTime .time-div{
@@ -37,9 +37,6 @@
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4,1fr);
-}
-.time-div label{
-  width: 100%;
 }
 
 .time-div input{
