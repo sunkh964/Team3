@@ -19,6 +19,7 @@
   display: flex;
   border-radius: 20px;
   color: white;
+  width: 110px;
 }
 .head1:hover{
   text-decoration-line: underline;

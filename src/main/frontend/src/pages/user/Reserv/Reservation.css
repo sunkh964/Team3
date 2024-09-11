@@ -48,7 +48,6 @@
   gap: 3px;
 }
 .act > div{
-  height: 600px;
   background-color: white;
   border: 1px solid lightgray;
 }
@@ -124,4 +123,36 @@
   font-weight: 600;
   color: rgb(124, 124, 124);
   margin-bottom: 5px;
+}
+
+/* =========== reservInfo =========== */
+
+.reservInfo{
+  width: 100%;
+  padding: 5px;
+  margin: auto;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.reservInfo > div{
+  margin-bottom: 10px;
+}
+
+.reservInfo .form{
+  width: 60%;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 7px;
+  font-size: 0.8rem;
+  border: 1px solid lightslategray;
+}
+
+.reservInfo .form::placeholder{
+  color: #cccccc;
+}
+
+.reservInfo .area{
+  height: 70px;
+  width: 100%;
 }

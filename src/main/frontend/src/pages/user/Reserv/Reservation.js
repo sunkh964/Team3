@@ -6,6 +6,8 @@ import DateSelect from '../../../common/DateSelect';
 import DatePicker from 'react-datepicker';
 import './reservCalendar.css'
 import { setHours } from 'date-fns';
+import styled from 'styled-components';
+import CustomRadio from './CustomRadio';
 
 const Reservation = () => {
   const {partNum: initialPartNum} = useParams();
@@ -22,6 +24,20 @@ const Reservation = () => {
 
   // 선택된 의료진 번호
   const [doctorNum, setDoctorNum] = useState(initialDoctorNum || '');
+
+  // 시간
+  const [time, setTime] = useState([
+    '9:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '1:00 PM',
+    '2:00 PM',
+    '3:00 PM',
+    '4:00 PM',
+    '5:00 PM',
+  ]);
+
+  
 
 
   // 부서목록 조회
@@ -61,25 +77,54 @@ const Reservation = () => {
     }
   },[partNum]);
 
-  // ================== DATE ================== //
+  // ================== Time ================== //
 
-  // 특정시간대 지정
-
-  const [startDate, setStartDate] = useState(new Date());
-
-  const filterTime = (time) => {
-    const hours = time.getHours();
-    return hours >= 9 && hours < 19; // 9 AM ~ 6 PM
-  };
-
-
-    // const minTime = new Date();
-    // minTime.setHours(8);
-    // minTime.setMinutes(30);
-
-    // const maxTime = new Date();
-    // maxTime.setHours(18);
-    // maxTime.setMinutes(30);
+  function CustomTime() {
+    const time = [
+      {text: '9:00 AM', value: 9},
+      {text: '10:00 AM', value: 10},
+      {text: '11:00 AM', value: 11},
+      {text: '13:00 PM', value: 13},
+      {text: '14:00 PM', value: 14},
+      {text: '15:00 PM', value: 15},
+      {text: '16:00 PM', value: 16},
+      {text: '17:00 PM', value: 17}
+    ]
+    const [selectedtime, setSelectedtime] = useState(null);
+    const onChangeRadio = (e) => {
+      console.log(e.target.value);
+      setSelectedtime(Number(e.target.value));
+    }
+    
+    return (
+        <div className='time-div'>
+          {
+            time.map((time, i) => (
+              // const idx = selectedtime >= 13 ? i+9 : i+10;
+              <label key={i}>
+                <input
+                  type='radio'
+                  name='time'
+                  value={time.value}
+                  onChange={(e)=>{onChangeRadio(e)}}
+                  checked={
+                    selectedtime >= 13 ? i+10 : i+9 === selectedtime}
+                />
+                <span className='time' 
+                  style={{
+                    border: (selectedtime >= 13 ? i+10 : i+9) === selectedtime ? '1px solid lightslategray' : '1px solid lightgray',
+                    backgroundColor: (selectedtime >= 13 ? i+10 : i+9) === selectedtime ? 'lightslategray' : '#eeeeee',
+                    color: (selectedtime >= 13 ? i+10 : i+9) === selectedtime ? 'white' : 'gray'
+                  }}
+                >
+                  {time.text}
+                </span>
+              </label>
+            ))
+          }
+        </div>
+    );
+  }
   
   return (
     <div className='reserv-container'>
@@ -131,19 +176,28 @@ const Reservation = () => {
               }
             </div>
           </div>
+          {/* css reservCalendar.css 파일에 있음 */}
           <div className='act_3'>
             <div className='reserv-title'>예약날짜/시간 선택</div>
             <div>
               <div className='reservCalendar'>
                 <DatePicker inline />
               </div>
+              
               <div className='reservTime'>
-                
-                <DatePicker  showTimeSelect={true} showTimeSelectOnly inline
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    timeIntervals={60}
-                    filterTime={filterTime} />
+                <CustomTime/>
+              </div>
+
+              <div className='reservInfo'>
+                <div>예약자 <br/>
+                  <input type='text' className='form'/>
+                </div>
+                <div>생년월일 <br/>
+                  <input type='text' className='form' placeholder='ex) 900101' />
+                </div>
+                <div>증상 <br/>
+                  <textarea type='text' className='form area' />
+                </div>
               </div>
             </div>
           </div>
