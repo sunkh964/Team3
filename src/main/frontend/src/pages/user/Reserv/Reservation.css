@@ -58,6 +58,10 @@
   border-bottom: 1px solid gray;
   padding: 10px 0px;
 }
+
+.act_1 .reserv-title{
+  width: 80%;
+}
 .act .reserv-part{
   padding: 20px;
 }
@@ -155,4 +159,199 @@
 .reservInfo .area{
   height: 70px;
   width: 100%;
+}
+
+/* =========== 개인정보 =========== */
+
+.privacyAgree{
+  width: 100%;
+}
+
+.privacyAgree .reserv-title{
+  font-size: 1rem;
+  width: 98%;
+  margin-top: 20px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.clauseWrap {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 170px;
+  margin-top: 20px;
+  padding: 20px 40px;
+  color: #666;
+  line-height: 22px;
+  border: 1px solid #dbdbdb;
+  background: #fff;
+}
+.clauseWrap li, .clauseWrap p {
+  margin-top: 5px;
+}
+
+.S_ContBox {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #666669;
+  line-height: 24px;
+}
+
+.S_ContBox .S_Cont .cBox {
+  border-bottom: 1px solid #e5e5ec;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.S_ContBox .S_Cont .cBox_top p {
+  margin-bottom: 15px;
+}
+
+.S_ContBox .S_Cont .cBox_top img {
+  width: 40px;
+}
+
+.label_style {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.label_style thead {
+  border-top: 2px solid #096cb8;
+  font-size: 0.9rem;
+  color: #333339;
+  line-height: 22px;
+  background: rgb(240, 246, 250);
+}
+
+.label_style thead tr th, .label_style tbody tr td {
+  text-align: center;
+  padding: 12px 10px !important;
+}
+
+.label_style tbody tr td {
+  text-align: center;
+  padding: 20px 10px !important;
+}
+
+.label_style tbody {
+  background: #fff;
+}
+
+.S_ContBox .S_Cont .cBox .cBtit {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #096cb8;
+}
+
+.S_ContBox .S_Cont .cBox_top .cBlist {
+  border: 1px solid #e5e5ec;
+  padding: 15px;
+}
+
+.S_ContBox .S_Cont .cBox p, .S_ContBox .S_Cont .cBox ol {
+  margin: 12px 0;
+}
+
+.txtTitSt {
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #333339;
+  line-height: 22px;
+}
+
+.txtTitSt > img {
+  display: inline-block;
+  width: 25px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.S_ContBox p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+}
+
+.tableStA {
+  width: 100%;
+  border-top: 2px solid #000;
+  border-bottom: 1px solid #d8dbe0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.tableStA thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.tableStA thead tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.tableStA thead tr th {
+  height: 18px;
+  padding: 15px 0 13px;
+  font-weight: 400;
+  color: #444449;
+  text-align: center;
+  line-height: 18px;
+  vertical-align: middle;
+  border: 1px solid #d8dbe0;
+  border-bottom: 1px solid #a1a1a3;
+  background: #f0f0f5;
+}
+
+.tableStA tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.tableStA tbody tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+  word-break: break-all;
+}
+
+.tableStA tbody tr td {
+  height: 18px;
+  padding: 11px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #555559;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #d8dbe0;
+}
+
+
+.agreeChk02 {
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 0.8rem;
+}
+
+.point07 {
+  color: #e71b0c !important;
+  font-size: 0.8rem;
+}
+
+.mgt20 {
+  margin-top: 20px !important;
+}
+
+.inputChk {
+  width: 13px;
+  height: 12px;
+  margin: 0 5px;
+  vertical-align:middle;
 }

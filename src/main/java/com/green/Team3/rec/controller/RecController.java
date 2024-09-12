@@ -64,4 +64,11 @@ public class RecController {
     public void delRec(@PathVariable("recNum") int recNum){
         recService.delRec(recNum);
     }
+
+/*<!-- ============== 회원페이지 진료예약 ==============   -->*/
+    /* 회원 진료 예약 */
+    @PostMapping("/insertMainRec")
+    void insertMainRec(@RequestBody RecVO recVO) {
+        recService.insertMainRec(recVO);
+    }
 }
