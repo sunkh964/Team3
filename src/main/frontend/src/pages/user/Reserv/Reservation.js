@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Reservation.css'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import DateSelect from '../../../common/DateSelect';
 import DatePicker from 'react-datepicker';
 import './reservCalendar.css'
-import { setHours } from 'date-fns';
+import styled from 'styled-components';
+import PrivacyInfo from './PrivacyInfo';
 
 const Reservation = () => {
-  const {partNum: initialPartNum} = useParams();
-  const {staffNum: initialDoctorNum} = useParams();
+  const {partNum: initialPartNum, staffNum: initialDoctorNum } = useParams();
+  // 현재 선택된 부서 번호
+  const [partNum, setPartNum] = useState(initialPartNum || '');
+
+  // 선택된 의료진 번호
+  const [doctorNum, setDoctorNum] = useState(initialDoctorNum || '');
 
   // 부서목록 저장
   const [partList, setPartList] = useState([]);
@@ -17,11 +21,45 @@ const Reservation = () => {
   // 의료진 저장
   const [doctor, setDoctor] = useState([]);
 
-  // 현재 선택된 부서 번호
-  const [partNum, setPartNum] = useState(initialPartNum || '');
+    
+  // 예약시 가져갈 데이터
+  const [insertRec, setInsertRec] = useState({
+    patieNum: 0,
+    patieName: '',
+    patieBirth: '',
+    patieAddr: '',
+    staffNum: 0,
+    partNum: 0,
+    recDetail:'',
+    recDate : ''
+  });
 
-  // 선택된 의료진 번호
-  const [doctorNum, setDoctorNum] = useState(initialDoctorNum || '');
+    // ============== recDate 합치기 ============
+    const [selectDate, setSelectDate] = useState(null);
+    const [selectTime, setSelectTime] = useState(null);
+
+    function handleDateChange(date){
+      setSelectDate(date);
+      setSelectTime(null);
+      updateRecDate(date, null) ;
+    };
+    function handleTimeChange(time){
+      setSelectTime(time);
+      updateRecDate(selectDate, time);
+    };
+
+    function updateRecDate(date, time){
+      if (date && time) {
+        const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+        const timeString = time.toString().padStart(2, '0') + ':00'; // HH:00 형식
+        const fullDateString = `${dateString}T${timeString}:00`; // 날짜와 시간 결합
+        setInsertRec(prevRec => ({
+          ...prevRec,
+          recDate: fullDateString
+        }));
+      }
+    };
+
 
 
   // 부서목록 조회
@@ -57,29 +95,96 @@ const Reservation = () => {
         })
         .catch((error) => { console.log(error) });
     } else {
-      setDoctor([]); // `partNum`이 없는 경우 직원 목록 초기화
+      setDoctor([]); // partNum 없으면 직원 목록 초기화
     }
   },[partNum]);
 
-  // ================== DATE ================== //
+  // ========================= 예약하기 ======================== //
 
-  // 특정시간대 지정
+    // 입력 값 가져가기
+    function changeInsertRec(e){
+      setInsertRec({
+        ...insertRec,
+        [e.target.name]: e.target.value
+      });
+    };
 
-  const [startDate, setStartDate] = useState(new Date());
+    // 예약 등록
+    function regRec(){
+      // 필수 값이 비어 있는지 확인
+      if (!insertRec.patieName || !insertRec.patieBirth) {
+      alert('기재란 입력 필수.');
+      return;
+      }
 
-  const filterTime = (time) => {
-    const hours = time.getHours();
-    return hours >= 9 && hours < 19; // 9 AM ~ 6 PM
-  };
+      const isReg = window.confirm(` ${insertRec.recDate}로 예약하시겠습니까?`)
 
+      if(isReg){
+        axios.post('/rec/insertMainRec',insertRec)
+      .then((res) => {
+        alert('예약 완료')
+      })
+      .catch((error) => {console.log(error)})
+      }
+      else{}
+      
+    }
+    
 
-    // const minTime = new Date();
-    // minTime.setHours(8);
-    // minTime.setMinutes(30);
+  // ========================= Time 컴포넌트 ======================== //
 
-    // const maxTime = new Date();
-    // maxTime.setHours(18);
-    // maxTime.setMinutes(30);
+  function CustomTime({onTimeChange}) {
+    const time = [
+      {text: '9:00 AM', value: 9},
+      {text: '10:00 AM', value: 10},
+      {text: '11:00 AM', value: 11},
+      {text: '13:00 PM', value: 13},
+      {text: '14:00 PM', value: 14},
+      {text: '15:00 PM', value: 15},
+      {text: '16:00 PM', value: 16},
+      {text: '17:00 PM', value: 17}
+    ]
+    const [selectedtime, setSelectedtime] = useState(0);
+
+    const onChangeRadio = (e) => {
+
+      const timeValue = Number(e.target.value);
+
+      setSelectedtime(timeValue);
+      if (onTimeChange) {
+        onTimeChange(timeValue);
+      }
+    }
+    
+    return (
+        <div className='time-div'>
+          {
+            time.map((time, i) => (
+              <label key={i}>
+                <input
+                  type='radio'
+                  name='time'
+                  value={time.value}
+                  onChange={onChangeRadio}
+                  checked={selectedtime === time.value}
+                />
+                <span className='time' 
+                  style={{
+                    border: selectedtime === time.value ? '1px solid rgb(139, 156, 173)' : '1px solid lightgray',
+                    backgroundColor: selectedtime === time.value ? 'rgb(150, 174, 197)' : '#eeeeee',
+                    color: selectedtime === time.value ? 'white' : 'gray'
+                  }}
+                >
+                  {time.text}
+                </span>
+              </label>
+            ))
+          }
+        </div>
+    );
+  }
+
+  // =========================== return ========================== //
   
   return (
     <div className='reserv-container'>
@@ -105,7 +210,7 @@ const Reservation = () => {
               {
                 partList.map((part, i) =>{
                   return(
-                    <div className={`part ${part.partNum === partNum ? 'selected' : ''}`} key={i} value={part.partNum}
+                    <div name='partNum' className={`part ${part.partNum === partNum ? 'selected' : ''}`} key={i} value={part.partNum}
                       onClick={() =>{setPartNum(part.partNum)}}>{part.partName}</div>
                   );
                 })
@@ -118,7 +223,7 @@ const Reservation = () => {
               {
                 doctor.map((doc,i) => {
                   return(
-                    <div className={`doctor ${doc.staffNum === doctorNum ? 'selected' : ''}`}
+                    <div name='staffNum' className={`doctor ${doc.staffNum === doctorNum ? 'selected' : ''}`}
                       onClick={()=>selectDoctor(doc.staffNum)}>
                       <div className='img'><img src={'http://localhost:8080/images/doctor.jpg'} /></div>
                       <div className='doctorInfo'>
@@ -131,23 +236,49 @@ const Reservation = () => {
               }
             </div>
           </div>
+          {/* css reservCalendar.css 파일에 있음 */}
           <div className='act_3'>
             <div className='reserv-title'>예약날짜/시간 선택</div>
             <div>
               <div className='reservCalendar'>
-                <DatePicker inline />
+                <DatePicker inline  selected={selectDate} onChange={handleDateChange}/>
               </div>
+              
               <div className='reservTime'>
-                
-                <DatePicker  showTimeSelect={true} showTimeSelectOnly inline
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    timeIntervals={60}
-                    filterTime={filterTime} />
+                <CustomTime onTimeChange={handleTimeChange}/>
+              </div>
+
+              <div className='reservInfo'>
+                <div>예약자 <br/>
+                  <input type='text' className='form' name='patieName' value={insertRec.patieName} onChange={(e) => {changeInsertRec(e)}}/>
+                </div>
+                <div>생년월일 <br/>
+                  <input type='text' className='form' placeholder='ex) 900101'
+                    name='patieBirth' value={insertRec.patieBirth} onChange={(e) => {changeInsertRec(e)}} />
+                </div>
+                <div>증상 <br/>
+                  <textarea type='text' className='form area' name='recDetail'
+                     value={insertRec.recDetail} onChange={(e) => {changeInsertRec(e)}} />
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className='privacyAgree'>
+          <div className='reserv-title'>개인정보처리방침</div>
+        </div>
+
+        <PrivacyInfo />
+
+        <div class="agreeChk02">
+          <label for="chk2">만 14세 미만 <span class="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" class="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다."/>
+        </div>
+        <div class="agreeChk02 mgt20">
+          <label for="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree" class="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."/>
+        </div>
+
+        <button className='addChartBtn' onClick={() =>{regRec()}}>등록</button>
       </div>
     </div>
   )

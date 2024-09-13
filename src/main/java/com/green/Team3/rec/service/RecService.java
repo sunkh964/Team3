@@ -30,4 +30,8 @@ public interface RecService {
 
     /*대기환자 삭제*/
     void delRec(int recNum);
+
+/*<!-- ============== 회원페이지 진료예약 ==============   -->*/
+    /* 회원 진료 예약 */
+    void insertMainRec(RecVO recVO);
 }
