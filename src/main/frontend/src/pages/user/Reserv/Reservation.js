@@ -34,6 +34,12 @@ const Reservation = () => {
     recDate : ''
   });
 
+  // datePicker 평일만 선택하기
+  const isDay = (date) => {
+    const day = date.getDay();
+    return day !=0 && day !=6
+  };
+
     // ============== recDate 합치기 ============
     const [selectDate, setSelectDate] = useState(null);
     const [selectTime, setSelectTime] = useState(null);
@@ -205,99 +211,90 @@ const Reservation = () => {
   // =========================== return ========================== //
   
   return (
-    <div className='reserv-container'>
-      <div id='sidebar'>
-        <div>진료예약</div>
-        <ul>
-          <li>예약하기</li>
-          <li>예약조회</li>
-          <li>간편예약</li>
-        </ul>
+    <div>
+      <div className='explain'>
+        <div>온라인예약</div>
+        <div>어쩌구</div>
       </div>
 
-      <div className='reserv-content'>
-        <div className='explain'>
-          <div>온라인예약</div>
-          <div>어쩌구</div>
-        </div>
-  
-        <div className='act'>
-          <div className='act_1'>
-            <div className='reserv-title'>진료과 선택</div>
-            <div className='reserv-part'>
-              {
-                partList.map((part, i) =>{
-                  return(
-                    <div name='partNum' className={`part ${part.partNum === partNum ? 'selected' : ''}`} key={i} value={part.partNum}
-                      onClick={() =>{setPartNum(part.partNum)}}>{part.partName}</div>
-                  );
-                })
-              }
-            </div>
+      <div className='act'>
+        <div className='act_1'>
+          <div className='reserv-title'>진료과 선택</div>
+          <div className='reserv-part'>
+            {
+              partList.map((part, i) =>{
+                return(
+                  <div name='partNum' className={`part ${part.partNum === partNum ? 'selected' : ''}`} key={i} value={part.partNum}
+                    onClick={() =>{setPartNum(part.partNum)}}>{part.partName}</div>
+                );
+              })
+            }
           </div>
-          <div className='act_2'>
-            <div className='reserv-title'>의료진 선택</div>
-            <div className='reserv-doctor'>
-              {
-                doctor.map((doc,i) => {
-                  return(
-                    <div key={i} name='staffNum' className={`doctor ${doc.staffNum === doctorNum ? 'selected' : ''}`}
-                      onClick={()=>selectDoctor(doc.staffNum)}>
-                      <div className='img'><img src={'http://localhost:8080/images/doctor.jpg'} /></div>
-                      <div className='doctorInfo'>
-                        <div>{doc.part.partName}</div>
-                        <div>{doc.staffName}</div>
-                      </div>
+        </div>
+        <div className='act_2'>
+          <div className='reserv-title'>의료진 선택</div>
+          <div className='reserv-doctor'>
+            {
+              doctor.map((doc,i) => {
+                return(
+                  <div key={i} name='staffNum' className={`doctor ${doc.staffNum === doctorNum ? 'selected' : ''}`}
+                    onClick={()=>selectDoctor(doc.staffNum)}>
+                    <div className='img'><img src={'http://localhost:8080/images/doctor.jpg'} /></div>
+                    <div className='doctorInfo'>
+                      <div>{doc.part.partName}</div>
+                      <div>{doc.staffName}</div>
                     </div>
-                  );
-                })
-              }
-            </div>
-          </div>
-          {/* css reservCalendar.css 파일에 있음 */}
-          <div className='act_3'>
-            <div className='reserv-title'>예약날짜/시간 선택</div>
-            <div>
-              <div className='reservCalendar'>
-                <DatePicker inline  selected={selectDate} value={selectDate} onChange={(date) =>{handleDateChange(date)}}/>
-              </div>
-              
-              <div className='reservTime'>
-                <CustomTime onChange={(time) =>{handleTimeChange(time)}}/>
-              </div>
-
-              <div className='reservInfo'>
-                <div>예약자<span style={{color:'darkred'}}> *</span> <br/>
-                  <input type='text' className='form' name='patieName' value={insertRec.patieName} onChange={(e) => {changeInsertRec(e)}}/>
-                </div>
-                <div>생년월일<span style={{color:'darkred'}}> *</span>  <br/>
-                  <input type='text' className='form' placeholder='ex) 900101'
-                    name='patieBirth' value={insertRec.patieBirth} onChange={(e) => {changeInsertRec(e)}} />
-                </div>
-                <div>증상 <br/>
-                  <textarea type='text' className='form area' name='recDetail'
-                     value={insertRec.recDetail} onChange={(e) => {changeInsertRec(e)}} />
-                </div>
-              </div>
-            </div>
+                  </div>
+                );
+              })
+            }
           </div>
         </div>
+        {/* css reservCalendar.css 파일에 있음 */}
+        <div className='act_3'>
+          <div className='reserv-title'>예약날짜/시간 선택</div>
+          <div>
+            <div className='reservCalendar'>
+              <DatePicker inline  selected={selectDate} value={selectDate} 
+                onChange={(date) =>{handleDateChange(date)}}
+                filterDate={isDay}/>
+            </div>
+            
+            <div className='reservTime'>
+              <CustomTime onChange={(time) =>{handleTimeChange(time)}}/>
+            </div>
 
-        <div className='privacyAgree'>
-          <div className='reserv-title'>개인정보처리방침</div>
+            <div className='reservInfo'>
+              <div>예약자<span style={{color:'darkred'}}> *</span> <br/>
+                <input type='text' className='form' name='patieName' value={insertRec.patieName} onChange={(e) => {changeInsertRec(e)}}/>
+              </div>
+              <div>생년월일<span style={{color:'darkred'}}> *</span>  <br/>
+                <input type='text' className='form' placeholder='ex) 900101'
+                  name='patieBirth' value={insertRec.patieBirth} onChange={(e) => {changeInsertRec(e)}} />
+              </div>
+              <div>증상 <br/>
+                <textarea type='text' className='form area' name='recDetail'
+                    value={insertRec.recDetail} onChange={(e) => {changeInsertRec(e)}} />
+              </div>
+            </div>
+          </div>
         </div>
-
-        <PrivacyInfo />
-
-        <div className="agreeChk02">
-          <label htmlFor="chk2">만 14세 미만 <span className="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" className="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다."/>
-        </div>
-        <div className="agreeChk02 mgt20">
-          <label htmlFor="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree" className="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."/>
-        </div>
-
-        <button className='addChartBtn' onClick={() =>{regRec()}}>예 약</button>
       </div>
+
+      <div className='privacyAgree'>
+        <div className='reserv-title'>개인정보처리방침</div>
+      </div>
+
+      <PrivacyInfo />
+
+      <div className="agreeChk02">
+        <label htmlFor="chk2">만 14세 미만 <span className="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" className="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다."/>
+      </div>
+      <div className="agreeChk02 mgt20">
+        <label htmlFor="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree" className="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."/>
+      </div>
+
+      <button className='addChartBtn' onClick={() =>{regRec()}}>예 약</button>
     </div>
   )
 }

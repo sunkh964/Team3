@@ -28,6 +28,8 @@ import Reserv_staff from './pages/admin/UserManage/Reserv_staff';
 import UserHistory from './pages/user/UserHistory';
 import Notice from './pages/user/Notice';
 import InsertRec from './pages/admin/InsertRec';
+import ReservSelect from './pages/user/Reserv/ReservSelect';
+import ReservHome from './pages/user/Reserv/ReservHome';
 
 
 
@@ -123,7 +125,10 @@ function App() {
               </Route>
 
               {/* 진료예약 */}
-              <Route path='reserv' element={<Reservation />} />
+              <Route path='reserv' element={<ReservHome/>}>
+                <Route path='' element={<Reservation/>}/>
+                <Route path='resSelect' element={<ReservSelect/>}/>
+              </Route>
               
             </Route>
   
