@@ -1,32 +1,66 @@
-.noti-body{
-  margin: auto;
-  text-align: center;
-  width: 100vw;
-  height: 75vh;
+
+/* 전체 공지사항 컨테이너 스타일 */
+.noti-body {
+  padding: 20px;
+  background-color: #f0f8ff; /* 연한 하늘색 배경 */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.noti-text{
-  font-size: 2rem;
+
+/* 공지사항 제목 스타일 */
+.noti-text {
+  font-size: 24px;
   font-weight: bold;
-  margin: 30px auto;
-}
-
-.noti-table{
-  margin: auto;
-  width: 60vw;
-  height: 80%;
-  font-size: 1.3rem;
-  line-height: 30px;
-}
-
-.noti-tr>td{
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(24, 41, 75);
-  background-color: rgb(235, 235, 255);
-}
-
-.Noti-map{
+  color: #003366; /* 다크 블루 색상 */
+  margin-bottom: 20px;
   text-align: center;
-  margin: auto;
-  line-height: 150px;
-  border-bottom: 4px double black;
+}
+
+/* 테이블 스타일 */
+.noti-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 테이블 헤더 스타일 */
+.noti-thead {
+  background-color: #003366; /* 다크 블루 색상 */
+  color: white;
+}
+
+.noti-thead td {
+  padding: 12px;
+  text-align: left;
+}
+
+/* 테이블 본문 스타일 */
+.noti-tr {
+  border-bottom: 1px solid #ddd; /* 연한 회색 밑줄 */
+}
+
+.Noti-map {
+  transition: background-color 0.3s ease;
+}
+
+.Noti-map:hover {
+  background-color: #e6f7ff; /* 연한 파란색 배경 호버 효과 */
+}
+
+.Noti-map td {
+  padding: 12px;
+}
+
+/* 번호, 제목, 날짜 열의 정렬 */
+.noti-table td:nth-child(1) {
+  text-align: center;
+  color: #003366;
+}
+
+.noti-table td:nth-child(2) {
+  color: #003366;
+}
+
+.noti-table td:nth-child(3) {
+  text-align: center;
+  color: #003366;
 }
