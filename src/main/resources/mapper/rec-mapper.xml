@@ -115,7 +115,7 @@
             , #{staffNum})
     </insert>
 
-    <!-- 당사자 예약 조회 -->
+    <!-- 회원 당사자 예약 조회 -->
     <select id="selectIdRec" resultMap="rec">
         SELECT
             REC_NUM,
@@ -130,11 +130,17 @@
             PART_NAME,
             STAFF_NAME
         FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
-        WHERE REC_NUM = #{recNum}
+        WHERE REC_NUM = #{patieNum}
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM
     </select>
+
+    <!--당사자 예약 삭제-->
+    <delete id="delIdRec">
+        DELETE FROM HOS_REC
+        WHERE REC_NUM = #{recNum};
+    </delete>
 
 
 </mapper>

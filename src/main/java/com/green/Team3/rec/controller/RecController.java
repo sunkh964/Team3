@@ -71,4 +71,17 @@ public class RecController {
     void insertMainRec(@RequestBody RecVO recVO) {
         recService.insertMainRec(recVO);
     }
+
+    /* 회원 당사자 예약 조회 */
+    @GetMapping("/selectIdRec/{patieNum}")
+    List<RecVO> selectIdRec(@PathVariable("patieNum")int patieNum) {
+        return recService.selectIdRec(patieNum);
+    }
+
+    /* 당사자 예약 삭제 */
+    @DeleteMapping("/delIdRec/{recNum}")
+    public void delIdRec(@PathVariable("recNum") int recNum){
+        recService.delIdRec(recNum);
+    }
+
 }

@@ -127,7 +127,7 @@ function App() {
               {/* 진료예약 */}
               <Route path='reserv' element={<ReservHome/>}>
                 <Route path='' element={<Reservation/>}/>
-                <Route path='resSelect' element={<ReservSelect/>}/>
+                <Route path='resSelect/:patieNum' element={<ReservSelect/>}/>
               </Route>
               
             </Route>

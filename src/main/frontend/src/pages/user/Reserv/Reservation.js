@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './Reservation.css'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import './reservCalendar.css'
 import styled from 'styled-components';
 import PrivacyInfo from './PrivacyInfo';
 
 const Reservation = () => {
+  const navigate = useNavigate();
+
   const {partNum: initialPartNum, staffNum: initialDoctorNum } = useParams();
   // 현재 선택된 부서 번호
   const [partNum, setPartNum] = useState(initialPartNum || '');
@@ -146,7 +148,8 @@ const Reservation = () => {
       if(isReg){
         axios.post('/rec/insertMainRec',insertRec)
       .then((res) => {
-        alert('예약 완료')
+        alert('예약 완료');
+        navigate(0);
       })
       .catch((error) => {console.log(error)})
       }

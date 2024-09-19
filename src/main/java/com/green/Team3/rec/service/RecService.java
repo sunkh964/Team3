@@ -34,4 +34,11 @@ public interface RecService {
 /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     void insertMainRec(RecVO recVO);
+
+    /* 회원 당사자 예약 조회 */
+    List<RecVO> selectIdRec(int recNum);
+
+    /*당사자 예약 삭제*/
+    void delIdRec(int recNum);
+
 }
