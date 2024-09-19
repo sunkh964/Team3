@@ -38,6 +38,9 @@ public interface RecService {
     /* 회원 예약리스트 조회 */
     List<RecVO> selectAllRec();
 
+    /* 예약정보 상세보기 */
+    RecVO getRecInfo(int recNum);
+
 /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     void insertMainRec(RecVO recVO);

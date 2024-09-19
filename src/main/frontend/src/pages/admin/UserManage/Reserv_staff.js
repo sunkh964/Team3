@@ -9,6 +9,8 @@ const Reserv_staff = () => {
 
   const [allRecList, setAllRecList] = useState([]);
 
+  const [recDetail, setRecDetail] = useState({});
+
   // 당일 예약 리스트
   useEffect(()=>{
     axios.get('/rec/selectTodayRec')
@@ -28,9 +30,17 @@ const Reserv_staff = () => {
     })
     .catch((error) =>{console.log(error)})
   }, []);
+
+  // 예약 상세정보 조회
+  function getRecDetail(recNum){
+    axios.get(`/rec/getRecInfo/${recNum}`)
+      .then((res) =>{
+        setRecDetail(res.data);
+      })
+      .catch((error) =>{console.log(error)})
+  }
   
-
-
+  
 
   return (
     <div className='reserv-staff'>
@@ -63,7 +73,7 @@ const Reserv_staff = () => {
                   {
                     todayRecList.map((rec, i)=>{
                       return(
-                        <tr key={i}>
+                        <tr key={i} onClick={()=>{getRecDetail(rec.recNum)}}>
                           <td>{i+1}</td>
                           <td>{rec.recDate}</td>
                           <td>{rec.staffVO.part.partName}</td>
@@ -80,7 +90,21 @@ const Reserv_staff = () => {
           </div>
           <div className='updateReserv'>
             <div className='resList-title'>예약정보 수정</div>
-            <div></div>
+            {
+              recDetail ? (
+                <tr>
+                <td>이름</td>
+                <td></td>
+                <td>진료부서</td>
+                <td></td>
+                <td>의료진</td>
+                <td></td>
+              </tr>
+              ) : (
+                <div></div>
+              )}
+            <div>
+            </div>
           </div>
         </div>
         <div className='content-down'>

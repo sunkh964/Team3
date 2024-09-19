@@ -72,7 +72,13 @@ public class RecServiceImpl implements RecService{
         return sqlSession.selectList("recMapper.selectAllRec");
     }
 
-/*<!-- ============== 회원페이지 진료예약 ==============   -->*/
+    /* 예약정보 상세보기*/
+    @Override
+    public RecVO getRecInfo(int recNum) {
+        return sqlSession.selectOne("recMapper.getRecInfo", recNum);
+    }
+
+    /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     @Override
     public void insertMainRec(RecVO recVO) {

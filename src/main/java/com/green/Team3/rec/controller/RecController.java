@@ -78,6 +78,12 @@ public class RecController {
         return recService.selectAllRec();
     }
 
+    /* 예약 상세정보 조회 */
+    @GetMapping("/getRecInfo/{recNum}")
+    public RecVO getRecInfo(@PathVariable("recNum")int recNum){
+        return recService.getRecInfo(recNum);
+    }
+
 /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     @PostMapping("/insertMainRec")

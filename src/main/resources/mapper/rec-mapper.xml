@@ -145,6 +145,16 @@
         ORDER BY REC_DATE ASC, PART_NAME ASC, STAFF_NAME ASC, PATIE_NAME ASC;
     </select>
 
+    <!-- 예약정보 상세보기 -->
+    <select id="getRecInfo" resultMap="rec">
+        SELECT *
+        FROM HOS_REC R, HOS_STAFF S, HOS_PART A, HOS_PATIE P
+        WHERE P.PATIE_NUM=R.PATIE_NUM
+        AND s.STAFF_NUM = R.STAFF_NUM
+        AND A.PART_NUM = s.PART_NUM
+        AND REC_NUM= #{recNum}
+    </select>
+
 <!-- ============== 회원페이지 진료예약 ==============   -->
     <!-- 예약하기-->
     <insert id="insertMainRec">
