@@ -37,11 +37,16 @@
   border-bottom: 1px solid #7e969e;
   padding: 5px;
 }
-.reservUserList{
+
+.resUserList{
+  overflow-y: scroll;
+  height: 335px;
+}
+.resUserList-table{
   width: 100%;
   text-align: center;
 }
-.reservUserList > thead{
+.resUserList-table > thead{
   background-color: #067da1;
   color: white;
   font-weight: bold;
@@ -49,16 +54,24 @@
   position: sticky;
   top: 0;
 }
-.reservUserList thead td{
+.resUserList-table thead td{
   padding: 10px 0px;
 }
-.reservUserList td{
+.resUserList-table td{
   border: 1px solid #dddddd ;
   border-top: none;
   border-bottom: none;
   border-left: none;
   text-align: center;
   padding: 12px 0px;
+}
+
+.resUserList-table tbody tr:nth-child(odd){
+  background-color: white;
+}
+
+.resUserList-table tbody td{
+  padding: 10px 0px;
 }
 
 /* ================== 예악정보 수정 ================== */

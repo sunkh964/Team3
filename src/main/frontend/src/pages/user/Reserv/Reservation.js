@@ -50,26 +50,28 @@ const Reservation = () => {
       setSelectDate(date);
       updateRecDate(date, selectTime) ;
     };
-    const handleTimeChange =(time)=>{
-      console.log(time);
 
-      setSelectTime(time);
-      updateRecDate(selectDate, time);
-    };
+    // const handleTimeChange =(time)=>{
+    //   console.log(time);
 
-    function updateRecDate(date, time){
-      if (date && time) {
+    //   setSelectTime(time);
+    //   updateRecDate(selectDate, time);
+    // };
 
-        const nowDate = new Date(date);
-        nowDate.setHours(time, 0,0,0);
 
+
+    function updateRecDate(){
+      if(selectTime != null){
+        const nowDate = new Date(selectDate);
+        nowDate.setHours(selectTime, 0,0,0);
+  
         const dateString = nowDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식
-        const timeString = time.toString().padStart(2, '0') + ':00'; // HH:00 형식
+        const timeString = selectTime.toString().padStart(2, '0') + ':00'; // HH:00 형식
         const fullDateString = `${dateString}T${timeString}:00`; // 날짜와 시간 결합
-
+  
         console.log(fullDateString);
-
-
+  
+  
         setInsertRec(prevRec => ({
           ...prevRec,
           recDate: fullDateString
@@ -77,6 +79,13 @@ const Reservation = () => {
       }
     };
 
+
+  //라디오를 클릭해서 selectTime의 값이 바꾸면 바뀐 데이터로 insertRec의 값을 변경
+  useEffect(() => {
+    if(selectTime != null){
+      updateRecDate();
+    }
+  }, [selectTime]);  
 
 
   // 부서목록 조회
@@ -160,7 +169,7 @@ const Reservation = () => {
 
   // ========================= Time 컴포넌트 ======================== //
 
-  function CustomTime({onChange}) {
+  function CustomTime({selectTime, setSelectTime}) {
     const time = [
       {text: '9:00 AM', value: 9},
       {text: '10:00 AM', value: 10},
@@ -171,16 +180,17 @@ const Reservation = () => {
       {text: '16:00 PM', value: 16},
       {text: '17:00 PM', value: 17}
     ]
-    const [selectedtime, setSelectedtime] = useState(null);
+    //const [selectedtime, setSelectedtime] = useState(null);
 
     const onChangeRadio = (e) => {
 
       const timeValue = Number(e.target.value);
 
-      setSelectedtime(timeValue);
-      if (onChange) {
-        onChange(timeValue);
-      }
+      //alert(timeValue)
+      setSelectTime(timeValue);
+      //if (onChange) {
+      //  onChange(timeValue);
+      //}
     }
     
     return (
@@ -193,13 +203,13 @@ const Reservation = () => {
                   name='time'
                   value={time.value}
                   onChange={onChangeRadio}
-                  checked={selectedtime == time.value}
+                  checked={selectTime == time.value}
                 />
                 <span className='time' 
                   style={{
-                    border: selectedtime == time.value ? '1px solid rgb(139, 156, 173)' : '1px solid lightgray',
-                    backgroundColor: selectedtime == time.value ? 'rgb(150, 174, 197)' : '#eeeeee',
-                    color: selectedtime == time.value ? 'white' : 'gray'
+                    border: selectTime == time.value ? '1px solid rgb(139, 156, 173)' : '1px solid lightgray',
+                    backgroundColor: selectTime == time.value ? 'rgb(150, 174, 197)' : '#eeeeee',
+                    color: selectTime == time.value ? 'white' : 'gray'
                   }}
                 >
                   {time.text}
@@ -264,7 +274,7 @@ const Reservation = () => {
             </div>
             
             <div className='reservTime'>
-              <CustomTime onChange={(time) =>{handleTimeChange(time)}}/>
+              <CustomTime selectTime={selectTime} setSelectTime={setSelectTime}/>
             </div>
 
             <div className='reservInfo'>

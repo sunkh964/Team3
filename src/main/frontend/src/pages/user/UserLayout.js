@@ -41,7 +41,7 @@ const UserLayout = () => {
           <li>고객서비스</li>
         </ul>
         <div className='menu-icon'>
-        <i class="bi bi-list-task"></i></div>
+        <i className="bi bi-list-task"></i></div>
       </div>
       
       <div className='outlet'><Outlet /></div>

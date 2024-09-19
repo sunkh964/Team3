@@ -5,12 +5,13 @@ import axios from 'axios';
 
 const Reserv_staff = () => {
 
-  const [allRecList, setAllRecList] = useState();
+  const [allRecList, setAllRecList] = useState([]);
 
   useEffect(()=>{
     axios.get('/rec/selectAllRec')
     .then((res) =>{
       setAllRecList(res.data);
+      console.log(res.data);
     })
     .catch((error) =>{console.log(error)})
   }, []);
@@ -25,8 +26,8 @@ const Reserv_staff = () => {
         <div className='content-up'>
           <div className='reservList'>
             <div>예약환자 리스트</div>
-            <div >
-              <table className='reservUserList'>
+            <div className='resUserList'>
+              <table className='resUserList-table'>
                 <colgroup>
                   <col width='10%'/>
                   <col width='20%'/>
@@ -42,16 +43,20 @@ const Reserv_staff = () => {
                     <td>진료과</td>
                     <td>담당의료진</td>
                     <td>이름</td>
-                    <td>연락처</td>
+                    <td>생년월일</td>
                   </tr>
                 </thead>
                 <tbody>
                   {
                     allRecList.map((rec, i)=>{
                       return(
-                        <tr>
-                          <td>{allRecList.length-i}</td>
+                        <tr key={i}>
+                          <td>{i+1}</td>
                           <td>{rec.recDate}</td>
+                          <td>{rec.staffVO.part.partName}</td>
+                          <td>{rec.staffVO.staffName}</td>
+                          <td>{rec.patieVO.patieName}</td>
+                          <td>{rec.patieVO.patieBirth}</td>
                         </tr>
                       );
                     })

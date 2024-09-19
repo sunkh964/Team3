@@ -100,7 +100,7 @@
     <!-- 회원 예약리스트 조회 -->
     <select id="selectAllRec" resultMap="rec">
         SELECT REC_NUM,
-            REC_DATE,
+            DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i') REC_DATE,
             IS_REC,
             REC_STATUS,
             REC_DETAIL,
@@ -117,7 +117,7 @@
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM
-        ORDER BY REC_DATE ASC;
+        ORDER BY REC_DATE ASC, PART_NAME ASC, STAFF_NAME ASC, PATIE_NAME ASC;
     </select>
 
 <!-- ============== 회원페이지 진료예약 ==============   -->
