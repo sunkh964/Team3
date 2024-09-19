@@ -90,19 +90,22 @@ const Reserv_staff = () => {
           </div>
           <div className='updateReserv'>
             <div className='resList-title'>예약정보 수정</div>
-            {
-              recDetail ? (
                 <tr>
-                <td>이름</td>
-                <td></td>
-                <td>진료부서</td>
-                <td></td>
-                <td>의료진</td>
-                <td></td>
+                <td colSpan={2}>{recDetail.patieVO ? recDetail.patieVO.patieName : ''}</td>
+                <td colSpan={2}>{recDetail.patieVO ? recDetail.patieVO.patieBirth : ''}</td>
               </tr>
-              ) : (
-                <div></div>
-              )}
+              <tr>
+                <td>진료부서</td>
+                <td><input value={recDetail.staffVO ? recDetail.staffVO.part.partName : ''}/></td>
+                <td>의료진</td>
+                <td><input value={recDetail.staffVO ? recDetail.staffVO.staffName : ''}/></td>
+              </tr>
+              <tr>
+                <td>예약시간</td>
+                <td><input type='datetime-local' value={recDetail.recDate}/></td>
+                <td>증상</td>
+                <td><input value={recDetail.recDetail}/></td>
+              </tr>
             <div>
             </div>
           </div>
