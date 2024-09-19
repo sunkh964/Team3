@@ -96,6 +96,30 @@
         WHERE REC_NUM = #{recNum};
     </delete>
 
+<!-- ============== 환자관리 예약 페이지 ==============   -->
+    <!-- 회원 예약리스트 조회 -->
+    <select id="selectAllRec" resultMap="rec">
+        SELECT REC_NUM,
+            REC_DATE,
+            IS_REC,
+            REC_STATUS,
+            REC_DETAIL,
+            P.PATIE_NUM,
+            S.STAFF_NUM,
+            PATIE_NAME,
+            PATIE_BIRTH,
+            PART.PART_NUM,
+            PART_NAME,
+            STAFF_NAME
+        FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
+        WHERE IS_REC = 'Y'
+        AND REC_STATUS = '대기'
+        AND R.PATIE_NUM = P.PATIE_NUM
+        AND R.STAFF_NUM = S.STAFF_NUM
+        AND PART.PART_NUM = S.PART_NUM
+        ORDER BY REC_DATE ASC;
+    </select>
+
 <!-- ============== 회원페이지 진료예약 ==============   -->
     <!-- 예약하기-->
     <insert id="insertMainRec">
@@ -115,7 +139,7 @@
             , #{staffNum})
     </insert>
 
-    <!-- 당사자 예약 조회 -->
+    <!-- 회원 당사자 예약 조회 -->
     <select id="selectIdRec" resultMap="rec">
         SELECT
             REC_NUM,
@@ -130,11 +154,19 @@
             PART_NAME,
             STAFF_NAME
         FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
-        WHERE REC_NUM = #{recNum}
+        WHERE PATIE_NUM = #{patieNum}
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM
     </select>
+
+    <!--당사자 예약 삭제-->
+    <delete id="delIdRec">
+        DELETE FROM HOS_REC
+        WHERE REC_NUM = #{recNum};
+    </delete>
+
+
 
 
 </mapper>

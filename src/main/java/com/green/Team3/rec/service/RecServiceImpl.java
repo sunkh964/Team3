@@ -59,11 +59,31 @@ public class RecServiceImpl implements RecService{
         sqlSession.delete("recMapper.delRec", recNum);
     }
 
+// <!-- ============== 환자관리 예약 페이지 ==============   -->
+    /* 회원 예약리스트 조회 */
+    @Override
+    public List<RecVO> selectAllRec() {
+        return sqlSession.selectList("recMapper.selectAllRec");
+    }
+
 /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     @Override
     public void insertMainRec(RecVO recVO) {
         sqlSession.insert("recMapper.insertMainRec", recVO);
     }
+
+    /* 회원 당사자 예약 조회 */
+    @Override
+    public List<RecVO> selectIdRec(int recNum) {
+        return sqlSession.selectList("recMapper.selectIdRec", recNum);
+    }
+
+    /* 당사자 예약 삭제*/
+    @Override
+    public void delIdRec(int recNum) {
+        sqlSession.delete("recMapper.delIdRec", recNum);
+    }
+
 }
 

@@ -65,10 +65,32 @@ public class RecController {
         recService.delRec(recNum);
     }
 
+// <!-- ============== 환자관리 예약 페이지 ==============   -->
+    /* 회원 예약리스트 조회 */
+    @GetMapping("/selectAllRec")
+    List<RecVO> selectAllRec(){
+        return recService.selectAllRec();
+    }
+
 /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     @PostMapping("/insertMainRec")
     void insertMainRec(@RequestBody RecVO recVO) {
         recService.insertMainRec(recVO);
     }
+
+    /* 회원 당사자 예약 조회 */
+    @GetMapping("/selectIdRec/{patieNum}")
+    List<RecVO> selectIdRec(@PathVariable("patieNum")int patieNum) {
+        return recService.selectIdRec(patieNum);
+    }
+
+    /* 당사자 예약 삭제 */
+    @DeleteMapping("/delIdRec/{recNum}")
+    public void delIdRec(@PathVariable("recNum") int recNum){
+        recService.delIdRec(recNum);
+    }
+
+
+
 }

@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Reserv_staff.css'
+import { useFetcher } from 'react-router-dom';
+import axios from 'axios';
 
 const Reserv_staff = () => {
+
+  const [allRecList, setAllRecList] = useState();
+
+  useEffect(()=>{
+    axios.get('/rec/selectAllRec')
+    .then((res) =>{
+      setAllRecList(res.data);
+    })
+    .catch((error) =>{console.log(error)})
+  }, []);
   
 
 
@@ -34,7 +46,16 @@ const Reserv_staff = () => {
                   </tr>
                 </thead>
                 <tbody>
-
+                  {
+                    allRecList.map((rec, i)=>{
+                      return(
+                        <tr>
+                          <td>{allRecList.length-i}</td>
+                          <td>{rec.recDate}</td>
+                        </tr>
+                      );
+                    })
+                  }
                 </tbody>
               </table>
             </div>
