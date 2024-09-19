@@ -29,6 +29,7 @@ import UserHistory from './pages/user/UserHistory';
 import Notice from './pages/user/Notice';
 import InsertRec from './pages/admin/InsertRec';
 import Check from './pages/user/Check';
+import OrderItem from './pages/admin/OrderItem';
 
 
 
@@ -171,6 +172,9 @@ function App() {
                 {/* 병원장 - 직원정보(상세보기) */}
                 <Route path='staffDetail/:staffNum' element={<StaffDetail/>}/>
               </Route>
+
+              {/* 관리자용 - 의료용품 관리 */}
+              <Route path='OrderItem' element={<OrderItem/>}/>
             </Route>
           </Routes>
         </div>

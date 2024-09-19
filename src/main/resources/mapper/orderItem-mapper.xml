@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="orderItemMapper">
+    <resultMap id="orderItem" type="com.green.Team3.orderItem.vo.OrderItemVO">
+        <id column="ORDER_ITEM_NUM" property="orderItemNum"/>
+        <result column="QUANTITY" property="quantity"/>
+        <result column="ORDER_DATE" property="orderDate"/>
+        <association property="supVO" resultMap="supMapper.sup"/>
+        <association property="productTypeVO" resultMap="supMapper.productType"/>
+        <association property="supProductVO" resultMap="supMapper.supProduct"/>
+    </resultMap>
+
+    <select id="selectOrderItem" resultMap="orderItem">
+        SELECT * FROM HOS_ORDER_ITEM O, HOS_SUP S, PRODUCT_TYPE T, SUP_PRODUCT SP
+        WHERE O.SUP_NUM = S.SUP_NUM
+        AND SP.SUP_NUM = S.SUP_NUM
+        AND T.TYPE_NUM = SP.TYPE_NUM;
+    </select>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -37,7 +37,6 @@ const Chart = () => {
   
   }, []);
     
- 
 
   // 진료환자 등록 버튼
   const goIsNow = async (recNum) => {

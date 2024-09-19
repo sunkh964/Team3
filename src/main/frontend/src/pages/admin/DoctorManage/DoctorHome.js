@@ -177,7 +177,7 @@ const DoctorHome = () => {
                 {
                   staffList.map((staff, i) => {
                     return(
-                      <tr onClick={() =>{navigate(`/admin/doctorManage/staffDetail/${staff.staffNum}`)}}>
+                      <tr key={i} onClick={() =>{navigate(`/admin/doctorManage/staffDetail/${staff.staffNum}`)}}>
                         <td>{i+1}</td>
                         <td>{staff.part.partName}</td>
                         <td>{staff.staffName}</td>

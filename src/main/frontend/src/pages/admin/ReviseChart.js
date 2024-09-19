@@ -15,7 +15,7 @@ const ReviseChart = () => {
     patieNum:patieNum,
     staffNum: 0,
     recDetail: '',
-    recStatus: ''
+    recStatus: '대기'
   });
 
   // 값 변경 함수
@@ -68,6 +68,7 @@ const ReviseChart = () => {
 
   // 기본정보 값
   const patie = reviseInfo.patieVO;
+  const staff = reviseInfo.staffVO;
 
   // 버튼 클릭 시 업데이트
   const handleSubmit = () => {
@@ -104,7 +105,7 @@ const ReviseChart = () => {
           <tr>
             <td><span>진료 부서</span> :
               <select name='partNum' value={updateChart.partNum} onChange={changeValue}>
-                <option value=''>진료부서 선택</option>
+                <option value={staff?staff.part.partNum:null}> {staff?staff.part.partName:null} </option>
                 {
                   parts.map((part, i) => (
                     <option key={i} value={part.partNum}> {part.partName} </option>
@@ -114,7 +115,7 @@ const ReviseChart = () => {
             </td>
             <td><span>담당의</span> :
               <select name='staffNum' value={updateChart.staffNum} onChange={changeValue}>
-                <option value=''>담당의 선택</option>
+                <option value={staff?staff.staffNum:null}> {staff?staff.staffName:null} </option>
                 {staffs.map((staff, i) => (
                   <option key={i} value={staff.staffNum}> {staff.staffName} </option>
                 ))}
