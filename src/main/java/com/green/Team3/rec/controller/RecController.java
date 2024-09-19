@@ -65,6 +65,13 @@ public class RecController {
         recService.delRec(recNum);
     }
 
+// <!-- ============== 환자관리 예약 페이지 ==============   -->
+    /* 회원 예약리스트 조회 */
+    @GetMapping("/selectAllRec")
+    List<RecVO> selectAllRec(){
+        return recService.selectAllRec();
+    }
+
 /*<!-- ============== 회원페이지 진료예약 ==============   -->*/
     /* 회원 진료 예약 */
     @PostMapping("/insertMainRec")
@@ -83,5 +90,7 @@ public class RecController {
     public void delIdRec(@PathVariable("recNum") int recNum){
         recService.delIdRec(recNum);
     }
+
+
 
 }
