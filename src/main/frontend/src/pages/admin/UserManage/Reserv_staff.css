@@ -31,6 +31,14 @@
   border-right: 1px solid #7e969e; /* 오른 테두리 설정 */
   width: 50%;
 }
+.resList-title{
+  font-weight: bold;
+}
+
+.resList-title span{
+  font-weight: 600;
+  color: darkblue;
+}
 
 .content-up .reservList > div:first-child{
   background-color: #bedce6;
@@ -89,7 +97,7 @@
 
 /* ================== 예약리스트 ================== */
 .content-down{
-  background-color: antiquewhite;
+  background-color: rgb(228, 234, 243);
   height: 50%;
 }
 .content-down > div:first-child{

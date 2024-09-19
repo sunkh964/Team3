@@ -97,10 +97,10 @@
     </delete>
 
 <!-- ============== 환자관리 예약 페이지 ==============   -->
-    <!-- 회원 예약리스트 조회 -->
-    <select id="selectAllRec" resultMap="rec">
+    <!-- 당일 예약리스트 조회 -->
+    <select id="selectTodayRec" resultMap="rec">
         SELECT REC_NUM,
-            DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i') REC_DATE,
+            DATE_FORMAT(REC_DATE, '%H:%i') REC_DATE,
             IS_REC,
             REC_STATUS,
             REC_DETAIL,
@@ -114,6 +114,31 @@
         FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
         WHERE IS_REC = 'Y'
         AND REC_STATUS = '대기'
+        AND DATE(REC_DATE) = CURDATE()
+        AND R.PATIE_NUM = P.PATIE_NUM
+        AND R.STAFF_NUM = S.STAFF_NUM
+        AND PART.PART_NUM = S.PART_NUM
+        ORDER BY REC_DATE ASC, PART_NAME ASC, STAFF_NAME ASC, PATIE_NAME ASC;
+    </select>
+
+    <!-- 회원 예약리스트 조회 -->
+    <select id="selectAllRec" resultMap="rec">
+        SELECT REC_NUM,
+        DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i') REC_DATE,
+        IS_REC,
+        REC_STATUS,
+        REC_DETAIL,
+        P.PATIE_NUM,
+        S.STAFF_NUM,
+        PATIE_NAME,
+        PATIE_BIRTH,
+        PART.PART_NUM,
+        PART_NAME,
+        STAFF_NAME
+        FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
+        WHERE IS_REC = 'Y'
+        AND REC_STATUS = '대기'
+        AND REC_DATE > CURDATE()
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM

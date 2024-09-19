@@ -32,6 +32,9 @@ public interface RecService {
     void delRec(int recNum);
 
 // <!-- ============== 환자관리 예약 페이지 ==============   -->
+    /* 당일 예약리스트 조회 */
+    List<RecVO> selectTodayRec();
+
     /* 회원 예약리스트 조회 */
     List<RecVO> selectAllRec();
 

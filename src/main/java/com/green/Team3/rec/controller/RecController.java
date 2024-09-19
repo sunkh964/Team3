@@ -66,6 +66,12 @@ public class RecController {
     }
 
 // <!-- ============== 환자관리 예약 페이지 ==============   -->
+    /* 당일 예약 리스트 조회*/
+    @GetMapping("/selectTodayRec")
+    List<RecVO> selectTodayRec(){
+        return recService.selectTodayRec();
+    }
+
     /* 회원 예약리스트 조회 */
     @GetMapping("/selectAllRec")
     List<RecVO> selectAllRec(){
