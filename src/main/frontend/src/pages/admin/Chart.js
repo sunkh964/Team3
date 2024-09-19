@@ -13,23 +13,31 @@ const Chart = () => {
 
   // 대기 예약 환자 리스트
   useEffect(() => {
-    axios.get('/rec/selectWaitPatie')
-      .then((res) => {
-        console.log(res.data)
-        setRecWaitPatieList(res.data);
-      })
+    axios.all([axios.get('/rec/selectWaitPatie'), axios.get('/rec/selectIngPatie')])
+      .then(
+        axios.spread((res1, res2) => {
+          setRecWaitPatieList(res1.data);
+          setRecIngPatieList(res2.data);
+        })
+      )
       .catch((error) => { console.log(error); });
-    }, []);
-    
-    // 진료 환자 리스트
-    useEffect(() => {
-      axios.get('/rec/selectIngPatie')
-      .then((res) => {
-        console.log(res.data)
-        setRecIngPatieList(res.data);
-      })
+
+    setInterval(() => {
+      axios.all([axios.get('/rec/selectWaitPatie'), axios.get('/rec/selectIngPatie')])
+      .then(
+        axios.spread((res1, res2) => {
+          setRecWaitPatieList(res1.data);
+          setRecIngPatieList(res2.data);
+        })
+      )
       .catch((error) => { console.log(error); });
+
+    }, 5000);
+
+  
   }, []);
+    
+ 
 
   // 진료환자 등록 버튼
   const goIsNow = async (recNum) => {
