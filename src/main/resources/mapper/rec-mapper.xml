@@ -115,6 +115,27 @@
             , #{staffNum})
     </insert>
 
+    <!-- 당사자 예약 조회 -->
+    <select id="selectIdRec" resultMap="rec">
+        SELECT
+            REC_NUM,
+            REC_DATE,
+            IS_REC,
+            REC_DETAIL,
+            P.PATIE_NUM,
+            S.STAFF_NUM,
+            PATIE_NAME,
+            PATIE_BIRTH,
+            PART.PART_NUM,
+            PART_NAME,
+            STAFF_NAME
+        FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
+        WHERE REC_NUM = #{recNum}
+        AND R.PATIE_NUM = P.PATIE_NUM
+        AND R.STAFF_NUM = S.STAFF_NUM
+        AND PART.PART_NUM = S.PART_NUM
+    </select>
+
 
 </mapper>
 

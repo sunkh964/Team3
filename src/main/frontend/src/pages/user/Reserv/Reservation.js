@@ -24,7 +24,7 @@ const Reservation = () => {
     
   // 예약시 가져갈 데이터
   const [insertRec, setInsertRec] = useState({
-    patieNum: 0,
+    patieNum: 1,
     patieName: '',
     patieBirth: '',
     patieAddr: '',
@@ -38,21 +38,30 @@ const Reservation = () => {
     const [selectDate, setSelectDate] = useState(null);
     const [selectTime, setSelectTime] = useState(null);
 
-    function handleDateChange(date){
+    const handleDateChange =(date)=>{
       setSelectDate(date);
-      setSelectTime(null);
-      updateRecDate(date, null) ;
+      updateRecDate(date, selectTime) ;
     };
-    function handleTimeChange(time){
+    const handleTimeChange =(time)=>{
+      console.log(time);
+
       setSelectTime(time);
       updateRecDate(selectDate, time);
     };
 
     function updateRecDate(date, time){
       if (date && time) {
-        const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+
+        const nowDate = new Date(date);
+        nowDate.setHours(time, 0,0,0);
+
+        const dateString = nowDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식
         const timeString = time.toString().padStart(2, '0') + ':00'; // HH:00 형식
         const fullDateString = `${dateString}T${timeString}:00`; // 날짜와 시간 결합
+
+        console.log(fullDateString);
+
+
         setInsertRec(prevRec => ({
           ...prevRec,
           recDate: fullDateString
@@ -79,6 +88,10 @@ const Reservation = () => {
   // 의료진 선택 기능
   const selectDoctor = (staffNum) =>{
     setDoctorNum(staffNum);
+    setInsertRec(prevRec => ({
+      ...prevRec,
+      staffNum:staffNum
+    }));
   }
 
   // 담당의 조회
@@ -113,11 +126,16 @@ const Reservation = () => {
     function regRec(){
       // 필수 값이 비어 있는지 확인
       if (!insertRec.patieName || !insertRec.patieBirth) {
-      alert('기재란 입력 필수.');
+      alert('필수 기재란 입력 필요');
       return;
       }
 
-      const isReg = window.confirm(` ${insertRec.recDate}로 예약하시겠습니까?`)
+      if(!insertRec.recDate){
+        alert('날짜 및 시간이 선택되지 않았습니다.');
+        return;
+      }
+
+      const isReg = window.confirm(`예약하시겠습니까?`)
 
       if(isReg){
         axios.post('/rec/insertMainRec',insertRec)
@@ -133,7 +151,7 @@ const Reservation = () => {
 
   // ========================= Time 컴포넌트 ======================== //
 
-  function CustomTime({onTimeChange}) {
+  function CustomTime({onChange}) {
     const time = [
       {text: '9:00 AM', value: 9},
       {text: '10:00 AM', value: 10},
@@ -144,15 +162,15 @@ const Reservation = () => {
       {text: '16:00 PM', value: 16},
       {text: '17:00 PM', value: 17}
     ]
-    const [selectedtime, setSelectedtime] = useState(0);
+    const [selectedtime, setSelectedtime] = useState(null);
 
     const onChangeRadio = (e) => {
 
       const timeValue = Number(e.target.value);
 
       setSelectedtime(timeValue);
-      if (onTimeChange) {
-        onTimeChange(timeValue);
+      if (onChange) {
+        onChange(timeValue);
       }
     }
     
@@ -166,13 +184,13 @@ const Reservation = () => {
                   name='time'
                   value={time.value}
                   onChange={onChangeRadio}
-                  checked={selectedtime === time.value}
+                  checked={selectedtime == time.value}
                 />
                 <span className='time' 
                   style={{
-                    border: selectedtime === time.value ? '1px solid rgb(139, 156, 173)' : '1px solid lightgray',
-                    backgroundColor: selectedtime === time.value ? 'rgb(150, 174, 197)' : '#eeeeee',
-                    color: selectedtime === time.value ? 'white' : 'gray'
+                    border: selectedtime == time.value ? '1px solid rgb(139, 156, 173)' : '1px solid lightgray',
+                    backgroundColor: selectedtime == time.value ? 'rgb(150, 174, 197)' : '#eeeeee',
+                    color: selectedtime == time.value ? 'white' : 'gray'
                   }}
                 >
                   {time.text}
@@ -223,7 +241,7 @@ const Reservation = () => {
               {
                 doctor.map((doc,i) => {
                   return(
-                    <div name='staffNum' className={`doctor ${doc.staffNum === doctorNum ? 'selected' : ''}`}
+                    <div key={i} name='staffNum' className={`doctor ${doc.staffNum === doctorNum ? 'selected' : ''}`}
                       onClick={()=>selectDoctor(doc.staffNum)}>
                       <div className='img'><img src={'http://localhost:8080/images/doctor.jpg'} /></div>
                       <div className='doctorInfo'>
@@ -241,18 +259,18 @@ const Reservation = () => {
             <div className='reserv-title'>예약날짜/시간 선택</div>
             <div>
               <div className='reservCalendar'>
-                <DatePicker inline  selected={selectDate} onChange={handleDateChange}/>
+                <DatePicker inline  selected={selectDate} value={selectDate} onChange={(date) =>{handleDateChange(date)}}/>
               </div>
               
               <div className='reservTime'>
-                <CustomTime onTimeChange={handleTimeChange}/>
+                <CustomTime onChange={(time) =>{handleTimeChange(time)}}/>
               </div>
 
               <div className='reservInfo'>
-                <div>예약자 <br/>
+                <div>예약자<span style={{color:'darkred'}}> *</span> <br/>
                   <input type='text' className='form' name='patieName' value={insertRec.patieName} onChange={(e) => {changeInsertRec(e)}}/>
                 </div>
-                <div>생년월일 <br/>
+                <div>생년월일<span style={{color:'darkred'}}> *</span>  <br/>
                   <input type='text' className='form' placeholder='ex) 900101'
                     name='patieBirth' value={insertRec.patieBirth} onChange={(e) => {changeInsertRec(e)}} />
                 </div>
@@ -271,14 +289,14 @@ const Reservation = () => {
 
         <PrivacyInfo />
 
-        <div class="agreeChk02">
-          <label for="chk2">만 14세 미만 <span class="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" class="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다."/>
+        <div className="agreeChk02">
+          <label htmlFor="chk2">만 14세 미만 <span className="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" className="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다."/>
         </div>
-        <div class="agreeChk02 mgt20">
-          <label for="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree" class="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."/>
+        <div className="agreeChk02 mgt20">
+          <label htmlFor="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree" className="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."/>
         </div>
 
-        <button className='addChartBtn' onClick={() =>{regRec()}}>등록</button>
+        <button className='addChartBtn' onClick={() =>{regRec()}}>예 약</button>
       </div>
     </div>
   )

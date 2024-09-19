@@ -28,6 +28,7 @@ import Reserv_staff from './pages/admin/UserManage/Reserv_staff';
 import UserHistory from './pages/user/UserHistory';
 import Notice from './pages/user/Notice';
 import InsertRec from './pages/admin/InsertRec';
+import Check from './pages/user/Check';
 
 
 
@@ -65,7 +66,7 @@ function App() {
                 <span onClick={(e)=> {navigate('/login')}}>로그인</span>
               </li>
               <li>
-                <span onClick={() => {navigate('/join')}}>회원가입</span>
+                <span onClick={() => {navigate('/check')}}>회원가입</span>
               </li>
             </ul>
             :
@@ -73,7 +74,16 @@ function App() {
             <li>
             {loginInfo.memName}{loginInfo.staffName}님 반갑습니다.
             </li>
-            <li><span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>마이페이지</span></li>
+            <li>
+              {
+                loginInfo.staffRole !== 'ADMIN' && (
+                  <li>
+                    <span onClick={() => {navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>마이페이지</span>
+                  </li>
+                )
+              }
+              {/* <span onClick={()=>{navigate(`/mypage/infoupdate/${loginInfo.memId}`)}}>마이페이지</span> */}
+              </li>
             <li>
             <span onClick={() => {
                 //세션에 저장된 로그인 정보 삭제
@@ -100,6 +110,8 @@ function App() {
             <Route path='/' element={<UserLayout />}>
               {/* 회원용 - 첫 화면 */}
               <Route path='' element={<UserHome />} />
+              {/* 회원가입 하기 전 동의란 */}
+              <Route path='check' element={<Check/>}/>
               {/* 회원 가입 화면 */}
               <Route path='/join' element={<Join/>}/>
               {/* 로그인 화면 */}
