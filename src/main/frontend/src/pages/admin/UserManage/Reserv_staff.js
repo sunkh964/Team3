@@ -5,6 +5,9 @@ import axios from 'axios';
 
 const Reserv_staff = () => {
 
+  //로그인 정보를 저장할수 있는 state 변수
+  const [loginInfo, setLoginInfo] = useState({});
+
   const [todayRecList, setTodayRecList] = useState([]);
 
   const [allRecList, setAllRecList] = useState([]);

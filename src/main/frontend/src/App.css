@@ -36,7 +36,9 @@
   font-size: 1.8rem;
   position: relative;
   line-height: 10vh;
+  cursor: pointer;
 }
+
 .head-name img{
   width: 40px;
   z-index: -1;

@@ -1,3 +1,4 @@
+/* ================ ReserveHome.js ================ */
 .reserv-container{
   margin: auto;
   padding: 30px 0px;
@@ -35,10 +36,38 @@
   margin-left: 20px;
 }
 
+/* ================ Reservation.js ================ */
+.reservation >div:first-child{
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  color: rgb(68, 67, 67);
+}
+
 .explain{
   width: 100%;
-  height: 20vh;
   background-color: #dddddd;
+  font-size: 0.9rem;
+  word-spacing: 1px;
+  padding: 20px ;
+  line-height: 21px;
+}
+
+.explain > div{
+  color: #085a99;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.explain > ul{
+  list-style: circle;
+  margin-left: 25px;
+  color: rgb(71, 71, 71);
+  font-size: 0.87rem;
+}
+.explain span{
+  color: rgb(207, 3, 3);
+  font-weight: 600;
 }
 
 .act{
@@ -56,7 +85,7 @@
   margin: auto;
   font-size: 1.1rem;
   border-bottom: 1px solid gray;
-  padding: 10px 0px;
+  padding: 20px 0px 10px 0px;
 }
 
 .act_1 .reserv-title{

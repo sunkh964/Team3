@@ -158,7 +158,7 @@
 <!-- ============== 회원페이지 진료예약 ==============   -->
     <!-- 예약하기-->
     <insert id="insertMainRec">
-        INSERT INTO HOS_REC(
+        INSERT INTO HOS_REC (
             REC_DATE
             , IS_REC
             , REC_STATUS
@@ -171,7 +171,8 @@
             , '대기'
             , #{recDetail}
             , #{patieNum}
-            , #{staffNum})
+            , #{staffNum}
+        )
     </insert>
 
     <!-- 회원 당사자 예약 조회 -->
