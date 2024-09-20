@@ -30,6 +30,7 @@ import Notice from './pages/user/Notice';
 import InsertRec from './pages/admin/InsertRec';
 import Check from './pages/user/Check';
 import OrderItem from './pages/admin/OrderItem';
+import ChartModal from './pages/admin/ChartModal';
 
 
 
@@ -149,6 +150,8 @@ function App() {
 
               {/* 관리자용 - 진료 관리(차트) */}
               <Route path='chart' element={<Chart />} />
+              {/* 관리자용 - 차트 수납 모달 */}
+              <Route path='chartModal' element={<ChartModal/> }/>
               {/* 관리자용 - 환자 진료 이력 */}
               <Route path='history/:patieNum' element={<History/>}/>
               {/* 관리자용 - 첫방문 환자 추가 */}

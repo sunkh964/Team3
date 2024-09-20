@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Chart.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Modal from './ChartModal'; 
 
 const Chart = () => {
   const navigate = useNavigate();
@@ -10,32 +11,33 @@ const Chart = () => {
   const [recPatieList, setRecWaitPatieList] = useState([]);
   // 진료 환자 담을 배열
   const [recIngPatieList, setRecIngPatieList] = useState([]);
-
-  // 대기 예약 환자 리스트
-  useEffect(() => {
-    axios.all([axios.get('/rec/selectWaitPatie'), axios.get('/rec/selectIngPatie')])
-      .then(
-        axios.spread((res1, res2) => {
-          setRecWaitPatieList(res1.data);
-          setRecIngPatieList(res2.data);
-        })
-      )
-      .catch((error) => { console.log(error); });
-
-    setInterval(() => {
-      axios.all([axios.get('/rec/selectWaitPatie'), axios.get('/rec/selectIngPatie')])
-      .then(
-        axios.spread((res1, res2) => {
-          setRecWaitPatieList(res1.data);
-          setRecIngPatieList(res2.data);
-        })
-      )
-      .catch((error) => { console.log(error); });
-
-    }, 5000);
-
+  // 진료 완료된 환자
+  const [completedRecNums, setCompletedRecNums] = useState(new Set());
   
-  }, []);
+
+     // 로컬 스토리지에서 상태 불러오기
+    useEffect(() => {
+      const savedCompletedRecNums = JSON.parse(localStorage.getItem('completedRecNums')) || [];
+      setCompletedRecNums(new Set(savedCompletedRecNums));
+    
+      const fetchData = async () => {
+        try {
+          const [waitRes, ingRes] = await Promise.all([
+            axios.get('/rec/selectWaitPatie'),
+            axios.get('/rec/selectIngPatie')
+          ]);
+          setRecWaitPatieList(waitRes.data);
+          setRecIngPatieList(ingRes.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    
+      fetchData();
+      const intervalId = setInterval(fetchData, 5000);
+    
+      return () => clearInterval(intervalId);
+    }, []);
     
 
   // 진료환자 등록 버튼
@@ -54,21 +56,42 @@ const Chart = () => {
     }
   };
 
-  // 환자 집보내기
-  const delIsNow = async (recNum) => {
+  // 진료 완료 처리
+  const handleComplete = (recNum) => {
     if (window.confirm('진료가 완료되었습니까?')) {
-      try {
-        await axios.put('/rec/endStatus', { recNum });
-        setRecIngPatieList(prevList => prevList.filter(patie => patie.recNum !== recNum));
-        const updatedRecWaitPatieList = await axios.get('/rec/selectWaitPatie');
-        setRecWaitPatieList(updatedRecWaitPatieList.data);
-      } catch (error) {
-        console.log(error);
-      }
+      setCompletedRecNums(prev => {
+        const newSet = new Set(prev).add(recNum);
+        localStorage.setItem('completedRecNums', JSON.stringify(Array.from(newSet))); // 상태 저장
+        return newSet;
+      });
     } else {
       alert('취소되었습니다.');
     }
   };
+
+  const [ isModalOpen, setIsModalOpen] = useState(false)
+  const [ currentRecNum, setCurrentRecNum] = useState(null)
+  // 수납하기 버튼 클릭 시 모달 열기
+  function openModal(recNum){
+    setCurrentRecNum(recNum)
+    setIsModalOpen(true)
+  }
+
+  // 모달 닫기
+  function closeModal(){
+    setIsModalOpen(false)
+    setCurrentRecNum(null)
+  }
+
+  // 수납완료 버튼 클릭 시 환자 집 보내기
+  function delRec(recNum) {
+    if (window.confirm('수납이 완료 되었습니까?')) {
+      axios.delete(`/rec/delRec/${recNum}`)
+        .then((res) => { closeModal() });
+    } else {
+      alert('취소되었습니다.');
+    }
+  }
 
   // 검색 환자 넣을 배열
   const [searchPaties, setSearchPaties] = useState([]);
@@ -132,11 +155,12 @@ const Chart = () => {
                   <div className='divFSec'>
                     <div>접수시간 : {recPatie.recDate}</div>
                     <div>진료 부서 : {part?part.partName:null}</div>
-                    <div>
-                      <span onClick={() => navigate(`/admin/reviseChart/${recPatie.patieNum}/${recPatie.recNum}`)}>수정</span>
-                      <span onClick={() => delRec(recPatie.recNum)}>삭제</span>
-                      <button onClick={() => goIsNow(recPatie.recNum)}>진료 환자 등록</button>
-                    </div>
+                    <div>예약 여부 : {recPatie.isRec}</div>
+                  </div>
+                  <div className='div-right'>
+                    <span onClick={() => navigate(`/admin/reviseChart/${recPatie.patieNum}/${recPatie.recNum}`)}>수정</span>
+                    <span onClick={() => delRec(recPatie.recNum)}>삭제</span>
+                    <button onClick={() => goIsNow(recPatie.recNum)}>진료 환자 등록</button>
                   </div>
                 </div>
               )})}
@@ -178,8 +202,12 @@ const Chart = () => {
             {recIngPatieList.map((recPatie, i) => {
               const patie = recPatie.patieVO;
               const staff = recPatie.staffVO;
+              const isCompleted = completedRecNums.has(recPatie.recNum); // 진료 완료 여부 확인
               return(
-              <div className='treatContent' key={i}>
+                <div 
+                  className={`treatContent ${isCompleted ? 'completed' : ''}`} // 배경색 클래스 적용
+                  key={i}
+                >
                 <div className='divTrF'>
                   <div>예약번호 : {recPatie.recNum}</div>
                 </div>
@@ -195,13 +223,26 @@ const Chart = () => {
 
                 <div className='botBut'>
                   <button onClick={() => navigate(`/admin/reviseChart/${patie.patieNum}/${recPatie.recNum}`)}>수정</button>
-                  <button onClick={() => delIsNow(recPatie.recNum)}>진료 완료</button>
+                  {
+                    !isCompleted?(
+                      <button onClick={()=>{ handleComplete(recPatie.recNum) }}>진료 완료</button>
+                    ) : (
+                      <button className='payBtn' onClick={()=>{ openModal(recPatie.recNum) }}>수납하기</button>
+
+                    )
+                  }
                 </div>
               </div>
             )})}
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={delRec}
+      />
     </div>
   );
 };

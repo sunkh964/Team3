@@ -25,7 +25,6 @@ const OrderItem = () => {
     <div className='orderItemContainer'>
       {loginData && Object.keys(loginData).length > 0 ? (
         <div className='Order-header'>
-          {loginData.staffName}님 반갑습니다.
           {loginData.staffRole === 'DOCTOR' ? (
             <table className='main-table'>
               <colgroup>
@@ -64,7 +63,12 @@ const OrderItem = () => {
                         <td> {productType?productType.typeName:null} </td>
                         <td> {supProduct?supProduct.productName:null} </td>
                         <td>{supProduct?supProduct.price:null}</td>
-                        <td>1</td>
+                        <td>
+                          {supProduct && supProduct.price && orderItem.quantity 
+                            ? supProduct.price * orderItem.quantity 
+                            : 0}
+                        </td>
+
                         <td>{sup?sup.supName:null}</td>
                         <td>{orderItem.orderDate}</td>
                       </tr>

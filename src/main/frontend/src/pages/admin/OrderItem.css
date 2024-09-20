@@ -30,3 +30,8 @@
   color: white;
   padding: 7px 0px;
 }
+.orderItemContainer .main-table tbody td{
+  text-align: center;
+  background-color: #bedce6;
+  padding: 7px 0px;
+}
