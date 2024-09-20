@@ -10,7 +10,7 @@ public interface MemberService {
     void join(MemberVO memberVO);
 
 //회원가입 환자 까지
-    void join1(PatieVO patieVO);
+    void join1(MemberVO memberVO);
 
 
 //    아이디 중복

@@ -23,14 +23,16 @@ public class MemberController {
     @PostMapping("/join")
     public void join(@RequestBody MemberVO memberVO){
         memberService.join(memberVO);
-    }
+        memberService.join1(memberVO);
+        //patie에서 insert
 
+    }
 
 //환자와 회원가입이 동시에 진행
-    @PostMapping("join1")
-    public void join1(@RequestBody PatieVO patie){
-        memberService.join1(patie);
-    }
+//    @PostMapping("join1")
+//    public void join1(@RequestBody PatieVO patie){
+//        memberService.join1(patie);
+//    }
 
 //    아이디 중복 확인
     @GetMapping("/checkId/{inputId}")

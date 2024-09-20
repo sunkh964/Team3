@@ -21,8 +21,8 @@ public class MemberServiceImpl implements MemberService {
 
 //    회원가입
     @Override
-    public void join1(PatieVO patie) {
-        sqlSession.insert("patieMapper.join1", patie);
+    public void join1(MemberVO memberVO) {
+        sqlSession.insert("memberMapper.join1", memberVO);
     }
 
     //    아이디 중복 확인

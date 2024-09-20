@@ -12,8 +12,6 @@ const Join = () => {
 
       //주소 검색 팝업창이 닫힐 때 실행되는 함수
   function handleComplete(data){
-    //우편번호
-    console.log(data.zonecode);
     //도로명주소
     console.log(data.roadAddress);
 
@@ -40,6 +38,7 @@ const [joinData, setJoinData]=useState({
   memGen:'male',
   memBirth:''
 });
+
 // 회원가입 시  환자 데이터 가져가기
 const [joinData1, setJoinData1]=useState({
   patieNum:'',
@@ -101,7 +100,6 @@ const validateBirth = (birth) => /^\d{6}$/.test(birth);
   axios.post('/member/join', joinData, joinData1)
   .then((res)=>{
     alert('회원가입')
-    console.log(setJoinData1);
     setJoinData(res.data);
     setJoinData1(res.data);
     navigate('/')
@@ -195,13 +193,6 @@ function checkId(){
 
 
 
-// --------------------------------------------------------------------
-
-
-
-// --------------------------------------------------------------------
-
-
 
   return (
     <div class="container">
@@ -244,7 +235,7 @@ function checkId(){
         <div class="user-info-email">
           <div>* 주소</div>
           
-          <input name='memAddr' onClick={handleClick} onChange={(e)=>{changeJoinData(e)}} />
+          <input name='memAddr' onClick={handleClick}  value={joinData.memAddr} onChange={(e)=>{changeJoinData(e)}} />
         </div>
       </div>
       <div class="gender">
