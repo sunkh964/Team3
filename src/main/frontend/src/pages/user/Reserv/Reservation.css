@@ -38,7 +38,8 @@
 
 /* ================ Reservation.js ================ */
 .reservation >div:first-child{
-  font-size: 2rem;
+  font-size: 1.5rem;
+  padding-left: 10px;
   font-weight: 600;
   letter-spacing: 3px;
   margin-bottom: 20px;
@@ -170,6 +171,11 @@
 
 .reservInfo > div{
   margin-bottom: 10px;
+}
+.reservInfo span{
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #5b6681;
 }
 
 .reservInfo .form{

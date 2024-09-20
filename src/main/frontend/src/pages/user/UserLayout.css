@@ -9,9 +9,11 @@
   height: 60px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .menu > .menu-ul{
+  border: 1px dotted blue;
   width: 90%;
   height: 100%;
   display: flex;
@@ -20,6 +22,7 @@
 }
 
 .menu > .menu-ul > li{
+  border: 1px dotted;
   border-bottom: 4px solid white;
   width: 150px;
   height: 100%;
@@ -42,6 +45,42 @@
   font-size: 2rem;
   margin-right: 20px;
   cursor: pointer;
+}
+
+
+.menu-dropdown {
+  position: absolute; /* 드롭다운 위치를 절대적으로 설정 */
+  top: 60px; /* 메뉴 아래에 위치하도록 설정 */
+  width: 65vw;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: white; /* 배경색 */
+  border: 1px solid #dddddd;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
+  z-index: 1000; /* 다른 요소들 위에 표시 */
+  display: none; /* 기본적으로 숨김 처리 */
+}
+
+/* 드롭다운이 열릴 때의 클래스 추가 */
+.menu-dropdown.active {
+  display: grid; /* 활성화 시 그리드로 표시 */
+}
+
+.dropdown-ul {
+  border-left: 1px solid #eeeeee;
+}
+.dropdown-ul:last-child {
+  border-right: 1px solid #eeeeee;
+}
+
+.dropdown-ul li {
+  padding: 10px; /* 항목 패딩 */
+  cursor: pointer; /* 커서 변경 */
+}
+
+.dropdown-ul li:hover {
+  background-color: #f0f0f0; /* 마우스 오버 색상 */
 }
 
 

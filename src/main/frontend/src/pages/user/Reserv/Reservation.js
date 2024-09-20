@@ -10,6 +10,13 @@ import PrivacyInfo from './PrivacyInfo';
 const Reservation = () => {
   const navigate = useNavigate();
 
+  // 로그인 정보 받아오기
+
+  const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
+  const loginInfo = JSON.parse(sessionLoginInfo);
+
+  console.log(loginInfo)
+
   const {partNum: initialPartNum, staffNum: initialDoctorNum } = useParams();
   // 현재 선택된 부서 번호
   const [partNum, setPartNum] = useState(initialPartNum || '');
@@ -26,7 +33,7 @@ const Reservation = () => {
     
   // 예약시 가져갈 데이터
   const [insertRec, setInsertRec] = useState({
-    patieNum: 0,
+    patieNum: '',
     patieName: '',
     patieBirth: '',
     patieAddr: '',
@@ -36,11 +43,29 @@ const Reservation = () => {
     recDate : ''
   });
 
-  // datePicker 평일만 선택하기
+  // 공휴일 배열 정의
+  const holidays = [
+    new Date(2024, 8, 16 ),
+    new Date(2024, 8, 17 ),
+    new Date(2024, 8, 18 ), 
+    new Date(2024, 9, 1),  
+    new Date(2024, 9, 3), 
+    new Date(2024, 9, 9),  
+    new Date(2024, 11, 25)  
+];
+
+  // datePicker 평일 및 공휴일 체크
   const isDay = (date) => {
     const day = date.getDay();
-    return day !=0 && day !=6
-  };
+    const isWeekend = day === 0 || day === 6;
+    const isHoliday = holidays.some(holiday =>
+      holiday.getFullYear() === date.getFullYear() &&
+      holiday.getMonth() === date.getMonth() &&
+      holiday.getDate() === date.getDate()
+  );
+
+  return !(isWeekend || isHoliday);
+};
 
     // ============== recDate 합치기 ============
     const [selectDate, setSelectDate] = useState(null);
@@ -290,7 +315,7 @@ const Reservation = () => {
             <div className='reservCalendar'>
               <DatePicker inline  selected={selectDate} value={selectDate} 
                 onChange={(date) =>{handleDateChange(date)}}
-                filterDate={isDay}/>
+                filterDate={isDay} dayClassName={isDay}/>
             </div>
             
             <div className='reservTime'>
@@ -298,7 +323,7 @@ const Reservation = () => {
             </div>
 
             <div className='reservInfo'>
-              <div>예약자 : {}</div>
+              <div>예약자 : <span>{loginInfo.memName}</span></div>
               <div>증상 <br/>
                 <textarea type='text' className='form area' name='recDetail'
                     value={insertRec.recDetail} onChange={(e) => {changeInsertRec(e)}} />

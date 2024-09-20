@@ -24,6 +24,10 @@
   color: red;
 }
 
+.unavailable-day {
+  color: red; 
+}
+
 /* ================ 시간 설정 ================ */
 .reservTime{
   width: 100%;
