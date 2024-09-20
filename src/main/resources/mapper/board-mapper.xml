@@ -18,6 +18,16 @@
         , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE
         FROM HOS_BOARD
     </select>
+
+<!--    글(공지사항) 상세보기 -->
+    <select id="getNoticeDetail" resultMap="board">
+        SELECT BOARD_NUM
+        , BOARD_TITLE
+        , BOARD_CONTENT
+        , BOARD_DATE
+        FORM BOARD
+        WHERE BOARD_NUM=#{boardNum}
+    </select>
 </mapper>
 
 

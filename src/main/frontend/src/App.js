@@ -31,6 +31,7 @@ import InsertRec from './pages/admin/InsertRec';
 import Check from './pages/user/Check';
 import ReservSelect from './pages/user/Reserv/ReservSelect';
 import ReservHome from './pages/user/Reserv/ReservHome';
+import NoticeDetail from './pages/user/NoticeDetail';
 
 
 
@@ -122,7 +123,10 @@ function App() {
 
                 {/* 공지사항 큰화면 */}
                 <Route path='/notice' element={<Notice/>}/>
-              {/* 마이페이지 */}
+                {/* 공지사항 상세보기 */}
+                <Route path='/NoticeDetail/:boardNum' element={<NoticeDetail/>}/>
+
+                {/* 마이페이지 */}
               <Route path='/mypage' element={<Mypage loginInfo={loginInfo}/>}>
                 {/* 마이페이지-개인정보수정 */}
                 <Route path='infoupdate/:memId' element={<Infoupdate />} />

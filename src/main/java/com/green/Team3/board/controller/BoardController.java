@@ -4,6 +4,7 @@ import com.green.Team3.board.service.BoardService;
 import com.green.Team3.board.vo.BoardVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,11 @@ public class BoardController {
     @GetMapping("/list")
     public List<BoardVO> boardList(BoardVO boardVO){
         return boardService.boardList(boardVO);
+    }
 
+    //        게시글 상세조회
+    @GetMapping("noticeDetail/{boardNum}")
+    public BoardVO getNoticeDetail(@PathVariable("boardNum")int boardNum){
+        return boardService.getNoticeDetail(boardNum);
     }
 }

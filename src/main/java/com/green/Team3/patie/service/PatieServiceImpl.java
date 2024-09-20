@@ -13,6 +13,7 @@ public class PatieServiceImpl implements PatieService {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+
     @Override
     public int getNextPatieNum() {
         return sqlSession.selectOne("patieMapper.getNextPatieNum");

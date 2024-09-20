@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './Notice.css';
+import { useNavigate } from 'react-router-dom';
 
 const Notice = () => {
+  const navigate=useNavigate();
   //조회된 게시글 목록을 저장할 변수
   const [boardList, setBoardList] = useState([]);
 
@@ -36,7 +38,7 @@ const Notice = () => {
               return(
                 <tr key={i} className='Noti-map'>
                   <td>{board.boardNum}</td>
-                  <td>{board.boardTitle}</td>
+                  <td onClick={(e)=>{navigate('/NoticeDetail:boardNum')}}>{board.boardTitle}</td>
                   <td>{board.boardDate}</td>
                 </tr>
               );

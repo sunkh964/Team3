@@ -8,4 +8,7 @@ public interface BoardService {
 
 //    게시글 목록 조회
     List<BoardVO> boardList(BoardVO boardVO);
+
+//    게시글 상세보기
+    BoardVO getNoticeDetail(int boardNum);
 }

@@ -51,22 +51,18 @@
 
     <insert id="join1">
     <!-- 회원 등록& 환자 등록 -->
-    INSERT INTO PATIE (
-    PATIE_NUM,
+    INSERT INTO HOS_PATIE (
     PATIE_NAME,
     PATIE_BIRTH,
     PATIE_TEL,
     PATIE_ADDR,
-    PATIE_GEN,
-    PERSONAL_YN
+    PATIE_GEN
     ) VALUES (
-    #{patieNum}, <!-- PATIE_NUM은 memNum과 동일하게 설정됨 -->
-    #{patieName},
-    #{patieBirth},
-    #{patieTel},
-    #{patieAddr},
-    #{patieGen},
-    #{personalYN}
+    #{memName},
+    #{memBirth},
+    #{memTel},
+    #{memAddr},
+    #{memGen}
     )
     </insert>
 
