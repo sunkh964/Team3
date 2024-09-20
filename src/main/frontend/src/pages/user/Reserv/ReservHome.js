@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import './Reservation.css'
 
 const ReservHome = () => {
   const navigate = useNavigate();

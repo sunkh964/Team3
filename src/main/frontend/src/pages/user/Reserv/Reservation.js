@@ -26,7 +26,7 @@ const Reservation = () => {
     
   // 예약시 가져갈 데이터
   const [insertRec, setInsertRec] = useState({
-    patieNum: 1,
+    patieNum: 0,
     patieName: '',
     patieBirth: '',
     patieAddr: '',
@@ -67,7 +67,7 @@ const Reservation = () => {
   
         const dateString = nowDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식
         const timeString = selectTime.toString().padStart(2, '0') + ':00'; // HH:00 형식
-        const fullDateString = `${dateString}T${timeString}:00`; // 날짜와 시간 결합
+        const fullDateString = `${dateString} T${timeString}:00`; // 날짜와 시간 결합
   
         console.log(fullDateString);
   
@@ -140,15 +140,23 @@ const Reservation = () => {
     };
 
     // 예약 등록
+    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked2, setIsChecked2] = useState(false);
+
     function regRec(){
       // 필수 값이 비어 있는지 확인
-      if (!insertRec.patieName || !insertRec.patieBirth) {
-      alert('필수 기재란 입력 필요');
+      if (!insertRec.recDetail) {
+      alert('증상 입력 필요');
       return;
       }
 
       if(!insertRec.recDate){
         alert('날짜 및 시간이 선택되지 않았습니다.');
+        return;
+      }
+
+      if(!isChecked || !isChecked2){
+        alert('모든 동의사항에 동의시 예약이 가능합니다.');
         return;
       }
 
@@ -224,10 +232,22 @@ const Reservation = () => {
   // =========================== return ========================== //
   
   return (
-    <div>
+    <div className='reservation'>
+      <div>온라인예약</div>
       <div className='explain'>
-        <div>온라인예약</div>
-        <div>어쩌구</div>
+        <div>√ 온라인 진료예약은 재진환자에 한합니다.</div>
+        <ul>
+          <li>초진 환자는 '간편예약' 또는 '내방접수'로 이용해주시기 바랍니다. </li>
+        </ul>
+        <div>√ 온라인 진료예약</div>
+        <ul>
+          <li><span>온라인 진료예약은 임시예약</span>으로, 담당자가 고객님께 전화드려서 예약시간을 조정하여 확정해 드립니다.</li>
+          <li>온라인 진료예약은 원하시는 날짜/시간에 예약이 안될 수 있습니다. <br/>
+            <span>예약이후 '예약확인 전화/문자'를 받지 못하신 경우에도 예약이 되지 않는 점 참고 부탁드리겠습니다.</span></li>
+          <li>홈페이지에서는 '홈페이지 예약접수'와 '예약완료내역' 확인만 가능하므로, <br /> 이전 병원예약 내역은 본원 원무팀 (☎052-123-4567) 으로 문의 바랍니다. </li>
+          <li>온라인 진료예약 변경 시,진료 예약일 하루 전까지 예약하신 진료과
+          또는 예약담당자에게 전화로 변경이나 취소하시기 바랍니다. </li>
+        </ul>
       </div>
 
       <div className='act'>
@@ -278,13 +298,7 @@ const Reservation = () => {
             </div>
 
             <div className='reservInfo'>
-              <div>예약자<span style={{color:'darkred'}}> *</span> <br/>
-                <input type='text' className='form' name='patieName' value={insertRec.patieName} onChange={(e) => {changeInsertRec(e)}}/>
-              </div>
-              <div>생년월일<span style={{color:'darkred'}}> *</span>  <br/>
-                <input type='text' className='form' placeholder='ex) 900101'
-                  name='patieBirth' value={insertRec.patieBirth} onChange={(e) => {changeInsertRec(e)}} />
-              </div>
+              <div>예약자 : {}</div>
               <div>증상 <br/>
                 <textarea type='text' className='form area' name='recDetail'
                     value={insertRec.recDetail} onChange={(e) => {changeInsertRec(e)}} />
@@ -301,10 +315,12 @@ const Reservation = () => {
       <PrivacyInfo />
 
       <div className="agreeChk02">
-        <label htmlFor="chk2">만 14세 미만 <span className="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" className="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다."/>
+        <label htmlFor="chk2">만 14세 미만 <span className="point07">아동 또는 진료 예약 대리인의 경우</span> : 법적대리인여부</label><input type="checkbox" id="chk2" name="chkAgree2" className="inputChk" value="Y" title="만 14세 미만 아동 또는 진료 예약 대리인의 경우 법적대리인 여부에 동의합니다." onChange={(e) =>{setIsChecked(e.target.checked)}}/>
       </div>
       <div className="agreeChk02 mgt20">
-        <label htmlFor="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree" className="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."/>
+        <label htmlFor="chk"> 개인정보보호정책을 읽었으며 내용에 동의합니다.</label><input type="checkbox" id="chk" name="chkAgree"   
+        className="inputChk" title="개인정보보호정책을 읽었으며 내용에 동의합니다."
+          onChange={(e) =>{setIsChecked2(e.target.checked)}}/>
       </div>
 
       <button className='addChartBtn' onClick={() =>{regRec()}}>예 약</button>
