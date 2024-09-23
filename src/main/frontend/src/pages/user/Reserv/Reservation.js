@@ -10,14 +10,13 @@ import PrivacyInfo from './PrivacyInfo';
 const Reservation = () => {
   const navigate = useNavigate();
 
-  // 로그인 정보 받아오기
-
-  const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
-  const loginInfo = JSON.parse(sessionLoginInfo);
-
-  console.log(loginInfo)
-
   const {partNum: initialPartNum, staffNum: initialDoctorNum } = useParams();
+
+  // 로그인 정보 확인
+  const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
+  const loginInfo = sessionLoginInfo ? JSON.parse(sessionLoginInfo) : null;
+
+
   // 현재 선택된 부서 번호
   const [partNum, setPartNum] = useState(initialPartNum || '');
 
@@ -33,8 +32,8 @@ const Reservation = () => {
     
   // 예약시 가져갈 데이터
   const [insertRec, setInsertRec] = useState({
-    patieNum: '',
-    patieName: '',
+    patieNum: loginInfo.patieNum,
+    patieName: loginInfo.patieName,
     patieBirth: '',
     patieAddr: '',
     staffNum: 0,
@@ -92,7 +91,7 @@ const Reservation = () => {
   
         const dateString = nowDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식
         const timeString = selectTime.toString().padStart(2, '0') + ':00'; // HH:00 형식
-        const fullDateString = `${dateString} T${timeString}:00`; // 날짜와 시간 결합
+        const fullDateString = `${dateString} ${timeString}:00`; // 날짜와 시간 결합
   
         console.log(fullDateString);
   

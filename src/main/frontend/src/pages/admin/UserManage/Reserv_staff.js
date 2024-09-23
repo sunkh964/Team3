@@ -36,11 +36,11 @@ const Reserv_staff = () => {
 
   // 예약 상세정보 조회
   function getRecDetail(recNum){
-    axios.get(`/rec/getRecInfo/${recNum}`)
+      axios.get(`/rec/getRecInfo/${recNum}`)
       .then((res) =>{
         setRecDetail(res.data);
       })
-      .catch((error) =>{console.log(error)})
+      .catch((error) =>{console.log(error)});
   }
   
   

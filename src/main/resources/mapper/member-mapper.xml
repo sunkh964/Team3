@@ -12,6 +12,7 @@
         <result column="MEM_ID" property="memId"/>
         <result column="MEM_PW" property="memPw"/>
         <result column="MEM_GEN" property="memGen"/>
+        <association property="patie" resultMap="patie" />
     </resultMap>
 
     <resultMap id="patie" type="com.green.Team3.patie.vo.PatieVO">
@@ -22,7 +23,7 @@
         <result column="PATIE_ADDR" property="patieAddr"/>
         <result column="PATIE_GEN" property="patieGen"/>
         <result column="PERSONAL_YN " property="personalYN"/>
-        <collection property="memberList" resultMap="memberMapper.member"/>
+<!--        <collection property="memberList" resultMap="memberMapper.member"/>-->
     </resultMap>
 
 <!--    환자의 회원가입과 로그인 만들기 -->
@@ -76,9 +77,10 @@
 
     <!--    로그인 -->
     <select id="login" resultMap="member">
-        SELECT MEM_ID, MEM_NAME, MEM_NUM
-        FROM HOS_MEMBER
+        SELECT MEM_ID, MEM_NAME, MEM_NUM, PATIE_NUM
+        FROM HOS_MEMBER M, HOS_PATIE P
         WHERE MEM_ID=#{memId}
+        AND PATIE_BIRTH = MEM_BIRTH
         AND MEM_PW=#{memPw}
     </select>
 

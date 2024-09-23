@@ -46,7 +46,7 @@ public interface RecService {
     void insertMainRec(RecVO recVO);
 
     /* 회원 당사자 예약 조회 */
-    List<RecVO> selectIdRec(int recNum);
+    List<RecVO> selectIdRec(int patieNum);
 
     /*당사자 예약 삭제*/
     void delIdRec(int recNum);

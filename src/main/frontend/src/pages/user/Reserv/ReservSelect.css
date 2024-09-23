@@ -1,0 +1,76 @@
+.resSelect{
+  height: 70vh;
+}
+
+.resSelect >div:first-child{
+  font-size: 1.5rem;
+  padding-left: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+  color: rgb(68, 67, 67);
+}
+
+.resSelect-list{
+  height: 55%;
+  background-color: white;
+  margin-top: 20px;
+  padding: 0px 20px;
+  padding-bottom: 30px;
+}
+
+.resSelect .explain{
+  width: 100%;
+  background-color: #dddddd;
+  font-size: 0.9rem;
+  word-spacing: 1px;
+  padding: 20px ;
+  line-height: 21px;
+}
+
+
+.resSelect-list > div:first-child{
+  font-size: 1.1rem;
+  border-bottom: 4px double #bbbbbb;
+  padding: 20px 10px 10px 10px;
+  margin-bottom: 10px;
+}
+
+.resSelectTable{
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px dotted #dddddd;
+}
+
+.resSelect-table{
+  width: 100%;
+  text-align: center;
+}
+
+.resSelect-table td{
+  padding: 5px 0;
+  vertical-align: middle;
+}
+
+.resSelectTable .resSelBtn{
+  background-color: rgb(92, 143, 194);
+  color: white;
+  border: 1px solid rgb(80, 131, 182);
+  border-radius: 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.resSelectTable .resSelBtn:hover{
+  background-color: rgb(58, 106, 153);
+}
+
+
+.resSelectTable .resSelBtn1{
+  background-color: lightslategray;
+  color: white;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+}

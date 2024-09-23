@@ -68,8 +68,8 @@ const liChange = (i) =>{
             </ul>
          </div>
          <div className='img-btn'>
-            <i onClick={()=>{prev()}} class="bi bi-chevron-double-left"></i>
-            <i onClick={()=>{next()}} class="bi bi-chevron-double-right"></i>
+            <i onClick={()=>{prev()}} className="bi bi-chevron-double-left"></i>
+            <i onClick={()=>{next()}} className="bi bi-chevron-double-right"></i>
          </div>
       </div>
 
@@ -107,7 +107,7 @@ const liChange = (i) =>{
          <div className='home3'>
             <div className='home4'>
                <div className='home1' onClick={(e)=>{navigate('/notice')}} >공지사항</div>
-               <div className='icon' onClick={(e)=>{navigate('/notice')}}><i class="bi bi-chat-left-dots"></i></div>
+               <div className='icon' onClick={(e)=>{navigate('/notice')}}><i className="bi bi-chat-left-dots"></i></div>
             </div>
             <div className='home2'>
                <table>

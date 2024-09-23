@@ -87,8 +87,8 @@ public class RecServiceImpl implements RecService{
 
     /* 회원 당사자 예약 조회 */
     @Override
-    public List<RecVO> selectIdRec(int recNum) {
-        return sqlSession.selectList("recMapper.selectIdRec", recNum);
+    public List<RecVO> selectIdRec(int patieNum) {
+        return sqlSession.selectList("recMapper.selectIdRec", patieNum);
     }
 
     /* 당사자 예약 삭제*/

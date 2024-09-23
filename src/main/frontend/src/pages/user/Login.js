@@ -56,6 +56,7 @@ const Login = ({setLoginInfo, loginInfo}) => {
           memId:res.data.memId,
           memName:res.data.memName,
           memNum:res.data.memNum,
+          patieNum:res.data.patie.patieNum
         };
         alert('로그인 성공')
 

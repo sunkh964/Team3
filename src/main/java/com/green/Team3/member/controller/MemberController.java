@@ -44,6 +44,7 @@ public class MemberController {
 //    로그인
     @PostMapping("/login")
     public MemberVO  login(@RequestBody MemberVO memberVO){
+        System.out.println(memberService.login(memberVO));
         return memberService.login(memberVO);
     }
 

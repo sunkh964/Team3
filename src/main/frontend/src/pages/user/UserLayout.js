@@ -3,6 +3,7 @@ import './UserLayout.css'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const UserLayout = () => {
+
   const navigate = useNavigate();
 
   const [dropDown, setDropDown] = useState({});
@@ -53,65 +54,80 @@ const UserLayout = () => {
     <div className='userLayout'>
       <div className='menu'>
         <ul className='menu-ul'>
-          <li>진료안내</li>
-          <li>이용안내</li>
-          <li onClick={() => { navigate('/reserv') }}>진료예약</li>
-          <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>고객서비스</li>
+        <li onMouseEnter={() => handleMouseEnter('진료안내')} onMouseLeave={() => handleMouseLeave('진료안내')}>진료안내</li>
+          <li onMouseEnter={() => handleMouseEnter('이용안내')} onMouseLeave={() => handleMouseLeave('이용안내')}>이용안내</li>
+          <li onClick={() => {
+            // 로그인 정보 확인
+            const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
+            const loginInfo = sessionLoginInfo ? JSON.parse(sessionLoginInfo) : null;
+            
+            console.log(loginInfo)
+            if(loginInfo == null){
+              alert('진료예약 이용시 로그인이 필요합니다')
+              navigate('/login')
+            }
+            else{
+              navigate('/reserv')
+            }
+          }}>진료예약</li>
+          <li onMouseEnter={() => handleMouseEnter('고객서비스')} onMouseLeave={() => handleMouseLeave('고객서비스')}>고객서비스</li>
         </ul>
         <div className='menu-icon'>
           <i className="bi bi-list-task"></i>
         </div>
       </div>
         
-      <div className={`menu-dropdown ${dropDown['고객서비스'] ? 'active' : ''}`}>
-        {dropDown['고객서비스'] && (
-          <div className='dropdown'>
-            <div className='dropTitle'>고객서비스</div>
-            <ul className='dropdown-ul'>
-              {menus.find(menu => menu.title === '고객서비스').items.map((item, index) => (
-                <li key={index} onClick={() => navigate(item.path)}>
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {dropDown['진료안내'] && (
-          <div className='dropdown'>
-            <div className='dropTitle'>진료안내</div>
-            <ul className='dropdown-ul'>
-              {menus.find(menu => menu.title === '진료안내').items.map((item, index) => (
-                <li key={index} onClick={() => navigate(item.path)}>
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {dropDown['이용안내'] && (
-          <div className='dropdown'>
-            <div className='dropTitle'>이용안내</div>
-            <ul className='dropdown-ul'>
-              {menus.find(menu => menu.title === '이용안내').items.map((item, index) => (
-                <li key={index} onClick={() => navigate(item.path)}>
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {dropDown['진료예약'] && (
-          <div className='dropdown'>
-            <div className='dropTitle'>진료예약</div>
-            <ul className='dropdown-ul'>
-              {menus.find(menu => menu.title === '진료예약').items.map((item, index) => (
-                <li key={index} onClick={() => navigate(item.path)}>
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div className='dropRelative'>
+        <div className={`menu-dropdown ${dropDown['고객서비스'] ? 'active' : ''}`}>
+          {dropDown['고객서비스'] && (
+            <div className='dropdown'>
+              <div className='dropTitle'>고객서비스</div>
+              <ul className='dropdown-ul'>
+                {menus.find(menu => menu.title === '고객서비스').items.map((item, index) => (
+                  <li key={index} onClick={() => navigate(item.path)}>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {dropDown['진료안내'] && (
+            <div className='dropdown'>
+              <div className='dropTitle'>진료안내</div>
+              <ul className='dropdown-ul'>
+                {menus.find(menu => menu.title === '진료안내').items.map((item, index) => (
+                  <li key={index} onClick={() => navigate(item.path)}>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {dropDown['이용안내'] && (
+            <div className='dropdown'>
+              <div className='dropTitle'>이용안내</div>
+              <ul className='dropdown-ul'>
+                {menus.find(menu => menu.title === '이용안내').items.map((item, index) => (
+                  <li key={index} onClick={() => navigate(item.path)}>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {dropDown['진료예약'] && (
+            <div className='dropdown'>
+              <div className='dropTitle'>진료예약</div>
+              <ul className='dropdown-ul'>
+                {menus.find(menu => menu.title === '진료예약').items.map((item, index) => (
+                  <li key={index} onClick={() => navigate(item.path)}>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
       
       <div className='outlet'><Outlet /></div>

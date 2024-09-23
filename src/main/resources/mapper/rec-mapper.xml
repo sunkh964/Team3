@@ -112,8 +112,7 @@
             PART_NAME,
             STAFF_NAME
         FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
-        WHERE IS_REC = 'Y'
-        AND REC_STATUS = '대기'
+        WHERE REC_STATUS = '대기'
         AND DATE(REC_DATE) = CURDATE()
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
@@ -179,7 +178,7 @@
     <select id="selectIdRec" resultMap="rec">
         SELECT
             REC_NUM,
-            REC_DATE,
+            DATE_FORMAT(REC_DATE, '%Y-%m-%d %H:%i') REC_DATE,
             IS_REC,
             REC_DETAIL,
             P.PATIE_NUM,
@@ -190,7 +189,7 @@
             PART_NAME,
             STAFF_NAME
         FROM HOS_REC R, HOS_PATIE P, HOS_STAFF S, HOS_PART PART
-        WHERE PATIE_NUM = #{patieNum}
+        WHERE R.PATIE_NUM = #{patieNum}
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM
