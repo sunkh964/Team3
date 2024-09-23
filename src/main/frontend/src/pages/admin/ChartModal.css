@@ -23,6 +23,14 @@
   margin-bottom: 30px;
   width: 90%;
 }
+.modal-content .payPatieName{
+  width: 90%;
+  margin: 10px auto;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #7e969e;
+  padding-bottom: 15px;
+  font-size: 25px;
+}
 
 .modal-content table td:nth-child(odd) {
   width: 30%;

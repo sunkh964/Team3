@@ -4,7 +4,7 @@ import './ChartModal.css'
 // isOpen : 모달에서 보여지는 내용
 // onClose : 모달을 닫는 코드
 // onConfirm : 모달의 확인버튼 클릭 시 실행할 코드
-const ChartModal = ({isOpen, onClose, onConfirm}) => {
+const ChartModal = ({isOpen, onClose, onConfirm, patieName}) => {
   const modalContainer = useRef();
 
   if (!isOpen) return null; // 모달이 열리지 않을 때는 아무 것도 렌더링하지 않음
@@ -18,6 +18,9 @@ const ChartModal = ({isOpen, onClose, onConfirm}) => {
           </span>
         </div>
         <div className='modal-content'>
+          <div className='payPatieName'>
+            {patieName}님 수납정보
+          </div>
           <table>
             <tbody>
               <tr>
@@ -35,13 +38,7 @@ const ChartModal = ({isOpen, onClose, onConfirm}) => {
               <tr>
                 <td>미수금액</td>
                 <td> <input type='text'/> </td>
-                <td>현금수납</td>
-                <td> <input type='text'/> </td>
-              </tr>
-              <tr>
-                <td>추가할인</td>
-                <td> <input type='text'/> </td>
-                <td>현금 영수</td>
+                <td>현금결제</td>
                 <td> <input type='text'/> </td>
               </tr>
               <tr>
@@ -59,9 +56,6 @@ const ChartModal = ({isOpen, onClose, onConfirm}) => {
             </tbody>
           </table>
             <table>
-              <thead>
-                수납
-              </thead>
               <tbody>
                 <tr>
                   <td>카드결제금액</td>

@@ -71,9 +71,12 @@ const Chart = () => {
 
   const [ isModalOpen, setIsModalOpen] = useState(false)
   const [ currentRecNum, setCurrentRecNum] = useState(null)
+  const [ currentPatieName, setCurrentPatieName] = useState(null)
+
   // 수납하기 버튼 클릭 시 모달 열기
-  function openModal(recNum){
+  function openModal(recNum, patieName){
     setCurrentRecNum(recNum)
+    setCurrentPatieName(patieName)
     setIsModalOpen(true)
   }
 
@@ -86,8 +89,7 @@ const Chart = () => {
   // 수납완료 버튼 클릭 시 환자 집 보내기
   function delRec(recNum) {
     if (window.confirm('수납이 완료 되었습니까?')) {
-      axios.delete(`/rec/delRec/${recNum}`)
-        .then((res) => { closeModal() });
+      // 수납 완료 기능
     } else {
       alert('취소되었습니다.');
     }
@@ -227,7 +229,7 @@ const Chart = () => {
                     !isCompleted?(
                       <button onClick={()=>{ handleComplete(recPatie.recNum) }}>진료 완료</button>
                     ) : (
-                      <button className='payBtn' onClick={()=>{ openModal(recPatie.recNum) }}>수납하기</button>
+                      <button className='payBtn' onClick={()=>{ openModal(recPatie.recNum, patie.patieName) }}>수납하기</button>
 
                     )
                   }
@@ -242,6 +244,7 @@ const Chart = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         onConfirm={delRec}
+        patieName={currentPatieName}
       />
     </div>
   );

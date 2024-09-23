@@ -2,10 +2,9 @@ package com.green.Team3.orderItem.controller;
 
 import com.green.Team3.orderItem.service.OrderItemService;
 import com.green.Team3.orderItem.vo.OrderItemVO;
+import com.green.Team3.patie.vo.SearchVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,8 +14,9 @@ public class OrderItemController {
     @Resource(name = "orderItemService")
     private OrderItemService orderItemService;
 
-    @GetMapping("/selectOrderItem")
-    public List<OrderItemVO> selectOrderItem(){
-        return orderItemService.selectOrderItem();
+    @PostMapping("/selectOrderItem")
+    public List<OrderItemVO> selectOrderItem(@RequestBody(required = false) SearchVO searchVO) {
+        return orderItemService.selectOrderItem(searchVO);
     }
+
 }
