@@ -6,10 +6,15 @@ import axios from 'axios';
 const OrderItem = () => {
   const navigate = useNavigate();
   const [orderItems, setOrderItems]=useState([]);
-  
   // 세션에 있는 로그인 정보 받아오기
   const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
   const loginData = JSON.parse(sessionLoginInfo);
+
+  const [isLeftHovered, setIsLeftHovered] = useState(false);
+  const [isRightHovered, setIsRightHovered] = useState(false);
+
+  const [orderAmounts, setOrderAmount] = useState([])
+  const [totalAmount, setTotalAmount] = useState(0)
 
   useEffect(()=>{
     axios.post("/orderItem/selectOrderItem", searchdata)
@@ -18,10 +23,18 @@ const OrderItem = () => {
       setOrderItems(res.data)
     })
     .catch((error)=>{console.log(error)})
-  },[])
 
-  const [isLeftHovered, setIsLeftHovered] = useState(false);
-  const [isRightHovered, setIsRightHovered] = useState(false);
+    axios.get('/orderItem/totalOrderAmount')
+    .then((res)=>{
+      console.log(res.data)
+      setOrderAmount(res.data)
+      const total = res.data.reduce((sum,item)=> sum+item.TOTAL_AMOUNT, 0)
+      setTotalAmount(total)
+
+    })
+    .catch((error)=>{console.log(error)})
+
+  },[])
   
   const [searchdata, setSearchData]=useState({
     searchType: 'TYPE_NAME',
@@ -83,11 +96,13 @@ const OrderItem = () => {
                   <colgroup>
                     <col width='5%'/>
                     <col width='5%'/>
+                    <col width='10%'/>
+                    <col width='15%'/>
+                    <col width='8%'/>
+                    <col width='10%'/>
                     <col width='15%'/>
                     <col width='15%'/>
                     <col width='10%'/>
-                    <col width='10%'/>
-                    <col width='15%'/>
                     <col width='15%'/>
                   </colgroup>
                   <thead>
@@ -100,6 +115,8 @@ const OrderItem = () => {
                       <td>금액</td>
                       <td>발주처</td>
                       <td>발주일</td>
+                      <td>배송 상태</td>
+                      <td></td>
                     </tr>
                   </thead>
                   <tbody>
@@ -108,7 +125,20 @@ const OrderItem = () => {
                         const productType = orderItem.productTypeVO;
                         const supProduct = orderItem.supProductVO;
                         const sup = orderItem.supVO;
-    
+
+                        let deliverStateClass;
+                        switch (orderItem.deliverState) {
+                          case '배송중':
+                            deliverStateClass = 'delivering';
+                            break;
+                          case '배송완료':
+                            deliverStateClass = 'delivered';
+                            break;
+                          default:
+                            deliverStateClass = 'default';
+                            break;
+                        }
+                        
                         return(
                           <tr key={i}>
                             <td>{orderItems.length - i}</td>
@@ -123,6 +153,12 @@ const OrderItem = () => {
                             </td>
                             <td>{sup ? sup.supName : null}</td>
                             <td>{orderItem.orderDate}</td>
+                            <td className={deliverStateClass}>{orderItem.deliverState}</td>
+                            <td>
+                              {orderItem.deliverState == '배송중' &&(
+                                <button className='isDeliver-btn' > 수령 확인 </button>
+                              ) }
+                              </td>
                           </tr>
                         )
                       })
@@ -131,6 +167,32 @@ const OrderItem = () => {
                   </tbody>
                 </table>
               </div>
+
+              <div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>용품 타입</th>
+                      <th>총 금액</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orderAmounts.map((orderAmount, i) => (
+                      <tr key={i}>
+                        <td>{orderAmount.typeName}</td>
+                        <td>{orderAmount.totalAmount}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td>총 합계</td>
+                      <td>{totalAmount}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
 
 
             </div>

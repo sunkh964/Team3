@@ -9,4 +9,5 @@ public class SupProductVO {
     private int price;
     private int supNum;
     private int typeNum;
+    private String deliverState;
 }

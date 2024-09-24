@@ -13,8 +13,15 @@ public class OrderItemServiceImpl  implements OrderItemService{
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+    /*주문 목록*/
     @Override
     public List<OrderItemVO> selectOrderItem(SearchVO searchVO) {
         return sqlSession.selectList("orderItemMapper.selectOrderItem", searchVO);
+    }
+
+    /*당월 총 주문 금액*/
+    @Override
+    public List<OrderItemVO> totalOrderAmount() {
+        return sqlSession.selectList("orderItemMapper.totalOrderAmount");
     }
 }

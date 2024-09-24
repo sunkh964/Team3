@@ -13,4 +13,5 @@ public class OrderItemVO {
     private SupVO supVO;
     private ProductTypeVO productTypeVO;
     private SupProductVO supProductVO;
+    private String deliverState;
 }

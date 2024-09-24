@@ -19,6 +19,7 @@
         <result column="PRODUCT_NAME" property="productName"/>
         <result column="PRICE" property="price"/>
         <result column="TYPE_NUM" property="typeNum"/>
+        <result column="DELIVER_STATE" property="deliverState"/>
     </resultMap>
 
 

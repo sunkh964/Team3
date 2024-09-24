@@ -26,6 +26,7 @@
   font-size: 20px;
   margin-left: 10px;
   border-radius: 8px;
+  border: 1px solid #067da1;
 }
 .search-orderItem select{
   width: 150px;
@@ -93,4 +94,26 @@
   pointer-events: none; /* 호버 이벤트 비활성화 */
 }
 
+.delivering {
+  color: rgb(49, 49, 224); /* 배송중: 파란색 */
+}
+
+.delivered {
+  color: rgb(240, 77, 77); /* 배송 완료: 빨간색 */
+}
+
+.default {
+  color: black; /* 기본: 검은색 (주문 확인 중) */
+}
+
+.isDeliver-btn{
+  background-color: #bedce6;
+  border: #067da1 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.isDeliver-btn:hover{
+  background-color: #b5cfd8;
+}
 
