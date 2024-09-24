@@ -103,6 +103,12 @@ public class RecController {
         recService.delIdRec(recNum);
     }
 
+    /* 예약정보 수정*/
+    @PutMapping("/updateIdRec")
+    public void updateIdRec(@RequestBody RecVO recVO){
+        recService.updateIdRec(recVO);
+    }
+
 
 
 }

@@ -74,3 +74,42 @@
   padding: 3px 10px;
   cursor: pointer;
 }
+
+/* ==================== 모달 ==================== */
+.resModal{
+  padding: 0px 20px;
+}
+
+.resModal >div:first-child{
+  margin-bottom: 20px;
+}
+
+.resModal >div:first-child span{
+  font-weight: 600;
+}
+
+.resModal-table td:nth-child(odd){
+  text-align: center;
+  background-color: rgb(143, 160, 177);
+  color: white;
+}
+
+.resModal-table td{
+  border: 1px solid #cccccc;
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.resModal .modaleForm{
+  border: 1px solid lightslategray;
+  text-align: center;
+  padding: 4px 0px;
+  border-radius: 5px;
+}
+
+.resModal textarea{
+  border: 1px solid lightslategray;
+  padding: 10px;
+  border-radius: 5px;
+  height: 100px;
+}

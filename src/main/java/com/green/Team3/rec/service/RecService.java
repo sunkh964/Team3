@@ -51,4 +51,7 @@ public interface RecService {
     /*당사자 예약 삭제*/
     void delIdRec(int recNum);
 
+    /* 예약 정보 수정 */
+    void updateIdRec(RecVO recVO);
+
 }

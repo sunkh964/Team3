@@ -201,6 +201,16 @@
         WHERE REC_NUM = #{recNum};
     </delete>
 
+    <!-- 예약 정보 수정 -->
+    <update id="updateIdRec">
+        UPDATE HOS_REC
+        SET
+        STAFF_NUM = #{staffNum},
+        REC_DATE = #{recDate},
+        REC_DETAIL = #{recDetail}
+        WHERE REC_NUM = #{recNum};
+    </update>
+
 
 
 

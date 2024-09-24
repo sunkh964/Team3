@@ -97,5 +97,11 @@ public class RecServiceImpl implements RecService{
         sqlSession.delete("recMapper.delIdRec", recNum);
     }
 
+    /* 예약 정보 수정 */
+    @Override
+    public void updateIdRec(RecVO recVO) {
+        sqlSession.update("recMapper.updateIdRec", recVO);
+    }
+
 }
 
