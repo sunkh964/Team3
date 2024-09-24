@@ -32,6 +32,7 @@ import Check from './pages/user/Check';
 import ReservSelect from './pages/user/Reserv/ReservSelect';
 import ReservHome from './pages/user/Reserv/ReservHome';
 import NoticeDetail from './pages/user/NoticeDetail';
+import NotiUpdate from './pages/admin/NotiUpdate';
 
 
 
@@ -152,6 +153,10 @@ function App() {
             <Route path='/admin' element={<AdminLayout />}>
               {/* 관리자용 - 첫 화면 */}
               <Route path='' element={<AdminHome />} />
+
+              {/* 공지사항 작성 */}
+              <Route path='NotiUpdate' element={<NotiUpdate/>}/>
+
               {/* 관리자용 - 직원 관리 */}
               <Route path='staffManage' element={<StaffManage />} />
 

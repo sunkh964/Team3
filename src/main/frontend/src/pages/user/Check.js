@@ -134,31 +134,6 @@ const Check = () => {
           />
           개인정보 처리방침 동의
         </label>
-        <div className='check-div1'>
-        저희 [그린카페병원]은(는) 다음과 같은 마케팅 자료를 귀하에게 보내드릴 수 있습니다:<br/>
-
-● 병원 소식 및 최신 정보<br/>
-● 건강 관리 및 의료 팁<br/>
-● 프로모션 및 할인 정보<br/>
-● 이벤트 및 캠페인 안내<br/>
-이와 관련하여 마케팅 정보를 수신하기 위해 아래의 동의 항목을 체크해 주시기 바랍니다:
-
-● 이메일을 통해 마케팅 정보를 수신하는 것에 동의합니다.<br/>
-● SMS를 통해 마케팅 정보를 수신하는 것에 동의합니다.<br/>
-● 우편을 통해 마케팅 정보를 수신하는 것에 동의합니다.<br/>
-귀하의 동의는 언제든지 철회할 수 있습니다. 동의를 철회하고 싶으신 경우, [그린카페병원]의 웹사이트나 고객 서비스 센터를 통해 요청해 주시면 됩니다.
-
-
-      </div>
-        <label>
-          <input 
-            type="checkbox" 
-            name="term3" 
-            checked={agreeTerms.term3} 
-            onChange={handleCheckboxChange} 
-          />
-          마케팅 수신 동의
-        </label>
       </div>
       <div className='check-btn'>
         <button type='button' class="btn-6"  onClick={handleCheckAll}><span>모두 체크</span></button>

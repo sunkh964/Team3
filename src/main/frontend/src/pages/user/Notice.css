@@ -1,66 +1,209 @@
 
-/* 전체 공지사항 컨테이너 스타일 */
-.noti-body {
-  padding: 20px;
-  background-color: #f0f8ff; /* 연한 하늘색 배경 */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+section.notice {
+  padding: 80px 0;
 }
 
-/* 공지사항 제목 스타일 */
-.noti-text {
-  font-size: 24px;
-  font-weight: bold;
-  color: #003366; /* 다크 블루 색상 */
-  margin-bottom: 20px;
+.noti{
+  display: flex;
+  justify-content: center;
+}
+
+.iconNoti{
+margin-right: 20px;
+}
+
+.page-title {
+  margin-bottom: 60px;
+}
+.page-title h3 {
+  font-size: 2.5rem;
+  color: #333333;
+  font-weight: 400;
   text-align: center;
 }
 
-/* 테이블 스타일 */
-.noti-table {
+#board-search .search-window {
+  padding: 15px 0;
+  background-color: #f9f7f9;
+}
+#board-search .search-window .search-wrap {
+  position: relative;
+/*   padding-right: 124px; */
+  margin: 0 auto;
+  width: 80%;
+  max-width: 564px;
+}
+
+.board-table {
   width: 100%;
-  border-collapse: collapse;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
-/* 테이블 헤더 스타일 */
-.noti-thead {
-  background-color: #003366; /* 다크 블루 색상 */
-  color: white;
+.board-table a {
+  color: #333;
+  display: inline-block;
+  line-height: 1.4;
+  word-break: break-all;
+  vertical-align: middle;
+}
+.board-table a:hover {
+  text-decoration: underline;
+}
+.board-table th {
+  text-align: center;
 }
 
-.noti-thead td {
-  padding: 12px;
+.board-table .th-num {
+  width: 100px;
+  text-align: center;
+}
+
+.board-table .th-date {
+  width: 200px;
+}
+
+.board-table th, .board-table td {
+  padding: 14px 0;
+}
+
+.board-table tbody td {
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+}
+
+.board-table tbody th {
+  padding-left: 28px;
+  padding-right: 14px;
+  border-top: 1px solid #e7e7e7;
   text-align: left;
 }
 
-/* 테이블 본문 스타일 */
-.noti-tr {
-  border-bottom: 1px solid #ddd; /* 연한 회색 밑줄 */
+.board-table tbody th p{
+  display: none;
 }
 
-.Noti-map {
-  transition: background-color 0.3s ease;
-}
-
-.Noti-map:hover {
-  background-color: #e6f7ff; /* 연한 파란색 배경 호버 효과 */
-}
-
-.Noti-map td {
-  padding: 12px;
-}
-
-/* 번호, 제목, 날짜 열의 정렬 */
-.noti-table td:nth-child(1) {
+.btn {
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
   text-align: center;
-  color: #003366;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
-.noti-table td:nth-child(2) {
-  color: #003366;
+.btn-dark {
+  background: #555;
+  color: #fff;
 }
 
-.noti-table td:nth-child(3) {
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+/* reset */
+
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.container0 {
+margin: auto;
+}
+.blind {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+}
+
+.Noti-map> td:hover{
+cursor: pointer;
+}
+
+.buttons {
+  margin: 10%;
   text-align: center;
-  color: #003366;
+}
+
+.btn-hover {
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover.color-1 {
+  background-image: linear-gradient(to right, #4ec0f1, #3270cc, #85c9e4, #7184ee);
+  box-shadow: 0 4px 15px 0 rgba(82, 116, 179, 0.75);
 }

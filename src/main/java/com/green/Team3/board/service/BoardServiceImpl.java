@@ -18,8 +18,14 @@ public class BoardServiceImpl implements BoardService {
         return sqlSession.selectList("boardMapper.boardList", boardVO);
     }
 
+//    게시글 상세조회
     @Override
     public BoardVO getNoticeDetail(int boardNum) {
         return sqlSession.selectOne("boardMapper.getNoticeDetail", boardNum);
+    }
+
+    @Override
+    public void insertBoard(BoardVO boardVO) {
+        sqlSession.insert("boardMapper.insertBoard", boardVO);
     }
 }

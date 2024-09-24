@@ -25,9 +25,21 @@
         , BOARD_TITLE
         , BOARD_CONTENT
         , BOARD_DATE
-        FORM BOARD
+        FROM HOS_BOARD
         WHERE BOARD_NUM=#{boardNum}
     </select>
+
+    <insert id="insertBoard">
+        INSERT INTO HOS_BOARD (
+        BOARD_TITLE
+        ,BOARD_CONTENT
+        ,STAFF_NUM
+        ) VALUES (
+        #{boardTitle}
+        ,#{boardContent}
+        ,#{staffNum}
+        );
+    </insert>
 </mapper>
 
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import './NoticeDetail.css';
 
 const NoticeDetail = () => {
   const {boardNum}=useParams();
@@ -10,7 +11,7 @@ const NoticeDetail = () => {
 
   // 상세정보 조회
   useEffect(()=>{
-    axios.get(`/NoticeDetail/${boardNum}`)
+    axios.get(`/board/NoticeDetail/${boardNum}`)
     .then((res)=>{
       setNotice(res.data);
     })
@@ -19,11 +20,13 @@ const NoticeDetail = () => {
     })
   }, []);
   return (
-    <div>
+    <div className='no-de-div'>
       <div>{notice.boardNum}</div>
-      <div>{notice.boardTitle}</div>
-      <div>{notice.boardContent}</div>
-      <div>{notice.boardDate}</div>
+      <blockquote>
+  <p>{notice.boardTitle}</p>
+  <p>{notice.boardContent}</p>
+  <cite>&mdash; {notice.boardDate}</cite>
+</blockquote>
     </div>
   )
 }

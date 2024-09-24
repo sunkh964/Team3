@@ -3,10 +3,7 @@ package com.green.Team3.board.controller;
 import com.green.Team3.board.service.BoardService;
 import com.green.Team3.board.vo.BoardVO;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,14 @@ public class BoardController {
     }
 
     //        게시글 상세조회
-    @GetMapping("noticeDetail/{boardNum}")
+    @GetMapping("/NoticeDetail/{boardNum}")
     public BoardVO getNoticeDetail(@PathVariable("boardNum")int boardNum){
         return boardService.getNoticeDetail(boardNum);
+    }
+
+//    공지사항 등록
+    @PostMapping("/content")
+    public void insertBoard(@RequestBody BoardVO boardVO){
+        boardService.insertBoard(boardVO);
     }
 }

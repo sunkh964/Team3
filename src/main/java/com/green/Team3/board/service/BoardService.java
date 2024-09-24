@@ -11,4 +11,7 @@ public interface BoardService {
 
 //    게시글 상세보기
     BoardVO getNoticeDetail(int boardNum);
+
+//    공지사항 등록
+    void insertBoard(BoardVO boardVO);
 }

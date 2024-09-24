@@ -1,0 +1,23 @@
+
+blockquote {
+  margin:auto;
+  position: relative;
+  padding: 20px 55px;
+background: #f9f9f9;
+width: 80%;
+height: 65.6vh;
+}
+
+blockquote:after {
+  content: "\201C";
+  font-size: 76px;
+  position: absolute;
+  top: -15px;
+left: 10px;
+  color: #0d689c;
+}
+
+blockquote p{
+  margin-bottom: 10px;
+}
+

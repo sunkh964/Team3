@@ -1,0 +1,72 @@
+.no-up1{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+}
+
+
+.no-up1 {
+  position: relative;
+  width: 300px;
+  margin-left: 50px;
+  margin-top: 100px;
+}
+
+.no-up2 {
+  font-size: 15px;
+  color: #222222;
+  width: 300px;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+.no-up2::placeholder { color: #aaaaaa; }
+.no-up2:focus { outline: none; }
+
+.no-sp {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0%;  /* right로만 바꿔주면 오 - 왼 */
+  background-color: #666;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  transition: 0.5s;
+}
+
+.no-up2:focus ~ .no-sp , .no-up2:valid ~ .no-sp  {
+  width: 100%;
+}
+
+
+
+.no-up3{
+  padding: 200px;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover.color-1 {
+  background-image: linear-gradient(to right, #4ec0f1, #3270cc, #85c9e4, #7184ee);
+  box-shadow: 0 4px 15px 0 rgba(82, 116, 179, 0.75);
+}
