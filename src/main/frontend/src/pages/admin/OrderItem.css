@@ -1,0 +1,119 @@
+.orderItemContainer{
+  height: 100%;
+  background-color: #f5f5f5;
+  border: 1px solid white;
+}
+
+.orderItemContainer .non-authority-header{
+  text-align: center;
+  margin-top: 150px;
+  font-size: 50px;
+}
+
+.orderItemContainer .Order-header{
+  margin: 40px;
+
+}
+.search-orderItem{
+  width: 95%;
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.search-orderItem select, 
+.search-orderItem input, 
+.search-orderItem button{
+  font-size: 20px;
+  margin-left: 10px;
+  border-radius: 8px;
+  border: 1px solid #067da1;
+}
+.search-orderItem select{
+  width: 150px;
+  cursor: pointer;
+}
+.search-orderItem button{
+  cursor: pointer;
+  background-color: #0797c1;
+  color: white;
+  width: 80px;
+}
+.search-orderItem button:hover{
+  background-color: #067da1;
+}
+
+.orderItemContainer .table-container{
+  border-radius: 8px;
+  overflow-y: auto;
+  height: 400px;
+  border: 1px solid #7e969e;
+  background-color: #cfdce0;
+  width: 95%;
+}
+.orderItemContainer .main-table{
+  width: 100%;
+}
+
+.orderItemContainer .main-table td{
+  border-bottom: 1px solid #7e969e;
+}
+.orderItemContainer .main-table thead td{
+  text-align: center;
+  background-color: #bedce6;
+  padding: 7px 0px;
+}
+.orderItemContainer .main-table tbody td{
+  text-align: center;
+  background-color: #e8f0f3;
+  padding: 7px 0px;
+}
+
+.table-date{
+  width: 95%;
+  background-color: #0797c1;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+.table-date .bi-calendar3{
+  margin-right: 10px;
+}
+.table-date .bi {
+  cursor: pointer;
+  transition: color 0.5s; /* 부드러운 색상 전환 */
+}
+
+.table-date .bi:hover {
+  color: #bedce6; 
+}
+.table-date .no-hover {
+  pointer-events: none; /* 호버 이벤트 비활성화 */
+}
+
+.delivering {
+  color: rgb(49, 49, 224); /* 배송중: 파란색 */
+}
+
+.delivered {
+  color: rgb(240, 77, 77); /* 배송 완료: 빨간색 */
+}
+
+.default {
+  color: black; /* 기본: 검은색 (주문 확인 중) */
+}
+
+.isDeliver-btn{
+  background-color: #bedce6;
+  border: #067da1 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.isDeliver-btn:hover{
+  background-color: #b5cfd8;
+}
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="supMapper">
+    <resultMap id="sup" type="com.green.Team3.supplier.vo.SupVO">
+        <id column="SUP_NUM" property="supNum"/>
+        <result column="SUP_NAME" property="supName"/>
+    </resultMap>
+
+    <resultMap id="productType" type="com.green.Team3.supplier.vo.ProductTypeVO">
+        <id column="TYPE_NUM" property="typeNum"/>
+        <result column="TYPE_NAME" property="typeName"/>
+    </resultMap>
+
+    <resultMap id="supProduct" type="com.green.Team3.supplier.vo.SupProductVO">
+        <id column="PRODUCT_NUM" property="productNum"/>
+        <result column="SUP_NUM" property="supNum"/>
+        <result column="PRODUCT_NAME" property="productName"/>
+        <result column="PRICE" property="price"/>
+        <result column="TYPE_NUM" property="typeNum"/>
+        <result column="DELIVER_STATE" property="deliverState"/>
+    </resultMap>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
