@@ -65,6 +65,25 @@
     #{memAddr},
     #{memGen}
     )
+=======
+        <!-- 회원 등록& 환자 등록 -->
+        INSERT INTO PATIE (
+        PATIE_NUM,
+        PATIE_NAME,
+        PATIE_BIRTH,
+        PATIE_TEL,
+        PATIE_ADDR,
+        PATIE_GEN,
+        PERSONAL_YN
+        ) VALUES (
+        #{patieNum}, <!-- PATIE_NUM은 memNum과 동일하게 설정됨 -->
+        #{patieName},
+        #{patieBirth},
+        #{patieTel},
+        #{patieAddr},
+        #{patieGen},
+        #{personalYN}
+        )
     </insert>
 
 
