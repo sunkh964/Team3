@@ -87,7 +87,7 @@ const Chart = () => {
   }
 
   // 수납완료 버튼 클릭 시 환자 집 보내기
-  function delRec(recNum) {
+  function completePay(recNum) {
     if (window.confirm('수납이 완료 되었습니까?')) {
       // 수납 완료 기능
     } else {
@@ -243,7 +243,7 @@ const Chart = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        onConfirm={delRec}
+        onConfirm={completePay}
         patieName={currentPatieName}
       />
     </div>
