@@ -93,10 +93,6 @@ const validateBirth = (birth) => /^\d{6}$/.test(birth);
       return;
     }
 
-
-
-
-
   axios.post('/member/join', joinData, joinData1)
   .then((res)=>{
     alert('회원가입')

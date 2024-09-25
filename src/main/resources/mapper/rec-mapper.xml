@@ -193,6 +193,7 @@
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM
+        ORDER BY REC_DATE ASC
     </select>
 
     <!--당사자 예약 삭제-->
@@ -200,6 +201,16 @@
         DELETE FROM HOS_REC
         WHERE REC_NUM = #{recNum};
     </delete>
+
+    <!-- 예약 정보 수정 -->
+    <update id="updateIdRec">
+        UPDATE HOS_REC
+        SET
+        STAFF_NUM = #{staffNum},
+        REC_DATE = #{recDate},
+        REC_DETAIL = #{recDetail}
+        WHERE REC_NUM = #{recNum};
+    </update>
 
 
 

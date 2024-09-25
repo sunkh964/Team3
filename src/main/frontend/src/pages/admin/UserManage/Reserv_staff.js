@@ -12,6 +12,7 @@ const Reserv_staff = () => {
 
   const [allRecList, setAllRecList] = useState([]);
 
+  // 예약 상세보기
   const [recDetail, setRecDetail] = useState({});
 
   // 당일 예약 리스트
