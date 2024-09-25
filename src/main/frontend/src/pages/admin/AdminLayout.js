@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './AdminLayout.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
+
   const [isShow, setIsShow] = useState(null);
-  const [loginInfo, setLoginInfo] = useState(null);
+
   const [adminMenu, setAdminMenu] = useState([
     {
       title: '진료 관리',
@@ -32,34 +33,22 @@ const AdminLayout = () => {
         { title: '직원 스케쥴 목록', path: '/admin/staffManage' }
       ]
     },
-    // 로그인 정보가 없을 경우에도 사이드바 메뉴는 항상 표시
-  ]);
-
-  useEffect(() => {
-    // 세션에 있는 로그인 정보를 받아 옴
-    const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
-    const parsedLoginInfo = JSON.parse(sessionLoginInfo);
-    setLoginInfo(parsedLoginInfo);
-  }, []);
-
-  useEffect(() => {
-    // 로그인 정보가 변경될 때마다 병원장 메뉴 설정
-    if (loginInfo) {
-      const menu = [
-        ...adminMenu,
-        ...(loginInfo.staffRole === 'ADMIN' ? [{
-          title: '병원장',
-          path: '/admin/doctorManage',
-          subMenu: [
-            { title: '직원 관리', path: '/admin/doctorManage' },
-            { title: '매출 관리', path: '/admin/doctorManage' }
-          ]
-        }] : [])
-      ];
-
-      setAdminMenu(menu);
+    {
+      title: '병원장',
+      path: '/admin/doctorManage',
+      subMenu: [
+        { title: '직원 관리', path: '/admin/doctorManage' },
+        { title: '매출 관리', path: '/admin/doctorManage' }
+      ]
+    },
+    {
+      title: '의료용품 관리',
+      path: '/admin/orderItem',
+      subMenu: [
+        { title: '발주 관리', path: '/admin/orderItem' }
+      ]
     }
-  }, [loginInfo]);
+  ]);
 
   const clickMenu = (index, path) => {
     setIsShow(isShow === index ? null : index);
