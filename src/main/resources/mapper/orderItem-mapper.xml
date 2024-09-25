@@ -13,12 +13,19 @@
         <association property="supProductVO" resultMap="supMapper.supProduct"/>
     </resultMap>
 
+    <resultMap id="orderAmount" type="com.green.Team3.orderItem.vo.OrderAmountVO">
+        <result column="typeName" property="typeName"/>
+        <result column="typeAmount" property="totalAmount"/>
+    </resultMap>
+
     <!-- 구입항목 가져오기 -->
     <select id="selectOrderItem" resultMap="orderItem">
         SELECT * FROM HOS_ORDER_ITEM O, HOS_SUP S, PRODUCT_TYPE T, SUP_PRODUCT SP
         WHERE O.PRODUCT_NUM = SP.PRODUCT_NUM
         AND SP.SUP_NUM= S.SUP_NUM
         AND SP.TYPE_NUM = T.TYPE_NUM
+<!--        AND MONTH(I.ORDER_DATE) = MONTH(CURRENT_DATE())-->
+<!--        AND YEAR(I.ORDER_DATE) = YEAR(CURRENT_DATE())-->
         <if test='searchValue != null and !searchValue.equals("")'>
             AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
         </if>
@@ -31,42 +38,13 @@
         FROM HOS_ORDER_ITEM I, PRODUCT_TYPE T, SUP_PRODUCT P
         WHERE I.PRODUCT_NUM = P.PRODUCT_NUM
         AND T.TYPE_NUM = P.TYPE_NUM
-        AND MONTH(I.ORDER_DATE) = MONTH(CURRENT_DATE())
-        AND YEAR(I.ORDER_DATE) = YEAR(CURRENT_DATE())
-        GROUP BY T.TYPE_NAME;
+<!--        AND MONTH(I.ORDER_DATE) = MONTH(CURRENT_DATE())-->
+<!--        AND YEAR(I.ORDER_DATE) = YEAR(CURRENT_DATE())-->
+        GROUP BY T.TYPE_NAME
+        ORDER BY T.TYPE_NAME;
+
     </select>
 
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

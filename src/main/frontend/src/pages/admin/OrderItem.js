@@ -172,17 +172,26 @@ const OrderItem = () => {
                 <table>
                   <thead>
                     <tr>
-                      <th>용품 타입</th>
-                      <th>총 금액</th>
+                      <td>총 금액</td>
                     </tr>
                   </thead>
                   <tbody>
-                    {orderAmounts.map((orderAmount, i) => (
-                      <tr key={i}>
-                        <td>{orderAmount.typeName}</td>
-                        <td>{orderAmount.totalAmount}</td>
-                      </tr>
-                    ))}
+                    {
+                      orderAmounts.map((orderAmount, i)=>{
+                        const productType = orderAmount.productTypeVO;
+
+                        return(
+                          <tr key={i}>
+                            <td>
+                              {productType? productType.typeName : null} :
+                            </td>
+                            <td>
+
+                            </td>
+                          </tr>
+                        )
+                      })
+                    }
                   </tbody>
                   <tfoot>
                     <tr>
