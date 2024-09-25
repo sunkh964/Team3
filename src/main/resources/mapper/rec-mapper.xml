@@ -193,6 +193,7 @@
         AND R.PATIE_NUM = P.PATIE_NUM
         AND R.STAFF_NUM = S.STAFF_NUM
         AND PART.PART_NUM = S.PART_NUM
+        ORDER BY REC_DATE ASC
     </select>
 
     <!--당사자 예약 삭제-->
