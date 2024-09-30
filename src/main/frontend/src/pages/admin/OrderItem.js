@@ -148,15 +148,15 @@ const OrderItem = () => {
                             <td>{orderItem.orderCnt}</td>
                             <td>{item ? item.price.toLocaleString() : null} 원</td>
                             <td>
-                              {item && item.price && orderItem.quantity
-                                ? (item.price * orderItem.quantity).toLocaleString()
+                              {item && item.price && orderItem.orderCnt
+                                ? (item.price * orderItem.orderCnt).toLocaleString()
                                 : 0} 원
                             </td>
                             <td>{sup ? sup.supName : null}</td>
                             <td>{orderItem.orderDate}</td>
                             <td className={deliverStateClass}>{deliver? deliver.deliStatus:null}</td>
                             <td>
-                              {orderItem.deliverState == '배송중' &&(
+                              {deliver.deliStatus == '배송중' &&(
                                 <button className='isDeliver-btn' > 수령 확인 </button>
                               ) }
                               </td>
@@ -173,7 +173,7 @@ const OrderItem = () => {
                 <table>
                   <thead>
                     <tr>
-                      <td>총 금액</td>
+                      <td colSpan={2}>당월 총 금액</td>
                     </tr>
                   </thead>
                   <tbody>
