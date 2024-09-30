@@ -1,5 +1,6 @@
 package com.green.Team3.orderItem.service;
 
+import com.green.Team3.orderItem.vo.OrderAmountVO;
 import com.green.Team3.orderItem.vo.OrderItemVO;
 import com.green.Team3.patie.vo.SearchVO;
 
@@ -10,5 +11,5 @@ public interface OrderItemService {
     List<OrderItemVO> selectOrderItem(SearchVO searchVO);
 
     /*당월 총 주문 금액*/
-    List<OrderItemVO> totalOrderAmount();
+    List<OrderAmountVO> totalOrderAmount();
 }

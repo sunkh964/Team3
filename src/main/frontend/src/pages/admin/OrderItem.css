@@ -116,4 +116,15 @@
 .isDeliver-btn:hover{
   background-color: #b5cfd8;
 }
-
+.total-amount-div{
+  border: 1px solid #7e969e;
+  border-radius: 8px;
+  width:  50%;
+  margin-top: 30px;
+  padding: 8px;
+  background-color: #e8f0f3;
+}
+.total-amount-div tbody td{
+  width: 50%;
+  border: 1px solid;
+}
