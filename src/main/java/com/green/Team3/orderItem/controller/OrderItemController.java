@@ -1,6 +1,7 @@
 package com.green.Team3.orderItem.controller;
 
 import com.green.Team3.orderItem.service.OrderItemService;
+import com.green.Team3.orderItem.vo.OrderAmountVO;
 import com.green.Team3.orderItem.vo.OrderItemVO;
 import com.green.Team3.patie.vo.SearchVO;
 import jakarta.annotation.Resource;
@@ -21,7 +22,7 @@ public class OrderItemController {
     }
     /*당월 총 주문금액*/
     @GetMapping("/totalOrderAmount")
-    public List<OrderItemVO> totalOrderAmount(){
+    public List<OrderAmountVO> totalOrderAmount(){
         return orderItemService.totalOrderAmount();
     }
 

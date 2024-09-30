@@ -26,9 +26,9 @@ const OrderItem = () => {
 
     axios.get('/orderItem/totalOrderAmount')
     .then((res)=>{
-      console.log(res.data)
+      console.log('totalAmount',res.data)
       setOrderAmount(res.data)
-      const total = res.data.reduce((sum,item)=> sum+item.TOTAL_AMOUNT, 0)
+      const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
       setTotalAmount(total)
 
     })
@@ -85,7 +85,7 @@ const OrderItem = () => {
               <div className='search-orderItem'>
                 <select name='searchType' onChange={changeSearchData}>
                   <option value={'TYPE_NAME'}>용품 타입</option>
-                  <option value={'PRODUCT_NAME'}>품명</option>
+                  <option value={'item_NAME'}>품명</option>
                   <option value={'SUP_NAME'}>발주처</option>
                 </select>
                 <input type='text' onChange={changeSearchData} name='searchValue'/>
@@ -95,9 +95,9 @@ const OrderItem = () => {
                 <table className='main-table'>
                   <colgroup>
                     <col width='5%'/>
-                    <col width='5%'/>
-                    <col width='10%'/>
                     <col width='15%'/>
+                    <col width='10%'/>
+                    <col width='5%'/>
                     <col width='8%'/>
                     <col width='10%'/>
                     <col width='15%'/>
@@ -108,9 +108,9 @@ const OrderItem = () => {
                   <thead>
                     <tr>
                       <td>번호</td>
-                      <td>수량</td>
                       <td>용품 타입</td>
                       <td>품명</td>
+                      <td>수량</td>
                       <td>단가</td>
                       <td>금액</td>
                       <td>발주처</td>
@@ -122,12 +122,13 @@ const OrderItem = () => {
                   <tbody>
                     {
                       orderItems.map((orderItem,i)=>{
-                        const productType = orderItem.productTypeVO;
-                        const supProduct = orderItem.supProductVO;
+                        const itemType = orderItem.itemTypeVO;
+                        const item = orderItem.itemVO;
                         const sup = orderItem.supVO;
+                        const deliver = orderItem.deliverVO
 
                         let deliverStateClass;
-                        switch (orderItem.deliverState) {
+                        switch (deliver? deliver.deliStatus:null) {
                           case '배송중':
                             deliverStateClass = 'delivering';
                             break;
@@ -142,18 +143,18 @@ const OrderItem = () => {
                         return(
                           <tr key={i}>
                             <td>{orderItems.length - i}</td>
-                            <td>{orderItem.quantity}</td>
-                            <td>{productType ? productType.typeName : null}</td>
-                            <td>{supProduct ? supProduct.productName : null}</td>
-                            <td>{supProduct ? supProduct.price : null}</td>
+                            <td>{itemType ? itemType.typeName : null}</td>
+                            <td>{item ? item.itemName : null}</td>
+                            <td>{orderItem.orderCnt}</td>
+                            <td>{item ? item.price.toLocaleString() : null} 원</td>
                             <td>
-                              {supProduct && supProduct.price && orderItem.quantity
-                                ? supProduct.price * orderItem.quantity
-                                : 0}
+                              {item && item.price && orderItem.quantity
+                                ? (item.price * orderItem.quantity).toLocaleString()
+                                : 0} 원
                             </td>
                             <td>{sup ? sup.supName : null}</td>
                             <td>{orderItem.orderDate}</td>
-                            <td className={deliverStateClass}>{orderItem.deliverState}</td>
+                            <td className={deliverStateClass}>{deliver? deliver.deliStatus:null}</td>
                             <td>
                               {orderItem.deliverState == '배송중' &&(
                                 <button className='isDeliver-btn' > 수령 확인 </button>
@@ -168,7 +169,7 @@ const OrderItem = () => {
                 </table>
               </div>
 
-              <div>
+              <div className='total-amount-div'>
                 <table>
                   <thead>
                     <tr>
@@ -178,16 +179,11 @@ const OrderItem = () => {
                   <tbody>
                     {
                       orderAmounts.map((orderAmount, i)=>{
-                        const productType = orderAmount.productTypeVO;
 
                         return(
                           <tr key={i}>
-                            <td>
-                              {productType? productType.typeName : null} :
-                            </td>
-                            <td>
-
-                            </td>
+                            <td>{orderAmount.typeName}</td>
+                            <td>{orderAmount.totalAmount.toLocaleString()} 원</td>
                           </tr>
                         )
                       })
@@ -196,7 +192,7 @@ const OrderItem = () => {
                   <tfoot>
                     <tr>
                       <td>총 합계</td>
-                      <td>{totalAmount}</td>
+                      <td>{totalAmount.toLocaleString()} 원</td>
                     </tr>
                   </tfoot>
                 </table>

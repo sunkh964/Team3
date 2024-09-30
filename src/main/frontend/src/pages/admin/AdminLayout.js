@@ -45,7 +45,7 @@ const AdminLayout = () => {
       title: '의료용품 관리',
       path: '/admin/orderItem',
       subMenu: [
-        { title: '발주 관리', path: '/admin/orderItem' }
+        { title: '입고 관리', path: '/admin/orderItem' }
       ]
     }
   ]);

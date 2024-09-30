@@ -1,5 +1,6 @@
 package com.green.Team3.orderItem.service;
 
+import com.green.Team3.orderItem.vo.OrderAmountVO;
 import com.green.Team3.orderItem.vo.OrderItemVO;
 import com.green.Team3.patie.vo.SearchVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,7 +22,7 @@ public class OrderItemServiceImpl  implements OrderItemService{
 
     /*당월 총 주문 금액*/
     @Override
-    public List<OrderItemVO> totalOrderAmount() {
+    public List<OrderAmountVO> totalOrderAmount() {
         return sqlSession.selectList("orderItemMapper.totalOrderAmount");
     }
 }

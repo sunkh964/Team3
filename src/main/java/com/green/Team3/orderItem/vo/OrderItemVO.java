@@ -1,17 +1,20 @@
 package com.green.Team3.orderItem.vo;
 
-import com.green.Team3.supplier.vo.ProductTypeVO;
-import com.green.Team3.supplier.vo.SupProductVO;
+import com.green.Team3.supplier.vo.ItemTypeVO;
+import com.green.Team3.supplier.vo.ItemVO;
 import com.green.Team3.supplier.vo.SupVO;
 import lombok.Data;
 
 @Data
 public class OrderItemVO {
-    private int orderItemNum;
-    private int quantity;
+    private int orderNum;
+    private int orderCnt;
     private String orderDate;
+    private String departTime;
+    private String arriveTime;
     private SupVO supVO;
-    private ProductTypeVO productTypeVO;
-    private SupProductVO supProductVO;
-    private String deliverState;
+    private ItemTypeVO itemTypeVO;
+    private ItemVO itemVO;
+    private DeliverVO deliverVO;
+    private int cusNum;
 }
