@@ -69,7 +69,9 @@ const UserLayout = () => {
             else{
               navigate('/reserv')
             }
-          }}>진료예약</li>
+          }}
+            onMouseEnter={() => handleMouseEnter('진료예약')} onMouseLeave={() => handleMouseLeave('진료예약')}
+          >진료예약</li>
           <li onMouseEnter={() => handleMouseEnter('고객서비스')} onMouseLeave={() => handleMouseLeave('고객서비스')}>고객서비스</li>
         </ul>
         <div className='menu-icon'>
@@ -78,10 +80,12 @@ const UserLayout = () => {
       </div>
         
       <div className='dropRelative'>
-        <div className={`menu-dropdown ${dropDown['고객서비스'] ? 'active' : ''}`}>
+        <div className={`menu-dropdown ${dropDown['고객서비스'] || ['진료예약']? 'active' : ''}`}
+            >
           {dropDown['고객서비스'] && (
-            <div className='dropdown'>
-              <div className='dropTitle'>고객서비스</div>
+            <div className='dropdown'
+                onMouseEnter={() => handleMouseEnter('고객서비스')}
+                onMouseLeave={() => handleMouseLeave('고객서비스')}>
               <ul className='dropdown-ul'>
                 {menus.find(menu => menu.title === '고객서비스').items.map((item, index) => (
                   <li key={index} onClick={() => navigate(item.path)}>
@@ -92,8 +96,9 @@ const UserLayout = () => {
             </div>
           )}
           {dropDown['진료안내'] && (
-            <div className='dropdown'>
-              <div className='dropTitle'>진료안내</div>
+            <div className='dropdown'
+                onMouseEnter={() => handleMouseEnter('진료안내')}
+                onMouseLeave={() => handleMouseLeave('진료안내')}>
               <ul className='dropdown-ul'>
                 {menus.find(menu => menu.title === '진료안내').items.map((item, index) => (
                   <li key={index} onClick={() => navigate(item.path)}>
@@ -104,8 +109,9 @@ const UserLayout = () => {
             </div>
           )}
           {dropDown['이용안내'] && (
-            <div className='dropdown'>
-              <div className='dropTitle'>이용안내</div>
+            <div className='dropdown'
+                onMouseEnter={() => handleMouseEnter('이용안내')}
+                onMouseLeave={() => handleMouseLeave('이용안내')}>
               <ul className='dropdown-ul'>
                 {menus.find(menu => menu.title === '이용안내').items.map((item, index) => (
                   <li key={index} onClick={() => navigate(item.path)}>
@@ -116,8 +122,9 @@ const UserLayout = () => {
             </div>
           )}
           {dropDown['진료예약'] && (
-            <div className='dropdown'>
-              <div className='dropTitle'>진료예약</div>
+            <div className='dropdown'
+                onMouseEnter={() => handleMouseEnter('진료예약')}
+                onMouseLeave={() => handleMouseLeave('진료예약')}>
               <ul className='dropdown-ul'>
                 {menus.find(menu => menu.title === '진료예약').items.map((item, index) => (
                   <li key={index} onClick={() => navigate(item.path)}>
@@ -127,6 +134,7 @@ const UserLayout = () => {
               </ul>
             </div>
           )}
+          <div> 진료과안내</div>
         </div>
       </div>
       
