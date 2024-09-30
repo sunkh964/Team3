@@ -124,7 +124,25 @@
   padding: 8px;
   background-color: #e8f0f3;
 }
+.total-amount-div table{
+  width: 95%;
+  margin: 5px auto;
+}
+.total-amount-div table thead td{
+  font-size: 20px;
+  padding: 10px 0px;
+  border-bottom: 1px solid #7e969e;
+}
+.total-amount-div tbody tr:first-child td{
+  padding-top: 10px;
+}
 .total-amount-div tbody td{
   width: 50%;
-  border: 1px solid;
+}
+.total-amount-div tbody tr:last-child td{
+  padding-bottom: 10px;
+}
+.total-amount-div tfoot td{
+  padding-top: 5px;
+  border-top: 1px solid #7e969e;
 }
