@@ -10,8 +10,8 @@ import interactionPlugin from "@fullcalendar/interaction"
 import styled from 'styled-components'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import Modal from '../../common/Modal'
-import DateSelect from '../../common/DateSelect'
+import Modal from '../../../common/Modal'
+import DateSelect from '../../../common/DateSelect'
 import moment from 'moment'
 
 // 캘린더 위치 조정용 컴포넌트 설정

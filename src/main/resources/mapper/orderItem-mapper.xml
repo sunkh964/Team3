@@ -27,10 +27,12 @@
 
     <!-- 구입항목 가져오기 -->
     <select id="selectOrderItem" resultMap="orderItem">
-        SELECT * FROM ORDER_ITEM O, SUP S, ITEM_TYPE T, ITEM SP, DELIVER D
+        SELECT *
+        FROM ORDER_ITEM O, SUP S, ITEM_TYPE T, ITEM SP, DELIVER D
         WHERE O.ITEM_NUM = SP.ITEM_NUM
         AND SP.SUP_NUM= S.SUP_NUM
         AND SP.TYPE_NUM = T.TYPE_NUM
+        AND O.DELI_NUM = D.DELI_NUM
 <!--        AND MONTH(I.ORDER_DATE) = MONTH(CURRENT_DATE())-->
 <!--        AND YEAR(I.ORDER_DATE) = YEAR(CURRENT_DATE())-->
         <if test='searchValue != null and !searchValue.equals("")'>
