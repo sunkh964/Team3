@@ -9,7 +9,21 @@ const Notice = () => {
   const [boardList, setBoardList] = useState([]);
   // 관리자 권한 여부
   const [isAdmin, setIsAdmin] = useState(true);
-  const [showForm, setShowForm] = useState(false);
+
+  const [loginInfo, setLoginInfo] = useState({}); // 로그인 상태에 따라 true/false 설정
+
+  useEffect(()=>{
+    
+    const sessionLoginInfo=window.sessionStorage.getItem('loginInfo');
+
+    if(sessionLoginInfo!=null){
+      const obj_loginInfo = JSON.parse(sessionLoginInfo);
+      //2. 로그인 정보를 loginInfo에 저장
+      setLoginInfo(obj_loginInfo);
+    }
+  },[]);
+
+
 
   //게시글 목록 조회
   useEffect(() => {
@@ -59,11 +73,20 @@ const Notice = () => {
         </tbody>
       </table>
       <div className='buttons'>
-        {isAdmin && (
-                <button className='btn-hover color-1' onClick={() => setShowForm(!showForm)}>
-                  {showForm ? navigate('/admin/NotiUpdate') : '공지사항 작성'}
-                </button>
-              )}
+        {
+          Object.keys(loginInfo).length == 0
+          ?
+          ''
+          :
+          <button className='btn-hover color-1' onClick={() => navigate('/admin/NotiUpdate')}>
+          공지사항 작성
+        </button>
+        }
+        {/* {isLoggedIn && isAdmin && (
+        <button className='btn-hover color-1' onClick={() => navigate('/admin/NotiUpdate')}>
+          공지사항 작성
+        </button>
+        )} */}
       </div>
     </div>
   </div>
