@@ -3,7 +3,7 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="cusMapper">
-    <resultMap id="cus" type="com.green.Team3.supplier.vo.cusVO">
+    <resultMap id="cus" type="com.green.Team3.cus.vo.CusVO">
         <id column="CUS_NUM" property="supNum"/>
         <result column="CUS_NAME" property="cusName"/>
         <result column="CUS_ADDR" property="cusAddr"/>

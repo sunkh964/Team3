@@ -3,7 +3,7 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="supmMapper">
-    <resultMap id="supm" type="com.green.Team3.supplier.vo.SupmVO">
+    <resultMap id="supm" type="com.green.Team3.supm.vo.SupmVO">
         <id column="SUPM_NUM" property="supmNum"/>
         <result column="SUPM_ROLE" property="supmRole"/>
         <result column="SUPM_NAME" property="supmName"/>
