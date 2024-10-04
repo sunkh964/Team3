@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './OrderItem.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Unauthorized from '../Unauthorized';
+import Unauthorized from './Unauthorized';
 
 const OrderItem = () => {
   const navigate = useNavigate();
