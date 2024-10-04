@@ -35,6 +35,7 @@ import NoticeDetail from './pages/user/NoticeDetail';
 import NotiUpdate from './pages/admin/NotiUpdate';
 import OrderItem from './pages/admin/OrderItem';
 import ChartModal from './pages/admin/ChartModal';
+import Unauthorized from './pages/admin/Unauthorized';
 
 function App() {
   const navigate = useNavigate();
@@ -163,7 +164,9 @@ function App() {
               <Route path='staffDetail/:staffNum' element={<StaffDetail />} />
             </Route>
             {/* 관리자용 - 의료용품 관리 */}
-            <Route path='OrderItem' element={<OrderItem />} />
+            <Route path='orderItem' element={<OrderItem />} />
+            {/* 페이지이용 권한 제한 */}
+            <Route path='unauthorized' element={<Unauthorized/>}/>
           </Route>
         </Routes>
       </div>

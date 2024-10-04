@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './OrderItem.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Unauthorized from './Unauthorized';
 
 const OrderItem = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const OrderItem = () => {
     <div className='orderItemContainer'>
       {loginData && Object.keys(loginData).length > 0 ? (
         <div className='Order-header'>
-          {loginData.staffRole == 'DOCTOR' ? (
+          {loginData.staffRole == 'ADMIN' ? (
 
             <div>
               <div className='table-date'>
@@ -95,7 +96,7 @@ const OrderItem = () => {
                 <table className='main-table'>
                   <colgroup>
                     <col width='5%'/>
-                    <col width='15%'/>
+                    <col width='13%'/>
                     <col width='10%'/>
                     <col width='5%'/>
                     <col width='8%'/>
@@ -202,15 +203,11 @@ const OrderItem = () => {
 
             </div>
           ) : (
-          <div className='non-authority-header'>
-            페이지 이용 권한이 없습니다.
-          </div>
+            <Unauthorized/>
           )}
         </div>
       ) : (
-        <div className='non-authority-header'>
-          페이지 이용 권한이 없습니다.
-        </div>
+        <Unauthorized/>
       )}
     </div>
   );
