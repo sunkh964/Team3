@@ -17,8 +17,12 @@ const OrderItem = () => {
   const [orderAmounts, setOrderAmount] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
 
+    // 날짜 상태 추가
+    const [currentYear, setCurrentYear] = useState(2024);
+    const [currentMonth, setCurrentMonth] = useState(10);
+
   useEffect(()=>{
-    axios.post("/orderItem/selectOrderItem", searchdata)
+    axios.post("/orderItem/selectOrderItem", {...searchdata, currentYear, currentMonth})
     .then((res)=>{
       console.log(res.data)
       setOrderItems(res.data)
@@ -52,13 +56,43 @@ const OrderItem = () => {
 
   // 검색 버튼
   function searchItems(){
-    axios.post('/orderItem/selectOrderItem', searchdata)
+    axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear, currentMonth })
     .then((res)=>{
       console.log(res.data)
       setOrderItems(res.data)
     })
     .catch((error)=>{console.log(error)})
   }
+
+  // 저번달 주문목록 보기
+  function selectLastMonth(){
+    setCurrentMonth((prevMonth) => {
+      if (prevMonth === 1) {
+        setCurrentYear((prevYear) => prevYear - 1);
+        return 12;
+      }
+      return prevMonth - 1;
+    });
+    axios.post('/orderItem/selectLastMonth', searchdata)
+    .then((res)=>{
+      console.log(res.data)
+      setOrderItems(res.data)
+    })
+    .catch((error)=>console.log(error))
+  }
+  
+    // 다음달 버튼 클릭 핸들러 (선택 사항)
+    const selectNextMonth = () => {
+      setCurrentMonth((prevMonth) => {
+        if (prevMonth === 12) {
+          setCurrentYear((prevYear) => prevYear + 1);
+          return 1;
+        }
+        return prevMonth + 1;
+      });
+    };
+
+  
 
   return (
     <div className='orderItemContainer'>
@@ -71,16 +105,18 @@ const OrderItem = () => {
                 <i 
                   className={`bi ${isLeftHovered ? 'bi-caret-left-fill' : 'bi-caret-left'}`} 
                   onMouseEnter={() => setIsLeftHovered(true)} 
-                  onMouseLeave={() => setIsLeftHovered(false)} 
+                  onMouseLeave={() => setIsLeftHovered(false)}
+                  onClick={selectLastMonth}
                 ></i>
                 <div className='no-hover'>
                   <i className="bi bi-calendar3"></i>
-                  2024년 09월
+                  {currentYear}년 {currentMonth}월
                 </div>
                 <i 
                   className={`bi ${isRightHovered ? 'bi-caret-right-fill' : 'bi-caret-right'}`} 
                   onMouseEnter={() => setIsRightHovered(true)} 
                   onMouseLeave={() => setIsRightHovered(false)} 
+                  onClick={selectNextMonth}
                 ></i>
               </div>
               <div className='search-orderItem'>

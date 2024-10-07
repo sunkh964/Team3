@@ -14,7 +14,7 @@ public class OrderItemServiceImpl  implements OrderItemService{
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-    /*주문 목록*/
+    /*당월 주문 목록*/
     @Override
     public List<OrderItemVO> selectOrderItem(SearchVO searchVO) {
         return sqlSession.selectList("orderItemMapper.selectOrderItem", searchVO);
@@ -24,5 +24,10 @@ public class OrderItemServiceImpl  implements OrderItemService{
     @Override
     public List<OrderAmountVO> totalOrderAmount() {
         return sqlSession.selectList("orderItemMapper.totalOrderAmount");
+    }
+
+    @Override
+    public List<OrderItemVO> selectLastMonth(SearchVO searchVO) {
+        return sqlSession.selectList("orderItemMapper.selectLastMonth");
     }
 }

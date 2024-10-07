@@ -15,7 +15,7 @@ public class OrderItemController {
     @Resource(name = "orderItemService")
     private OrderItemService orderItemService;
 
-    /*주문 목록*/
+    /*당월 주문 목록*/
     @PostMapping("/selectOrderItem")
     public List<OrderItemVO> selectOrderItem(@RequestBody(required = false) SearchVO searchVO) {
         return orderItemService.selectOrderItem(searchVO);
@@ -26,5 +26,10 @@ public class OrderItemController {
         return orderItemService.totalOrderAmount();
     }
 
+    /*저번달 주문 목록*/
+    @PostMapping("/selectLastMonth")
+    public List<OrderItemVO> selectLastMonth(@RequestBody(required = false) SearchVO searchVO){
+        return orderItemService.selectLastMonth(searchVO);
+    }
 
 }
