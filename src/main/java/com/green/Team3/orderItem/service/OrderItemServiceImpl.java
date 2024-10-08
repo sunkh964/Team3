@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("orderItemService")
 public class OrderItemServiceImpl  implements OrderItemService{
@@ -22,12 +23,14 @@ public class OrderItemServiceImpl  implements OrderItemService{
 
     /*당월 총 주문 금액*/
     @Override
-    public List<OrderAmountVO> totalOrderAmount() {
-        return sqlSession.selectList("orderItemMapper.totalOrderAmount");
+    public List<OrderAmountVO> totalOrderAmount(int currentYear, int currentMonth) {
+        return sqlSession.selectList("orderItemMapper.totalOrderAmount",
+                Map.of("currentYear", currentYear, "currentMonth", currentMonth));
     }
+
 
     @Override
     public List<OrderItemVO> selectLastMonth(SearchVO searchVO) {
-        return sqlSession.selectList("orderItemMapper.selectLastMonth");
+        return sqlSession.selectList("orderItemMapper.selectLastMonth", searchVO);
     }
 }

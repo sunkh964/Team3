@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class OrderItemVO {
     private int orderNum;
-    private int orderCnt;
     private String orderDate;
     private String departTime;
     private String arriveTime;
@@ -17,4 +16,5 @@ public class OrderItemVO {
     private ItemVO itemVO;
     private DeliverVO deliverVO;
     private int cusNum;
+    private OrderDetailVO orderDetailVO;
 }

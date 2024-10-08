@@ -29,7 +29,7 @@ const OrderItem = () => {
     })
     .catch((error)=>{console.log(error)})
 
-    axios.get('/orderItem/totalOrderAmount')
+    axios.get('/orderItem/totalOrderAmount',{params: {currentYear, currentMonth}})
     .then((res)=>{
       console.log('totalAmount',res.data)
       setOrderAmount(res.data)

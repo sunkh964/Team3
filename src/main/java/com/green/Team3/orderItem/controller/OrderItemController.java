@@ -22,9 +22,12 @@ public class OrderItemController {
     }
     /*당월 총 주문금액*/
     @GetMapping("/totalOrderAmount")
-    public List<OrderAmountVO> totalOrderAmount(){
-        return orderItemService.totalOrderAmount();
+    public List<OrderAmountVO> totalOrderAmount(
+            @RequestParam(value = "currentYear") int currentYear,
+            @RequestParam(value = "currentMonth") int currentMonth) {
+        return orderItemService.totalOrderAmount(currentYear, currentMonth);
     }
+
 
     /*저번달 주문 목록*/
     @PostMapping("/selectLastMonth")
