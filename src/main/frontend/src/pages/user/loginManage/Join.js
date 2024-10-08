@@ -188,8 +188,6 @@ function checkId(){
 }
 
 
-
-
   return (
     <div class="container">
     <div class="member-container">

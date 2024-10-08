@@ -6,24 +6,22 @@
 .menu{
   width: 65vw;
   margin: 0 auto;
-  height: 60px;
+  height: 70px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .menu > .menu-ul{
-  border: 1px dotted blue;
   width: 90%;
   height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .menu > .menu-ul > li{
-  border: 1px dotted;
   border-bottom: 4px solid white;
-  width: 150px;
+  width: 130px;
   height: 100%;
   list-style: none;
   font-size: 1.2rem;
@@ -40,23 +38,40 @@
 }
 
 .menu .menu-icon{
-  line-height: 65px;
-  font-size: 2rem;
+  line-height: 75px;
+  font-size: 2.2rem;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.menu .menu-icon2{
+  line-height: 75px;
+  font-size: 1.8rem;
   margin-right: 20px;
   cursor: pointer;
 }
 
-.menu-dropdown {
-  position: absolute; /* 드롭다운 위치를 절대적으로 설정 */
-  width: 100vw;
-  margin: auto;
+.dropRelative{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+}
+.menu-dropdown {
+  position: absolute; /* 드롭다운 위치를 절대적으로 설정 */
+  margin: auto;
   background-color: white; /* 배경색 */
   border: 1px solid #dddddd;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
   z-index: 1000; /* 다른 요소들 위에 표시 */
-  display: none; /* 기본적으로 숨김 처리 */
+  width: 100%;
+}
+.dropdown{
+  width: 65vw;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  padding: 10px 0px;
 }
 
 /* 드롭다운이 열릴 때의 클래스 추가 */
@@ -64,20 +79,58 @@
   display: grid; /* 활성화 시 그리드로 표시 */
 }
 
+.menuTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  letter-spacing: 5px;
+  font-weight: 600;
+  background: url('http://localhost:8080/images/dropmenu.png') no-repeat ;
+  background-position: 160px calc(0% + 10px);
+  background-size: 170px 150px;
+}
+
 .dropdown-ul {
   border-left: 1px solid #eeeeee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .dropdown-ul:last-child {
   border-right: 1px solid #eeeeee;
 }
 
 .dropdown-ul li {
-  padding: 10px; /* 항목 패딩 */
+  padding: 0px 10px 0px 20px;
   cursor: pointer; /* 커서 변경 */
 }
 
 .dropdown-ul li:hover {
-  background-color: #f0f0f0; /* 마우스 오버 색상 */
+  color: #55679C;
+  text-decoration-line: underline;
+  text-underline-offset:3px ;
+}
+
+.fixItem{
+  border-left: 1px solid #eeeeee;
+  padding: 0px 10px 0px 20px;
+}
+.fixItem > div:first-child{
+  font-weight: 600;
+  padding-top: 10px;
+  text-align: center;
+}
+.fixItem-navi{
+  box-shadow: 1px 1px 3px 1px #dddddd;
+}
+.fixItem-navi> span{
+  display: inline-block;
+  font-size: 2rem;
+  color: gray;
+  border: 1px solid #dddddd;
+  border-radius: 100%;
+  padding: 8px 10px;
 }
 
 
