@@ -64,22 +64,26 @@ const OrderItem = () => {
     .catch((error)=>{console.log(error)})
   }
 
-  // 저번달 주문목록 보기
-  function selectLastMonth(){
-    setCurrentMonth((prevMonth) => {
-      if (prevMonth === 1) {
-        setCurrentYear((prevYear) => prevYear - 1);
-        return 12;
-      }
-      return prevMonth - 1;
-    });
-    axios.post('/orderItem/selectLastMonth', searchdata)
-    .then((res)=>{
-      console.log(res.data)
-      setOrderItems(res.data)
+// 저번달 주문목록 보기
+function selectLastMonth() {
+  setCurrentMonth((prevMonth) => {
+    const newMonth = (prevMonth === 1) ? 12 : prevMonth - 1; // 1월이면 12월로
+    const newYear = (prevMonth === 1) ? currentYear - 1 : currentYear; // 1월이면 연도 -1
+    return newMonth; // 새로운 월 반환
+  });
+
+  // 새로운 연도와 월로 API 호출
+  const newMonth = (currentMonth === 1) ? 12 : currentMonth - 1;
+  const newYear = (currentMonth === 1) ? currentYear - 1 : currentYear;
+
+  axios.post('/orderItem/selectLastMonth', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
+    .then((res) => {
+      console.log(res.data);
+      setOrderItems(res.data);
     })
-    .catch((error)=>console.log(error))
-  }
+    .catch((error) => console.log(error));
+}
+
   
     // 다음달 버튼 클릭 핸들러 (선택 사항)
     const selectNextMonth = () => {
@@ -92,7 +96,6 @@ const OrderItem = () => {
       });
     };
 
-  
 
   return (
     <div className='orderItemContainer'>

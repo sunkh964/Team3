@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="orderItemMapper">
     <resultMap id="orderItem" type="com.green.Team3.orderItem.vo.OrderItemVO">
         <id column="ORDER_NUM" property="orderNum"/>
@@ -26,13 +23,14 @@
 
     <!-- 특정 월과 연도의 구입 항목 가져오기 -->
     <select id="selectOrderItem" resultMap="orderItem">
-        SELECT *
-        FROM ORDER_ITEM O, SUP S, ITEM_TYPE T, ITEM SP, DELIVER D
-        WHERE O.ITEM_NUM = SP.ITEM_NUM
-        AND SP.SUP_NUM = S.SUP_NUM
-        AND SP.TYPE_NUM = T.TYPE_NUM
-        AND O.DELI_NUM = D.DELI_NUM
-        AND MONTH(O.ORDER_DATE) = #{currentMonth}
+        SELECT O.*, S.*, T.*, SP.*, D.*, OD.*
+        FROM ORDER_ITEM O
+        JOIN DELIVER D ON O.DELI_NUM = D.DELI_NUM
+        JOIN ITEM SP ON O.ITEM_NUM = SP.ITEM_NUM
+        JOIN SUP S ON SP.SUP_NUM = S.SUP_NUM
+        JOIN ITEM_TYPE T ON SP.TYPE_NUM = T.TYPE_NUM
+        JOIN ORDER_DETAIL OD ON O.ORDER_NUM = OD.ORDER_NUM
+        WHERE MONTH(O.ORDER_DATE) = #{currentMonth}
         AND YEAR(O.ORDER_DATE) = #{currentYear}
         <if test='searchValue != null and !searchValue.equals("")'>
             AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
@@ -42,12 +40,13 @@
 
     <!-- 상품 타입별 총 금액 -->
     <select id="totalOrderAmount" resultMap="orderAmount">
-        SELECT T.TYPE_NAME, SUM(I.ORDER_CNT * P.PRICE) AS TOTAL_AMOUNT
-        FROM ORDER_ITEM I, ITEM_TYPE T, ITEM P
-        WHERE I.ITEM_NUM = P.ITEM_NUM
-        AND T.TYPE_NUM = P.TYPE_NUM
-        AND MONTH(I.ORDER_DATE) = MONTH(CURRENT_DATE())
-        AND YEAR(I.ORDER_DATE) = YEAR(CURRENT_DATE())
+        SELECT T.TYPE_NAME, SUM(OD.ORDER_CNT * I.PRICE) AS TOTAL_AMOUNT
+        FROM ORDER_ITEM O
+        JOIN ORDER_DETAIL OD ON O.ORDER_NUM = OD.ORDER_NUM
+        JOIN ITEM I ON OD.ITEM_NUM = I.ITEM_NUM
+        JOIN ITEM_TYPE T ON I.TYPE_NUM = T.TYPE_NUM
+        WHERE MONTH(O.ORDER_DATE) = MONTH(CURRENT_DATE())
+        AND YEAR(O.ORDER_DATE) = YEAR(CURRENT_DATE())
         GROUP BY T.TYPE_NAME
         ORDER BY T.TYPE_NAME;
     </select>
@@ -58,18 +57,18 @@
     <!-- a < b    -> a &lt; b -->
     <!-- a <= b    -> a &lt;= b -->
     <select id="selectLastMonth" resultMap="orderItem">
-        SELECT *
-        FROM ORDER_ITEM O, SUP S, ITEM_TYPE T, ITEM SP, DELIVER D
-        WHERE O.ITEM_NUM = SP.ITEM_NUM
-        AND SP.SUP_NUM = S.SUP_NUM
-        AND SP.TYPE_NUM = T.TYPE_NUM
-        AND O.DELI_NUM = D.DELI_NUM
-        AND O.ORDER_DATE &gt;= DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), '%Y-%m-01')
+        SELECT O.*, S.*, T.*, SP.*, D.*, OD.*
+        FROM ORDER_ITEM O
+        JOIN DELIVER D ON O.DELI_NUM = D.DELI_NUM
+        JOIN ITEM SP ON O.ITEM_NUM = SP.ITEM_NUM
+        JOIN SUP S ON SP.SUP_NUM = S.SUP_NUM
+        JOIN ITEM_TYPE T ON SP.TYPE_NUM = T.TYPE_NUM
+        JOIN ORDER_DETAIL OD ON O.ORDER_NUM = OD.ORDER_NUM
+        WHERE O.ORDER_DATE &gt;= DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), '%Y-%m-01')
         AND O.ORDER_DATE &lt; DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01')
         <if test='searchValue != null and !searchValue.equals("")'>
             AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
         </if>
         ORDER BY O.ORDER_DATE DESC;
     </select>
-
 </mapper>
