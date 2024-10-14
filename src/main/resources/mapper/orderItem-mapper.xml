@@ -43,6 +43,7 @@
         AND O.ORDER_NUM = OD.ORDER_NUM
         AND MONTH(O.ORDER_DATE) = #{currentMonth}
         AND YEAR(O.ORDER_DATE) = #{currentYear}
+        AND CUS_NUM =1
         <if test='searchValue != null and !searchValue.equals("")'>
             AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
         </if>
@@ -58,28 +59,47 @@
         AND I.TYPE_NUM = T.TYPE_NUM
         AND MONTH(O.ORDER_DATE) = #{currentMonth}
         AND YEAR(O.ORDER_DATE) = #{currentYear}
+        AND DELI_NUM !=5
+        AND CUS_NUM = 1
         GROUP BY T.TYPE_NAME
         ORDER BY T.TYPE_NAME;
     </select>
 
-    <!-- 저번달 -->
+    <!--주문 취소 된 상품 금액-->
+    <select id="selectCancelOrderAmount">
+        SELECT T.TYPE_NAME, SUM(OD.ORDER_CNT * I.PRICE) AS TOTAL_AMOUNT
+        FROM ORDER_ITEM O, ORDER_DETAIL OD, ITEM I, ITEM_TYPE T
+        WHERE O.ORDER_NUM = OD.ORDER_NUM
+        AND OD.ITEM_NUM = I.ITEM_NUM
+        AND I.TYPE_NUM = T.TYPE_NUM
+        AND MONTH(O.ORDER_DATE) = #{currentMonth}
+        AND YEAR(O.ORDER_DATE) = #{currentYear}
+        AND DELI_NUM =5
+        AND CUS_NUM = 1
+        GROUP BY T.TYPE_NAME
+        ORDER BY T.TYPE_NAME;
+    </select>
+
     <!-- a > b    -> a &gt; b -->
     <!-- a >= b    -> a &gt;= b -->
     <!-- a < b    -> a &lt; b -->
     <!-- a <= b    -> a &lt;= b -->
-    <select id="selectLastMonth" resultMap="orderItem">
-        SELECT O.*, S.*, T.*, SP.*, D.*, OD.*
-        FROM ORDER_ITEM O, DELIVER D, ITEM SP, SUP S, ITEM_TYPE T, ORDER_DETAIL OD
-        WHERE O.DELI_NUM = D.DELI_NUM
-        AND OD.ITEM_NUM = SP.ITEM_NUM
-        AND SP.SUP_NUM = S.SUP_NUM
-        AND SP.TYPE_NUM = T.TYPE_NUM
-        AND O.ORDER_NUM = OD.ORDER_NUM
-        AND O.ORDER_DATE &gt;= DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), '%Y-%m-01')
-        AND O.ORDER_DATE &lt; DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01')
-        <if test='searchValue != null and !searchValue.equals("")'>
-            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
-        </if>
-        ORDER BY O.ORDER_DATE DESC;
-    </select>
+
+    <!-- 수령확인 버튼 -->
+    <update id="completedDeli">
+        UPDATE ORDER_ITEM
+        SET DELI_NUM = 4
+        DEPART_TIME = CURRENT_TIMESTAMP
+        WHERE ORDER_NUM = #{orderNum};
+    </update>
+
+    <!--주문 취소 버튼-->
+    <update id="cancelDeli">
+        UPDATE ORDER_ITEM
+        SET DELI_NUM = 5
+        WHERE ORDER_NUM = #{orderNum};
+    </update>
+
+
+    
 </mapper>

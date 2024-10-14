@@ -28,11 +28,26 @@ public class OrderItemController {
         return orderItemService.totalOrderAmount(currentYear, currentMonth);
     }
 
-
-    /*저번달 주문 목록*/
-    @PostMapping("/selectLastMonth")
-    public List<OrderItemVO> selectLastMonth(@RequestBody(required = false) SearchVO searchVO){
-        return orderItemService.selectLastMonth(searchVO);
+    /*당월 취소된 총 주문 금액*/
+    @GetMapping("/selectCancelOrderAmount")
+    public List<OrderAmountVO> selectCancelOrderAmount(
+            @RequestParam(value = "currentYear") int currentYear,
+            @RequestParam(value = "currentMonth") int currentMonth) {
+        return orderItemService.selectCancelOrderAmount(currentYear, currentMonth);
     }
+
+
+    /*수령확인 버튼*/
+    @PutMapping("/completedDeli")
+    public void completedDeli(@RequestBody OrderItemVO orderItemVO){
+        orderItemService.completedDeli(orderItemVO);
+    }
+
+    /*주문 취소 버튼*/
+    @PutMapping("/cancelDeli")
+    public void cancelDeli(@RequestBody OrderItemVO orderItemVO){
+        orderItemService.cancelDeli(orderItemVO);
+    }
+
 
 }

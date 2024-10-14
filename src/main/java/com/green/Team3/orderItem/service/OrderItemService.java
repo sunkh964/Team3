@@ -14,6 +14,14 @@ public interface OrderItemService {
     /*당월 총 주문 금액*/
     List<OrderAmountVO> totalOrderAmount(int currentYear, int currentMonth);
 
-    // 저번달 주문 목록 리스트
-    List<OrderItemVO> selectLastMonth(SearchVO searchVO);
+    /*주문 취소된 상품 금액*/
+    List<OrderAmountVO> selectCancelOrderAmount(int currentYear, int currentMonth);
+
+    /*수령확인 버튼*/
+    void completedDeli(OrderItemVO orderItemVO);
+
+    /*주문취소 버튼*/
+    void cancelDeli(OrderItemVO orderItemVO);
+
+
 }

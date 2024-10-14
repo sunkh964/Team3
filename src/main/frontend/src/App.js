@@ -36,6 +36,7 @@ import NotiUpdate from './pages/admin/NotiUpdate';
 import OrderItem from './pages/admin/orderManage/OrderItem';
 import ChartModal from './pages/admin/treatManage/ChartModal';
 import Unauthorized from './pages/admin/Unauthorized';
+import OrderingItem from './pages/admin/orderManage/OrderingItem';
 
 function App() {
   const navigate = useNavigate();
@@ -163,8 +164,10 @@ function App() {
               {/* 병원장 - 직원정보(상세보기) */}
               <Route path='staffDetail/:staffNum' element={<StaffDetail />} />
             </Route>
-            {/* 관리자용 - 의료용품 관리 */}
+            {/* 관리자용 - 입고 관리 */}
             <Route path='orderItem' element={<OrderItem />} />
+            {/* 관리자용 -  발주 관리 */}
+            <Route path='orderingItem' element={<OrderingItem/>}/>
             {/* 페이지이용 권한 제한 */}
             <Route path='unauthorized' element={<Unauthorized/>}/>
           </Route>

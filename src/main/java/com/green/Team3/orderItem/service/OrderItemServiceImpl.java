@@ -28,9 +28,22 @@ public class OrderItemServiceImpl  implements OrderItemService{
                 Map.of("currentYear", currentYear, "currentMonth", currentMonth));
     }
 
-
+    /*당월 주문 취소 된 금액*/
     @Override
-    public List<OrderItemVO> selectLastMonth(SearchVO searchVO) {
-        return sqlSession.selectList("orderItemMapper.selectLastMonth", searchVO);
+    public List<OrderAmountVO> selectCancelOrderAmount(int currentYear, int currentMonth) {
+        return sqlSession.selectList("orderItemMapper.selectCancelOrderAmount",
+                Map.of("currentYear", currentYear, "currentMonth", currentMonth));
+    }
+
+    /*수령확인 버튼*/
+    @Override
+    public void completedDeli(OrderItemVO orderItemVO) {
+        sqlSession.update("orderItemMapper.completedDeli", orderItemVO);
+    }
+
+    /*주문취소 버튼*/
+    @Override
+    public void cancelDeli(OrderItemVO orderItemVO) {
+        sqlSession.update("orderItemMapper.cancelDeli", orderItemVO);
     }
 }
