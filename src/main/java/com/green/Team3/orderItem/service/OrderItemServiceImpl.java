@@ -46,4 +46,12 @@ public class OrderItemServiceImpl  implements OrderItemService{
     public void cancelDeli(OrderItemVO orderItemVO) {
         sqlSession.update("orderItemMapper.cancelDeli", orderItemVO);
     }
+
+    /*재고 관리*/
+    @Override
+    public List<OrderItemVO> selectStockItem(SearchVO searchVO) {
+        return sqlSession.selectList("orderItemMapper.selectStockItem", searchVO);
+    }
 }
+
+

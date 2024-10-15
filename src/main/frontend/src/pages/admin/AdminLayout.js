@@ -46,7 +46,8 @@ const AdminLayout = () => {
       path: '/admin/orderItem',
       subMenu: [
         { title: '입고 관리', path: '/admin/orderItem' },
-        { title: '발주 관리', path: '/admin/orderingItem' }
+        { title: '발주 관리', path: '/admin/orderingItem' },
+        { title: '재고 관리', path: '/admin/stockItem' }
       ]
     }
   ]);

@@ -1,0 +1,70 @@
+.stockItemContainer{
+  padding: 30px;
+  margin: 0 auto;
+  width: 95%;
+}
+
+.stockItemContainer div:first-child{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+
+.stockItemContainer table{
+  width: 90%;
+  text-align: center;
+}
+
+.stockItemContainer table td{
+  border: 1px solid #7e969e;
+}
+
+.stockItemContainer table thead td{
+  background-color: #bedce6;
+  padding: 12px 0px;
+  border-bottom: 2px solid #7e969e;
+  cursor: context-menu;
+}
+
+.stockItemContainer table tbody td{
+  background-color: #e8f0f3;
+  padding: 5px 0px;
+  cursor: context-menu;
+}
+
+.stockItemContainer table button{
+  padding: 0px 10px;
+  background-color: #bedce6;
+  border: 1px solid #7e969e;
+  border-radius: 5px;
+}
+
+.stockItemContainer table button:hover,
+.stockItemContainer .addStock:hover{
+  background-color: #b6ced6;
+  cursor: pointer;
+  color: #384144;
+}
+
+.stockItemContainer table input{
+  width: 100%;
+  border: none;
+  background-color: #e8f0f3;
+  text-align: center;
+  cursor: context-menu;
+}
+
+.stockItemContainer .addStockDiv{
+  width: 90%;
+  display: flex;
+  justify-content: right;
+}
+
+.stockItemContainer .addStock{
+  padding: 5px 20px;
+  background-color: #bedce6;
+  border: 1px solid #7e969e;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+

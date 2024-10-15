@@ -12,9 +12,19 @@ const OrderingItem = () => {
       {loginData && Object.keys(loginData).length > 0 ? (
         <div>
           {loginData.staffRole === 'ADMIN' ? (
-            <div>
+            <div className='orderingTable'>
               <div>발주 관리</div>
               <table>
+                <colgroup>
+                  <col width='6%'/>
+                  <col width='8%'/>
+                  <col width='6%'/>
+                  <col width='8%'/>
+                  <col width='6%'/>
+                  <col width='8%'/>
+                  <col width='6%'/>
+                  <col width='10%'/>
+                </colgroup>
                 <thead>
                   <tr>
                     <td> 거래처 : </td>
@@ -37,8 +47,8 @@ const OrderingItem = () => {
                     </td>
                     <td> 품번 : </td>
                     <td>
-                      <input type='search' />
-                      <button>
+                      <input type='search' className='searchItemNum' />
+                      <button className='orderingBtn'>
                         <i className="bi bi-search"></i>
                       </button>
                     </td>
@@ -46,11 +56,11 @@ const OrderingItem = () => {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>발주 일자</td>
+                    <td>발주 일자 : </td>
                     <td>
                       <input type='date' />
                     </td>
-                    <td> 발주담당자 </td>
+                    <td> 발주담당자 : </td>
                     <td>
                       <select>
                         <option>이순신</option>

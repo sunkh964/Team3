@@ -23,5 +23,8 @@ public interface OrderItemService {
     /*주문취소 버튼*/
     void cancelDeli(OrderItemVO orderItemVO);
 
+    /*재고 관리*/
+    List<OrderItemVO> selectStockItem(SearchVO searchVO);
+
 
 }

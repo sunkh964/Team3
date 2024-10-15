@@ -36,7 +36,6 @@ public class OrderItemController {
         return orderItemService.selectCancelOrderAmount(currentYear, currentMonth);
     }
 
-
     /*수령확인 버튼*/
     @PutMapping("/completedDeli")
     public void completedDeli(@RequestBody OrderItemVO orderItemVO){
@@ -49,5 +48,10 @@ public class OrderItemController {
         orderItemService.cancelDeli(orderItemVO);
     }
 
+    /*재고 관리*/
+    @PostMapping("/selectStockItem")
+    public List<OrderItemVO> selectStockItem(@RequestBody(required = false) SearchVO searchVO){
+        return orderItemService.selectStockItem(searchVO);
+    }
 
 }

@@ -7,12 +7,14 @@
         <result column="ORDER_DATE" property="orderDate"/>
         <result column="DEPART_TIME" property="departTime"/>
         <result column="ARRIVE_TIME" property="arriveTime"/>
+        <result column="STOCK_ITEM_CNT" property="stockItemCnt"/>
         <association property="supVO" resultMap="supMapper.sup"/>
         <association property="itemTypeVO" resultMap="supMapper.itemType"/>
         <association property="itemVO" resultMap="supMapper.item"/>
         <association property="deliverVO" resultMap="deliver"/>
         <association property="orderDetailVO" resultMap="orderDetail"/>
     </resultMap>
+
 
     <resultMap id="orderAmount" type="com.green.Team3.orderItem.vo.OrderAmountVO">
         <id column="TYPE_NAME" property="typeName"/>
@@ -99,6 +101,25 @@
         SET DELI_NUM = 5
         WHERE ORDER_NUM = #{orderNum};
     </update>
+
+    <!-- 재고 관리 -->
+    <select id="selectStockItem" resultMap="orderItem">
+        SELECT T.TYPE_NAME, I.ITEM_NAME, SUM(OD.ORDER_CNT) AS STOCK_ITEM_CNT, S.SUP_NAME
+        FROM ORDER_ITEM O, ITEM I, SUP S, ITEM_TYPE T, ORDER_DETAIL OD, deliver D
+        WHERE O.DELI_NUM = D.DELI_NUM
+        AND D.DELI_NUM = 4
+        AND OD.ITEM_NUM = I.ITEM_NUM
+        AND I.SUP_NUM = S.SUP_NUM
+        AND I.TYPE_NUM = T.TYPE_NUM
+        AND O.ORDER_NUM = OD.ORDER_NUM
+        AND O.CUS_NUM =1
+            <if test='searchValue != null and !searchValue.equals("")'>
+                AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+            </if>
+        GROUP BY T.TYPE_NAME, I.ITEM_NAME, S.SUP_NAME
+        ORDER BY O.ORDER_DATE DESC;
+
+    </select>
 
 
     
