@@ -162,7 +162,7 @@ function cancelDeli(orderNum){
                 ></i>
               </div>
               <div className='search-orderItem'>
-                <select name='searchType' onChange={changeSearchData}>
+                <select name='searchType' value={searchdata.searchType} onChange={changeSearchData}>
                   <option value={'SUP_NAME'}>발주처</option>
                   <option value={'item_NAME'}>품명</option>
                   <option value={'TYPE_NAME'}>용품 타입</option>

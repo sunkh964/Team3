@@ -68,3 +68,41 @@
   margin-top: 10px;
 }
 
+
+.stockItemContainer table .changeInput{
+  width: 100%;
+  background-color: white;
+  border: 1px solid #384144;
+  text-align: center;
+  cursor: context-menu;
+  cursor: text;
+}
+
+.stockItemContainer .stockSearch{
+  width: 90%;
+  display: flex;
+  justify-content: right;
+}
+.stockItemContainer .stockSearch select{
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid #7e969e;
+  border-radius: 5px;
+}
+.stockItemContainer .stockSearch input{
+  margin-right: 10px;
+  border: 1px solid #7e969e;
+  border-radius: 5px;
+}
+.stockItemContainer .stockSearch button{
+  border: 1px solid #7e969e;
+  padding: 0px 15px;
+  cursor: pointer;
+  background-color: #bedce6;
+  border-radius: 5px;
+}
+.stockItemContainer .stockSearch button:hover{
+  border: 1px solid #6d8086;
+  background-color: #b6ced6;
+}
+

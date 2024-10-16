@@ -4,47 +4,89 @@
   border: 1px solid white;
 }
 
-.orderingTable{
+.orderingControllerDiv{
   background-color: #e7e5e5;
   box-shadow: 0.5px 0.5px 3.4px;
-  width: 90%;
+  width: 70%;
   margin: 20px auto;
   cursor: context-menu;
   padding: 20px;
   border-radius: 5px;
 }
 
+.orderingItemContainer  .orderingFirTable  thead td{
+  width: 10%;
+  padding: 10px;
+}
 
-.orderingTable div:first-child {
+.orderingItemContainer .orderingFirTable thead td span{
+  margin-right: 20px;
+}
+
+.orderingControllerDiv div:first-child {
   font-size: 20px;
   margin-bottom: 20px;
   font-weight: 600;
   color: #067da1;
 }
 
-.orderingTable select{
+.orderingControllerDiv select{
   cursor: pointer;
   font-size: 15px;
   width: 120px;
 }
 
-.orderingTable input{
+.orderingControllerDiv orderingFirTable input{
   font-size: 15px;
   cursor: text;
   width: 120px;
 }
 
-.orderingTable td{
-  padding: 10px;
-}
-
-.orderingTable .searchItemNum{
+.orderingControllerDiv .searchItemNum{
   width: 150px;
 }
 
-.orderingTable .orderingBtn{
+.orderingControllerDiv  .orderingFirTable .orderingBtn{
   margin-left: 10px;
   color: #067da1;
   padding:1px 6px;
+  cursor: pointer;
+}
+.orderingControllerDiv .orderingSecTable td{
+  border: 1px solid #7e969e;
+  padding: 3px 0px;
+}
+
+.orderingSecTable{
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.orderingSecTable thead{
+  border-bottom: 2px solid #7e969e;
+  background-color: #bedce6;
+  font-size: 15px;
+}
+.orderingSecTable thead td{
+  font-weight: 600;
+  color: #044d63;
+  padding: 8px 0px !important;
+}
+.orderingSecTable tbody{
+  font-size: 13px;
+  background-color: #e8f0f3;
+}
+
+.orderingSecTable tbody input[type='number']{
+  width: 50%;
+  border: 1px solid #7e969e;
+  border-radius: 5px;
+}
+.orderingSecTable tbody button{
+  padding: 0px 5px;
+  background-color: #bedce6;
+  border: 1px solid #067da1;
+  border-radius: 5px;
   cursor: pointer;
 }

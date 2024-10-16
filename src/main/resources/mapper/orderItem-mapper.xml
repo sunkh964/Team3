@@ -113,9 +113,9 @@
         AND I.TYPE_NUM = T.TYPE_NUM
         AND O.ORDER_NUM = OD.ORDER_NUM
         AND O.CUS_NUM =1
-            <if test='searchValue != null and !searchValue.equals("")'>
-                AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
-            </if>
+        <if test='searchValue != null and !searchValue.equals("")'>
+            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
         GROUP BY T.TYPE_NAME, I.ITEM_NAME, S.SUP_NAME
         ORDER BY O.ORDER_DATE DESC;
 

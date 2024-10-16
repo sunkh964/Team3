@@ -38,6 +38,7 @@ import ChartModal from './pages/admin/treatManage/ChartModal';
 import Unauthorized from './pages/admin/Unauthorized';
 import OrderingItem from './pages/admin/orderManage/OrderingItem';
 import StockItem from './pages/admin/orderManage/StockItem';
+import StockItemModal from './pages/admin/orderManage/StockItemModal';
 
 function App() {
   const navigate = useNavigate();
@@ -171,6 +172,8 @@ function App() {
             <Route path='orderingItem' element={<OrderingItem/>}/>
             {/* 관리자용 - 재고 관리 */}
             <Route path='stockItem' element={<StockItem/>}/>
+            {/* 관리자용 - 재고 관리 모달 */}
+            <Route path='stockItemModal' element={<StockItemModal/>}/>
             {/* 페이지이용 권한 제한 */}
             <Route path='unauthorized' element={<Unauthorized/>}/>
           </Route>
