@@ -19,7 +19,7 @@ import Qupldate from './pages/user/mypage/Qupldate';
 
 import StaffDetail from './pages/admin/doctorManage/StaffDetail';
 import AddChart from './pages/admin/treatManage/AddChart';
-// import DoctorHome from './pages/admin/doctorManage/DoctorHome';
+import DoctorHome from './pages/admin/doctorManage/DoctorHome';
 import StaffChange from './pages/admin/doctorManage/StaffChange';
 import ReviseChart from './pages/admin/treatManage/ReviseChart';
 import Reservation from './pages/user/reserv/Reservation';
