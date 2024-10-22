@@ -29,12 +29,12 @@ const [showImg, setShowImage] = useState(0);
 const img = [
    'http://localhost:8080/images/img_introRolling02.jpg',
    'http://localhost:8080/images/FIL_20240719140842069Pf20.jpg',
-   'http://localhost:8080/images/img_introRolling02.jpg'
+   'http://localhost:8080/images/banner3.jpg'
 ]
 const img2 = [
    'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png',
    'http://localhost:8080/images/FIL_20240719140842069Pf20.jpg',
-   'http://localhost:8080/images/hos_banner_waifu2x_art_noise1_scale.png'
+   'http://localhost:8080/images/banner3.jpg'
 ]
 
 // 이미지 이동

@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import './UserLayout.css'
-import { Outlet, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import './UserLayout.css';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const UserLayout = () => {
-
   const navigate = useNavigate();
   const [dropDown, setDropDown] = useState({});
 
@@ -35,9 +34,9 @@ const UserLayout = () => {
     {
       title: '진료예약',
       items: [
-        { name: '예약하기', path: '/book' },
-        { name: '예약 변경', path: '/change' },
-        { name: '상담 예약', path: '/consultation' },
+        { name: '예약하기', path: '/reserv' },
+        { name: '예약변경', path: '/change' },
+        { name: '간편예약', path: '/consultation' },
       ],
     },
     {
@@ -49,25 +48,57 @@ const UserLayout = () => {
     },
   ];
 
+  const handleNavigation = (path) => {
+    const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
+    const loginInfo = sessionLoginInfo ? JSON.parse(sessionLoginInfo) : null;
+
+    if (loginInfo == null) {
+      alert('진료예약 이용 시 로그인이 필요합니다');
+      navigate('/login');
+    } else {
+      navigate(path);
+    }
+  };
+
   const renderMenuItems = (menuTitle) => (
     <>
       <div className='menuTitle'>{menuTitle}</div>
       <ul className='dropdown-ul'>
         {menus.find(menu => menu.title === menuTitle).items.map((item, index) => (
-          <li key={index} onClick={() => navigate(item.path)}>
+          <li key={index} onClick={item.name === '예약하기' || item.name === '예약변경' ? () => handleNavigation(item.path) : () => navigate(item.path)}>
             {item.name}
           </li>
         ))}
       </ul>
       {/* 고정 항목 */}
-        <div className='fixItem'>
-          <div>진료과안내</div>
+      <div className='fixItem'>
+        <div>- 진료과안내 -</div>
+        <div className='treatType'>
+          <img src='http://localhost:8080/images/treat.png' />
+          <div>진료과목 보기</div>
         </div>
-        <div className='fixItem'>
-          <div>위치서비스</div>
-          <div className='fixItem-navi'><span><i class="bi bi-geo-alt-fill"></i></span> 오시는 길</div>
-          <img src='http://localhost:8080/images/gnb_img3.png'/>
+        <div className='fix-search'>
+          <div>진료과/의료진 찾기</div>
+          <div className='fs'>
+            <input type='text' placeholder='검색어를 입력하세요.' />
+            <div><i className="bi bi-search"></i></div>
+          </div>
         </div>
+      </div>
+      <div className='fixItem'>
+        <div>- 위치서비스 -</div>
+        <img src='http://localhost:8080/images/gnb_img3.png' />
+        <div className='fixItem-navi'>
+          <div>
+            <span><i className="bi bi-geo-alt-fill"></i></span>
+            <div>오시는 길</div>
+          </div>
+          <div>
+            <span><i className="bi bi-p-square-fill"></i></span>
+            <div>주차 안내</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 
@@ -80,27 +111,17 @@ const UserLayout = () => {
         <ul className='menu-ul'>
           <li onMouseEnter={() => handleMouseEnter('진료안내')} onMouseLeave={() => handleMouseLeave('진료안내')}>진료안내</li>
           <li onMouseEnter={() => handleMouseEnter('이용안내')} onMouseLeave={() => handleMouseLeave('이용안내')}>이용안내</li>
-          <li onClick={() => {
-            const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
-            const loginInfo = sessionLoginInfo ? JSON.parse(sessionLoginInfo) : null;
-
-            if (loginInfo == null) {
-              alert('진료예약 이용 시 로그인이 필요합니다');
-              navigate('/login');
-            } else {
-              navigate('/reserv');
-            }
-          }}
-            onMouseEnter={() => handleMouseEnter('진료예약')} onMouseLeave={() => handleMouseLeave('진료예약')}>
+          <li onClick={() => handleNavigation('/reserv')}
+              onMouseEnter={() => handleMouseEnter('진료예약')} onMouseLeave={() => handleMouseLeave('진료예약')}>
             진료예약
           </li>
           <li onMouseEnter={() => handleMouseEnter('고객서비스')} onMouseLeave={() => handleMouseLeave('고객서비스')}>고객서비스</li>
         </ul>
         <div className='menu-icon2'>
-          <i class="bi bi-search"></i>
+          <i className="bi bi-search"></i>
         </div>
       </div>
-        
+
       <div className='dropRelative'>
         <div className={`menu-dropdown ${dropDown['고객서비스'] || dropDown['진료예약'] || dropDown['진료안내'] || dropDown['이용안내'] ? 'active' : ''}`}>
           {dropDown['진료안내'] && (
@@ -125,7 +146,7 @@ const UserLayout = () => {
           )}
         </div>
       </div>
-      
+
       <div className='outlet'><Outlet /></div>
 
       <div className='foot'>
@@ -147,7 +168,7 @@ const UserLayout = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default UserLayout
+export default UserLayout;
