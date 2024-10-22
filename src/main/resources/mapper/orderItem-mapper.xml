@@ -15,7 +15,6 @@
         <association property="orderDetailVO" resultMap="orderDetail"/>
     </resultMap>
 
-
     <resultMap id="orderAmount" type="com.green.Team3.orderItem.vo.OrderAmountVO">
         <id column="TYPE_NAME" property="typeName"/>
         <result column="TOTAL_AMOUNT" property="totalAmount"/>
@@ -118,8 +117,22 @@
         </if>
         GROUP BY T.TYPE_NAME, I.ITEM_NAME, S.SUP_NAME
         ORDER BY O.ORDER_DATE DESC;
-
     </select>
+
+    <!--본원 재고량-->
+    <select id="onlyStockCnt" resultMap="orderItem">
+        SELECT SUM(OD.ORDER_CNT) AS STOCK_ITEM_CNT, I.ITEM_NAME
+        FROM ORDER_ITEM O
+        JOIN ORDER_DETAIL OD ON O.ORDER_NUM = OD.ORDER_NUM
+        JOIN ITEM I ON OD.ITEM_NUM = I.ITEM_NUM
+        JOIN SUP S ON I.SUP_NUM = S.SUP_NUM
+        WHERE S.SUP_NUM = #{supNum}
+        AND I.ITEM_NUM = #{itemNum}
+        GROUP BY I.ITEM_NAME;
+    </select>
+
+
+
 
 
     

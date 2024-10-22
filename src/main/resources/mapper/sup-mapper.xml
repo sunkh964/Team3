@@ -22,7 +22,17 @@
         <result column="ITEM_DETAIL" property="itemDetail"/>
         <result column="TYPE_NUM" property="typeNum"/>
         <result column="SUP_NUM" property="supNum"/>
+        <association property="supVO" resultMap="sup"/>
+        <association property="itemTypeVO" resultMap="itemType"/>
     </resultMap>
+
+    <!--발주 리스트-->
+    <select id="selectOrderingList" resultMap="item">
+        SELECT *
+        FROM SUP S, ITEM_TYPE T, ITEM I
+        WHERE I.SUP_NUM = S.SUP_NUM
+        AND I.TYPE_NUM = T.TYPE_NUM;
+    </select>
 
 
 </mapper>

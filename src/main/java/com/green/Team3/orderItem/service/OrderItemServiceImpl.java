@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service("orderItemService")
-public class OrderItemServiceImpl  implements OrderItemService{
+public class OrderItemServiceImpl implements OrderItemService {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
@@ -28,7 +28,7 @@ public class OrderItemServiceImpl  implements OrderItemService{
                 Map.of("currentYear", currentYear, "currentMonth", currentMonth));
     }
 
-    /*당월 주문 취소 된 금액*/
+    /*주문 취소된 상품 금액*/
     @Override
     public List<OrderAmountVO> selectCancelOrderAmount(int currentYear, int currentMonth) {
         return sqlSession.selectList("orderItemMapper.selectCancelOrderAmount",
@@ -41,7 +41,7 @@ public class OrderItemServiceImpl  implements OrderItemService{
         sqlSession.update("orderItemMapper.completedDeli", orderItemVO);
     }
 
-    /*주문취소 버튼*/
+    /*주문 취소 버튼*/
     @Override
     public void cancelDeli(OrderItemVO orderItemVO) {
         sqlSession.update("orderItemMapper.cancelDeli", orderItemVO);
@@ -52,6 +52,8 @@ public class OrderItemServiceImpl  implements OrderItemService{
     public List<OrderItemVO> selectStockItem(SearchVO searchVO) {
         return sqlSession.selectList("orderItemMapper.selectStockItem", searchVO);
     }
+
+    /*본원 재고량*/
+
+
 }
-
-

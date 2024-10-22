@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orderItem")
@@ -53,5 +54,8 @@ public class OrderItemController {
     public List<OrderItemVO> selectStockItem(@RequestBody(required = false) SearchVO searchVO){
         return orderItemService.selectStockItem(searchVO);
     }
+
+    /*본원 재고량*/
+
 
 }

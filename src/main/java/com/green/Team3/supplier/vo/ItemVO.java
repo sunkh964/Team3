@@ -12,4 +12,7 @@ public class ItemVO {
     private String itemDetail;
     private int supNum;
     private int typeNum;
+    private SupVO supVO;
+    private ItemTypeVO itemTypeVO;
+
 }
