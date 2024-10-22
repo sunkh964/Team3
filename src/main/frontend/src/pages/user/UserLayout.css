@@ -87,15 +87,18 @@
   letter-spacing: 5px;
   font-weight: 600;
   background: url('http://localhost:8080/images/dropmenu.png') no-repeat ;
-  background-position: 160px calc(0% + 10px);
+  background-position: 160px calc(0% + 50px);
   background-size: 170px 150px;
+  padding: 20px;
 }
 
 .dropdown-ul {
   border-left: 1px solid #eeeeee;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  font-size: 1.1rem;
+  padding: 10px;
 }
 .dropdown-ul:last-child {
   border-right: 1px solid #eeeeee;
@@ -114,23 +117,116 @@
 
 .fixItem{
   border-left: 1px solid #eeeeee;
-  padding: 0px 10px 0px 20px;
+  padding: 0px 20px 0px 20px;
 }
 .fixItem > div:first-child{
   font-weight: 600;
   padding-top: 10px;
   text-align: center;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
 }
+.treatType{
+  box-shadow: 1px 1px 3px gray;
+  padding: 10px 13px;
+  margin-bottom: 20px;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color:#525661 ;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 15px;
+  background-color: rgb(240, 244, 245);
+  /* background-color: rgb(197, 230, 226); */
+}
+.treatType:hover{
+  color:#41444b ;
+  background-color: rgb(214, 222, 224);
+  cursor: pointer;
+  box-shadow: 1px 1px 3px gray;
+}
+.treatType img{
+  border: 1px solid #7d88aa;
+  border-radius: 17px;
+  padding: 3px;
+  margin-right: 20px;
+  background-color: white;
+}
+.fix-search{
+  border-radius: 15px;
+  background-color: #a1abc7;
+  padding: 12px 15px;
+  border: none;
+  color:#42464e;
+  font-weight: 600;
+}
+.fix-search:hover{
+  background-color: #929bb3;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px gray;
+}
+.fix-search .fs{
+  display: flex;
+  /* border: 1px solid #7d88aa; */
+  width: 90%;
+  height: 30px;
+  margin-top: 7px;
+}
+.fix-search .fs >input{
+  border: 1px solid #7481a5;
+  padding: 0px 5px;
+}
+.fix-search .fs >div{
+  border-left: none;
+  width: 55px;
+  color: whitesmoke;
+  text-align: center;
+  line-height: 30px;
+  font-size: 1.1rem;
+  background-color: #7481a5;
+}
+
+/* ============================ 위치 서비스 */
 .fixItem-navi{
-  box-shadow: 1px 1px 3px 1px #dddddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  justify-content: space-evenly;
 }
-.fixItem-navi> span{
+.fixItem-navi>div{
+  text-align: center;
+  color:#525661 ;
+}
+.fixItem-navi span{
   display: inline-block;
-  font-size: 2rem;
-  color: gray;
-  border: 1px solid #dddddd;
+  font-size: 1.6rem;
+  color: #7d88aa;
+  border: 1px solid #7d88aa;
   border-radius: 100%;
-  padding: 8px 10px;
+  padding: 8px 11px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.fixItem-navi span:hover{
+  color: #5d657e;
+  border: 1px solid #5d657e;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px lightgray;
+}
+
+.fixItem > img{
+  width: 260px;
+  cursor: pointer;
+}
+
+.fixItem > img:hover{
+  box-shadow: 1px 1px 3px gray;
 }
 
 

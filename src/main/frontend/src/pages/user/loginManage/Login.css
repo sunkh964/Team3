@@ -8,7 +8,7 @@ margin: auto;
 }
 
 .login > div:last-child{
-  border-bottom: 4px double lightgray;
+  /* border-bottom: 4px double lightgray; */
   padding-bottom: 40px;
 }
 
@@ -17,7 +17,6 @@ margin: auto;
   width: 95%;
   padding-top: 10px;
   margin-top: 15px;
-  border-top: 4px double lightgray;
 }
 
 .box {
@@ -92,6 +91,7 @@ margin: auto;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-top: 15px;
 }
 
 .login-foot > div{
