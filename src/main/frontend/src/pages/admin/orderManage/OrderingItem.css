@@ -90,3 +90,20 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.cartButton{
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+.cartButton i {
+  border: 1px solid #067da1;
+  background-color: #bedce6;
+  border-radius: 5px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.cartButton i:hover{
+  background-color:  #bad3db;
+}

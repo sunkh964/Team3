@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './OrderingItem.css';
 import Unauthorized from '../Unauthorized';
+import Modal from'./OrderingModal'
 
 const OrderingItem = () => {
   // 세션에 있는 로그인 정보 받아오기
   const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
   const loginData = JSON.parse(sessionLoginInfo);
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  function openModal(){
+    setIsModalOpen(true)
+
+  }
+
+  function closeModal(){
+    setIsModalOpen(false)
+  }
+
+  function OrderingCart(){
+    if(window.confirm('주문하시겠습니까?')){
+      // 주문 기능
+      alert('주문이 완료되었습니다.')
+      closeModal();
+    } else{
+      alert('취소되었습니다.')
+    }
+  }
 
   return (
     <div className='orderingItemContainer'>
@@ -76,7 +98,15 @@ const OrderingItem = () => {
                 </tbody>
 
               </table>
+              <div className='cartButton'>
+              <i class="bi bi-cart" onClick={openModal}> 구매목록</i>
+              </div>
+
+
+
             </div>
+
+            
           ) : (
             <Unauthorized />
           )}
@@ -84,6 +114,13 @@ const OrderingItem = () => {
       ) : (
         <Unauthorized />
       )}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={OrderingCart}
+      />
+
+      
     </div>
   );
 };
