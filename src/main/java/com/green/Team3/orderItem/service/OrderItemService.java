@@ -1,7 +1,9 @@
 package com.green.Team3.orderItem.service;
 
 import com.green.Team3.orderItem.vo.OrderAmountVO;
+import com.green.Team3.orderItem.vo.OrderDetailVO;
 import com.green.Team3.orderItem.vo.OrderItemVO;
+import com.green.Team3.orderItem.vo.StockCountVO;
 import com.green.Team3.patie.vo.SearchVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,6 +28,13 @@ public interface OrderItemService {
 
     /*재고 관리*/
     List<OrderItemVO> selectStockItem(SearchVO searchVO);
+
+    /*본원 재고량*/
+    int onlyStockCnt(@Param("supNum") int supNum, @Param("itemNum") int itemNum);
+
+    /*구매하기*/
+    Long goOrder(OrderItemVO orderItemVO);
+    void goOrderDetail(OrderDetailVO orderDetailVO);
 
 
 

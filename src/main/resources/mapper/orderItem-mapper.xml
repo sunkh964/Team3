@@ -8,6 +8,7 @@
         <result column="DEPART_TIME" property="departTime"/>
         <result column="ARRIVE_TIME" property="arriveTime"/>
         <result column="STOCK_ITEM_CNT" property="stockItemCnt"/>
+        <result column="TOTAL_PRICE" property="totalPrice"/>
         <association property="supVO" resultMap="supMapper.sup"/>
         <association property="itemTypeVO" resultMap="supMapper.itemType"/>
         <association property="itemVO" resultMap="supMapper.item"/>
@@ -18,6 +19,11 @@
     <resultMap id="orderAmount" type="com.green.Team3.orderItem.vo.OrderAmountVO">
         <id column="TYPE_NAME" property="typeName"/>
         <result column="TOTAL_AMOUNT" property="totalAmount"/>
+    </resultMap>
+
+    <resultMap id="stockCount" type="com.green.Team3.orderItem.vo.StockCountVO">
+        <id column="STOCK_ITEM_CNT" property="stockItemCnt"/>
+        <result column="ITEM_NAME" property="itemName"/>
     </resultMap>
 
     <resultMap id="deliver" type="com.green.Team3.orderItem.vo.DeliverVO">
@@ -32,6 +38,8 @@
         <result column="DETAIL_PRICE" property="detailPrice"/>
         <result column="ORDER_NUM" property="orderNum"/>
     </resultMap>
+
+
 
     <!-- 특정 월과 연도의 구입 항목 가져오기 -->
     <select id="selectOrderItem" resultMap="orderItem">
@@ -120,17 +128,30 @@
     </select>
 
     <!--본원 재고량-->
-    <select id="onlyStockCnt" resultMap="orderItem">
-        SELECT SUM(OD.ORDER_CNT) AS STOCK_ITEM_CNT, I.ITEM_NAME
+    <select id="onlyStockCnt" parameterType="map" resultType="int">
+        SELECT SUM(OD.ORDER_CNT) AS STOCK_ITEM_CNT
         FROM ORDER_ITEM O
         JOIN ORDER_DETAIL OD ON O.ORDER_NUM = OD.ORDER_NUM
         JOIN ITEM I ON OD.ITEM_NUM = I.ITEM_NUM
-        JOIN SUP S ON I.SUP_NUM = S.SUP_NUM
-        WHERE S.SUP_NUM = #{supNum}
-        AND I.ITEM_NUM = #{itemNum}
-        GROUP BY I.ITEM_NAME;
+        WHERE I.SUP_NUM = #{supNum} AND I.ITEM_NUM = #{itemNum}
+        GROUP BY I.ITEM_NUM;
     </select>
 
+
+    <!--구매하기-->
+    <insert id="goOrder" parameterType="com.green.Team3.orderItem.vo.OrderItemVO" useGeneratedKeys="true" keyProperty="orderNum">
+        INSERT INTO ORDER_ITEM
+        (TOTAL_PRICE, ORDER_DATE, CUS_NUM, DELI_NUM)
+        VALUES
+        (#{totalPrice}, NOW(), 1, 1);
+    </insert>
+
+    <insert id="goOrderDetail">
+        INSERT INTO ORDER_DETAIL
+        (ORDER_CNT, ITEM_NUM, DETAIL_PRICE, ORDER_NUM)
+        VALUES
+        (#{orderCnt}, #{itemNum}, #{detailPrice}, #{orderNum});
+    </insert>
 
 
 

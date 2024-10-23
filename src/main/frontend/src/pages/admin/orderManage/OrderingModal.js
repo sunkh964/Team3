@@ -42,7 +42,7 @@ const OrderingModal = ({ isOpen, onClose, onConfirm, cartItems }) => {
             </thead>
             <tbody>
               {cartItems.map((item, index) => (
-                <tr key={item.itemCode}>
+                <tr key={item.itemNum}>
                   <td>{index + 1}</td>
                   <td>{item.itemCode}</td>
                   <td className='rightText'>{item.itemName}</td>

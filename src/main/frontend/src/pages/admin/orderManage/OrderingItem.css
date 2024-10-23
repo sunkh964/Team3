@@ -20,7 +20,7 @@
 }
 
 .orderingItemContainer .orderingFirTable thead td span{
-  margin-right: 20px;
+  margin-right: 15px;
 }
 
 .orderingControllerDiv div:first-child {
@@ -43,13 +43,13 @@
 }
 
 .orderingControllerDiv .searchItemNum{
-  width: 150px;
+  width: 140px;
 }
 
 .orderingControllerDiv  .orderingFirTable .orderingBtn{
-  margin-left: 10px;
+  margin-left: 5px;
   color: #067da1;
-  padding:1px 6px;
+  padding:0px 6px;
   cursor: pointer;
 }
 .orderingControllerDiv .orderingSecTable td{

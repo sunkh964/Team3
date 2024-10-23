@@ -12,6 +12,7 @@ const OrderingItem = () => {
   const [orderingList, setOrderingList] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [cartItems, setCartItems] = useState([]);
+  const [stockCount, setStockCount] = useState({})
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -22,30 +23,59 @@ const OrderingItem = () => {
   };
 
   const OrderingCart = () => {
-    if (window.confirm('주문하시겠습니까?')) {
-      alert('주문이 완료되었습니다.');
-      closeModal();
-    } else {
-      alert('취소되었습니다.');
-    }
+    const totalPrice = cartItems.reduce((total, item) => total + item.totalPrice, 0);
+
+    const orderData = {
+      totalPrice
+    };
+
+    // 주문 생성
+    axios.post('/orderItem/goOrder', orderData)
+      .then(res => {
+        const orderNum = res.data.orderNum; 
+        console.log(res.data);
+
+        // 주문 세부 정보 삽입
+        const orderDetailPromises = cartItems.map(item => {
+          const orderDetailData = {
+            orderCnt: item.quantity,
+            itemNum: item.itemNum, 
+            detailPrice: item.price,
+            orderNum: orderNum 
+          };
+
+          return axios.post('/orderItem/goOrderDetail', orderDetailData);
+        });
+
+        return Promise.all(orderDetailPromises);
+      })
+      .then(() => {
+        alert('주문이 완료되었습니다.');
+      })
+      .catch(error => {
+        console.log(error);
+        alert('주문 처리 중 오류가 발생했습니다.');
+      });
+
+    closeModal();
   };
 
-  const handleQuantityChange = (itemCode, stock) => (event) => {
+  const handleQuantityChange = (itemNum, stock) => (event) => {
     const value = Math.max(1, Math.min(stock, Number(event.target.value)));
-    setQuantities((prev) => ({ ...prev, [itemCode]: value }));
+    setQuantities((prev) => ({ ...prev, [itemNum]: value }));
   };
 
   const addToCart = (ordering) => {
-    const quantity = quantities[ordering.itemCode] || 1;
+    const quantity = quantities[ordering.itemNum] || 1;
 
     if (window.confirm('구매 목록에 추가하시겠습니까?')) {
       const totalPrice = ordering.price * quantity;
 
-      const existingItem = cartItems.find(item => item.itemCode === ordering.itemCode);
+      const existingItem = cartItems.find(item => item.itemNum === ordering.itemNum);
       if (existingItem) {
         setCartItems((prev) =>
           prev.map(item =>
-            item.itemCode === ordering.itemCode
+            item.itemNum === ordering.itemNum
               ? { ...item, quantity: item.quantity + quantity, totalPrice: item.totalPrice + totalPrice }
               : item
           )
@@ -54,7 +84,7 @@ const OrderingItem = () => {
         setCartItems(prev => [
           ...prev,
           {
-            itemCode: ordering.itemCode,
+            itemNum: ordering.itemNum,
             itemName: ordering.supVO.supName,
             price: ordering.price,
             quantity,
@@ -70,9 +100,25 @@ const OrderingItem = () => {
       .then(res => {
         console.log(res.data);
         setOrderingList(res.data);
+        res.data.forEach(ordering => {
+          onlyStockCount(ordering.supNum, ordering.itemNum);
+        });
       })
       .catch((error) => { console.log(error); });
   }, []);
+  
+
+  const onlyStockCount = (supNum, itemNum) => {
+    axios.get(`/orderItem/onlyStockCnt?supNum=${supNum}&itemNum=${itemNum}`)
+      .then(res => {
+        setStockCount(prev => ({ ...prev, [itemNum]: res.data }));
+      })
+      .catch(error => {
+        console.log(error);
+        alert('재고 수량을 가져오는 데 오류가 발생했습니다.');
+      });
+  };
+  
 
   return (
     <div className='orderingItemContainer'>
@@ -149,12 +195,14 @@ const OrderingItem = () => {
                           <input 
                             type='number' 
                             name='orderCnt' 
-                            value={quantity} 
-                            onChange={handleQuantityChange(ordering.itemCode, ordering.stock)} 
+                            defaultValue={1} 
+                            min={1}
+                            onChange={handleQuantityChange(ordering.itemNum, ordering.stock)} 
                           /> 개
                         </td>
                         <td>{totalPrice.toLocaleString()} 원</td>
-                        <td>{ordering.stock} 개</td>
+                        <td>{stockCount[ordering.itemNum] ? stockCount[ordering.itemNum] : 'Loading...'} 개</td>
+
                         <td>
                           <button onClick={() => addToCart(ordering)}>추가</button>
                         </td>

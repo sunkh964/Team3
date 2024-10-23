@@ -1,7 +1,9 @@
 package com.green.Team3.orderItem.service;
 
 import com.green.Team3.orderItem.vo.OrderAmountVO;
+import com.green.Team3.orderItem.vo.OrderDetailVO;
 import com.green.Team3.orderItem.vo.OrderItemVO;
+import com.green.Team3.orderItem.vo.StockCountVO;
 import com.green.Team3.patie.vo.SearchVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,20 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     /*본원 재고량*/
+    @Override
+    public int onlyStockCnt(int supNum, int itemNum) {
+        return sqlSession.selectOne("orderItemMapper.onlyStockCnt", Map.of("supNum", supNum, "itemNum", itemNum));
+    }
 
+    /*주문하기*/
+    @Override
+    public Long goOrder(OrderItemVO orderItemVO) {
+        sqlSession.insert("orderItemMapper.goOrder", orderItemVO);
+        return orderItemVO.getOrderNum();
+    }
 
+    @Override
+    public void goOrderDetail(OrderDetailVO orderDetailVO) {
+        sqlSession.insert("orderItemMapper.goOrderDetail", orderDetailVO);
+    }
 }

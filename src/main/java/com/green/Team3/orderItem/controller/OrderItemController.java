@@ -2,11 +2,15 @@ package com.green.Team3.orderItem.controller;
 
 import com.green.Team3.orderItem.service.OrderItemService;
 import com.green.Team3.orderItem.vo.OrderAmountVO;
+import com.green.Team3.orderItem.vo.OrderDetailVO;
 import com.green.Team3.orderItem.vo.OrderItemVO;
+import com.green.Team3.orderItem.vo.StockCountVO;
 import com.green.Team3.patie.vo.SearchVO;
 import jakarta.annotation.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +60,29 @@ public class OrderItemController {
     }
 
     /*본원 재고량*/
+    @GetMapping("/onlyStockCnt")
+    public ResponseEntity<Integer> onlyStockCnt(
+            @RequestParam(value = "supNum") int supNum,
+            @RequestParam(value = "itemNum") int itemNum) {
+        int stockCount = orderItemService.onlyStockCnt(supNum, itemNum);
+        return ResponseEntity.ok(stockCount);
+    }
+
+
+
+    /*주문하기*/
+    @PostMapping("/goOrder")
+    public ResponseEntity<Map<String, Object>> goOrder(@RequestBody OrderItemVO orderItemVO){
+        Long orderNum = orderItemService.goOrder(orderItemVO);
+        Map<String, Object> response = new HashMap<>();
+        response.put("orderNum", orderNum);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/goOrderDetail")
+    public void goOrderDetail(@RequestBody OrderDetailVO orderDetailVO){
+        orderItemService.goOrderDetail(orderDetailVO);
+    }
 
 
 }
