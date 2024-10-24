@@ -29,13 +29,12 @@ const OrderItem = () => {
     })
     .catch((error)=>{console.log(error)})
 
-    axios.get('/orderItem/totalOrderAmount')
+    axios.get('/orderItem/totalOrderAmount',{params: {currentYear, currentMonth}})
     .then((res)=>{
       console.log('totalAmount',res.data)
       setOrderAmount(res.data)
       const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
       setTotalAmount(total)
-
     })
     .catch((error)=>{console.log(error)})
 
@@ -76,26 +75,66 @@ function selectLastMonth() {
   const newMonth = (currentMonth === 1) ? 12 : currentMonth - 1;
   const newYear = (currentMonth === 1) ? currentYear - 1 : currentYear;
 
-  axios.post('/orderItem/selectLastMonth', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
+  axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
     .then((res) => {
       console.log(res.data);
       setOrderItems(res.data);
     })
     .catch((error) => console.log(error));
+
+    axios.get('/orderItem/totalOrderAmount',{params: {currentYear: newYear, currentMonth: newMonth}})
+    .then((res)=>{
+      console.log('totalAmount',res.data)
+      setOrderAmount(res.data)
+      const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
+      setTotalAmount(total)
+    })
+    .catch((error)=>{console.log(error)})
 }
 
   
-    // 다음달 버튼 클릭 핸들러 (선택 사항)
-    const selectNextMonth = () => {
-      setCurrentMonth((prevMonth) => {
-        if (prevMonth === 12) {
-          setCurrentYear((prevYear) => prevYear + 1);
-          return 1;
-        }
-        return prevMonth + 1;
-      });
-    };
+   // 다음달 주문목록 보기
+function selectNextMonth() {
+  setCurrentMonth((prevMonth) => {
+    const newMonth = (prevMonth == 12) ? 1 : prevMonth + 1; // 12월이면 1월로
+    const newYear = (prevMonth == 1) ? currentYear + 1 : currentYear+1; // 1월이면 연도 +1
+    return newMonth; // 새로운 월 반환
+  });
 
+  // 새로운 연도와 월로 API 호출
+  const newMonth = (currentMonth == 1) ? 12 : currentMonth + 1;
+  const newYear = (currentMonth == 1) ? currentYear + 1 : currentYear;
+
+  axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
+    .then((res) => {
+      console.log(res.data);
+      setOrderItems(res.data);
+    })
+    .catch((error) => console.log(error));
+
+    axios.get('/orderItem/totalOrderAmount',{params: {currentYear: newYear, currentMonth: newMonth}})
+    .then((res)=>{
+      console.log('totalAmount',res.data)
+      setOrderAmount(res.data)
+      const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
+      setTotalAmount(total)
+    })
+    .catch((error)=>{console.log(error)})
+}
+
+// 수령확인 버튼
+function completedDeli(orderNum){
+  axios.put('/orderItem/completedDeli', {orderNum})
+  .then((res)=>{navigate(0)})
+  .catch((error)=>{console.log(error)})
+}
+
+// 주문취소 버튼
+function cancelDeli(orderNum){
+  axios.put('/orderItem/cancelDeli', {orderNum})
+  .then((res)=>{navigate(0)})
+  .catch((error)=>{console.log(error)})
+}
 
   return (
     <div className='orderItemContainer'>
@@ -123,27 +162,30 @@ function selectLastMonth() {
                 ></i>
               </div>
               <div className='search-orderItem'>
-                <select name='searchType' onChange={changeSearchData}>
-                  <option value={'TYPE_NAME'}>용품 타입</option>
-                  <option value={'item_NAME'}>품명</option>
+                <select name='searchType' value={searchdata.searchType} onChange={changeSearchData}>
                   <option value={'SUP_NAME'}>발주처</option>
+                  <option value={'item_NAME'}>품명</option>
+                  <option value={'TYPE_NAME'}>용품 타입</option>
                 </select>
                 <input type='text' onChange={changeSearchData} name='searchValue'/>
-                <button onClick={searchItems}>검색</button>
+                <button onClick={searchItems}><i class="bi bi-search"></i></button>
               </div>
               <div className='table-container'>
                 <table className='main-table'>
                   <colgroup>
-                    <col width='5%'/>
-                    <col width='13%'/>
-                    <col width='10%'/>
-                    <col width='5%'/>
+                    <col width='3%'/>
+                    <col width='6%'/>
+                    <col width='6%'/>
+                    <col width='3%'/>
+                    <col width='8%'/>
+                    <col width='8%'/>
                     <col width='8%'/>
                     <col width='10%'/>
-                    <col width='15%'/>
-                    <col width='15%'/>
                     <col width='10%'/>
-                    <col width='15%'/>
+                    <col width='10%'/>
+                    <col width='10%'/>
+                    <col width='7%'/>
+                    <col width='7%'/>
                   </colgroup>
                   <thead>
                     <tr>
@@ -155,7 +197,10 @@ function selectLastMonth() {
                       <td>금액</td>
                       <td>발주처</td>
                       <td>발주일</td>
+                      <td>출발일</td>
+                      <td>도착일</td>
                       <td>배송 상태</td>
+                      <td></td>
                       <td></td>
                     </tr>
                   </thead>
@@ -166,6 +211,7 @@ function selectLastMonth() {
                         const item = orderItem.itemVO;
                         const sup = orderItem.supVO;
                         const deliver = orderItem.deliverVO
+                        const detail = orderItem.orderDetailVO
 
                         let deliverStateClass;
                         switch (deliver? deliver.deliStatus:null) {
@@ -174,6 +220,9 @@ function selectLastMonth() {
                             break;
                           case '배송완료':
                             deliverStateClass = 'delivered';
+                            break;
+                          case '주문취소':
+                            deliverStateClass = 'cancelDeliver'
                             break;
                           default:
                             deliverStateClass = 'default';
@@ -185,19 +234,30 @@ function selectLastMonth() {
                             <td>{orderItems.length - i}</td>
                             <td>{itemType ? itemType.typeName : null}</td>
                             <td>{item ? item.itemName : null}</td>
-                            <td>{orderItem.orderCnt}</td>
+                            <td>{detail.orderCnt}</td>
                             <td>{item ? item.price.toLocaleString() : null} 원</td>
                             <td>
-                              {item && item.price && orderItem.orderCnt
-                                ? (item.price * orderItem.orderCnt).toLocaleString()
+                              {item && item.price && detail.orderCnt
+                                ? (item.price * detail.orderCnt).toLocaleString()
                                 : 0} 원
                             </td>
                             <td>{sup ? sup.supName : null}</td>
                             <td>{orderItem.orderDate}</td>
+                            <td>{orderItem.departTime}</td>
+                            <td>{orderItem.arriveTime}</td>
                             <td className={deliverStateClass}>{deliver? deliver.deliStatus:null}</td>
                             <td>
+                              {deliver.deliStatus != '배송완료' && deliver.deliStatus!= '주문취소'&&(
+                                <button className='isDeliver-btn' 
+                                onClick={()=>{cancelDeli(orderItem.orderNum)}}
+                                > 주문 취소 </button>
+                              ) }
+                              </td>
+                            <td>
                               {deliver.deliStatus == '배송중' &&(
-                                <button className='isDeliver-btn' > 수령 확인 </button>
+                                <button className='isDeliver-btn' 
+                                onClick={()=>{completedDeli(orderItem.orderNum)}}
+                                > 수령 확인 </button>
                               ) }
                               </td>
                           </tr>
@@ -213,7 +273,7 @@ function selectLastMonth() {
                 <table>
                   <thead>
                     <tr>
-                      <td colSpan={2}>당월 총 금액</td>
+                      <td colSpan={2}>당월 주문 금액</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -223,7 +283,22 @@ function selectLastMonth() {
                         return(
                           <tr key={i}>
                             <td>{orderAmount.typeName}</td>
-                            <td>{orderAmount.totalAmount.toLocaleString()} 원</td>
+                            <td> - {orderAmount.totalAmount.toLocaleString()} 원</td>
+                          </tr>
+                        )
+                      })
+                    }
+                    <tr className='cancelAmountTr'>
+                      <td colSpan={2}>
+                        주문 취소 된 금액
+                      </td>
+                    </tr>
+                    {
+                      orderAmounts.map((orderAmount, i)=>{
+                        return(
+                          <tr key={i} className='cancelAmount'>
+                            <td>{orderAmount.typeName}</td>
+                            <td> + {orderAmount.totalAmount.toLocaleString()} 원</td>
                           </tr>
                         )
                       })
@@ -232,7 +307,7 @@ function selectLastMonth() {
                   <tfoot>
                     <tr>
                       <td>총 합계</td>
-                      <td>{totalAmount.toLocaleString()} 원</td>
+                      <td>- {totalAmount.toLocaleString()} 원</td>
                     </tr>
                   </tfoot>
                 </table>

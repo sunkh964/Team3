@@ -95,15 +95,18 @@
 }
 
 .delivering {
-  color: rgb(49, 49, 224); /* 배송중: 파란색 */
+  color: rgb(49, 90, 224); /* 배송중 */
 }
 
 .delivered {
-  color: rgb(240, 77, 77); /* 배송 완료: 빨간색 */
+  color: #07bd68; /* 배송 완료 */
 }
 
 .default {
-  color: black; /* 기본: 검은색 (주문 확인 중) */
+  color: black; /* 기본(주문 확인 중) */
+}
+.cancelDeliver {
+  color: rgb(226, 54, 54); /* 주문취소 */
 }
 
 .isDeliver-btn{
@@ -111,10 +114,13 @@
   border: #067da1 1px solid;
   border-radius: 5px;
   cursor: pointer;
+  color: #393d3f;
+  padding: 3px 5px;
 }
 
 .isDeliver-btn:hover{
   background-color: #b5cfd8;
+  color: #0c0d0e;
 }
 .total-amount-div{
   border: 1px solid #7e969e;
@@ -145,4 +151,12 @@
 .total-amount-div tfoot td{
   padding-top: 5px;
   border-top: 1px solid #7e969e;
+}
+.cancelAmountTr td{
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: #7e969e;
+}
+.cancelAmount td{
+  color: #7e969e;
 }

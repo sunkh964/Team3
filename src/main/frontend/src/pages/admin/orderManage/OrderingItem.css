@@ -1,0 +1,109 @@
+.orderingItemContainer{
+  height: 100%;
+  background-color: #f5f5f5;
+  border: 1px solid white;
+}
+
+.orderingControllerDiv{
+  background-color: #e7e5e5;
+  box-shadow: 0.5px 0.5px 3.4px;
+  width: 70%;
+  margin: 20px auto;
+  cursor: context-menu;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.orderingItemContainer  .orderingFirTable  thead td{
+  width: 10%;
+  padding: 10px;
+}
+
+.orderingItemContainer .orderingFirTable thead td span{
+  margin-right: 15px;
+}
+
+.orderingControllerDiv div:first-child {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #067da1;
+}
+
+.orderingControllerDiv select{
+  cursor: pointer;
+  font-size: 15px;
+  width: 120px;
+}
+
+.orderingControllerDiv orderingFirTable input{
+  font-size: 15px;
+  cursor: text;
+  width: 120px;
+}
+
+.orderingControllerDiv .searchItemNum{
+  width: 140px;
+}
+
+.orderingControllerDiv  .orderingFirTable .orderingBtn{
+  margin-left: 5px;
+  color: #067da1;
+  padding:0px 6px;
+  cursor: pointer;
+}
+.orderingControllerDiv .orderingSecTable td{
+  border: 1px solid #7e969e;
+  padding: 3px 0px;
+}
+
+.orderingSecTable{
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.orderingSecTable thead{
+  border-bottom: 2px solid #7e969e;
+  background-color: #bedce6;
+  font-size: 15px;
+}
+.orderingSecTable thead td{
+  font-weight: 600;
+  color: #044d63;
+  padding: 8px 0px !important;
+}
+.orderingSecTable tbody{
+  font-size: 13px;
+  background-color: #e8f0f3;
+}
+
+.orderingSecTable tbody input[type='number']{
+  width: 50%;
+  border: 1px solid #7e969e;
+  border-radius: 5px;
+}
+.orderingSecTable tbody button{
+  padding: 0px 5px;
+  background-color: #bedce6;
+  border: 1px solid #4f8596;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cartButton{
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+.cartButton i {
+  border: 1px solid #4f8596;
+  background-color: #bedce6;
+  border-radius: 5px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.cartButton i:hover{
+  background-color:  #bad3db;
+}
