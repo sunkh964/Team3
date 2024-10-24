@@ -97,8 +97,8 @@
     <!-- 수령확인 버튼 -->
     <update id="completedDeli">
         UPDATE ORDER_ITEM
-        SET DELI_NUM = 4
-        DEPART_TIME = CURRENT_TIMESTAMP
+        SET DELI_NUM = 4,
+        ARRIVE_TIME = NOW()
         WHERE ORDER_NUM = #{orderNum};
     </update>
 

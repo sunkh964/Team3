@@ -124,16 +124,21 @@ function selectNextMonth() {
 
 // 수령확인 버튼
 function completedDeli(orderNum){
-  axios.put('/orderItem/completedDeli', {orderNum})
-  .then((res)=>{navigate(0)})
-  .catch((error)=>{console.log(error)})
-}
+  if(window.confirm('상품을 수령받았습니까?')){
+    axios.put('/orderItem/completedDeli', {orderNum})
+    .then((res)=>{navigate(0)})
+    .catch((error)=>{console.log(error)})
+  }
+
+  }
 
 // 주문취소 버튼
 function cancelDeli(orderNum){
-  axios.put('/orderItem/cancelDeli', {orderNum})
-  .then((res)=>{navigate(0)})
-  .catch((error)=>{console.log(error)})
+  if(window.confirm('주문을 취소하시겠습니까?')){
+    axios.put('/orderItem/cancelDeli', {orderNum})
+    .then((res)=>{navigate(0)})
+    .catch((error)=>{console.log(error)})
+  }
 }
 
   return (
