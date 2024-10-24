@@ -14,7 +14,7 @@ const UserHome = () => {
    useEffect(() => {
    axios.get('/board/list')
    .then((res) => {
-   console.log(res.data)
+   alert(res.data);
    setBoardList(res.data);
    })
    .catch((error) => {
