@@ -6,152 +6,134 @@ import Unauthorized from '../Unauthorized';
 
 const OrderItem = () => {
   const navigate = useNavigate();
-  const [orderItems, setOrderItems]=useState([]);
-  // 세션에 있는 로그인 정보 받아오기
+  const [orderItems, setOrderItems] = useState([]);
   const sessionLoginInfo = window.sessionStorage.getItem('loginInfo');
   const loginData = JSON.parse(sessionLoginInfo);
 
   const [isLeftHovered, setIsLeftHovered] = useState(false);
   const [isRightHovered, setIsRightHovered] = useState(false);
-
-  const [orderAmounts, setOrderAmount] = useState([])
-  const [totalAmount, setTotalAmount] = useState(0)
-
-    // 날짜 상태 추가
-    const [currentYear, setCurrentYear] = useState(2024);
-    const [currentMonth, setCurrentMonth] = useState(10);
-
-  useEffect(()=>{
-    axios.post("/orderItem/selectOrderItem", {...searchdata, currentYear, currentMonth})
-    .then((res)=>{
-      console.log(res.data)
-      setOrderItems(res.data)
-    })
-    .catch((error)=>{console.log(error)})
-
-    axios.get('/orderItem/totalOrderAmount',{params: {currentYear, currentMonth}})
-    .then((res)=>{
-      console.log('totalAmount',res.data)
-      setOrderAmount(res.data)
-      const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
-      setTotalAmount(total)
-    })
-    .catch((error)=>{console.log(error)})
-
-  },[])
-  
-  const [searchdata, setSearchData]=useState({
+  const [orderAmounts, setOrderAmount] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [currentYear, setCurrentYear] = useState(2024);
+  const [currentMonth, setCurrentMonth] = useState(9);
+  const [searchdata, setSearchData] = useState({
     searchType: 'TYPE_NAME',
     searchValue: ''
-  })
+  });
 
-  // 검색 내용 값 변경
-  function changeSearchData(e){
+  useEffect(() => {
+    fetchOrderItems();
+    fetchTotalOrderAmount();
+  }, []);
+
+  const fetchOrderItems = () => {
+    axios.post("/orderItem/selectOrderItem", { ...searchdata, currentYear, currentMonth })
+      .then((res) => {
+        console.log(res.data);
+        setOrderItems(res.data);
+      })
+      .catch((error) => { console.log(error); });
+  };
+
+  const fetchTotalOrderAmount = () => {
+    axios.get('/orderItem/totalOrderAmount', { params: { currentYear, currentMonth } })
+      .then((res) => {
+        console.log('totalAmount', res.data);
+        setOrderAmount(res.data);
+        const total = res.data.reduce((sum, item) => sum + item.totalAmount, 0);
+        setTotalAmount(total);
+      })
+      .catch((error) => { console.log(error); });
+  };
+
+  const changeSearchData = (e) => {
     setSearchData({
       ...searchdata,
-      [e.target.name]:e.target.value
-    })
-  }
+      [e.target.name]: e.target.value
+    });
+  };
 
-  // 검색 버튼
-  function searchItems(){
-    axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear, currentMonth })
-    .then((res)=>{
-      console.log(res.data)
-      setOrderItems(res.data)
-    })
-    .catch((error)=>{console.log(error)})
-  }
+  const searchItems = () => {
+    fetchOrderItems();
+  };
 
-// 저번달 주문목록 보기
-function selectLastMonth() {
-  setCurrentMonth((prevMonth) => {
-    const newMonth = (prevMonth === 1) ? 12 : prevMonth - 1; // 1월이면 12월로
-    const newYear = (prevMonth === 1) ? currentYear - 1 : currentYear; // 1월이면 연도 -1
-    return newMonth; // 새로운 월 반환
-  });
+  const selectLastMonth = () => {
+    setCurrentMonth((prevMonth) => {
+      const newMonth = (prevMonth === 1) ? 12 : prevMonth - 1;
+      const newYear = (prevMonth === 1) ? currentYear - 1 : currentYear;
+      return newMonth;
+    });
 
-  // 새로운 연도와 월로 API 호출
-  const newMonth = (currentMonth === 1) ? 12 : currentMonth - 1;
-  const newYear = (currentMonth === 1) ? currentYear - 1 : currentYear;
+    const newMonth = (currentMonth === 1) ? 12 : currentMonth - 1;
+    const newYear = (currentMonth === 1) ? currentYear - 1 : currentYear;
 
-  axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
-    .then((res) => {
-      console.log(res.data);
-      setOrderItems(res.data);
-    })
-    .catch((error) => console.log(error));
+    axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
+      .then((res) => {
+        console.log(res.data);
+        setOrderItems(res.data);
+      })
+      .catch((error) => console.log(error));
 
-    axios.get('/orderItem/totalOrderAmount',{params: {currentYear: newYear, currentMonth: newMonth}})
-    .then((res)=>{
-      console.log('totalAmount',res.data)
-      setOrderAmount(res.data)
-      const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
-      setTotalAmount(total)
-    })
-    .catch((error)=>{console.log(error)})
-}
+    fetchTotalOrderAmount();
+  };
 
-  
-   // 다음달 주문목록 보기
-function selectNextMonth() {
-  setCurrentMonth((prevMonth) => {
-    const newMonth = (prevMonth == 12) ? 1 : prevMonth + 1; // 12월이면 1월로
-    const newYear = (prevMonth == 1) ? currentYear + 1 : currentYear+1; // 1월이면 연도 +1
-    return newMonth; // 새로운 월 반환
-  });
+  const selectNextMonth = () => {
+    setCurrentMonth((prevMonth) => {
+      const newMonth = (prevMonth === 12) ? 1 : prevMonth + 1;
+      const newYear = (prevMonth === 12) ? currentYear + 1 : currentYear;
+      return newMonth;
+    });
 
-  // 새로운 연도와 월로 API 호출
-  const newMonth = (currentMonth == 1) ? 12 : currentMonth + 1;
-  const newYear = (currentMonth == 1) ? currentYear + 1 : currentYear;
+    const newMonth = (currentMonth === 12) ? 1 : currentMonth + 1;
+    const newYear = (currentMonth === 12) ? currentYear + 1 : currentYear;
 
-  axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
-    .then((res) => {
-      console.log(res.data);
-      setOrderItems(res.data);
-    })
-    .catch((error) => console.log(error));
+    axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
+      .then((res) => {
+        console.log(res.data);
+        setOrderItems(res.data);
+      })
+      .catch((error) => console.log(error));
 
-    axios.get('/orderItem/totalOrderAmount',{params: {currentYear: newYear, currentMonth: newMonth}})
-    .then((res)=>{
-      console.log('totalAmount',res.data)
-      setOrderAmount(res.data)
-      const total = res.data.reduce((sum,item)=> sum+item.totalAmount, 0)
-      setTotalAmount(total)
-    })
-    .catch((error)=>{console.log(error)})
-}
+    fetchTotalOrderAmount();
+  };
 
-// 수령확인 버튼
-function completedDeli(orderNum){
-  if(window.confirm('상품을 수령받았습니까?')){
-    axios.put('/orderItem/completedDeli', {orderNum})
-    .then((res)=>{navigate(0)})
-    .catch((error)=>{console.log(error)})
-  }
+  const completedDeli = (detailNum) => {
+    if (window.confirm('상품을 수령받았습니까?')) {
+      axios.put('/orderItem/completedDeli', { detailNum })
+        .then((res) => {
+          const updatedOrderItems = orderItems.map(orderItem => {
+            if (orderItem.orderDetailVO.detailNum === detailNum) {
+              return {
+                ...orderItem,
+                deliverVO: { ...orderItem.deliverVO, deliStatus: '배송완료' }
+              };
+            }
+            return orderItem;
+          });
+          setOrderItems(updatedOrderItems);
+        })
+        .catch((error) => { console.log(error); });
+    }
+  };
 
-  }
-
-// 주문취소 버튼
-function cancelDeli(orderNum){
-  if(window.confirm('주문을 취소하시겠습니까?')){
-    axios.put('/orderItem/cancelDeli', {orderNum})
-    .then((res)=>{navigate(0)})
-    .catch((error)=>{console.log(error)})
-  }
-}
+  const cancelDeli = (orderNum) => {
+    if (window.confirm('주문을 취소하시겠습니까?')) {
+      axios.put('/orderItem/cancelDeli', { orderNum })
+        .then((res) => { navigate(0); })
+        .catch((error) => { console.log(error); });
+    }
+  };
 
   return (
     <div className='orderItemContainer'>
       {loginData && Object.keys(loginData).length > 0 ? (
         <div className='Order-header'>
-          {loginData.staffRole == 'ADMIN' ? (
-
+          {loginData.staffRole === 'ADMIN' ? (
             <div>
               <div className='table-date'>
-                <i 
-                  className={`bi ${isLeftHovered ? 'bi-caret-left-fill' : 'bi-caret-left'}`} 
-                  onMouseEnter={() => setIsLeftHovered(true)} 
+                <i
+                  className={`bi ${isLeftHovered ? 'bi-caret-left-fill' : 'bi-caret-left'}`}
+                  onMouseEnter={() => setIsLeftHovered(true)}
                   onMouseLeave={() => setIsLeftHovered(false)}
                   onClick={selectLastMonth}
                 ></i>
@@ -159,10 +141,10 @@ function cancelDeli(orderNum){
                   <i className="bi bi-calendar3"></i>
                   {currentYear}년 {currentMonth}월
                 </div>
-                <i 
-                  className={`bi ${isRightHovered ? 'bi-caret-right-fill' : 'bi-caret-right'}`} 
-                  onMouseEnter={() => setIsRightHovered(true)} 
-                  onMouseLeave={() => setIsRightHovered(false)} 
+                <i
+                  className={`bi ${isRightHovered ? 'bi-caret-right-fill' : 'bi-caret-right'}`}
+                  onMouseEnter={() => setIsRightHovered(true)}
+                  onMouseLeave={() => setIsRightHovered(false)}
                   onClick={selectNextMonth}
                 ></i>
               </div>
@@ -172,30 +154,30 @@ function cancelDeli(orderNum){
                   <option value={'item_NAME'}>품명</option>
                   <option value={'TYPE_NAME'}>용품 타입</option>
                 </select>
-                <input type='text' onChange={changeSearchData} name='searchValue'/>
-                <button onClick={searchItems}><i class="bi bi-search"></i></button>
+                <input type='text' onChange={changeSearchData} name='searchValue' />
+                <button onClick={searchItems}><i className="bi bi-search"></i></button>
               </div>
               <div className='table-container'>
                 <table className='main-table'>
                   <colgroup>
-                    <col width='3%'/>
-                    <col width='6%'/>
-                    <col width='6%'/>
-                    <col width='3%'/>
-                    <col width='8%'/>
-                    <col width='8%'/>
-                    <col width='8%'/>
-                    <col width='10%'/>
-                    <col width='10%'/>
-                    <col width='10%'/>
-                    <col width='10%'/>
-                    <col width='7%'/>
-                    <col width='7%'/>
+                    <col width='3%' />
+                    <col width='4%' />
+                    <col width='*%' />
+                    <col width='3%' />
+                    <col width='7%' />
+                    <col width='7%' />
+                    <col width='7%' />
+                    <col width='8%' />
+                    <col width='8%' />
+                    <col width='8%' />
+                    <col width='7%' />
+                    <col width='6%' />
+                    <col width='6%' />
                   </colgroup>
                   <thead>
                     <tr>
                       <td>번호</td>
-                      <td>용품 타입</td>
+                      <td>타입</td>
                       <td>품명</td>
                       <td>수량</td>
                       <td>단가</td>
@@ -211,15 +193,15 @@ function cancelDeli(orderNum){
                   </thead>
                   <tbody>
                     {
-                      orderItems.map((orderItem,i)=>{
+                      orderItems.map((orderItem, i) => {
                         const itemType = orderItem.itemTypeVO;
                         const item = orderItem.itemVO;
                         const sup = orderItem.supVO;
-                        const deliver = orderItem.deliverVO
-                        const detail = orderItem.orderDetailVO
+                        const deliver = orderItem.deliverVO;
+                        const detail = orderItem.orderDetailVO;
 
                         let deliverStateClass;
-                        switch (deliver? deliver.deliStatus:null) {
+                        switch (deliver ? deliver.deliStatus : null) {
                           case '배송중':
                             deliverStateClass = 'delivering';
                             break;
@@ -227,14 +209,14 @@ function cancelDeli(orderNum){
                             deliverStateClass = 'delivered';
                             break;
                           case '주문취소':
-                            deliverStateClass = 'cancelDeliver'
+                            deliverStateClass = 'cancelDeliver';
                             break;
                           default:
                             deliverStateClass = 'default';
                             break;
                         }
-                        
-                        return(
+
+                        return (
                           <tr key={i}>
                             <td>{orderItems.length - i}</td>
                             <td>{itemType ? itemType.typeName : null}</td>
@@ -248,28 +230,27 @@ function cancelDeli(orderNum){
                             </td>
                             <td>{sup ? sup.supName : null}</td>
                             <td>{orderItem.orderDate}</td>
-                            <td>{orderItem.departTime}</td>
-                            <td>{orderItem.arriveTime}</td>
-                            <td className={deliverStateClass}>{deliver? deliver.deliStatus:null}</td>
+                            <td>{detail.departTime}</td>
+                            <td>{detail.arriveTime}</td>
+                            <td className={deliverStateClass}>{deliver ? deliver.deliStatus : null}</td>
                             <td>
-                              {deliver.deliStatus != '배송완료' && deliver.deliStatus!= '주문취소'&&(
-                                <button className='isDeliver-btn' 
-                                onClick={()=>{cancelDeli(orderItem.orderNum)}}
+                              {deliver.deliStatus !== '배송완료' && deliver.deliStatus !== '주문취소' && (
+                                <button className='isDeliver-btn'
+                                  onClick={() => { cancelDeli(orderItem.orderNum) }}
                                 > 주문 취소 </button>
-                              ) }
-                              </td>
+                              )}
+                            </td>
                             <td>
-                              {deliver.deliStatus == '배송중' &&(
-                                <button className='isDeliver-btn' 
-                                onClick={()=>{completedDeli(orderItem.orderNum)}}
+                              {deliver.deliStatus === '배송중' && (
+                                <button className='isDeliver-btn'
+                                  onClick={() => { completedDeli(detail.detailNum) }}
                                 > 수령 확인 </button>
-                              ) }
-                              </td>
+                              )}
+                            </td>
                           </tr>
-                        )
+                        );
                       })
                     }
-                    
                   </tbody>
                 </table>
               </div>
@@ -283,14 +264,13 @@ function cancelDeli(orderNum){
                   </thead>
                   <tbody>
                     {
-                      orderAmounts.map((orderAmount, i)=>{
-
-                        return(
+                      orderAmounts.map((orderAmount, i) => {
+                        return (
                           <tr key={i}>
                             <td>{orderAmount.typeName}</td>
                             <td> - {orderAmount.totalAmount.toLocaleString()} 원</td>
                           </tr>
-                        )
+                        );
                       })
                     }
                     <tr className='cancelAmountTr'>
@@ -299,13 +279,13 @@ function cancelDeli(orderNum){
                       </td>
                     </tr>
                     {
-                      orderAmounts.map((orderAmount, i)=>{
-                        return(
+                      orderAmounts.map((orderAmount, i) => {
+                        return (
                           <tr key={i} className='cancelAmount'>
                             <td>{orderAmount.typeName}</td>
                             <td> + {orderAmount.totalAmount.toLocaleString()} 원</td>
                           </tr>
-                        )
+                        );
                       })
                     }
                   </tbody>
@@ -317,16 +297,13 @@ function cancelDeli(orderNum){
                   </tfoot>
                 </table>
               </div>
-
-
-
             </div>
           ) : (
-            <Unauthorized/>
+            <Unauthorized />
           )}
         </div>
       ) : (
-        <Unauthorized/>
+        <Unauthorized />
       )}
     </div>
   );

@@ -18,5 +18,6 @@ public class OrderItemVO {
     private DeliverVO deliverVO;
     private int cusNum;
     private OrderDetailVO orderDetailVO;
+    private int detailNum;
     private int stockItemCnt;
 }

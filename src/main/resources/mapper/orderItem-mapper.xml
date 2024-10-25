@@ -9,6 +9,7 @@
         <result column="ARRIVE_TIME" property="arriveTime"/>
         <result column="STOCK_ITEM_CNT" property="stockItemCnt"/>
         <result column="TOTAL_PRICE" property="totalPrice"/>
+        <result column="DETAIL_NUM" property="detailNum"/>
         <association property="supVO" resultMap="supMapper.sup"/>
         <association property="itemTypeVO" resultMap="supMapper.itemType"/>
         <association property="itemVO" resultMap="supMapper.item"/>
@@ -37,6 +38,8 @@
         <result column="ITEM_NUM" property="itemNum"/>
         <result column="DETAIL_PRICE" property="detailPrice"/>
         <result column="ORDER_NUM" property="orderNum"/>
+        <result column="DEPART_TIME" property="departTime"/>
+        <result column="ARRIVE_TIME" property="arriveTime"/>
     </resultMap>
 
 
@@ -68,7 +71,7 @@
         AND I.TYPE_NUM = T.TYPE_NUM
         AND MONTH(O.ORDER_DATE) = #{currentMonth}
         AND YEAR(O.ORDER_DATE) = #{currentYear}
-        AND DELI_NUM !=5
+        AND O.DELI_NUM !=5
         AND CUS_NUM = 1
         GROUP BY T.TYPE_NAME
         ORDER BY T.TYPE_NAME;
@@ -83,7 +86,7 @@
         AND I.TYPE_NUM = T.TYPE_NUM
         AND MONTH(O.ORDER_DATE) = #{currentMonth}
         AND YEAR(O.ORDER_DATE) = #{currentYear}
-        AND DELI_NUM =5
+        AND O.DELI_NUM =5
         AND CUS_NUM = 1
         GROUP BY T.TYPE_NAME
         ORDER BY T.TYPE_NAME;
@@ -96,10 +99,11 @@
 
     <!-- 수령확인 버튼 -->
     <update id="completedDeli">
-        UPDATE ORDER_ITEM
-        SET DELI_NUM = 4,
+        UPDATE ORDER_ITEM O, ORDER_DETAIL D
+        SET D.DELI_NUM = 4,
         ARRIVE_TIME = NOW()
-        WHERE ORDER_NUM = #{orderNum};
+        WHERE DETAIL_NUM = #{detailNum}
+        AND O.ORDER_NUM = D.ORDER_NUM;
     </update>
 
     <!--주문 취소 버튼-->
@@ -145,7 +149,6 @@
         VALUES
         (#{totalPrice}, NOW(), 1, 1);
     </insert>
-
     <insert id="goOrderDetail">
         INSERT INTO ORDER_DETAIL
         (ORDER_CNT, ITEM_NUM, DETAIL_PRICE, ORDER_NUM)

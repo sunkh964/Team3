@@ -19,14 +19,13 @@ const OrderingModal = ({ isOpen, onClose, onConfirm, cartItems }) => {
         <div className='cartList'>
           <table>
             <colgroup>
-              <col width='4%' />
+              <col width='7%' />
+              <col width='30%' />
+              <col width='*%' />
+              <col width='14%' />
+              <col width='7%' />
+              <col width='15%' />
               <col width='8%' />
-              <col width='8%' />
-              <col width='6%' />
-              <col width='5%' />
-              <col width='6%' />
-              <col width='5%' />
-              <col width='5%' />
             </colgroup>
             <thead>
               <tr>
@@ -37,19 +36,17 @@ const OrderingModal = ({ isOpen, onClose, onConfirm, cartItems }) => {
                 <td>수량</td>
                 <td>총 금액</td>
                 <td></td>
-                <td></td>
               </tr>
             </thead>
             <tbody>
               {cartItems.map((item, index) => (
                 <tr key={item.itemNum}>
                   <td>{index + 1}</td>
-                  <td>{item.itemCode}</td>
-                  <td className='rightText'>{item.itemName}</td>
+                  <td>{item.itemName}</td>
+                  <td>{item.supName}</td>
                   <td>{item.price.toLocaleString()} 원</td>
                   <td>{item.quantity}</td>
                   <td>{item.totalPrice.toLocaleString()} 원</td>
-                  <td><button>수정</button></td>
                   <td><button>삭제</button></td>
                 </tr>
               ))}

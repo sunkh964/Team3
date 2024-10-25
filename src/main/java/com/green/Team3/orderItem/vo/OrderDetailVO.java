@@ -9,4 +9,6 @@ public class OrderDetailVO {
     private int itemNum;
     private int detailPrice;
     private int orderNum;
+    private String departTime;
+    private String arriveTime;
 }

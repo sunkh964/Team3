@@ -85,7 +85,8 @@ const OrderingItem = () => {
           ...prev,
           {
             itemNum: ordering.itemNum,
-            itemName: ordering.supVO.supName,
+            itemName: ordering.itemName,
+            supName: ordering.supVO.supName,
             price: ordering.price,
             quantity,
             totalPrice,
@@ -137,13 +138,9 @@ const OrderingItem = () => {
                       </select>
                     </td>
                     <td>
-                      <span>상품 타입 :</span>
-                      <select>
-                        <option> 소모품 A </option>
+                    <select>
+                        <option> 상품 타입 </option>
                       </select>
-                    </td>
-                    <td>
-                      <span> 상품 코드 : </span>
                       <input type='search' className='searchItemNum' />
                       <button className='orderingBtn'>
                         <i className="bi bi-search"></i>
@@ -154,14 +151,14 @@ const OrderingItem = () => {
               </table>
               <table className='orderingSecTable'>
                 <colgroup>
-                  <col width='6%' />
+                  <col width='7%' />
                   <col width='10%' />
+                  <col width='*%' />
                   <col width='10%' />
                   <col width='9%' />
                   <col width='9%' />
                   <col width='9%' />
-                  <col width='9%' />
-                  <col width='9%' />
+                  <col width='10%' />
                   <col width='6%' />
                 </colgroup>
                 <thead>
@@ -188,7 +185,7 @@ const OrderingItem = () => {
                       <tr key={i}>
                         <td>{ordering.itemCode}</td>
                         <td>{itemType.typeName}</td>
-                        <td>{sup.supName}</td>
+                        <td>{ordering.itemName}</td>
                         <td>{ordering.stock} 개</td>
                         <td>{(ordering.price).toLocaleString()} 원</td>
                         <td>
