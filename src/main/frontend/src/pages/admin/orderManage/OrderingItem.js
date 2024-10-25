@@ -50,7 +50,7 @@ const OrderingItem = () => {
         return Promise.all(orderDetailPromises);
       })
       .then(() => {
-        alert('주문이 완료되었습니다.');
+        alert('주문서를 발송하였습니다.');
       })
       .catch(error => {
         console.log(error);
@@ -68,7 +68,7 @@ const OrderingItem = () => {
   const addToCart = (ordering) => {
     const quantity = quantities[ordering.itemNum] || 1;
 
-    if (window.confirm('구매 목록에 추가하시겠습니까?')) {
+    if (window.confirm('발주서에 추가하시겠습니까?')) {
       const totalPrice = ordering.price * quantity;
 
       const existingItem = cartItems.find(item => item.itemNum === ordering.itemNum);
@@ -209,7 +209,7 @@ const OrderingItem = () => {
                 </tbody>
               </table>
               <div className='cartButton'>
-                <i className="bi bi-cart" onClick={openModal}> 구매목록</i>
+                <i className="bi bi-cart" onClick={openModal}> 목록</i>
               </div>
             </div>
           ) : (

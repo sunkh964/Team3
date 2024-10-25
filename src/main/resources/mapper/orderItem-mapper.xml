@@ -14,7 +14,7 @@
         <association property="itemTypeVO" resultMap="supMapper.itemType"/>
         <association property="itemVO" resultMap="supMapper.item"/>
         <association property="deliverVO" resultMap="deliver"/>
-        <association property="orderDetailVO" resultMap="orderDetail"/>
+        <collection property="orderDetailVO" resultMap="orderDetail"/>
     </resultMap>
 
     <resultMap id="orderAmount" type="com.green.Team3.orderItem.vo.OrderAmountVO">
@@ -40,6 +40,8 @@
         <result column="ORDER_NUM" property="orderNum"/>
         <result column="DEPART_TIME" property="departTime"/>
         <result column="ARRIVE_TIME" property="arriveTime"/>
+        <association property="itemVO" resultMap="supMapper.item"/>
+        <association property="deliverVO" resultMap="deliver"/>
     </resultMap>
 
 
@@ -108,9 +110,10 @@
 
     <!--주문 취소 버튼-->
     <update id="cancelDeli">
-        UPDATE ORDER_ITEM
-        SET DELI_NUM = 5
-        WHERE ORDER_NUM = #{orderNum};
+        UPDATE ORDER_ITEM I, ORDER_DETAIL D
+        SET D.DELI_NUM = 5, I.DELI_NUM = 5
+        WHERE D.DETAIL_NUM = #{orderNum}
+        AND I.ORDER_NUM = D.ORDER_NUM;
     </update>
 
     <!-- 재고 관리 -->

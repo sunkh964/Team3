@@ -37,8 +37,4 @@
                 SELECT * FROM HOS_PATIE
                 WHERE PATIE_NUM= #{patieNum};
         </select>
-
-
-
-
 </mapper>

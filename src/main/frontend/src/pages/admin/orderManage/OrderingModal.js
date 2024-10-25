@@ -15,7 +15,7 @@ const OrderingModal = ({ isOpen, onClose, onConfirm, cartItems }) => {
             <i className="bi bi-x-lg"></i>
           </span>
         </div>
-        <h2> 구매 목록 </h2>
+        <h2> 발주서 </h2>
         <div className='cartList'>
           <table>
             <colgroup>
@@ -57,8 +57,8 @@ const OrderingModal = ({ isOpen, onClose, onConfirm, cartItems }) => {
           총 금액 : {totalCartPrice.toLocaleString()} 원
         </div>
         <div className='modalBottmBtn'>
-          <button onClick={onConfirm}>구매하기</button>
-          <button onClick={onClose}>취소</button>
+          <button onClick={onConfirm}>발주하기</button>
+          <button onClick={onClose}>닫기</button>
         </div>
       </div>
     </div>

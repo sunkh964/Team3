@@ -5,6 +5,8 @@ import com.green.Team3.supplier.vo.ItemVO;
 import com.green.Team3.supplier.vo.SupVO;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class OrderItemVO {
     private long orderNum;
@@ -17,7 +19,7 @@ public class OrderItemVO {
     private ItemVO itemVO;
     private DeliverVO deliverVO;
     private int cusNum;
-    private OrderDetailVO orderDetailVO;
+    private List<OrderDetailVO> orderDetailVO;
     private int detailNum;
     private int stockItemCnt;
 }

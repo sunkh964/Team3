@@ -20,6 +20,10 @@
   text-align: right;
 }
 
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
 .search-orderItem select, 
 .search-orderItem input, 
 .search-orderItem button{

@@ -15,7 +15,7 @@ const OrderItem = () => {
   const [orderAmounts, setOrderAmount] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentYear, setCurrentYear] = useState(2024);
-  const [currentMonth, setCurrentMonth] = useState(9);
+  const [currentMonth, setCurrentMonth] = useState(10);
   const [searchdata, setSearchData] = useState({
     searchType: 'TYPE_NAME',
     searchValue: ''
@@ -29,7 +29,6 @@ const OrderItem = () => {
   const fetchOrderItems = () => {
     axios.post("/orderItem/selectOrderItem", { ...searchdata, currentYear, currentMonth })
       .then((res) => {
-        console.log(res.data);
         setOrderItems(res.data);
       })
       .catch((error) => { console.log(error); });
@@ -38,7 +37,6 @@ const OrderItem = () => {
   const fetchTotalOrderAmount = () => {
     axios.get('/orderItem/totalOrderAmount', { params: { currentYear, currentMonth } })
       .then((res) => {
-        console.log('totalAmount', res.data);
         setOrderAmount(res.data);
         const total = res.data.reduce((sum, item) => sum + item.totalAmount, 0);
         setTotalAmount(total);
@@ -69,7 +67,6 @@ const OrderItem = () => {
 
     axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
       .then((res) => {
-        console.log(res.data);
         setOrderItems(res.data);
       })
       .catch((error) => console.log(error));
@@ -89,7 +86,6 @@ const OrderItem = () => {
 
     axios.post('/orderItem/selectOrderItem', { ...searchdata, currentYear: newYear, currentMonth: newMonth })
       .then((res) => {
-        console.log(res.data);
         setOrderItems(res.data);
       })
       .catch((error) => console.log(error));
@@ -111,6 +107,7 @@ const OrderItem = () => {
             return orderItem;
           });
           setOrderItems(updatedOrderItems);
+          navigate(0);
         })
         .catch((error) => { console.log(error); });
     }
@@ -200,6 +197,8 @@ const OrderItem = () => {
                         const deliver = orderItem.deliverVO;
                         const detail = orderItem.orderDetailVO;
 
+                        console.log(detail);
+
                         let deliverStateClass;
                         switch (deliver ? deliver.deliStatus : null) {
                           case '배송중':
@@ -217,37 +216,41 @@ const OrderItem = () => {
                         }
 
                         return (
-                          <tr key={i}>
-                            <td>{orderItems.length - i}</td>
-                            <td>{itemType ? itemType.typeName : null}</td>
-                            <td>{item ? item.itemName : null}</td>
-                            <td>{detail.orderCnt}</td>
-                            <td>{item ? item.price.toLocaleString() : null} 원</td>
-                            <td>
-                              {item && item.price && detail.orderCnt
-                                ? (item.price * detail.orderCnt).toLocaleString()
-                                : 0} 원
-                            </td>
-                            <td>{sup ? sup.supName : null}</td>
-                            <td>{orderItem.orderDate}</td>
-                            <td>{detail.departTime}</td>
-                            <td>{detail.arriveTime}</td>
-                            <td className={deliverStateClass}>{deliver ? deliver.deliStatus : null}</td>
-                            <td>
-                              {deliver.deliStatus !== '배송완료' && deliver.deliStatus !== '주문취소' && (
-                                <button className='isDeliver-btn'
-                                  onClick={() => { cancelDeli(orderItem.orderNum) }}
-                                > 주문 취소 </button>
-                              )}
-                            </td>
-                            <td>
-                              {deliver.deliStatus === '배송중' && (
-                                <button className='isDeliver-btn'
-                                  onClick={() => { completedDeli(detail.detailNum) }}
-                                > 수령 확인 </button>
-                              )}
-                            </td>
-                          </tr>
+                          detail.map((detailItem, j) => {
+                            return (
+                              <tr key={j}>
+                                <td>{orderItems.length - i}</td>
+                                <td>{itemType ? itemType.typeName : null}</td>
+                                <td>{detailItem ? detailItem.itemVO.itemName : null}</td>
+                                <td>{detailItem.orderCnt}</td>
+                                <td>{item ? detailItem.itemVO.price.toLocaleString() : null} 원</td>
+                                <td>
+                                  {item && item.price && detailItem.orderCnt
+                                    ? (detailItem.itemVO.price * detailItem.orderCnt).toLocaleString()
+                                    : 0} 원
+                                </td>
+                                <td>{sup ? sup.supName : null}</td>
+                                <td>{orderItem.orderDate}</td>
+                                <td>{detailItem.departTime}</td>
+                                <td>{detailItem.arriveTime}</td>
+                                <td className={deliverStateClass}>{deliver ? deliver.deliStatus : null}</td>
+                                <td>
+                                  {deliver.deliStatus !== '배송완료' && deliver.deliStatus !== '주문취소' && (
+                                    <button className='isDeliver-btn'
+                                      onClick={() => { cancelDeli(detailItem.detailNum) }}
+                                    > 주문 취소 </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {deliver.deliStatus === '배송중' && (
+                                    <button className='isDeliver-btn'
+                                      onClick={() => { completedDeli(detailItem.detailNum) }}
+                                    > 수령 확인 </button>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          })
                         );
                       })
                     }
