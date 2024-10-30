@@ -59,7 +59,7 @@
   position: absolute; /* 드롭다운 위치를 절대적으로 설정 */
   margin: auto;
   background-color: white; /* 배경색 */
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
   z-index: 1000; /* 다른 요소들 위에 표시 */
   width: 100%;
@@ -138,7 +138,7 @@
   font-weight: 600;
   font-size: 17px;
   border-radius: 15px;
-  background-color: rgb(240, 244, 245);
+  /* background-color: rgb(240, 244, 245); */
   /* background-color: rgb(197, 230, 226); */
 }
 .treatType:hover{

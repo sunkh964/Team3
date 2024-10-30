@@ -94,22 +94,32 @@ const Reserv_staff = () => {
           </div>
           <div className='updateReserv'>
             <div className='resList-title'>예약정보 수정</div>
+              <table className='updateRes-table'>
+                <colgroup>
+                  <col width="15%"/>
+                  <col width="35%"/>
+                  <col width="15%"/>
+                  <col width="35%"/>
+                </colgroup>
                 <tr>
-                <td colSpan={2}>{recDetail.patieVO ? recDetail.patieVO.patieName : ''}</td>
-                <td colSpan={2}>{recDetail.patieVO ? recDetail.patieVO.patieBirth : ''}</td>
-              </tr>
-              <tr>
-                <td>진료부서</td>
-                <td><input value={recDetail.staffVO ? recDetail.staffVO.part.partName : ''}/></td>
-                <td>의료진</td>
-                <td><input value={recDetail.staffVO ? recDetail.staffVO.staffName : ''}/></td>
-              </tr>
-              <tr>
-                <td>예약시간</td>
-                <td><input type='datetime-local' value={recDetail.recDate}/></td>
-                <td>증상</td>
-                <td><input value={recDetail.recDetail}/></td>
-              </tr>
+                  <td>이름</td>
+                  <td>{recDetail.patieVO ? recDetail.patieVO.patieName : ''}</td>
+                  <td>생년월일</td>
+                  <td>{recDetail.patieVO ? recDetail.patieVO.patieBirth : ''}</td>
+                </tr>
+                <tr>
+                  <td>진료부서</td>
+                  <td><input value={recDetail.staffVO ? recDetail.staffVO.part.partName : ''}/></td>
+                  <td>의료진</td>
+                  <td><input value={recDetail.staffVO ? recDetail.staffVO.staffName : ''}/></td>
+                </tr>
+                <tr>
+                  <td>예약시간</td>
+                  <td><input type='datetime-local' value={recDetail.recDate}/></td>
+                  <td>증상</td>
+                  <td><input value={recDetail.recDetail}/></td>
+                </tr>
+              </table>
             <div>
             </div>
           </div>
@@ -140,7 +150,7 @@ const Reserv_staff = () => {
                   {
                     allRecList.map((rec, i)=>{
                       return(
-                        <tr key={i}>
+                        <tr key={i} onClick={()=>{getRecDetail(rec.recNum)}}>
                           <td>{i+1}</td>
                           <td>{rec.recDate}</td>
                           <td>{rec.staffVO.part.partName}</td>
