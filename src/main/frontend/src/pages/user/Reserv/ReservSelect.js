@@ -115,16 +115,10 @@ const ReservSelect = () => {
           <div className='resModal'>
             <div><span>[ {loginInfo.memName} ]</span> 님</div>
             <table className='resModal-table'>
-              <colgroup>
-                <col width='25%' />
-                <col width='30%' />
-                <col width='20%' />
-                <col width='25%' />
-              </colgroup>
               <tr>
                 <td>진료과</td>
                 <td>{resDetail.staffVO.part.partName}</td>
-                <td>담당의료진</td>
+                <td className='dam'>담당의료진</td>
                 <td>
                   <select className='modaleForm'
                           name='staffNum' 
@@ -165,7 +159,6 @@ const ReservSelect = () => {
       </>
     );
   }
-
   // 일정 추가 모달 footerContent 내용
   function drawFooterContent() {}
 

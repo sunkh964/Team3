@@ -1,5 +1,4 @@
 .reserv-staff{
-  border: 1px dotted;
   display: flex;
   flex-direction: column;
   height: 85vh;
@@ -93,6 +92,25 @@
   background-color: #bedce6;
   border-bottom: 1px solid #7e969e;
   padding: 5px;
+}
+
+.updateRes-table{
+  width: 90%;
+  margin: 30px auto;
+}
+.updateRes-table input{
+  width: 100%;
+  border: 1px solid lightslategray;
+  padding: 4px 5px;
+  border-radius: 5px;
+}
+
+.updateRes-table td{
+  padding: 15px 0px;
+  /* border: 1px solid; */
+}
+.updateRes-table td:nth-child(odd){
+  text-align: center;
 }
 
 /* ================== 예약리스트 ================== */
