@@ -55,9 +55,14 @@
 }
 
 .regStaff .btn{
+  display: block;
   text-align: center;
   margin-bottom: 20px;
 }
+.regStaff .btn button{
+  padding: 3px 5px;
+}
+
 
 /* ---------- 직원목록 ---------- */
 .getStaff{

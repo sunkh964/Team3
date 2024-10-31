@@ -5,6 +5,10 @@
   display: flex;
 }
 
+.adminLayout-content{
+  display: flex;
+}
+
 .side-menu{
   margin-top: 20px;
   padding-right: 20px;

@@ -1,9 +1,9 @@
 .detailContainer{
-  width: 95%;
+  width: 90%;
   margin: auto;
 }
 .staffDetail{
-  margin: auto;
+  margin: 20px auto;
   width: 100%;
   border: 1px solid #7e969e;
   box-shadow: 3px 3px 5px lightgrey;
@@ -34,8 +34,12 @@
 }
 
 .staffDetail-btn{
-  margin: 30px;
+  margin: 40px auto;
   display: flex;
   justify-content: center;
   gap: 20px;
+}
+
+.staffDetail-btn button{
+  padding: 2px 10px;
 }

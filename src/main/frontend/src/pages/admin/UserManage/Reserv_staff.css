@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  border: 1px solid #ddd; /*테두리 설정 */
 }
 
 .content-up{
@@ -42,7 +43,7 @@
 .content-up .reservList > div:first-child{
   background-color: #bedce6;
   border-bottom: 1px solid #7e969e;
-  padding: 5px;
+  padding: 10px;
 }
 
 .resUserList{
@@ -76,6 +77,14 @@
 .resUserList-table tbody tr:nth-child(odd){
   background-color: white;
 }
+.resUserList-table tbody tr:hover{
+  background-color: rgb(245, 229, 223);
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: rgb(245, 229, 223) !important; /* 원하는 색상으로 설정 */
+}
 
 .resUserList-table tbody td{
   padding: 10px 0px;
@@ -91,12 +100,23 @@
 .content-up .updateReserv> div:first-child{
   background-color: #bedce6;
   border-bottom: 1px solid #7e969e;
-  padding: 5px;
+  padding: 10px;
+}
+
+.updateReserv .resList-btn{
+  margin-top: 60px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.updateReserv button{
+  padding: 1px 6px;
+  cursor: pointer;
 }
 
 .updateRes-table{
   width: 90%;
-  margin: 30px auto;
+  margin: 30px 20px;
 }
 .updateRes-table input{
   width: 100%;
@@ -121,5 +141,5 @@
 .content-down > div:first-child{
   background-color: #bedce6;
   border-bottom: 1px solid #7e969e;
-  padding: 5px;
+  padding: 10px;
 }

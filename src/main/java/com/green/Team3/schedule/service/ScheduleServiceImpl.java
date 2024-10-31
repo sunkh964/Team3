@@ -56,7 +56,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         return sqlSession.selectList("scheduleMapper.getAllSchedule", staffNum);
     }
 
-//    진료 일정 상세 조회
+    //    진료 일정 상세 조회
     @Override
     public RecVO getRecDetail(int recNum) {
         return sqlSession.selectOne("scheduleMapper.getRecDetail", recNum);

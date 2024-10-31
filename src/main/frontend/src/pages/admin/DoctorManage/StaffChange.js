@@ -39,7 +39,7 @@ const StaffChange = () => {
 
   return (
     <div className='staffChange'>
-      <div className='doctor-title'>직원 리스트 </div>
+      <div className='doctor-title'>직원 리스트 ( <span>{staffInfoList.length}</span> ) </div>
       <div className='staffChange-content'>
         <table className='staffChange-table'>
           <colgroup>

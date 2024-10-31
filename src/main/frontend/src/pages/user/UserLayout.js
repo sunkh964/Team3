@@ -35,7 +35,7 @@ const UserLayout = () => {
       title: '진료예약',
       items: [
         { name: '예약하기', path: '/reserv' },
-        { name: '예약변경', path: '/change' },
+        { name: '예약조회', path: '/reserv/resSelect/${loginInfo.patieNum}' },
         { name: '간편예약', path: '/consultation' },
       ],
     },

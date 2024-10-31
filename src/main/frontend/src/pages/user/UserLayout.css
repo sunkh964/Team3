@@ -177,6 +177,7 @@
 .fix-search .fs >input{
   border: 1px solid #7481a5;
   padding: 0px 5px;
+  outline: none;
 }
 .fix-search .fs >div{
   border-left: none;

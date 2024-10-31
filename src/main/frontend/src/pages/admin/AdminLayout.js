@@ -5,6 +5,10 @@ import { Outlet, useNavigate } from 'react-router-dom';
 const AdminLayout = () => {
   const navigate = useNavigate();
 
+  //세션에 있는 로그인 정보를 받아 옴
+  const sessionLoginInfo =  window.sessionStorage.getItem('loginInfo');
+  const loginInfo = JSON.parse(sessionLoginInfo);
+
   const [isShow, setIsShow] = useState(null);
 
   const [adminMenu, setAdminMenu] = useState([
@@ -34,14 +38,6 @@ const AdminLayout = () => {
       ]
     },
     {
-      title: '병원장',
-      path: '/admin/doctorManage',
-      subMenu: [
-        { title: '직원 관리', path: '/admin/doctorManage' },
-        { title: '매출 관리', path: '/admin/doctorManage' }
-      ]
-    },
-    {
       title: '의료용품 관리',
       path: '/admin/orderItem',
       subMenu: [
@@ -49,7 +45,16 @@ const AdminLayout = () => {
         { title: '발주 관리', path: '/admin/orderingItem' },
         { title: '재고 관리', path: '/admin/stockItem' }
       ]
-    }
+    },
+    // staffRole이 ADMIN일 때만 메뉴 추가
+    ...(loginInfo.staffRole === 'ADMIN' ? [{
+      title: '병원장',
+      path: '/admin/doctorManage',
+      subMenu: [
+        { title: '직원 관리', path: '/admin/doctorManage' },
+        { title: '매출 관리', path: '/admin/doctorManage' }
+      ]
+    }] : []),
   ]);
 
   const clickMenu = (index, path) => {
@@ -67,6 +72,7 @@ const AdminLayout = () => {
     <div className='adminLayout'>
       <div className='adminLayout-content'>
         <div className='side-menu'>
+          {/* <div className='staffPage'>직원 전용 페이지</div> */}
           {adminMenu.map((menu, index) => (
             <div key={index} className="menu-title">
               <div

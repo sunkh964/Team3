@@ -39,3 +39,7 @@
 .staffChange-table tbody td{
   padding: 10px 0px;
 }
+
+.staffChange-table button{
+  padding: 0px 3px;
+}

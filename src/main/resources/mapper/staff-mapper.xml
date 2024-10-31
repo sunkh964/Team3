@@ -36,7 +36,7 @@
         SELECT PART_NUM
             , PART_NAME
         FROM HOS_PART
-        ORDER BY PART_NUM ASC
+        ORDER BY PART_NAME ASC
     </select>
 
     <!-- 스태프 등록 -->
