@@ -20,6 +20,30 @@ const StaffChange = () => {
     .catch((error) => {console.log(error)})
   },[]);
 
+  // 검색 정보 기본값 저장
+  const [searchInfo, setSearchInfo] = useState({
+    searchType: 'STAFF_NAME',
+    searchValue: '',
+    sortValue: ''
+  });
+
+  // 검색 searchInfo onChange 함수
+  const searchInfoChange = (e) => {
+    setSearchInfo({
+      ...searchInfo,
+      [e.target.name] : e.target.value
+    })
+  };
+
+  // 검색하기 버튼 함수
+  const searchBtn = () => {
+    axios.post(`/orderItem/getOrderList`, searchInfo)
+    .then((res) => {
+      setStaffInfoList(res.data);
+    })
+    .catch((error) => {alert(error);});
+  }
+
   // 직원 삭제
   function deleteStaff(staffNum, staffName, e){
     e.stopPropagation();
@@ -39,6 +63,16 @@ const StaffChange = () => {
 
   return (
     <div className='staffChange'>
+      <div className='search-div'>
+        <select onClick={(e) => {searchInfoChange(e);}}>
+          <option value="STAFF_NAME">진료부서</option>
+          <option value="STAFF_NAME">직원명</option>
+          <option value="STAFF_NAME">연락처</option>
+          <option value="STAFF_NAME">고용일자</option>
+        </select>
+        <input type='text' name='searchValue' onChange={(e) => {searchInfoChange(e);}} />
+        <button type='button' onClick={() => {searchBtn();}}>검색</button>
+      </div>
       <div className='doctor-title'>직원 리스트 ( <span>{staffInfoList.length}</span> ) </div>
       <div className='staffChange-content'>
         <table className='staffChange-table'>
@@ -57,7 +91,7 @@ const StaffChange = () => {
             <tr>
               <td>No.</td>
               <td>진료부서</td>
-              <td>이름</td>
+              <td>직원명</td>
               <td>생년월일</td>
               <td>연락처</td>
               <td>주소</td>
