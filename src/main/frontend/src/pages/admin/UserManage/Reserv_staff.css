@@ -124,6 +124,12 @@
   padding: 4px 5px;
   border-radius: 5px;
 }
+.updateRes-table select{
+  width: 60%;
+  border: 1px solid lightslategray;
+  padding: 4px 5px;
+  border-radius: 5px;
+}
 
 .updateRes-table td{
   padding: 15px 0px;
