@@ -87,6 +87,9 @@
         , DATE_FORMAT(HIRE_DATE, '%Y-%m-%d') AS HIRE_DATE
         FROM HOS_STAFF STAFF, HOS_PART PART
         WHERE STAFF.PART_NUM = PART.PART_NUM
+        <if test='searchValue != null and !searchValue.equals("")'>
+            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
         ORDER BY PART_NAME ASC, HIRE_DATE DESC, STAFF_NAME ASC
     </select>
 

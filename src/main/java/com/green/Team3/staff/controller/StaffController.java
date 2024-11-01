@@ -1,6 +1,7 @@
 package com.green.Team3.staff.controller;
 
 import com.green.Team3.part.vo.PartVO;
+import com.green.Team3.patie.vo.SearchVO;
 import com.green.Team3.schedule.vo.ScheduleVO;
 import com.green.Team3.staff.service.StaffService;
 import com.green.Team3.staff.vo.StaffVO;
@@ -51,9 +52,10 @@ public class StaffController {
     }
 
     // 직원 상세정보 목록 조회
-    @GetMapping("/getStaffInfo")
-    public List<StaffVO> getStaffInfoList(StaffVO staffVO){
-        return staffService.getStaffInfoList(staffVO);
+    @PostMapping("/getStaffInfo")
+    public List<StaffVO> getStaffInfoList(@RequestBody(required = false)SearchVO searchVO){
+        List<StaffVO> result = staffService.getStaffInfoList(searchVO);
+        return result;
     }
 
     // 직원 상세보기

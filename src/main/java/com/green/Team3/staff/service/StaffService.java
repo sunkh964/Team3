@@ -1,6 +1,7 @@
 package com.green.Team3.staff.service;
 
 import com.green.Team3.part.vo.PartVO;
+import com.green.Team3.patie.vo.SearchVO;
 import com.green.Team3.staff.vo.StaffVO;
 import com.green.Team3.schedule.vo.ScheduleVO;
 
@@ -23,7 +24,7 @@ public interface StaffService {
     List<ScheduleVO> getOneList(int staffNum);
 
     // 직원 상세정보 목록 조회
-    List<StaffVO> getStaffInfoList(StaffVO staffVO);
+    List<StaffVO> getStaffInfoList(SearchVO searchVO);
 
     // 직원 상세보기
     StaffVO getStaffDetail(int staffNum);

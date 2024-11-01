@@ -13,7 +13,7 @@ const StaffChange = () => {
 
   // 조회
   useEffect(() => {
-    axios.get('/staff/getStaffInfo')
+    axios.post('/staff/getStaffInfo', searchInfo)
     .then((res) =>{
       setStaffInfoList(res.data);
     })
@@ -37,12 +37,28 @@ const StaffChange = () => {
 
   // 검색하기 버튼 함수
   const searchBtn = () => {
-    axios.post(`/orderItem/getOrderList`, searchInfo)
+    axios.post(`/staff/getStaffInfo`, searchInfo)
     .then((res) => {
       setStaffInfoList(res.data);
+      console.log(searchInfo)
     })
     .catch((error) => {alert(error);});
   }
+
+  // 화면 리렌더링 상태 저장
+  const [refresh, setRefresh] = useState(false);
+  // 검색항목 불러오기
+  useEffect(() => {
+    const fetchOrderList = async () => {
+        try {
+          const res = await axios.post(`/staff/getStaffInfo`, searchInfo);
+          setStaffInfoList(res.data);
+        } catch (error) {
+          alert(error);
+        }
+    };
+    fetchOrderList();
+  }, [refresh]);
 
   // 직원 삭제
   function deleteStaff(staffNum, staffName, e){
@@ -64,21 +80,21 @@ const StaffChange = () => {
   return (
     <div className='staffChange'>
       <div className='search-div'>
-        <select onClick={(e) => {searchInfoChange(e);}}>
-          <option value="STAFF_NAME">진료부서</option>
+        <select name='searchType' onClick={(e) => {searchInfoChange(e);}}>
+          <option value="PART_NAME">진료부서</option>
           <option value="STAFF_NAME">직원명</option>
-          <option value="STAFF_NAME">연락처</option>
-          <option value="STAFF_NAME">고용일자</option>
+          <option value="STAFF_TEL">연락처</option>
+          <option value="HIRE_DATE">고용일자</option>
         </select>
         <input type='text' name='searchValue' onChange={(e) => {searchInfoChange(e);}} />
-        <button type='button' onClick={() => {searchBtn();}}>검색</button>
+        <button type='button' onClick={() => {searchBtn()}}>검색</button>
       </div>
       <div className='doctor-title'>직원 리스트 ( <span>{staffInfoList.length}</span> ) </div>
       <div className='staffChange-content'>
         <table className='staffChange-table'>
           <colgroup>
-            <col width='6%'/>
-            <col width='10%'/>
+            <col width='5%'/>
+            <col width='11%'/>
             <col width='10%'/>
             <col width='15%'/>
             <col width='16%'/>

@@ -1,6 +1,7 @@
 package com.green.Team3.staff.service;
 
 import com.green.Team3.part.vo.PartVO;
+import com.green.Team3.patie.vo.SearchVO;
 import com.green.Team3.staff.vo.StaffVO;
 import com.green.Team3.schedule.vo.ScheduleVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,8 +47,8 @@ public class StaffServiceImpl implements StaffService {
 
     // 직원 상세정보 목록 조회
     @Override
-    public List<StaffVO> getStaffInfoList(StaffVO staffVO) {
-        return sqlSession.selectList("staffMapper.getStaffInfoList", staffVO);
+    public List<StaffVO> getStaffInfoList(SearchVO searchVO) {
+        return sqlSession.selectList("staffMapper.getStaffInfoList", searchVO);
     }
 
     // 직원 상세보기
