@@ -233,16 +233,16 @@ const OrderItem = () => {
                                 <td>{orderItem.orderDate}</td>
                                 <td>{detailItem.departTime}</td>
                                 <td>{detailItem.arriveTime}</td>
-                                <td className={deliverStateClass}>{deliver ? deliver.deliStatus : null}</td>
+                                <td className={deliverStateClass}>{deliver ? detailItem.deliverVO.deliStatus : null}</td>
                                 <td>
-                                  {deliver.deliStatus !== '배송완료' && deliver.deliStatus !== '주문취소' && (
+                                  {detailItem.deliverVO.deliStatus !== '배송완료' && detailItem.deliverVO.deliStatus !== '주문취소' && (
                                     <button className='isDeliver-btn'
                                       onClick={() => { cancelDeli(detailItem.detailNum) }}
                                     > 주문 취소 </button>
                                   )}
                                 </td>
                                 <td>
-                                  {deliver.deliStatus === '배송중' && (
+                                  {detailItem.deliverVO.deliStatus === '배송중' && (
                                     <button className='isDeliver-btn'
                                       onClick={() => { completedDeli(detailItem.detailNum) }}
                                     > 수령 확인 </button>

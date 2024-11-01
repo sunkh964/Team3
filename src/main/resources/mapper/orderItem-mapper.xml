@@ -50,7 +50,7 @@
     <select id="selectOrderItem" resultMap="orderItem">
         SELECT *
         FROM ORDER_ITEM O, DELIVER D, ITEM SP, SUP S, ITEM_TYPE T, ORDER_DETAIL OD
-        WHERE O.DELI_NUM = D.DELI_NUM
+        WHERE OD.DELI_NUM = D.DELI_NUM
         AND OD.ITEM_NUM = SP.ITEM_NUM
         AND SP.SUP_NUM = S.SUP_NUM
         AND SP.TYPE_NUM = T.TYPE_NUM
@@ -63,7 +63,6 @@
         </if>
         ORDER BY O.ORDER_DATE DESC;
     </select>
-
     <!-- 상품 타입별 총 금액 -->
     <select id="totalOrderAmount" resultMap="orderAmount">
         SELECT T.TYPE_NAME, SUM(OD.ORDER_CNT * I.PRICE) AS TOTAL_AMOUNT
