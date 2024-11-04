@@ -84,6 +84,7 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 ### 진료 관리
 ![1_진료관리 (2)](https://github.com/user-attachments/assets/17169370-4dc9-4c56-8646-99a5782f0cf9)
 ![1_진료관리](https://github.com/user-attachments/assets/c9acbe0d-0e66-4dc1-ab26-2a9cdc9ba5e7)
+![1_진료관리](https://github.com/user-attachments/assets/8d9d94c5-5c2e-4280-8d41-991e8955b4bd)
 // 설명
 
 ### 일정 관리
