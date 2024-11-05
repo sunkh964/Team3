@@ -60,24 +60,25 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 ## 🔧💻기능 소개
 
 ### 예약하기
-![1_예약하기](https://github.com/user-attachments/assets/e48b7ffc-5e8f-4b35-a83d-cc5bbbc6b7c4)
+![1_예약하기](https://github.com/user-attachments/assets/68a91094-3c6d-412b-a935-2aea70e4c0c4)
 // 설명
 
 ### 진료 관리
-![1_진료관리 (2)](https://github.com/user-attachments/assets/17169370-4dc9-4c56-8646-99a5782f0cf9)
-![1_진료관리](https://github.com/user-attachments/assets/8d9d94c5-5c2e-4280-8d41-991e8955b4bd)
+![1_환자검색](https://github.com/user-attachments/assets/b970ff63-e409-4d5d-8f7c-62283a761379)
+// 설명
+![1_진료](https://github.com/user-attachments/assets/dba264e2-d1d2-4c73-973c-c0653adc127a)
 // 설명
 
 ### 일정 관리
 
 | 조회 | 추가 |
 | --- | --- |
-| ![1_일정 조회](https://github.com/user-attachments/assets/a2cf200f-15bc-4a00-b639-927020b8cf1a) | ![1_일정 추가](https://github.com/user-attachments/assets/b43b93cb-8c8f-498a-abcf-8a9f8bc5a434) | 
+| ![1_일정 조회](https://github.com/user-attachments/assets/172d6c32-1230-4e7d-9e3f-8f19f2ef7b79) | ![1_일정 추가](https://github.com/user-attachments/assets/c1c0b194-d300-427f-96f6-6872d3064810) | 
 | // 설명 | // 설명 |
 
 | 수정 | 삭제 |
 | --- | --- |
-| ![1_일정 수정](https://github.com/user-attachments/assets/c7801b9e-92b2-4ebf-a03c-a28c12d4d7b3) | ![1_일정 삭제](https://github.com/user-attachments/assets/21366a98-c5e7-4738-ba9c-630bea05490e) |
+| ![1_일정 수정](https://github.com/user-attachments/assets/8760c3ff-8047-4099-95b7-db66a0b52e8e) | ![1_일정 삭제](https://github.com/user-attachments/assets/4b81db1e-e48c-42e9-b1fb-7fa0fec7f656) |
 | // 설명 | // 설명 |
 
 ### 입고 관리
