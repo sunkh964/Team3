@@ -31,39 +31,21 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
      - - [x] 로그인
      - - [x] 회원가입
      - - [x] 게시글 관리
-   - 진료 안내
-      - - [ ] 진료과/의료진
-      - - [ ] 진료일정표
-      - - [ ] 상담예약
-   - 이용 안내
-      - - [ ] 시설안내
-      - - [ ] 수납하기
-      - - [ ] 증명서발급
    - 진료 예약
       - - [x] 예약하기
       - - [x] 예약조회
-      - - [ ] 간편예약
-   - 고객 서비스
-      - - [ ] 문의하기
-      - - [ ] 공지사항
 - Admin 페이지
    - 진료 관리
       - - [x] 진료 목록
-      - - [ ] 환자 차트
-      - - [ ] 예약 목록
    - 환자 관리
       - - [x] 예약
-      - - [ ] 문의하기
-      - - [ ] 환자 목록
    - 직원 일정 관리
       - - [x] 직원 스케줄 목록
    - 의료용품 관리
       - - [x] 입고 관리
       - - [x] 발주 관리
-      - - [ ] 재고 관리
     - 병원장
       - - [x] 직원 관리
-      - - [ ] 매출 관리 
 
 </br>
 
@@ -83,16 +65,20 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 
 ### 진료 관리
 ![1_진료관리 (2)](https://github.com/user-attachments/assets/17169370-4dc9-4c56-8646-99a5782f0cf9)
-![1_진료관리](https://github.com/user-attachments/assets/c9acbe0d-0e66-4dc1-ab26-2a9cdc9ba5e7)
 ![1_진료관리](https://github.com/user-attachments/assets/8d9d94c5-5c2e-4280-8d41-991e8955b4bd)
 // 설명
 
 ### 일정 관리
 
-| 추가 | 수정 | 삭제 |
-| --- | --- | --- |
-| ![1_일정 추가](https://github.com/user-attachments/assets/b43b93cb-8c8f-498a-abcf-8a9f8bc5a434) | ![1_일정 수정](https://github.com/user-attachments/assets/c7801b9e-92b2-4ebf-a03c-a28c12d4d7b3) | ![1_일정 삭제](https://github.com/user-attachments/assets/21366a98-c5e7-4738-ba9c-630bea05490e) |
-// 설명
+| 조회 | 추가 |
+| --- | --- |
+| ![1_일정 조회](https://github.com/user-attachments/assets/a2cf200f-15bc-4a00-b639-927020b8cf1a) | ![1_일정 추가](https://github.com/user-attachments/assets/b43b93cb-8c8f-498a-abcf-8a9f8bc5a434) | 
+| // 설명 | // 설명 |
+
+| 수정 | 삭제 |
+| --- | --- |
+| ![1_일정 수정](https://github.com/user-attachments/assets/c7801b9e-92b2-4ebf-a03c-a28c12d4d7b3) | ![1_일정 삭제](https://github.com/user-attachments/assets/21366a98-c5e7-4738-ba9c-630bea05490e) |
+| // 설명 | // 설명 |
 
 ### 입고 관리
 // 이미지
