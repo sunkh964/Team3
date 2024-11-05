@@ -72,12 +72,12 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 
 | 조회 | 추가 |
 | --- | --- |
-| ![1_일정 조회](https://github.com/user-attachments/assets/a2cf200f-15bc-4a00-b639-927020b8cf1a) | ![1_일정 추가](https://github.com/user-attachments/assets/b43b93cb-8c8f-498a-abcf-8a9f8bc5a434) | 
+| ![1_일정 조회](https://github.com/user-attachments/assets/172d6c32-1230-4e7d-9e3f-8f19f2ef7b79) | ![1_일정 추가](https://github.com/user-attachments/assets/c1c0b194-d300-427f-96f6-6872d3064810) | 
 | // 설명 | // 설명 |
 
 | 수정 | 삭제 |
 | --- | --- |
-| ![1_일정 수정](https://github.com/user-attachments/assets/c7801b9e-92b2-4ebf-a03c-a28c12d4d7b3) | ![1_일정 삭제](https://github.com/user-attachments/assets/21366a98-c5e7-4738-ba9c-630bea05490e) |
+| ![1_일정 수정](https://github.com/user-attachments/assets/8760c3ff-8047-4099-95b7-db66a0b52e8e) | ![1_일정 삭제](https://github.com/user-attachments/assets/4b81db1e-e48c-42e9-b1fb-7fa0fec7f656) |
 | // 설명 | // 설명 |
 
 <br>
@@ -91,5 +91,5 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 ## 👬 팀원 및 역할
 - [<u>노현경</u>](https://github.com/nohk1113) - 로그인/회원가입, 게시글, 1:1 문의하기
 - [<u>한선경</u>](https://github.com/sunkh964)  - 메인 화면 UI 디자인, 예약하기, 병원장 전용 페이지
-- [<u>정다영</u>](https://github.com/da9630jj) - 진료 목록, 환자 파트 목록
+- [<u>정다영</u>](https://github.com/da9630jj) - 진료 목록, 환자 파트 목록, 입고 관리
 - [<u>이도원</u>](https://github.com/nubbp) - 직원 일정 관리
