@@ -56,7 +56,7 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 
 ### 예약하기
 ![1_예약하기](https://github.com/user-attachments/assets/68a91094-3c6d-412b-a935-2aea70e4c0c4)
-// 설명
+// 아야어여
 
 <br>
 
