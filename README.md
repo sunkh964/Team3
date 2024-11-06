@@ -79,7 +79,9 @@ React를 이용해 가상의 병원인 '그린카페병원'의 웹 사이트 구
 | 조회 | 추가 |
 | --- | --- |
 | ![1_일정 조회](https://github.com/user-attachments/assets/172d6c32-1230-4e7d-9e3f-8f19f2ef7b79) | ![1_일정 추가](https://github.com/user-attachments/assets/c1c0b194-d300-427f-96f6-6872d3064810) | 
-| // 설명 | // 설명 |
+| #### // 재방문 환자 검색 설명 
+
+| // 설명 |
 
 | 수정 | 삭제 |
 | --- | --- |
